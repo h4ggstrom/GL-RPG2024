@@ -23,6 +23,10 @@ public class Room {
         return blocks;
     }
 
+    public Block getBlock(int line, int column){
+        return blocks[line][column];
+    }
+
     public int getLineCount(){
         return lineCount;
     }

@@ -2,6 +2,7 @@ package gui;
 
 import config.GameConfiguration;
 import engine.dungeon.Room;
+import engine.process.CharacterManager;
 import engine.process.GameBuilder;
 
 import java.awt.BorderLayout;
@@ -20,6 +21,8 @@ public class MainGUI extends JFrame implements Runnable {
 
     private GameDisplay dashboard;
 
+    private CharacterManager manager;
+
     public MainGUI(String title){
         super(title);
         init();
@@ -31,7 +34,8 @@ public class MainGUI extends JFrame implements Runnable {
 		contentPane.setLayout(new BorderLayout());
 
 		room = GameBuilder.buildRoom();
-		dashboard = new GameDisplay(room);
+        manager = GameBuilder.buildInitCharacters(room);
+		dashboard = new GameDisplay(room, manager);
 
 		dashboard.setPreferredSize(preferredSize);
 		contentPane.add(dashboard, BorderLayout.CENTER);
