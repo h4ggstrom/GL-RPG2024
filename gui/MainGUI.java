@@ -8,8 +8,11 @@ import engine.process.GameBuilder;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 public class MainGUI extends JFrame implements Runnable {
     
@@ -32,6 +35,9 @@ public class MainGUI extends JFrame implements Runnable {
 
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
+
+        KeyControls keyControls = new KeyControls();
+        addKeyListener(keyControls);
 
 		room = GameBuilder.buildRoom();
         manager = GameBuilder.buildInitCharacters(room);
@@ -58,6 +64,43 @@ public class MainGUI extends JFrame implements Runnable {
 
 			dashboard.repaint();
 		}
+    }
+
+    /*
+     * Inner-class permettant d'écouter les touches
+     */
+    private class KeyControls implements KeyListener {
+        
+        @Override
+        public void keyPressed(KeyEvent event){
+            char keyChar = event.getKeyChar(); // On récupère le charactère associé à la touche enfoncée
+            switch (keyChar) {
+                case 'z':
+                    manager.movePlayerUp();
+                    break;
+                case 'q':
+                    manager.movePlayerLeft();
+                    break;
+                case 's':
+                    manager.movePlayerDown();
+                    break;
+                case 'd':
+                    manager.movePlayerRight();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public void keyTyped(KeyEvent event){
+            
+        }
+
+        @Override
+        public void keyReleased(KeyEvent event){
+            
+        }
     }
 
 }
