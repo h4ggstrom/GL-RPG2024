@@ -12,7 +12,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 
 public class MainGUI extends JFrame implements Runnable {
     
@@ -37,7 +36,7 @@ public class MainGUI extends JFrame implements Runnable {
 		contentPane.setLayout(new BorderLayout());
 
         KeyControls keyControls = new KeyControls();
-        addKeyListener(keyControls);
+        addKeyListener(keyControls); // On ajoute le KeyListener à notre JFrame
 
 		room = GameBuilder.buildRoom();
         manager = GameBuilder.buildInitCharacters(room);
