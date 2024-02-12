@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 import config.GameConfiguration;
+import engine.characters.Enemy;
 import engine.characters.Player;
 import engine.dungeon.Block;
 import engine.dungeon.Room;
@@ -46,4 +47,14 @@ public class PaintStrategy {
         graphics.fillOval(x, y, 40, 40); // On dessine un disque dans un rectangle dont le coin supérieur gauche est aux coordonnées de notre pixel
     }
 
+    public void paint(Enemy enemy, Graphics graphics) {
+		Block position = enemy.getPosition();
+		int blockSize = GameConfiguration.BLOCK_SIZE;
+
+		int y = position.getLine();
+		int x = position.getColumn();
+
+		graphics.setColor(Color.RED);
+		graphics.fillOval(x * blockSize, y * blockSize, blockSize, blockSize);
+	}
 }

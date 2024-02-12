@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import engine.characters.Enemy;
 import engine.characters.Player;
 import engine.dungeon.Room;
 import engine.process.CharacterManager;
@@ -29,5 +30,9 @@ public class GameDisplay extends JPanel {
 
         Player player = manager.getPlayer();
         paintStrategy.paint(player, g);
+
+        for (Enemy enemy : manager.getEnemies()) {
+			paintStrategy.paint(enemy, g);
+		}
 	}
 }
