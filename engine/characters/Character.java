@@ -6,6 +6,7 @@ public abstract class Character {
     private Block position;
 
     public Character(Block position) {
+		position.occupy();
 		this.position = position;
 	}
 

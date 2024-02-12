@@ -40,7 +40,7 @@ public class MainGUI extends JFrame implements Runnable {
 
 		room = GameBuilder.buildRoom();
         manager = GameBuilder.buildInitCharacters(room);
-        manager.generateEnemies();
+        manager.generateEnemies(); // On génère une seule fois les ennemis par salle
 		dashboard = new GameDisplay(room, manager);
 
 		dashboard.setPreferredSize(preferredSize);
@@ -62,7 +62,6 @@ public class MainGUI extends JFrame implements Runnable {
 				System.out.println(e.getMessage());
 			}
 
-            manager.nextRound();
 			dashboard.repaint();
 		}
     }
