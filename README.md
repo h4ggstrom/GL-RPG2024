@@ -1,3 +1,7 @@
-zbilizbouet, faudra encore changer le texte plus tard !
-voici un petit test de commit de la part de tibo terrier
-voici un petit test de commit de la part de eder ur rehman
+Projet GLP : RPG
+
+DE ANGELIS Robin
+TERRIE Thibault
+UR REHMAN Hayder
+
+L2 Informatique-CYU
