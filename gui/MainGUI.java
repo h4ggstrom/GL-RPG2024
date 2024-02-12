@@ -40,6 +40,7 @@ public class MainGUI extends JFrame implements Runnable {
 
 		room = GameBuilder.buildRoom();
         manager = GameBuilder.buildInitCharacters(room);
+        manager.generateEnemies();
 		dashboard = new GameDisplay(room, manager);
 
 		dashboard.setPreferredSize(preferredSize);

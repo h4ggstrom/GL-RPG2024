@@ -71,7 +71,7 @@ public class CharacterManager {
         }
     }
 
-    private void generateEnemy() {
+    public void generateEnemies() {
         for (int i = 0; i < 3; i++) {
             int randomRow = getRandomNumber(0, GameConfiguration.LINE_COUNT - 1);
             int randomColumn = getRandomNumber(0, GameConfiguration.COLUMN_COUNT - 1);
@@ -87,36 +87,29 @@ public class CharacterManager {
 
     private void moveEnemies() {
         Block PlayerPosition = player.getPosition(); //On détermine la position du joueur, les ennemies vont logiquement se diriger vers player 
-		List<Enemy> outOfBoundEnemies = new ArrayList<Enemy>();
 
 		for (Enemy enemy : enemies) {
 			Block EnemyPosition = enemy.getPosition();
             
-            if (PlayerPosition.getLine() > EnemyPosition.getLine()) { // Déplacer vers le bas
+            if (PlayerPosition.getLine() > EnemyPosition.getLine()) { // Si l'ennemi est au dessus du joueur, déplacer vers le bas
                 Block newPosition = room.getBlock(EnemyPosition.getLine() + 1, EnemyPosition.getColumn());
                 enemy.setPosition(newPosition);
-            } else if (PlayerPosition.getLine() < EnemyPosition.getLine()) { // Déplacer vers le haut
+            } else if (PlayerPosition.getLine() < EnemyPosition.getLine()) { // Si l'ennemi est en dessous du joueur, déplacer vers le bas
                 Block newPosition = room.getBlock(EnemyPosition.getLine() - 1, EnemyPosition.getColumn());
                 enemy.setPosition(newPosition);
             }
 
-            if (PlayerPosition.getColumn() > EnemyPosition.getColumn()) { // Déplacer vers la droite
+            if (PlayerPosition.getColumn() > EnemyPosition.getColumn()) { // Si l'ennemi est à gauche du joueur, déplacer vers la droite
                 Block newPosition = room.getBlock(EnemyPosition.getLine(), EnemyPosition.getColumn() + 1);
                 enemy.setPosition(newPosition);
-            } else if (PlayerPosition.getColumn() < EnemyPosition.getColumn()) { // Déplacer vers la gauche
+            } else if (PlayerPosition.getColumn() < EnemyPosition.getColumn()) { // Si l'ennemi est à droite du joueur, déplacer vers la gauche
                 Block newPosition = room.getBlock(EnemyPosition.getLine(), EnemyPosition.getColumn() - 1);
                 enemy.setPosition(newPosition);
             }
 		}
-
-		for (Enemy enemy : outOfBoundEnemies) {
-			enemies.remove(enemy);
-		}
-
 	}
 
     public void nextRound() {
-		generateEnemy();
 		moveEnemies();
 	}
 }
