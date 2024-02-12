@@ -99,18 +99,18 @@ public class CharacterManager {
             
             if (PlayerPosition.getLine() > EnemyPosition.getLine()) { // Déplacer vers le bas
                 Block newPosition = room.getBlock(EnemyPosition.getLine() + 1, EnemyPosition.getColumn());
-                player.setPosition(newPosition);
+                enemy.setPosition(newPosition);
             } else if (PlayerPosition.getLine() < EnemyPosition.getLine()) { // Déplacer vers le haut
                 Block newPosition = room.getBlock(EnemyPosition.getLine() - 1, EnemyPosition.getColumn());
-                player.setPosition(newPosition);
+                enemy.setPosition(newPosition);
             }
 
             if (PlayerPosition.getColumn() > EnemyPosition.getColumn()) { // Déplacer vers la droite
                 Block newPosition = room.getBlock(EnemyPosition.getLine(), EnemyPosition.getColumn() + 1);
-                player.setPosition(newPosition);
+                enemy.setPosition(newPosition);
             } else if (PlayerPosition.getColumn() < EnemyPosition.getColumn()) { // Déplacer vers la gauche
                 Block newPosition = room.getBlock(EnemyPosition.getLine(), EnemyPosition.getColumn() - 1);
-                player.setPosition(newPosition);
+                enemy.setPosition(newPosition);
             }
 		}
 
