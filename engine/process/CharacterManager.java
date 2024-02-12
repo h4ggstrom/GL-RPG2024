@@ -77,10 +77,10 @@ public class CharacterManager {
 		Enemy enemy1 = new Enemy(position1);
         int randomBlock2 = getRandomNumber(0, GameConfiguration.LINE_COUNT - 1);
         Block position2 = new Block(5, randomBlock2);
-		Enemy enemy2 = new Enemy(position1);
+		Enemy enemy2 = new Enemy(position2);
         int randomBlock3 = getRandomNumber(0, GameConfiguration.COLUMN_COUNT - 10);
         Block position3 = new Block(10, randomBlock3);
-		Enemy enemy3 = new Enemy(position1);
+		Enemy enemy3 = new Enemy(position3);
 		add(enemy1);
         add(enemy2);
         add(enemy3);
@@ -118,5 +118,10 @@ public class CharacterManager {
 			enemies.remove(enemy);
 		}
 
+	}
+
+    public void nextRound() {
+		generateEnemy();
+		moveEnemies();
 	}
 }
