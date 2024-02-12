@@ -13,7 +13,7 @@ public class Block {
 	private int line;
 	private int column;
 	private boolean occupied = false; // Définit si la case est occupée par quelque-chose (vide par défaut)
-	Enemy enemy; // Si c'est un ennemi on l'associe à la case
+	private Enemy enemy; // Si c'est un ennemi on l'associe à la case
 
 	public Block(int line, int column) {
 		this.line = line;

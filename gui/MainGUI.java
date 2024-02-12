@@ -122,6 +122,12 @@ public class MainGUI extends JFrame implements Runnable {
             int selectedLine = y / GameConfiguration.BLOCK_SIZE - 1;
             int selectedColumn = x / GameConfiguration.BLOCK_SIZE;
 
+            // Cette suite d'instructions empêche de sélectionner une colonne ou une ligne qui n'existe pas dans la room
+            if(selectedLine < 0) selectedLine += 1;
+            if(selectedColumn < 0) selectedColumn -= 1;
+            if(selectedLine > GameConfiguration.LINE_COUNT) selectedLine += 1;
+            if(selectedColumn > GameConfiguration.COLUMN_COUNT) selectedColumn -= 1;
+
             Block cible = room.getBlock(selectedLine, selectedColumn); // On récupère le block cliqué
             manager.attack(cible); // On attaque la cible
         }
