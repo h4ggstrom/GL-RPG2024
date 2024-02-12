@@ -72,18 +72,13 @@ public class CharacterManager {
     }
 
     private void generateEnemy() {
-		int randomBlock1 = getRandomNumber(0, GameConfiguration.COLUMN_COUNT - 1);
-		Block position1 = new Block(0, randomBlock1);
-		Enemy enemy1 = new Enemy(position1);
-        int randomBlock2 = getRandomNumber(0, GameConfiguration.LINE_COUNT - 1);
-        Block position2 = new Block(5, randomBlock2);
-		Enemy enemy2 = new Enemy(position2);
-        int randomBlock3 = getRandomNumber(0, GameConfiguration.COLUMN_COUNT - 10);
-        Block position3 = new Block(10, randomBlock3);
-		Enemy enemy3 = new Enemy(position3);
-		add(enemy1);
-        add(enemy2);
-        add(enemy3);
+        for (int i = 0; i < 3; i++) {
+            int randomRow = getRandomNumber(0, GameConfiguration.LINE_COUNT - 1);
+            int randomColumn = getRandomNumber(0, GameConfiguration.COLUMN_COUNT - 1);
+            Block position = new Block(randomRow, randomColumn);
+            Enemy enemy = new Enemy(position);
+            add(enemy);
+        }
 	}
 
     private static int getRandomNumber(int min, int max) {
