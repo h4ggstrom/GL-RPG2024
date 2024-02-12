@@ -1,6 +1,7 @@
 package gui;
 
 import config.GameConfiguration;
+import engine.dungeon.Block;
 import engine.dungeon.Room;
 import engine.process.CharacterManager;
 import engine.process.GameBuilder;
@@ -10,6 +11,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
@@ -37,6 +40,9 @@ public class MainGUI extends JFrame implements Runnable {
 
         KeyControls keyControls = new KeyControls();
         addKeyListener(keyControls); // On ajoute le KeyListener à notre JFrame
+
+        MouseControls mouseControls = new MouseControls();
+        addMouseListener(mouseControls);
 
 		room = GameBuilder.buildRoom();
         manager = GameBuilder.buildInitCharacters(room);
@@ -103,4 +109,41 @@ public class MainGUI extends JFrame implements Runnable {
         }
     }
 
+    /*
+     * Inner-class permettant d'écouter les clics-souris
+     */
+    private class MouseControls implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e){
+            int x = e.getX(); // On récupère le pixel x cliqué
+            int y = e.getY(); // On récupère le pixel y cliqué
+            
+            int selectedLine = y / GameConfiguration.BLOCK_SIZE - 1;
+            int selectedColumn = x / GameConfiguration.BLOCK_SIZE;
+
+            Block cible = room.getBlock(selectedLine, selectedColumn); // On récupère le block cliqué
+            manager.attack(cible); // On attaque la cible
+        }
+
+        @Override
+		public void mousePressed(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+
+		}
+    }
 }

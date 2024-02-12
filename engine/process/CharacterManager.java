@@ -86,6 +86,7 @@ public class CharacterManager {
             Block position = room.getBlock(randomRow, randomColumn); // On récupère la cellule existante obtenue
             if(!position.isOccupied()){ // Si la cellule n'est pas déjà occupée par quelque-chose
                 Enemy enemy = new Enemy(position); // On génère une instance de l'ennemi sur cette case
+                position.setEnemy(enemy);
                 add(enemy); // On l'ajoute à la liste d'ennemis
             }
         }
@@ -93,5 +94,18 @@ public class CharacterManager {
 
     private static int getRandomNumber(int min, int max) {
 		return (int) (Math.random() * (max + 1 - min)) + min;
+    }
+
+    public void attack(Block block){
+        List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
+        Block position = player.getPosition(); // On récupère la position du joueur
+        if(position.sidesWith(block) && block.isOccupied()){ // Si le joueur est à coté de la case qu'il attaque et si cette case est occupée
+            eliminatedEnemies.add(block.getEnemy());
+        }
+        for (Enemy enemy : eliminatedEnemies) {
+            Block enemyPosition = enemy.getPosition(); // On recupère la position de l'Enemy
+            enemyPosition.free(); // On libère la case
+            enemies.remove(enemy); // On retire l'Enemy de notre liste d'ennemis
+        }
     }
 }
