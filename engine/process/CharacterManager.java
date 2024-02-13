@@ -25,7 +25,7 @@ public class CharacterManager {
 
     public Player getPlayer(){
         return player;
-    }
+    } 
 
     public List<Enemy> getEnemies() {
 		return enemies;
@@ -35,14 +35,18 @@ public class CharacterManager {
 		enemies.add(enemy);
 	}
 
+    private void move(Block startingPosition, Block finalPosition){
+        startingPosition.free(); // On libère la case précédente
+        finalPosition.occupy(); // On occupe la nouvelle case
+        player.setPosition(finalPosition); // On change la position du joueur
+    }
+
     public void movePlayerUp(){
         Block position = player.getPosition();
 
         if(position.getLine() > 0 && !room.getBlock(position.getLine() - 1, position.getColumn()).isOccupied()){ // Il ne peut aller en haut que si il n'est pas déjà tout en haut (coordonnée de ligne = 0) et si la case n'est pas déjà occupée
             Block newPosition = room.getBlock(position.getLine() - 1, position.getColumn()); // On récupère la case du dessus
-            position.free(); // On libère la case précédente
-            newPosition.occupy(); // On occupe la nouvelle case
-            player.setPosition(newPosition); // On change la position du joueur
+            move(position, newPosition);
         }
     }
 
@@ -51,9 +55,7 @@ public class CharacterManager {
 
         if(position.getLine() < GameConfiguration.LINE_COUNT - 1 && !room.getBlock(position.getLine() + 1, position.getColumn()).isOccupied()){ // Il ne peut aller en bas que si il n'est pas déjà tout en bas (coordonnée de ligne = nombre de lignes - 1) et si la case n'est pas déjà occupée
             Block newPosition = room.getBlock(position.getLine() + 1, position.getColumn()); // On récupère la case du dessous
-            position.free(); // On libère la case précédente
-            newPosition.occupy(); // On occupe la nouvelle case
-            player.setPosition(newPosition); // On change la position du joueur
+            move(position, newPosition);
         }
     }
 
@@ -62,9 +64,7 @@ public class CharacterManager {
 
         if(position.getColumn() > 0 && !room.getBlock(position.getLine(), position.getColumn() - 1).isOccupied()){ // Il ne peut aller à gauche que si il n'est pas déjà tout à gauche (coordonnée de colonne = 0) et si la case n'est pas déjà occupée
             Block newPosition = room.getBlock(position.getLine(), position.getColumn() - 1);
-            position.free(); // On libère la case précédente
-            newPosition.occupy(); // On occupe la nouvelle case
-            player.setPosition(newPosition); // On change la position du joueur
+            move(position, newPosition);
         }
     }
 
@@ -73,9 +73,7 @@ public class CharacterManager {
 
         if(position.getColumn() < GameConfiguration.COLUMN_COUNT - 1 && !room.getBlock(position.getLine(), position.getColumn() + 1).isOccupied()){ // Il ne peut aller à droite que si il n'est pas déjà tout à droite (coordonnée de colonne = nombre de colonnes - 1) et si la case n'est pas déjà occupée
             Block newPosition = room.getBlock(position.getLine(), position.getColumn() + 1);
-            position.free(); // On libère la case précédente
-            newPosition.occupy(); // On occupe la nouvelle case
-            player.setPosition(newPosition); // On change la position du joueur
+            move(position, newPosition);
         }
     }
 

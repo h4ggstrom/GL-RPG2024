@@ -20,15 +20,15 @@ public class PaintStrategy {
         Block[][] blocks = room.getBlocks();
 
         for (int lineIndex = 0; lineIndex < room.getLineCount(); lineIndex++) {
-			for (int columnIndex = 0; columnIndex < room.getColumnCount(); columnIndex++) {
-				Block block = blocks[lineIndex][columnIndex];
+			      for (int columnIndex = 0; columnIndex < room.getColumnCount(); columnIndex++) {
+                Block block = blocks[lineIndex][columnIndex];
 
-				if ((lineIndex + columnIndex) % 2 == 0) {
-					graphics.setColor(Color.GRAY);
-					graphics.fillRect(block.getColumn() * blockSize, block.getLine() * blockSize, blockSize, blockSize);
-				}
-			}
-		}
+                if ((lineIndex + columnIndex) % 2 == 0) {
+                  graphics.setColor(Color.WHITE);
+                  graphics.fillRect(block.getColumn() * blockSize, block.getLine() * blockSize, blockSize, blockSize);
+                }
+			      }
+		      }
     }
 
     // Stratégie d'affichage pour le joueur
