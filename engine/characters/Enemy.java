@@ -1,9 +1,11 @@
 package engine.characters;
-import engine.dungeon.Block;
 
-public class Enemy extends Character{
+import engine.dungeon.Pixel;
 
-    public Enemy(Block position){
+public class Enemy extends Character {
+    
+    public Enemy (Pixel position) {
         super(position);
     }
+
 }

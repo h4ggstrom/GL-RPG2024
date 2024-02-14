@@ -11,28 +11,27 @@ import engine.process.CharacterManager;
 
 public class GameDisplay extends JPanel {
     
-    private static final long serialVersionUID = 1L;
-
     private Room room;
     private CharacterManager manager;
     private PaintStrategy paintStrategy = new PaintStrategy();
 
-    public GameDisplay(Room room, CharacterManager manager){
+    public GameDisplay (Room room, CharacterManager manager) {
         this.room = room;
         this.manager = manager;
     }
 
     @Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+    public void paintComponent (Graphics graphics) {
+        super.paintComponent(graphics);
 
-		paintStrategy.paint(room, g);
+        paintStrategy.paint(room, graphics);
 
         Player player = manager.getPlayer();
-        paintStrategy.paint(player, g);
+        paintStrategy.paint(player, graphics);
 
         for (Enemy enemy : manager.getEnemies()) {
-			paintStrategy.paint(enemy, g);
-		}
-	}
+            paintStrategy.paint(enemy, graphics);
+        }
+    }
+
 }

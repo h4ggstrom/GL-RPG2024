@@ -1,37 +1,27 @@
 package engine.dungeon;
 
+import config.GameConfiguration;
+
 public class Room {
-	private Block[][] blocks;
+    
+    private Pixel[][] pixels;
 
-	private int lineCount;
-	private int columnCount;
-
-	public Room(int lineCount, int columnCount) {
-		this.lineCount = lineCount;
-		this.columnCount = columnCount;
-
-		blocks = new Block[lineCount][columnCount];
-
-		for (int lineIndex = 0; lineIndex < this.lineCount; lineIndex++) {
-			for (int columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
-				blocks[lineIndex][columnIndex] = new Block(lineIndex, columnIndex);
-			}
-		}
-	}
-
-    public Block[][] getBlocks(){
-        return blocks;
+    public Room() {
+        pixels = new Pixel[GameConfiguration.WINDOW_WIDTH][GameConfiguration.WINDOW_HEIGHT];
+        
+        for (int x = 0 ; x < GameConfiguration.WINDOW_WIDTH ; x++) {
+            for (int y = 0 ; y < GameConfiguration.WINDOW_HEIGHT ; y++) {
+                pixels[x][y] = new Pixel(x, y);
+            }
+        }
     }
 
-    public Block getBlock(int line, int column){
-        return blocks[line][column];
+    public Pixel[][] getPixels() {
+        return this.pixels;
     }
 
-    public int getLineCount(){
-        return lineCount;
+    public Pixel getPixel(int x, int y) {
+        return pixels[x][y];
     }
 
-    public int getColumnCount(){
-        return columnCount;
-    }
 }

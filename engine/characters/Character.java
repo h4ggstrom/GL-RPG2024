@@ -1,20 +1,26 @@
 package engine.characters;
 
-import engine.dungeon.Block;
+import engine.dungeon.Pixel;
 
 public abstract class Character {
-    private Block position;
 
-    public Character(Block position) {
-		position.occupy();
-		this.position = position;
-	}
+    private Pixel position;
 
-	public Block getPosition() {
-		return position;
-	}
+    public Character (Pixel position) {
+        this.position = position;
+    }
 
-	public void setPosition(Block position) {
-		this.position = position;
-	}
+    public Pixel getPosition () {
+        return this.position;
+    }
+
+    public void setPosition (Pixel position) {
+        this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return "Character [position=" + position + "]";
+    }
+    
 }
