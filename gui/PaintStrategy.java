@@ -18,7 +18,7 @@ public class PaintStrategy {
     
     // Stratégie d'affichage pour la salle
     public void paint (Room room, Graphics graphics) {
-        graphics.drawImage(Utility.readImage("ressources\\room.png"), 0, 0, null);
+        graphics.drawImage(Utility.readImage("./ressources/room.png"), 0, 0, null);
     }
 
     // Stratégie d'affichage pour le joueur
