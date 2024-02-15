@@ -1,7 +1,7 @@
 package engine.process;
 
 import config.GameConfiguration;
-import engine.characters.Character;
+import engine.characters.GameCharacter;
 import engine.characters.Enemy;
 import engine.characters.Player;
 import engine.dungeon.Pixel;
@@ -25,7 +25,7 @@ public class GameBuilder {
 
     private static void initializePlayer (Room room, CharacterManager manager) {
         Pixel pixel = room.getPixel( (GameConfiguration.WINDOW_WIDTH - 1) / 2, (GameConfiguration.WINDOW_HEIGHT - 1) / 2);
-        Player player = new Player(pixel);
+        Player player = new Player(room, pixel);
         manager.set(player);
     }
 
@@ -34,7 +34,8 @@ public class GameBuilder {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.PLAYER_WIDTH);
             int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.PLAYER_HEIGHT);
             Pixel position = room.getPixel(enemyX, enemyY);
-            Enemy enemy = new Enemy(position);
+            GameCharacter enemy = new Enemy(room, position);
+            room.addCharacter(enemy); // On l'ajoute à la liste des personnages de la room
             manager.add(enemy); // On l'ajoute à la liste d'ennemis
         }
     }

@@ -8,6 +8,7 @@ import engine.characters.Player;
 import engine.dungeon.Pixel;
 import engine.dungeon.Room;
 import engine.characters.Enemy;
+import engine.characters.GameCharacter;
 
 public class CharacterManager {
     
@@ -31,8 +32,9 @@ public class CharacterManager {
 		return enemies;
 	}
     
-    public void add (Enemy enemy) {
-		enemies.add(enemy);
+    public void add (GameCharacter enemy) {
+		if(enemy instanceof Enemy)
+            enemies.add((Enemy) enemy);
 	}
 
     public void movePlayer (String direction) {
