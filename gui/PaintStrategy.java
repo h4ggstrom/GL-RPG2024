@@ -26,7 +26,7 @@ public class PaintStrategy {
         Pixel position = player.getPosition();
 
         graphics.setColor(Color.MAGENTA);
-        graphics.fillOval(position.getX(), position.getY(), GameConfiguration.PLAYER_WIDTH, GameConfiguration.PLAYER_HEIGHT);
+        graphics.fillRect(position.getX(), position.getY(), GameConfiguration.PLAYER_WIDTH, GameConfiguration.PLAYER_HEIGHT);
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
         graphics.drawString("Player", position.getX() - 5, position.getY() + 60);
     }
@@ -35,6 +35,6 @@ public class PaintStrategy {
 		Pixel position = enemy.getPosition();
 
 		graphics.setColor(Color.RED);
-		graphics.fillOval(position.getX(), position.getY(), GameConfiguration.ENEMY_WIDTH, GameConfiguration.ENEMY_HEIGHT);
+		graphics.fillRect(position.getX(), position.getY(), GameConfiguration.ENEMY_WIDTH, GameConfiguration.ENEMY_HEIGHT);
 	}
 }

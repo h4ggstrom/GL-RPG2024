@@ -10,7 +10,7 @@ public abstract class GameCharacter {
 
     public GameCharacter (Room room, Pixel position) {
         this.position = position;
-        this.hitbox = new Hitbox(room, position);
+        this.hitbox = new Hitbox(room, position, "enemy"); // Le pixel upperleft et le pixel bottomright
     }
 
     public Pixel getPosition () {

@@ -7,7 +7,7 @@ public class GameConfiguration {
 	
 	public static final int GAME_SPEED = 1;
 
-    public static final int PLAYER_DEFAULT_SPEED = 12; // 48 pixels par /10 de secondes ce qui fait 1920px en 4 secondes
+    public static final int PLAYER_DEFAULT_SPEED = 1;
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 40;
 

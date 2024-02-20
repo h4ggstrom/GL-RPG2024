@@ -37,6 +37,7 @@ public class GameBuilder {
             GameCharacter enemy = new Enemy(room, position);
             room.addCharacter(enemy); // On l'ajoute à la liste des personnages de la room
             manager.add(enemy); // On l'ajoute à la liste d'ennemis
+            manager.add(enemy.getHitbox()); // On ajoute sa Hitbox à notre liste de Hitboxes
         }
     }
 
