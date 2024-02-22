@@ -59,25 +59,27 @@ public class CharacterManager {
                 break;
             case "right":
                 endPosition = room.getPixel(startPosition.getX() + GameConfiguration.PLAYER_DEFAULT_SPEED, startPosition.getY());
-                System.out.println(hitboxes);
                 break;
             default:
                 endPosition = startPosition; // Sinon, on garde la même position
                 break;
         }
 
-        if ( ! ( GameConfiguration.ROOM_LEFT_LIMITATION < endPosition.getX() && endPosition.getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < endPosition.getY() && endPosition.getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) // Si le joueur est au limites de la room
+        Hitbox finaleHitbox = new Hitbox(room, endPosition, "player"); // On instancie la Hitbox sur l'emplacement final
+
+        // Si le joueur est au limites de la room
+        if ( ! ( ( GameConfiguration.ROOM_LEFT_LIMITATION < endPosition.getX() && endPosition.getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < endPosition.getY() && endPosition.getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) )
             canBeMoved = false; // Il ne peut pas être déplacé
 
-        for (Hitbox hitbox : hitboxes) { // On parcourt toutes les Hitbox de la Room
-            if ( player.getHitbox().isInCollision(hitbox) ) // Si la Hitbox finale du joueur est en collision avec une des Hitbox de la salle
+        // On parcourt toutes les Hitbox de la Room
+        for (Hitbox hitbox : hitboxes) {
+            if ( finaleHitbox.isInCollision(hitbox) ) // Si la Hitbox finale du joueur est en collision avec une des Hitbox de la salle
                 canBeMoved = false; // Il ne peut pas être déplacé
         }
 
         if (canBeMoved) // Si on a jugé que le joueur peut se déplacer
             player.setPosition(endPosition); // On le déplace
             hitboxes.remove(player.getHitbox()); // On retire la Hitbox précédente de notre liste de Hitbox
-            player.setHitbox(new Hitbox(room, endPosition, "player")); // On créé la nouvelle Hitbox et on l'associe au joueur
-            System.out.println(player.getHitbox());
+            player.setHitbox(finaleHitbox); // On créé la nouvelle Hitbox et on l'associe au joueur
     }
 }

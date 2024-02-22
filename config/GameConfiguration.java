@@ -7,7 +7,7 @@ public class GameConfiguration {
 	
 	public static final int GAME_SPEED = 1;
 
-    public static final int PLAYER_DEFAULT_SPEED = 1;
+    public static final int PLAYER_DEFAULT_SPEED = 10;
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 40;
 
