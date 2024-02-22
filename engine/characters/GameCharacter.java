@@ -7,10 +7,12 @@ public abstract class GameCharacter {
 
     private Pixel position;
     private Hitbox hitbox;
+    private int health;
 
-    public GameCharacter (Room room, Pixel position) {
+    public GameCharacter (Room room, Pixel position, String characterType, int health) {
         this.position = position;
-        this.hitbox = new Hitbox(room, position, "enemy"); // Le pixel upperleft et le pixel bottomright
+        this.hitbox = new Hitbox(room, position, characterType, this);
+        this.health = health;
     }
 
     public Pixel getPosition () {
@@ -29,9 +31,17 @@ public abstract class GameCharacter {
         this.hitbox = hitbox;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     @Override
     public String toString() {
-        return "Character [position=" + position + "]";
+        return "GameCharacter [position=" + position + ", hitbox=" + hitbox + ", health=" + health + "]";
     }
     
 }

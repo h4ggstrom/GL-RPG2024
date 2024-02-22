@@ -26,15 +26,18 @@ public class PaintStrategy {
         Pixel position = player.getPosition();
 
         graphics.setColor(Color.MAGENTA);
-        graphics.fillRect(position.getX(), position.getY(), GameConfiguration.PLAYER_WIDTH, GameConfiguration.PLAYER_HEIGHT);
+        graphics.fillRect(position.getX(), position.getY(), GameConfiguration.PLAYER_WIDTH, GameConfiguration.PLAYER_HEIGHT); // Le corps
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
-        graphics.drawString("Player", position.getX() - 5, position.getY() + 60);
+        graphics.drawString("Player", position.getX() - 5, position.getY() - 5); // Le nom
+        graphics.fillRect(position.getX() - 15, position.getY() + GameConfiguration.PLAYER_HEIGHT + 5, player.getHealth(), 2); // La barre de vie
     }
 
     public void paint(Enemy enemy, Graphics graphics) {
 		Pixel position = enemy.getPosition();
 
 		graphics.setColor(Color.RED);
-		graphics.fillRect(position.getX(), position.getY(), GameConfiguration.ENEMY_WIDTH, GameConfiguration.ENEMY_HEIGHT);
+		graphics.fillRect(position.getX(), position.getY(), GameConfiguration.ENEMY_WIDTH, GameConfiguration.ENEMY_HEIGHT); // Le corps
+        graphics.drawString("Enemy", position.getX() - 5, position.getY() - 5); // Le nom
+        graphics.fillRect(position.getX() - 5, position.getY() + GameConfiguration.ENEMY_HEIGHT + 5, enemy.getHealth(), 2); // La barre de vie
 	}
 }

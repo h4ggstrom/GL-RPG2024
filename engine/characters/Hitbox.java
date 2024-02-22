@@ -13,8 +13,9 @@ public class Hitbox {
     private Pixel upperRight;
     private Pixel bottomLeft;
     private Pixel bottomRight;
+    private GameCharacter character;
 
-    public Hitbox(Room room, Pixel upperLeft, String characterType) {
+    public Hitbox(Room room, Pixel upperLeft, String characterType, GameCharacter character) {
         this.upperLeft = upperLeft;
         int width = 0;
         int height = 0;
@@ -33,6 +34,7 @@ public class Hitbox {
         this.upperRight = room.getPixel(upperLeft.getX() + width, upperLeft.getY());
         this.bottomLeft = room.getPixel(upperLeft.getX(), upperLeft.getY() + height);
         this.bottomRight = room.getPixel(bottomLeft.getX() + width, bottomLeft.getY());
+        this.character = character;
     }
 
     /**
@@ -50,7 +52,7 @@ public class Hitbox {
      * @param pixel
      * @return
      */
-    private boolean isContaining(Pixel pixel) {
+    public boolean isContaining(Pixel pixel) {
         return ( ( this.upperLeft.getX() <= pixel.getX() && pixel.getX() <= this.upperRight.getX() ) && ( this.upperLeft.getY() <= pixel.getY() && pixel.getY() <= this.bottomLeft.getY() ));
     }
 
@@ -84,6 +86,10 @@ public class Hitbox {
 
     public void setBottomRight(Pixel bottomRight) {
         this.bottomRight = bottomRight;
+    }
+
+    public Enemy getEnemy() {
+        return (Enemy)this.character;
     }
 
     @Override
