@@ -23,7 +23,7 @@ public class GameBuilder {
     }
 
     private static void initializePlayer (CharacterManager manager) {
-        Pixel pixel = new Pixel( (GameConfiguration.WINDOW_WIDTH - 1) / 2, (GameConfiguration.WINDOW_HEIGHT - 1) / 2);
+        Pixel pixel = new Pixel( GameConfiguration.ROOM_CENTER_X - ( GameConfiguration.PLAYER_WIDTH / 2 ) , GameConfiguration.ROOM_CENTER_Y - ( GameConfiguration.PLAYER_HEIGHT / 2 ) );
         Player player = new Player(pixel);
         manager.set(player);
     }

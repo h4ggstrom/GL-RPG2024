@@ -7,6 +7,7 @@ import config.GameConfiguration;
 import engine.characters.Player;
 import engine.dungeon.Pixel;
 import engine.dungeon.Room;
+import engine.Abilities.Ability;
 import engine.characters.Enemy;
 import engine.characters.Hitbox;
 
@@ -14,6 +15,7 @@ public class CharacterManager {
     
     private Player player;
     private Room room;
+    private ArrayList<Ability> abilities = new ArrayList<Ability>();
 
     public CharacterManager (Room room) {
         this.room = room;
@@ -23,12 +25,24 @@ public class CharacterManager {
         this.player = player;
     }
 
+    public void add (Ability ability) {
+        this.abilities.add(ability);
+    }
+
+    public void emptyAbilities () {
+        this.abilities.clear();
+    }
+
     public Player getPlayer () {
         return this.player;
     }
 
     public Room getRoom() {
         return this.room;
+    }
+
+    public ArrayList<Ability> getAbilities() {
+        return abilities;
     }
 
     public void movePlayer (String direction) {
@@ -55,9 +69,13 @@ public class CharacterManager {
 
         Hitbox finaleHitbox = new Hitbox(endPosition, "player", player); // On instancie la Hitbox sur l'emplacement final
 
-        // Si le joueur est au limites de la room
-        if ( ! ( ( GameConfiguration.ROOM_LEFT_LIMITATION < endPosition.getX() && endPosition.getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < endPosition.getY() && endPosition.getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) )
+        // Si la Room n'est pas ouverte et que le joueur est aux limites de la room
+        if ( !room.getCleaned() && ! ( ( GameConfiguration.ROOM_LEFT_LIMITATION < endPosition.getX() && endPosition.getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < endPosition.getY() && endPosition.getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) )
             canBeMoved = false; // Il ne peut pas être déplacé
+
+        // Si la Room est ouverte alors il pourra sortir par la porte
+        if ( room.getCleaned() && ! ( ( GameConfiguration.ROOM_LEFT_LIMITATION < endPosition.getX() && endPosition.getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < endPosition.getY() && endPosition.getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) && !(GameConfiguration.GATE_UP.getY() <= endPosition.getY() && endPosition.getY() <= GameConfiguration.GATE_DOWN.getY() - GameConfiguration.PLAYER_HEIGHT) )
+            canBeMoved = false;
 
         // On parcourt toutes les Hitbox d'Enemy de la Room
         for (Hitbox hitbox : room.getEnemyHitboxes()) {
@@ -98,4 +116,5 @@ public class CharacterManager {
             // Si c'est le cas la Room à été nettoyée
             room.clean();
     }
+
 }

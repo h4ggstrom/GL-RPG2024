@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import config.GameConfiguration;
+import engine.Abilities.Ability;
 import engine.dungeon.Pixel;
 import engine.dungeon.Room;
 import engine.process.CharacterManager;
@@ -90,6 +91,7 @@ public class MainGUI extends JFrame implements Runnable {
                     manager.movePlayer("right");
                     break;
                 default:
+                    manager.emptyAbilities();
                     break;
             }
         }
@@ -117,7 +119,19 @@ public class MainGUI extends JFrame implements Runnable {
             int x = e.getX() + GameConfiguration.CORRECTCLICKSHIFT_X;
             int y = e.getY() + GameConfiguration.CORRECTCLICKSHIFT_Y;
 
-            manager.attack(new Pixel(x, y)); // On lance l'attaque avec le pixel concerné
+            // On récupère les coordonnées du centre de la hitbox du joueur
+            int x_center_player = manager.getPlayer().getHitbox().getCenter().getX();
+            int y_center_player = manager.getPlayer().getHitbox().getCenter().getY();
+
+            // On calcule l'angle en radian de l'attaque par rapport au centre du joueur avec Arctangente
+            double angle = Math.atan2(y - y_center_player, x - x_center_player);
+
+            // On calcule le pixel d'arrivée sur le cercle dont le centre est le joueur et le rayon est la range de l'attaque
+            int finalx = (int)(x_center_player + GameConfiguration.WEAPON_RANGE * Math.cos(angle));
+            int finaly = (int)(y_center_player + GameConfiguration.WEAPON_RANGE * Math.sin(angle));
+
+            Ability ability = new Ability(manager.getPlayer(), GameConfiguration.WEAPON_DAMAGE, GameConfiguration.WEAPON_RANGE, new Pixel(finalx, finaly));
+            manager.add(ability);
         }
 
         @Override
@@ -127,7 +141,6 @@ public class MainGUI extends JFrame implements Runnable {
 
         @Override
         public void mouseReleased(java.awt.event.MouseEvent e) {
-            
         }
 
         @Override
@@ -141,4 +154,5 @@ public class MainGUI extends JFrame implements Runnable {
         }
         
     }
+
 }
