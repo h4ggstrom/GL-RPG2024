@@ -1,7 +1,6 @@
 package engine.process;
 
 import config.GameConfiguration;
-import engine.characters.GameCharacter;
 import engine.characters.Enemy;
 import engine.characters.Player;
 import engine.dungeon.Pixel;
@@ -16,28 +15,27 @@ public class GameBuilder {
     public static CharacterManager buildInitCharacters (Room room) {
         CharacterManager manager = new CharacterManager(room);
 
-        initializePlayer(room, manager);
+        initializePlayer(manager);
 
-        initializeEnemies(room, manager);
+        initializeEnemies(manager);
 
         return manager;
     }
 
-    private static void initializePlayer (Room room, CharacterManager manager) {
-        Pixel pixel = room.getPixel( (GameConfiguration.WINDOW_WIDTH - 1) / 2, (GameConfiguration.WINDOW_HEIGHT - 1) / 2);
-        Player player = new Player(room, pixel);
+    private static void initializePlayer (CharacterManager manager) {
+        Pixel pixel = new Pixel( (GameConfiguration.WINDOW_WIDTH - 1) / 2, (GameConfiguration.WINDOW_HEIGHT - 1) / 2);
+        Player player = new Player(pixel);
         manager.set(player);
     }
 
-    private static void initializeEnemies(Room room, CharacterManager manager) {
+    private static void initializeEnemies(CharacterManager manager) {
         for (int i = 0; i < GameConfiguration.ENEMIES_INIT_NUMBER; i++) {
-            int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.PLAYER_WIDTH);
-            int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.PLAYER_HEIGHT);
-            Pixel position = room.getPixel(enemyX, enemyY);
-            GameCharacter enemy = new Enemy(room, position);
-            room.addCharacter(enemy); // On l'ajoute à la liste des personnages de la room
-            manager.add(enemy); // On l'ajoute à la liste d'ennemis
-            manager.add(enemy.getHitbox()); // On ajoute sa Hitbox à notre liste de Hitboxes
+            int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH);
+            int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT);
+            Pixel position = new Pixel(enemyX, enemyY); // On instancie sa position
+            Enemy enemy = new Enemy(position); // On instancie l'Enemy
+            manager.getRoom().addEnemy(enemy); // On l'ajoute à la liste d'ennemis de la Room
+            manager.getRoom().addHitbox(enemy.getHitbox()); // On ajoute sa Hitbox à la liste de Hitboxes de la Room
         }
     }
 

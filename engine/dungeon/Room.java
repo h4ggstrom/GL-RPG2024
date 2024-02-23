@@ -2,38 +2,53 @@ package engine.dungeon;
 
 import java.util.ArrayList;
 
-import config.GameConfiguration;
-import engine.characters.GameCharacter;
+import engine.characters.Enemy;
+import engine.characters.Hitbox;
 
 public class Room {
     
-    private Pixel[][] pixels;
-    private ArrayList<GameCharacter> characters = new ArrayList<GameCharacter>();
+    private Boolean cleaned;
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    private ArrayList<Hitbox> enemy_hitboxes = new ArrayList<Hitbox>();
 
-    public Room() {
-        pixels = new Pixel[GameConfiguration.WINDOW_WIDTH][GameConfiguration.WINDOW_HEIGHT];
-        
-        for (int x = 0 ; x < GameConfiguration.WINDOW_WIDTH ; x++) {
-            for (int y = 0 ; y < GameConfiguration.WINDOW_HEIGHT ; y++) {
-                pixels[x][y] = new Pixel(x, y);
-            }
-        }
-    }
-
-    public Pixel[][] getPixels() {
-        return this.pixels;
-    }
-
-    public Pixel getPixel(int x, int y) {
-        return pixels[x][y];
+    public Room () {
+        this.cleaned = false; // Par défaut, une Room est remplie de monstres et doit-être nettoyée
     }
 
     /**
      * Cette méthode ajoute un personnage à la liste des personnages présents dans la room
      * @param character le personnage à ajouter
      */
-    public void addCharacter (GameCharacter character) {
-        this.characters.add(character);
+    public void addEnemy (Enemy enemy) {
+        enemies.add(enemy);
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return this.enemies;
+    }
+
+    public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
+    }
+
+    public void addHitbox (Hitbox hitbox) {
+        enemy_hitboxes.add(hitbox);
+    }
+
+    public ArrayList<Hitbox> getEnemyHitboxes() {
+        return this.enemy_hitboxes;
+    }
+
+    public void removeEnemyHitbox(Hitbox hitbox) {
+        enemy_hitboxes.remove(hitbox);
+    }
+
+    public void clean () {
+        cleaned = true;
+    }
+
+    public Boolean getCleaned () {
+        return this.cleaned;
     }
 
 }

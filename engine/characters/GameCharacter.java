@@ -1,7 +1,6 @@
 package engine.characters;
 
 import engine.dungeon.Pixel;
-import engine.dungeon.Room;
 
 public abstract class GameCharacter {
 
@@ -9,9 +8,9 @@ public abstract class GameCharacter {
     private Hitbox hitbox;
     private int health;
 
-    public GameCharacter (Room room, Pixel position, String characterType, int health) {
+    public GameCharacter (Pixel position, String characterType, int health) {
         this.position = position;
-        this.hitbox = new Hitbox(room, position, characterType, this);
+        this.hitbox = new Hitbox(position, characterType, this);
         this.health = health;
     }
 

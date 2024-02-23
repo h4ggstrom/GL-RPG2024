@@ -29,7 +29,7 @@ public class GameDisplay extends JPanel {
         Player player = manager.getPlayer();
         paintStrategy.paint(player, graphics);
 
-        for (Enemy enemy : manager.getEnemies()) {
+        for (Enemy enemy : manager.getRoom().getEnemies()) {
             paintStrategy.paint(enemy, graphics);
         }
     }

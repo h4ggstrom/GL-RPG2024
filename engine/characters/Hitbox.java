@@ -2,7 +2,6 @@ package engine.characters;
 
 import config.GameConfiguration;
 import engine.dungeon.Pixel;
-import engine.dungeon.Room;
 
 /**
  * Une Hitbox est un rectangle défini par ses 4 coins, intraversable et touchable avec des attaques
@@ -15,7 +14,7 @@ public class Hitbox {
     private Pixel bottomRight;
     private GameCharacter character;
 
-    public Hitbox(Room room, Pixel upperLeft, String characterType, GameCharacter character) {
+    public Hitbox(Pixel upperLeft, String characterType, GameCharacter character) {
         this.upperLeft = upperLeft;
         int width = 0;
         int height = 0;
@@ -31,9 +30,9 @@ public class Hitbox {
             case "default" :
                 break;
         }
-        this.upperRight = room.getPixel(upperLeft.getX() + width, upperLeft.getY());
-        this.bottomLeft = room.getPixel(upperLeft.getX(), upperLeft.getY() + height);
-        this.bottomRight = room.getPixel(bottomLeft.getX() + width, bottomLeft.getY());
+        this.upperRight = new Pixel(upperLeft.getX() + width, upperLeft.getY());
+        this.bottomLeft = new Pixel(upperLeft.getX(), upperLeft.getY() + height);
+        this.bottomRight = new Pixel(bottomLeft.getX() + width, bottomLeft.getY());
         this.character = character;
     }
 

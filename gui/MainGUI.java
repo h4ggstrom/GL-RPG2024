@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import config.GameConfiguration;
+import engine.dungeon.Pixel;
 import engine.dungeon.Room;
 import engine.process.CharacterManager;
 import engine.process.GameBuilder;
@@ -116,7 +117,7 @@ public class MainGUI extends JFrame implements Runnable {
             int x = e.getX() + GameConfiguration.CORRECTCLICKSHIFT_X;
             int y = e.getY() + GameConfiguration.CORRECTCLICKSHIFT_Y;
 
-            manager.attack(room.getPixel(x, y)); // On lance l'attaque avec le pixel concerné
+            manager.attack(new Pixel(x, y)); // On lance l'attaque avec le pixel concerné
         }
 
         @Override

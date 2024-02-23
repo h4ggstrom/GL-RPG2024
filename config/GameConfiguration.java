@@ -17,7 +17,7 @@ public class GameConfiguration {
     public static final int ROOM_LEFT_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en X
     public static final int ROOM_RIGHT_LIMITATION = 1007; // Le mur bloque le joueur après cette valeur en X
 
-    public static final int ENEMIES_INIT_NUMBER = 1;
+    public static final int ENEMIES_INIT_NUMBER = 4;
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
     public static final int ENEMY_HEALTH = 30;
