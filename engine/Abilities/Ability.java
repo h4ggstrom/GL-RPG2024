@@ -8,13 +8,13 @@ public class Ability {
     private GameCharacter caster;
     private int damage;
     private int range;
-    private Pixel direction;
+    private Pixel target;
 
-    public Ability(GameCharacter caster, int damage, int range, Pixel direction) {
+    public Ability(GameCharacter caster, int damage, int range, Pixel target) {
         this.caster = caster;
         this.damage = damage;
         this.range = range;
-        this.direction = direction;
+        this.target = target;
     }
 
     public GameCharacter getCaster() {
@@ -41,12 +41,12 @@ public class Ability {
         this.range = range;
     }
 
-    public Pixel getDirection() {
-        return direction;
+    public Pixel getTarget() {
+        return target;
     }
 
-    public void setDirection(Pixel direction) {
-        this.direction = direction;
+    public void setTarget(Pixel target) {
+        this.target = target;
     }
 
 }

@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import config.GameConfiguration;
-import engine.Abilities.Ability;
 import engine.characters.Enemy;
 import engine.characters.Player;
 import engine.dungeon.Pixel;
@@ -80,18 +79,4 @@ public class PaintStrategy {
         graphics.fillRect(position.getX() - 5, position.getY() + GameConfiguration.ENEMY_HEIGHT + 5, enemy.getHealth(), 2); // La barre de vie
 	}
 
-    // Stratégie d'affichage pour les attaques
-    public void paint(Ability ability, Graphics graphics) {
-        Pixel startPosition = ability.getCaster().getHitbox().getCenter();
-        Pixel finishPosition = ability.getDirection();
-
-        int xstart = startPosition.getX();
-        int ystart = startPosition.getY();
-
-        int xfinish = finishPosition.getX();
-        int yfinish = finishPosition.getY();
-
-        graphics.setColor(Color.ORANGE);
-        graphics.drawLine(xstart, ystart, xfinish, yfinish);
-    }
 }
