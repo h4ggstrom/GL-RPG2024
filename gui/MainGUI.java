@@ -111,7 +111,7 @@ public class MainGUI extends JFrame implements Runnable {
      * Inner-class permettant d'écouter les clics-souris
      */
     private class MouseControls implements MouseListener {
-
+  
         @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
             

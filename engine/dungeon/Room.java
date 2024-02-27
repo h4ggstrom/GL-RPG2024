@@ -14,7 +14,7 @@ public class Room {
     public Room () {
         this.cleaned = false; // Par défaut, une Room est remplie de monstres et doit-être nettoyée
     }
-
+  
     /**
      * Cette méthode ajoute un personnage à la liste des personnages présents dans la room
      * @param character le personnage à ajouter

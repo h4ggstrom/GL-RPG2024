@@ -1,11 +1,11 @@
 package engine.characters;
 
 import config.GameConfiguration;
-import engine.dungeon.Pixel;
+import engine.dungeon.Position;
 
 public class Player extends GameCharacter {
-
-    public Player( Pixel position) {
+  
+    public Player( Position position) {
         super(position, "player", GameConfiguration.PLAYER_HEALTH);
     }
     

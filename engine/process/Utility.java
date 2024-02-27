@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Utility {
-    
+      
     /**
 	 * Reads a image from an image file.
 	 * 

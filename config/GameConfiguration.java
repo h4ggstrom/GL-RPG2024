@@ -1,6 +1,6 @@
 package config;
 
-import engine.dungeon.Pixel;
+import engine.dungeon.Position;
 
 public class GameConfiguration {
 
@@ -23,8 +23,8 @@ public class GameConfiguration {
     public static final int ROOM_RIGHT_LIMITATION = 1007; // Le mur bloque le joueur après cette valeur en X
     public static final int ROOM_CENTER_X = 549;
     public static final int ROOM_CENTER_Y = 359;
-    public static final Pixel GATE_UP = new Pixel(1026, 292); // Le pixel haut de la porte de sortie
-    public static final Pixel GATE_DOWN = new Pixel(1028, 429); // Le pixel bas de la porte de sortie
+    public static final Position GATE_UP = new Position(1026, 292); // Le pixel haut de la porte de sortie
+    public static final Position GATE_DOWN = new Position(1028, 429); // Le pixel bas de la porte de sortie
 
     public static final int ENEMIES_INIT_NUMBER = 4;
     public static final int ENEMY_WIDTH = 20;
@@ -33,5 +33,4 @@ public class GameConfiguration {
 
     public static final int CORRECTCLICKSHIFT_X = -8; // Le MouseListener séléctionne une coordonnée en X incorrecte de 8 pixels en trop
     public static final int CORRECTCLICKSHIFT_Y = -32; // Le MouseListener séléctionne une coordonnée en Y incorrecte de 31 pixels en trop
-
 }

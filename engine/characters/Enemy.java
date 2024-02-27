@@ -1,12 +1,11 @@
 package engine.characters;
 
 import config.GameConfiguration;
-import engine.dungeon.Pixel;
+import engine.dungeon.Position;
 
 public class Enemy extends GameCharacter {
     
-    public Enemy (Pixel position) {
+    public Enemy (Position position) {
         super(position, "enemy", GameConfiguration.ENEMY_HEALTH);
     }
-
 }

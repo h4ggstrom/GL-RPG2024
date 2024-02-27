@@ -1,16 +1,16 @@
 package engine.Abilities;
 
 import engine.characters.GameCharacter;
-import engine.dungeon.Pixel;
+import engine.dungeon.Position;
 
 public class Ability {
     
     private GameCharacter caster;
     private int damage;
     private int range;
-    private Pixel target;
+    private Position target;
 
-    public Ability(GameCharacter caster, int damage, int range, Pixel target) {
+    public Ability(GameCharacter caster, int damage, int range, Position target) {
         this.caster = caster;
         this.damage = damage;
         this.range = range;
@@ -41,12 +41,12 @@ public class Ability {
         this.range = range;
     }
 
-    public Pixel getTarget() {
+    public Position getTarget() {
         return target;
     }
 
-    public void setTarget(Pixel target) {
+    public void setTarget(Position target) {
         this.target = target;
     }
-
+  
 }

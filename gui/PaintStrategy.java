@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import config.GameConfiguration;
 import engine.characters.Enemy;
 import engine.characters.Player;
-import engine.dungeon.Pixel;
+import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.process.Utility;
 
@@ -15,7 +15,7 @@ import engine.process.Utility;
  * Dans cette classe, on implémente une stratégie d'affichage pour chaque élement du jeu.
  */
 public class PaintStrategy {
-    
+      
     // Stratégie d'affichage pour la salle
     public void paint (Room room, Graphics graphics) {
         // Si la Room n'a pas été nettoyée de tous ses monstres
@@ -28,27 +28,27 @@ public class PaintStrategy {
 
     // Stratégie d'affichage pour le joueur
     public void paint (Player player, Graphics graphics) {
-        Pixel position = player.getPosition();
+        Position position = player.getPosition();
         int x = position.getX();
         int y = position.getY();
 
-        Pixel hitbox_center = player.getHitbox().getCenter();
+        Position hitbox_center = player.getHitbox().getCenter();
         int x_center = hitbox_center.getX();
         int y_center = hitbox_center.getY();
 
-        Pixel hitbox_UL = player.getHitbox().getUpperLeft();
+        Position hitbox_UL = player.getHitbox().getUpperLeft();
         int x_UL = hitbox_UL.getX();
         int y_UL = hitbox_UL.getY();
 
-        Pixel hitbox_UR = player.getHitbox().getUpperRight();
+        Position hitbox_UR = player.getHitbox().getUpperRight();
         int x_UR = hitbox_UR.getX();
         int y_UR = hitbox_UR.getY();
 
-        Pixel hitbox_BL = player.getHitbox().getBottomLeft();
+        Position hitbox_BL = player.getHitbox().getBottomLeft();
         int x_BL = hitbox_BL.getX();
         int y_BL = hitbox_BL.getY();
 
-        Pixel hitbox_BR = player.getHitbox().getBottomRight();
+        Position hitbox_BR = player.getHitbox().getBottomRight();
         int x_BR = hitbox_BR.getX();
         int y_BR = hitbox_BR.getY();
 
@@ -71,7 +71,7 @@ public class PaintStrategy {
 
     // Stratégie d'affichage pour les ennemis
     public void paint(Enemy enemy, Graphics graphics) {
-		Pixel position = enemy.getPosition();
+		Position position = enemy.getPosition();
 
 		graphics.setColor(Color.RED);
 		graphics.fillRect(position.getX(), position.getY(), GameConfiguration.ENEMY_WIDTH, GameConfiguration.ENEMY_HEIGHT); // Le corps

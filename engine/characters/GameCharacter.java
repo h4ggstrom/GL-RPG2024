@@ -1,24 +1,24 @@
 package engine.characters;
 
-import engine.dungeon.Pixel;
+import engine.dungeon.Position;
 
 public abstract class GameCharacter {
 
-    private Pixel position;
+    private Position position;
     private Hitbox hitbox;
     private int health;
 
-    public GameCharacter (Pixel position, String characterType, int health) {
+    public GameCharacter (Position position, String characterType, int health) {
         this.position = position;
         this.hitbox = new Hitbox(position, characterType, this);
         this.health = health;
     }
 
-    public Pixel getPosition () {
+    public Position getPosition () {
         return this.position;
     }
 
-    public void setPosition (Pixel position) {
+    public void setPosition (Position position) {
         this.position = position;
     }
 
@@ -42,5 +42,6 @@ public abstract class GameCharacter {
     public String toString() {
         return "GameCharacter [position=" + position + ", hitbox=" + hitbox + ", health=" + health + "]";
     }
+    
     
 }

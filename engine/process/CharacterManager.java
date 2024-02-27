@@ -12,7 +12,7 @@ import engine.characters.Enemy;
 import engine.characters.Hitbox;
 
 public class CharacterManager {
-    
+     
     private Player player;
     private Room room;
     private ArrayList<Ability> abilities = new ArrayList<Ability>();

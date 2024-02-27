@@ -3,11 +3,11 @@ package engine.process;
 import config.GameConfiguration;
 import engine.characters.Enemy;
 import engine.characters.Player;
-import engine.dungeon.Pixel;
+import engine.dungeon.Position;
 import engine.dungeon.Room;
 
 public class GameBuilder {
-    
+      
     public static Room buildRoom() {
         return new Room();
     }
@@ -23,7 +23,7 @@ public class GameBuilder {
     }
 
     private static void initializePlayer (CharacterManager manager) {
-        Pixel pixel = new Pixel( GameConfiguration.ROOM_CENTER_X - ( GameConfiguration.PLAYER_WIDTH / 2 ) , GameConfiguration.ROOM_CENTER_Y - ( GameConfiguration.PLAYER_HEIGHT / 2 ) );
+        Position pixel = new Position( GameConfiguration.ROOM_CENTER_X - ( GameConfiguration.PLAYER_WIDTH / 2 ) , GameConfiguration.ROOM_CENTER_Y - ( GameConfiguration.PLAYER_HEIGHT / 2 ) );
         Player player = new Player(pixel);
         manager.set(player);
     }
@@ -32,7 +32,7 @@ public class GameBuilder {
         for (int i = 0; i < GameConfiguration.ENEMIES_INIT_NUMBER; i++) {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH);
             int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT);
-            Pixel position = new Pixel(enemyX, enemyY); // On instancie sa position
+            Position position = new Position(enemyX, enemyY); // On instancie sa position
             Enemy enemy = new Enemy(position); // On instancie l'Enemy
             manager.getRoom().addEnemy(enemy); // On l'ajoute à la liste d'ennemis de la Room
             manager.getRoom().addHitbox(enemy.getHitbox()); // On ajoute sa Hitbox à la liste de Hitboxes de la Room

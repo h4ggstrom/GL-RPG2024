@@ -33,5 +33,5 @@ public class GameDisplay extends JPanel {
             paintStrategy.paint(enemy, graphics);
         }
     }
-
+   
 }
