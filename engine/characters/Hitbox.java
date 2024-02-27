@@ -4,10 +4,18 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 
 /**
- * Une Hitbox est un rectangle défini par ses 4 coins et son milieu, intraversable et touchable avec des attaques
+ * Génie Logiciel - Projet RPG.
+ * 
+ * Cette classe gère toutes les boîtes de collision des personnages.
+ * 
+ * @author thibault.terrie@etu.cyu.fr
+ * @author robin.de-angelis@etu.cyu.fr
+ * @author hayder.ur-rehman@etu.cyu.fr
+ * 
  */
 public class Hitbox {
 
+    // définition des attributs
     private Position upperLeft;
     private Position upperRight;
     private Position bottomLeft;
@@ -15,6 +23,13 @@ public class Hitbox {
     private Position center;
     private GameCharacter character;
 
+    /**
+     * Constructeur par défaut. Génère une nouvelle instance de hitbox contenant ses dimensions (dépendant du type de personnage).
+     * 
+     * @param upperLeft la position en haut à gauche du personnage. La hitbox est calculée à partir de ce point
+     * @param characterType le type de personnage
+     * @param character le personnage à qui attribuer la hitbox
+     */
     public Hitbox(Position upperLeft, String characterType, GameCharacter character) {
         this.upperLeft = upperLeft;
         int width = 0;
@@ -40,13 +55,17 @@ public class Hitbox {
 
     /**
      * Cette méthode vérifie si deux Hitbox sont en collision
+     * 
+     * @param hitbox la hitbox à comparer
      */
     public boolean isInCollision (Hitbox hitbox) {
         return (this.isContaining(hitbox.upperLeft) || this.isContaining(hitbox.upperRight) || this.isContaining(hitbox.bottomLeft) || this.isContaining(hitbox.bottomRight));
     }
 
-    /*
+    /**
      * Cette méthode vérifie si un pixel est inclus dans la Hitbox
+     * 
+     * @param pixel la position à comparer
      */
     public boolean isContaining(Position pixel) {
         return ( ( this.upperLeft.getX() <= pixel.getX() && pixel.getX() <= this.upperRight.getX() ) && ( this.upperLeft.getY() <= pixel.getY() && pixel.getY() <= this.bottomLeft.getY() ));
