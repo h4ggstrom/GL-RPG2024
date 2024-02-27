@@ -5,7 +5,7 @@ import java.util.List;
 
 import config.GameConfiguration;
 import engine.characters.Player;
-import engine.dungeon.Pixel;
+import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.Abilities.Ability;
 import engine.characters.Enemy;
@@ -46,21 +46,21 @@ public class CharacterManager {
     }
 
     public void movePlayer (String direction) {
-        Pixel startPosition = player.getPosition();
-        Pixel endPosition;
+        Position startPosition = player.getPosition();
+        Position endPosition;
         Boolean canBeMoved = true;
         switch (direction) {
             case "up":
-                endPosition = new Pixel(startPosition.getX(), startPosition.getY() - GameConfiguration.PLAYER_DEFAULT_SPEED);
+                endPosition = new Position(startPosition.getX(), startPosition.getY() - GameConfiguration.PLAYER_DEFAULT_SPEED);
                 break;
             case "left":
-                endPosition = new Pixel(startPosition.getX() - GameConfiguration.PLAYER_DEFAULT_SPEED, startPosition.getY());
+                endPosition = new Position(startPosition.getX() - GameConfiguration.PLAYER_DEFAULT_SPEED, startPosition.getY());
                 break;
             case "down":
-                endPosition = new Pixel(startPosition.getX(), startPosition.getY() + GameConfiguration.PLAYER_DEFAULT_SPEED);
+                endPosition = new Position(startPosition.getX(), startPosition.getY() + GameConfiguration.PLAYER_DEFAULT_SPEED);
                 break;
             case "right":
-                endPosition = new Pixel(startPosition.getX() + GameConfiguration.PLAYER_DEFAULT_SPEED, startPosition.getY());
+                endPosition = new Position(startPosition.getX() + GameConfiguration.PLAYER_DEFAULT_SPEED, startPosition.getY());
                 break;
             default:
                 endPosition = startPosition; // Sinon, on garde la même position
@@ -88,35 +88,37 @@ public class CharacterManager {
             player.setHitbox(finaleHitbox); // On associe la nouvelle Hitbox au joueur
     }
 
-    public void attack(Ability ability) {
-        List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
+    public void attack(int distance, Ability ability) {
+        if(distance <= GameConfiguration.WEAPON_RANGE) {
+            List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
 
-        // On parcourt toutes les Hitbox d'Enemy
-        for (Hitbox hitbox : room.getEnemyHitboxes()) {
-            // Si la Hitbox contient le pixel visé par l'attaque
-            if (hitbox.isContaining(ability.getTarget())) {
-                Enemy enemy = hitbox.getEnemy();
-                enemy.setHealth(enemy.getHealth() - ability.getDamage());
+            // On parcourt toutes les Hitbox d'Enemy
+            for (Hitbox hitbox : room.getEnemyHitboxes()) {
+                // Si la Hitbox contient le pixel visé par l'attaque
+                if (hitbox.isContaining(ability.getTarget())) {
+                    Enemy enemy = hitbox.getEnemy();
+                    enemy.setHealth(enemy.getHealth() - ability.getDamage());
 
-                // Si la vie de l'Enemy atteint 0 (ou moins)
-                if (enemy.getHealth() <= 0)
-                    // On l'ajoute à la liste d'Enemy éliminés
-                    eliminatedEnemies.add(enemy);
-            }
+                    // Si la vie de l'Enemy atteint 0 (ou moins)
+                    if (enemy.getHealth() <= 0)
+                        // On l'ajoute à la liste d'Enemy éliminés
+                        eliminatedEnemies.add(enemy);
+                    }
+                }
+
+            // On parcourt les Enemy éliminés pour les retirer du jeu
+            for (Enemy enemy : eliminatedEnemies) {
+                room.removeEnemyHitbox(enemy.getHitbox());
+                room.removeEnemy(enemy);
+                }
+
+            // On vérifie si il ne reste plus aucun ennemis
+            if (room.getEnemies().size() == 0) {
+                // Si c'est le cas la Room à été nettoyée
+                room.clean();
+
+                abilities.remove(ability);
+                }
         }
-
-        // On parcourt les Enemy éliminés pour les retirer du jeu
-        for (Enemy enemy : eliminatedEnemies) {
-            room.removeEnemyHitbox(enemy.getHitbox());
-            room.removeEnemy(enemy);
-        }
-
-        // On vérifie si il ne reste plus aucun ennemis
-        if (room.getEnemies().size() == 0)
-            // Si c'est le cas la Room à été nettoyée
-            room.clean();
-
-            abilities.remove(ability);
     }
-
 }

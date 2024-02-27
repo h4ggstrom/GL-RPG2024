@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 
 import config.GameConfiguration;
 import engine.Abilities.Ability;
-import engine.dungeon.Pixel;
+import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.process.CharacterManager;
 import engine.process.GameBuilder;
@@ -123,17 +123,11 @@ public class MainGUI extends JFrame implements Runnable {
             int x_center_player = manager.getPlayer().getHitbox().getCenter().getX();
             int y_center_player = manager.getPlayer().getHitbox().getCenter().getY();
 
-            // On cherche à déterminer si le pixel cliqué est compris dans le cercle de centre x_center_player y_center_player et de rayon GameConfiguration.WEAPON_RANGE
-
             // On calcule la distance entre ce pixel et notre centre avec pythagore
             int distance = (int)(Math.sqrt(Math.pow(Math.abs(x_center_player - x), 2) + Math.pow(Math.abs(y_center_player - y), 2)));
 
-            // Si cette distance est inférieure ou égale à la portée de l'arme, alors on peut continuer
-            if(distance <= GameConfiguration.WEAPON_RANGE) {
-                Ability ability = new Ability(manager.getPlayer(), GameConfiguration.WEAPON_DAMAGE, GameConfiguration.WEAPON_RANGE, new Pixel(x, y));
-                manager.add(ability);
-                manager.attack(ability);
-            }
+            Ability ability = new Ability(manager.getPlayer(), GameConfiguration.WEAPON_DAMAGE, GameConfiguration.WEAPON_RANGE, new Position(x, y));
+            manager.attack(distance, ability);
         }
 
         @Override
