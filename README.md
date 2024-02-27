@@ -8,4 +8,4 @@ DE ANGELIS Robin, L2-Informatique, robin.de-angelis@etu.cyu.fr
 TERRIE Thibault, L2-Informatique, thibault.terrie@etu.cyu.fr
 UR REHMAN Hayder, L2-Informatique, hayder.ur-rehman@etu.cyu.fr
 
-*Réalisé en 2024, Pour CYU Cergy Paris Université, cyu.fr*
+*Réalisé en 2024, Pour CYU Cergy Paris Université, [cyu.fr](cyu.fr)*
