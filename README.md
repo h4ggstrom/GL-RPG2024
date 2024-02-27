@@ -8,4 +8,4 @@ Pour l'aider, le joueur pourra choisir parmi différentes classes d'avatar, mais
 - TERRIE Thibault, L2-Informatique, thibault.terrie@etu.cyu.fr
 - UR REHMAN Hayder, L2-Informatique, hayder.ur-rehman@etu.cyu.fr
 
-*Réalisé en 2024, Pour CYU Cergy Paris Université, [cyu.fr](cyu.fr)*
+*Réalisé en 2024, Pour CYU Cergy Paris Université, [cyu.fr](https://cyu.fr)*
