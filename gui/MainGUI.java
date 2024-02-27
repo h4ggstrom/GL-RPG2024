@@ -124,7 +124,7 @@ public class MainGUI extends JFrame implements Runnable {
             Position click = new Position(x, y);
 
             // On calcule la distance entre ce pixel et notre centre avec pythagore
-            int distance = manager.calculateDistance(playerCenter, click);
+            int distance = manager.calculateDistance(playerCenter, click); 
 
             Ability ability = new Ability(manager.getPlayer(), GameConfiguration.WEAPON_DAMAGE, GameConfiguration.WEAPON_RANGE, new Position(x, y));
             manager.attack(distance, ability);

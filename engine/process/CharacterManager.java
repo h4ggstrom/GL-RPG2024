@@ -117,7 +117,7 @@ public class CharacterManager {
                 // Si c'est le cas la Room à été nettoyée
                 room.clean();
 
-                abilities.remove(ability);
+                abilities.remove(ability); 
                 }
         }
     }
