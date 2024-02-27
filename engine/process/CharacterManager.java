@@ -12,7 +12,7 @@ import engine.characters.Enemy;
 import engine.characters.Hitbox;
 
 public class CharacterManager {
-     
+      
     private Player player;
     private Room room;
     private ArrayList<Ability> abilities = new ArrayList<Ability>();
@@ -120,5 +120,9 @@ public class CharacterManager {
                 abilities.remove(ability);
                 }
         }
+    }
+
+    public int calculateDistance(Position p1, Position p2) {
+        return ((int)(Math.sqrt(Math.pow(Math.abs(p1.getX() - p2.getX()), 2) + Math.pow(Math.abs(p1.getY()) - p2.getY(), 2))));
     }
 }

@@ -120,11 +120,11 @@ public class MainGUI extends JFrame implements Runnable {
             int y = e.getY() + GameConfiguration.CORRECTCLICKSHIFT_Y;
 
             // On récupère les coordonnées du centre de la hitbox du joueur
-            int x_center_player = manager.getPlayer().getHitbox().getCenter().getX();
-            int y_center_player = manager.getPlayer().getHitbox().getCenter().getY();
+            Position playerCenter = manager.getPlayer().getHitbox().getCenter();
+            Position click = new Position(x, y);
 
             // On calcule la distance entre ce pixel et notre centre avec pythagore
-            int distance = (int)(Math.sqrt(Math.pow(Math.abs(x_center_player - x), 2) + Math.pow(Math.abs(y_center_player - y), 2)));
+            int distance = manager.calculateDistance(playerCenter, click);
 
             Ability ability = new Ability(manager.getPlayer(), GameConfiguration.WEAPON_DAMAGE, GameConfiguration.WEAPON_RANGE, new Position(x, y));
             manager.attack(distance, ability);
