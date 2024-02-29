@@ -6,12 +6,28 @@ import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
 
+/**
+ * Génie Logiciel - Projet RPG.
+ * 
+ * Cette classe gère la génération du jeu (salle et entités)
+ * 
+ * @author thibault.terrie@etu.cyu.fr
+ * @author robin.de-angelis@etu.cyu.fr
+ * @author hayder.ur-rehman@etu.cyu.fr
+ * 
+ */
 public class GameBuilder {
       
     public static Room buildRoom() {
         return new Room();
     }
 
+    /**
+     * génère la salle et les ennemis à l'apparition de la salle en utilisant le constructeur de la classe {@link engine.characters.GameCharacter}
+     * 
+     * @param room la salle dans laquelle évolue le joueur
+     * @return le système de gestion de la partie. Pour plus de détails, voir {@link engine.characters.GameCharacter}
+     */
     public static CharacterManager buildInitCharacters (Room room) {
         CharacterManager manager = new CharacterManager(room);
 
@@ -22,12 +38,26 @@ public class GameBuilder {
         return manager;
     }
 
+    /**
+     * Cette méthode permet d'initialiser le joueur au centre de la salle
+     * 
+     * @param manager le process de gestion des actions, auquel sera ajouté le joueur généré
+     * 
+     * @see engine.process.CharacterManager pour les détails du processus de gestion des actions du joueur
+     */
     private static void initializePlayer (CharacterManager manager) {
         Position pixel = new Position( GameConfiguration.ROOM_CENTER_X - ( GameConfiguration.PLAYER_WIDTH / 2 ) , GameConfiguration.ROOM_CENTER_Y - ( GameConfiguration.PLAYER_HEIGHT / 2 ) );
         Player player = new Player(pixel);
         manager.set(player);
     }
 
+    /**
+     * Cette méthode permet d'initialiser les ennemis à des endroits aléatoires de la salle.
+     * 
+     * @param manager le process de gestion des actions auquel seront ajoutés les ennemis générés.
+     * 
+     * @see engine.process.CharacterManager pour les détails du processus de gestion des ennemis
+     */
     private static void initializeEnemies(CharacterManager manager) {
         for (int i = 0; i < GameConfiguration.ENEMIES_INIT_NUMBER; i++) {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH);
@@ -39,6 +69,13 @@ public class GameBuilder {
         }
     }
 
+    /**
+     * Cette méthode génère un nombre aléatoire compris entre un minimum et un maximum
+     * 
+     * @param min le nombre minimum
+     * @param max le nombre maximum
+     * @return le nombre aléatoire généré, formatté en entier
+     */
     private static int getRandomNumber(int min, int max) {
 		return (int) (Math.random() * (max + 1 - min)) + min;
     }

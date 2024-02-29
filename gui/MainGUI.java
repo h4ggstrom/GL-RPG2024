@@ -16,17 +16,28 @@ import engine.dungeon.Room;
 import engine.process.CharacterManager;
 import engine.process.GameBuilder;
 
+/**
+ * Génie Logiciel - Projet RPG.
+ * 
+ * Classe principale de la GUI. gère l'affichage du jeu dans son entiereté
+ * 
+ * @author thibault.terrie@etu.cyu.fr
+ * @author robin.de-angelis@etu.cyu.fr
+ * @author hayder.ur-rehman@etu.cyu.fr
+ * 
+ */
 public class MainGUI extends JFrame implements Runnable {
-        
-    private static final long serialVersionUID = 1L;
 
-    private final static Dimension preferredSize = new Dimension(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT);
+    // définition des attributs    
+    private static final long serialVersionUID = 1L; // définit un numéro de version pour la serialisation
 
-    private Room room;
+    private final static Dimension preferredSize = new Dimension(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT); // définit la taille de la fenêtre
 
-    private GameDisplay dashboard;
+    private Room room; // la salle dans laquelle évolue le joueur
 
-    private CharacterManager manager;
+    private GameDisplay dashboard; // ATH à intégrer dans la fenêtre
+
+    private CharacterManager manager; // processus de gestion des actions
 
     public MainGUI (String title){
         super(title);

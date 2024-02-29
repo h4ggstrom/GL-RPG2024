@@ -14,7 +14,7 @@ import engine.dungeon.Position;
  */
 public abstract class GameCharacter {
 
-    //définition des attributs
+    // définition des attributs
     private Position position;
     private Hitbox hitbox;
     private int health;

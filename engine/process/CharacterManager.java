@@ -11,12 +11,29 @@ import engine.Abilities.Ability;
 import engine.characters.Enemy;
 import engine.characters.Hitbox;
 
+/**
+ * Génie Logiciel - Projet RPG.
+ * 
+ * Cette classe contient toutes les processus liés aux déplacements et autres actions du joueur dans l'environnement de jeu.
+ * 
+ * @author thibault.terrie@etu.cyu.fr
+ * @author robin.de-angelis@etu.cyu.fr
+ * @author hayder.ur-rehman@etu.cyu.fr
+ * 
+ */
 public class CharacterManager {
-      
-    private Player player;
-    private Room room;
-    private ArrayList<Ability> abilities = new ArrayList<Ability>();
 
+    // définition des attributs
+    private Player player; // le contrôle
+    private Room room; // la salle dans laquelle évolue le joueur 
+    private ArrayList<Ability> abilities = new ArrayList<Ability>(); // liste des capacités du joueur
+
+    
+    /**
+     * Constructeur par défaut. Génère une nouvelle instance de CharacterManager.
+     * 
+     * @param room la salle dans laquelle évoluera le joueur
+     */
     public CharacterManager (Room room) {
         this.room = room;
     }
@@ -45,6 +62,11 @@ public class CharacterManager {
         return abilities;
     }
 
+    /**
+     * Cette méthode gère les déplacements du joueur
+     * 
+     * @param direction l'input envoyé par le joueur, au format String
+     */
     public void movePlayer (String direction) {
         Position startPosition = player.getPosition();
         Position endPosition;
@@ -88,6 +110,12 @@ public class CharacterManager {
             player.setHitbox(finaleHitbox); // On associe la nouvelle Hitbox au joueur
     }
 
+    /**
+     * Cette méthode gère les attaques du joueur.
+     * 
+     * @param distance la distance du clic par rapport au joueur.
+     * @param ability la capacité utilisée pour attaquer.
+     */
     public void attack(int distance, Ability ability) {
         if(distance <= GameConfiguration.WEAPON_RANGE) {
             List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
@@ -122,6 +150,13 @@ public class CharacterManager {
         }
     }
 
+    /**
+     * Cette méthode permet de calculer la distance entre deux objets.
+     * 
+     * @param p1 la position du premier objet
+     * @param p2 la position du deuxieme objet
+     * @return la distance entière entre l'objet p1 et p2
+     */
     public int calculateDistance(Position p1, Position p2) {
         return ((int)(Math.sqrt(Math.pow(Math.abs(p1.getX() - p2.getX()), 2) + Math.pow(Math.abs(p1.getY()) - p2.getY(), 2))));
     }

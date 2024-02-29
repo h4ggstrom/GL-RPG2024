@@ -6,13 +6,24 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Génie Logiciel - Projet RPG.
+ * 
+ * Cette classe gère divers aspects utiles au jeu.
+ * 
+ * @author thibault.terrie@etu.cyu.fr
+ * @author robin.de-angelis@etu.cyu.fr
+ * @author hayder.ur-rehman@etu.cyu.fr
+ * 
+ */
 public class Utility {
       
-    /**
-	 * Reads a image from an image file.
+
+	/**
+	 * Cette méthode récupère et renvoie un fichier image à partir d'un chemin spécifié
 	 * 
-	 * @param filePath the path (from "src") of the image file
-	 * @return the read file
+	 * @param filePath le chemin du fichier à lire. (prioriser les chemins relatifs, partant de la racine du repertoire.)
+	 * @return l'image en tant qu'objet File
 	 */
 	public static Image readImage(String filePath) {
 		try {
