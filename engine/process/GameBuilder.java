@@ -65,7 +65,7 @@ public class GameBuilder {
             Position position = new Position(enemyX, enemyY); // On instancie sa position
             Enemy enemy = new Enemy(position); // On instancie l'Enemy
             manager.getRoom().addEnemy(enemy); // On l'ajoute à la liste d'ennemis de la Room
-            manager.getRoom().addHitbox(enemy.getHitbox()); // On ajoute sa Hitbox à la liste de Hitboxes de la Room
+            manager.getRoom().addEnemyHitbox(enemy.getHitbox()); // On ajoute sa Hitbox à la liste de Hitboxes de la Room
         }
     }
 

@@ -11,10 +11,8 @@ import java.awt.event.MouseListener;
 
 import config.GameConfiguration;
 import engine.Abilities.Ability;
-import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
-import engine.items.Weapon;
 import engine.process.CharacterManager;
 import engine.process.GameBuilder;
 
@@ -136,14 +134,10 @@ public class MainGUI extends JFrame implements Runnable {
             Position playerCenter = manager.getPlayer().getHitbox().getCenter();
             Position click = new Position(x, y);
 
-            // On calcule la distance entre ce pixel et notre centre avec pythagore
+            // On récupère la distance entre ce pixel et notre centre
             int distance = manager.calculateDistance(playerCenter, click); 
 
-            // On récupère les instances du joueur et de son arme équipée
-            Player player = manager.getPlayer();
-            Weapon weapon = (Weapon)player.getWeaponSlot().getSlotItem();
-
-            Ability ability = new Ability(player, weapon.getAttackDamage(), weapon.getAttackRange(), new Position(x, y));
+            Ability ability = new Ability(manager.getPlayer(), new Position(x, y));
             manager.attack(distance, ability);
         }
 

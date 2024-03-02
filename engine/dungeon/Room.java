@@ -1,9 +1,12 @@
 package engine.dungeon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import engine.characters.Enemy;
 import engine.characters.Hitbox;
+import engine.items.Item;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -20,7 +23,8 @@ public class Room {
     // définition des attributs
     private Boolean cleaned; // booléen pour savoir si la salle a été nettoyée de toute entité hostile
     private ArrayList<Enemy> enemies = new ArrayList<Enemy>(); // liste des ennemis présents dans la salle
-    private ArrayList<Hitbox> enemy_hitboxes = new ArrayList<Hitbox>(); // liste des hitboxes associées aux ennemis présents dans la salle
+    private ArrayList<Hitbox> enemyHitboxes = new ArrayList<Hitbox>(); // liste des hitboxes associées aux ennemis présents dans la salle
+    private HashMap<Position, Item> itemsOnTheGround = new HashMap<Position, Item>();
 
     public Room () {
         this.cleaned = false; // Par défaut, une Room est remplie de monstres et doit-être nettoyée
@@ -54,12 +58,12 @@ public class Room {
      * 
      * @param hitbox la hitbox à ajouter
      */
-    public void addHitbox (Hitbox hitbox) {
-        enemy_hitboxes.add(hitbox);
+    public void addEnemyHitbox (Hitbox hitbox) {
+        enemyHitboxes.add(hitbox);
     }
 
     public ArrayList<Hitbox> getEnemyHitboxes() {
-        return this.enemy_hitboxes;
+        return this.enemyHitboxes;
     }
 
     /**
@@ -68,7 +72,30 @@ public class Room {
      * @param hitbox
      */
     public void removeEnemyHitbox(Hitbox hitbox) {
-        enemy_hitboxes.remove(hitbox);
+        enemyHitboxes.remove(hitbox);
+    }
+
+    public void addItemOnTheGround(Position position, Item item) {
+        itemsOnTheGround.put(position, item);
+    }
+
+    public void removeItemOnTheGround(Item item) {
+        // On initialise une variable pour la clé associée à notre item que l'on va trouver en parcourant la HashMap
+        Position positionOfItemToRemove = null;
+        // On parcourt chaque couple de la HashMap
+        for (Map.Entry<Position, Item> couple : itemsOnTheGround.entrySet()) {
+            // Si on trouve la valeur correspondant à l'item
+            if (couple.getValue().equals(item)) {
+                // On sauvegarde sa clé qui est sa position
+                positionOfItemToRemove = couple.getKey();
+            }
+        }
+        // On retire cet item de la HashMap grâce à sa clé : sa position
+        itemsOnTheGround.remove(positionOfItemToRemove);
+    }
+
+    public HashMap<Position, Item> getItemsOnTheGround () {
+        return this.itemsOnTheGround;
     }
 
     /**

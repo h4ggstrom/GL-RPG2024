@@ -7,6 +7,7 @@ import config.GameConfiguration;
 import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
+import engine.items.weapons.Weapon;
 import engine.Abilities.Ability;
 import engine.characters.Enemy;
 import engine.characters.Hitbox;
@@ -145,6 +146,8 @@ public class CharacterManager {
 
             // On parcourt les Enemy éliminés pour les retirer du jeu
             for (Enemy enemy : eliminatedEnemies) {
+                Weapon enemyWeapon = (Weapon)enemy.getWeaponSlot().getItem();
+                room.addItemOnTheGround(enemy.getPosition(), enemyWeapon);
                 room.removeEnemyHitbox(enemy.getHitbox());
                 room.removeEnemy(enemy);
                 }
@@ -160,7 +163,7 @@ public class CharacterManager {
     }
 
     /**
-     * Cette méthode permet de calculer la distance entre deux objets.
+     * Cette méthode permet de calculer la distance entre deux objets en utilisant le théorème de Pytaghore.
      * 
      * @param p1 la position du premier objet
      * @param p2 la position du deuxieme objet

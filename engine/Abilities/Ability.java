@@ -2,6 +2,7 @@ package engine.Abilities;
 
 import engine.characters.GameCharacter;
 import engine.dungeon.Position;
+import engine.items.weapons.Weapon;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -30,10 +31,11 @@ public class Ability {
      * @param range la portée de la capacité
      * @param target la position de la cible
      */
-    public Ability(GameCharacter caster, int damage, int range, Position target) {
+    public Ability(GameCharacter caster, Position target) {
         this.caster = caster;
-        this.damage = damage;
-        this.range = range;
+        Weapon weapon = (Weapon)caster.getWeaponSlot().getItem();
+        this.damage = weapon.getAttackDamage();
+        this.range = weapon.getAttackRange();
         this.target = target;
     }
 

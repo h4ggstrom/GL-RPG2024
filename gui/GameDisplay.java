@@ -1,12 +1,15 @@
 package gui;
 
 import java.awt.Graphics;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
 import engine.characters.Enemy;
 import engine.characters.Player;
+import engine.dungeon.Position;
 import engine.dungeon.Room;
+import engine.items.Item;
 import engine.process.CharacterManager;
 
 /**
@@ -42,6 +45,10 @@ public class GameDisplay extends JPanel {
 
         for (Enemy enemy : manager.getRoom().getEnemies()) {
             paintStrategy.paint(enemy, graphics);
+        }
+
+        for (Map.Entry<Position, Item> couple : room.getItemsOnTheGround().entrySet()) {
+            paintStrategy.paint(couple.getKey(), couple.getValue(), graphics);
         }
     }
    

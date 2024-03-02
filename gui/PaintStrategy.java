@@ -10,7 +10,8 @@ import engine.characters.GameCharacter;
 import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
-import engine.items.Weapon;
+import engine.items.Item;
+import engine.items.weapons.Weapon;
 import engine.process.Utility;
 
 /*
@@ -59,8 +60,14 @@ public class PaintStrategy {
         Position hitbox_center = character.getHitbox().getCenter();
         int x_center = hitbox_center.getX();
         int y_center = hitbox_center.getY();
-        Weapon weapon = (Weapon)character.getWeaponSlot().getSlotItem();
+        Weapon weapon = (Weapon)character.getWeaponSlot().getItem();
         graphics.drawOval(x_center - weapon.getAttackRange(), y_center - weapon.getAttackRange(), weapon.getAttackRange() * 2, weapon.getAttackRange() * 2);
+    }
+
+    public void paint(Position position, Item item, Graphics graphics) {
+        String itemFilePath = "";
+        if (item instanceof Weapon)  itemFilePath = "./ressources/sword.png";
+        graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
     }
 
 }

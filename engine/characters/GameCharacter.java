@@ -3,7 +3,7 @@ package engine.characters;
 import engine.dungeon.Position;
 import engine.items.Inventory;
 import engine.items.Slot;
-import engine.items.Sword;
+import engine.items.weapons.Sword;
 
 /**
  * Génie Logiciel - Projet RPG.

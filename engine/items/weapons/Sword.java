@@ -1,4 +1,4 @@
-package engine.items;
+package engine.items.weapons;
 
 import config.GameConfiguration;
 

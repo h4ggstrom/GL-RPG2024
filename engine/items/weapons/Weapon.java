@@ -1,4 +1,6 @@
-package engine.items;
+package engine.items.weapons;
+
+import engine.items.Item;
 
 public abstract class Weapon extends Item {
     

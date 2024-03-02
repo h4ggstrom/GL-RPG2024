@@ -2,18 +2,18 @@ package engine.items;
 
 public class Slot {
     
-    private Item slotItem;
+    private Item item;
 
-    public Slot(Item slotItem) {
-        this.slotItem = slotItem;
+    public Slot(Item item) {
+        this.item = item;
     }
 
-    public Item getSlotItem() {
-        return slotItem;
+    public Item getItem() {
+        return item;
     }
 
-    public void setSlotItem(Item slotItem) {
-        this.slotItem = slotItem;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
 }
