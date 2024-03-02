@@ -92,13 +92,22 @@ public class CharacterManager {
 
         Hitbox finaleHitbox = new Hitbox(endPosition, "player", player); // On instancie la Hitbox sur l'emplacement final
 
-        // Si la Room n'est pas ouverte et que le joueur est aux limites de la room
-        if ( !room.getCleaned() && ! ( ( GameConfiguration.ROOM_LEFT_LIMITATION < endPosition.getX() && endPosition.getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < endPosition.getY() && endPosition.getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) )
-            canBeMoved = false; // Il ne peut pas être déplacé
-
-        // Si la Room est ouverte alors il pourra sortir par la porte
-        if ( room.getCleaned() && ! ( ( GameConfiguration.ROOM_LEFT_LIMITATION < endPosition.getX() && endPosition.getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < endPosition.getY() && endPosition.getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) && !(GameConfiguration.GATE_UP.getY() <= endPosition.getY() && endPosition.getY() <= GameConfiguration.GATE_DOWN.getY() - GameConfiguration.PLAYER_HEIGHT) )
-            canBeMoved = false;
+        // Si la position finale du joueur n'est pas dans les limites de la Room
+        if ( ! ( ( GameConfiguration.ROOM_LEFT_LIMITATION < endPosition.getX() && endPosition.getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < endPosition.getY() && endPosition.getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) ) {
+            // Si la Room n'est pas ouverte
+            if(!room.getCleaned()){
+                canBeMoved = false; // Il ne peut pas être déplacé
+            }
+            // Si la Room est ouverte
+            else {
+                // Si il veut se déplacer derrière le mur de droite, entre le haut et le bas de la porte
+                if ( ( GameConfiguration.ROOM_RIGHT_LIMITATION < endPosition.getX() ) && ( (GameConfiguration.GATE_UP.getY() < endPosition.getY()) && (endPosition.getY() < GameConfiguration.GATE_DOWN.getY() - GameConfiguration.PLAYER_HEIGHT)))
+                    canBeMoved = true; // On peut le déplacer
+                else {
+                    canBeMoved = false; // Sinon, non
+                }
+            }
+        }
 
         // On parcourt toutes les Hitbox d'Enemy de la Room
         for (Hitbox hitbox : room.getEnemyHitboxes()) {
