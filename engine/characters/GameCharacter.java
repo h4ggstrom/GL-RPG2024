@@ -1,6 +1,9 @@
 package engine.characters;
 
 import engine.dungeon.Position;
+import engine.items.Inventory;
+import engine.items.Slot;
+import engine.items.Sword;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -17,7 +20,8 @@ public abstract class GameCharacter {
     // définition des attributs
     private Hitbox hitbox;
     private int health;
-
+    private Inventory inventory;
+    private Slot weaponSlot = new Slot(new Sword());
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de personnage (gameCharacter) contenant sa position, sa hitbox, et ses PV
@@ -29,6 +33,7 @@ public abstract class GameCharacter {
     public GameCharacter (Position position, String characterType, int health) {
         this.hitbox = new Hitbox(position, characterType, this);
         this.health = health;
+        this.inventory = new Inventory();
     }
 
     public Position getPosition () {
@@ -49,6 +54,22 @@ public abstract class GameCharacter {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Slot getWeaponSlot() {
+        return weaponSlot;
+    }
+
+    public void setWeaponSlot(Slot weaponSlot) {
+        this.weaponSlot = weaponSlot;
     }
 
     @Override

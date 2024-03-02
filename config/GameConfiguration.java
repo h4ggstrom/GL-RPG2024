@@ -28,9 +28,10 @@ public class GameConfiguration {
     public static final int PLAYER_HEALTH = 50;
     public static final int PLAYER_LIFEBAR_XSHIFT = -15;
     
-    // degats par défaut de l'arme
-    public static final int WEAPON_DAMAGE = 5;
-    public static final int WEAPON_RANGE = 100;
+    // dégats de l'epée
+    public static final int SWORD_DAMAGE = 5;
+    public static final int SWORD_SPEED = 0;
+    public static final int SWORD_RANGE = 100;
 
     // dimensions et limites de la salle
     public static final int ROOM_UPPER_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en Y

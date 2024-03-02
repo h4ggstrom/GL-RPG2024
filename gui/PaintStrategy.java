@@ -10,6 +10,7 @@ import engine.characters.GameCharacter;
 import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
+import engine.items.Weapon;
 import engine.process.Utility;
 
 /*
@@ -46,17 +47,20 @@ public class PaintStrategy {
             width = GameConfiguration.ENEMY_WIDTH;
             name = "Player";
             lifebar_xshift = GameConfiguration.PLAYER_LIFEBAR_XSHIFT;
-
-            // Partie WEAPON_RANGE
-            Position hitbox_center = character.getHitbox().getCenter();
-            int x_center = hitbox_center.getX();
-            int y_center = hitbox_center.getY();
-            graphics.drawOval(x_center - GameConfiguration.WEAPON_RANGE, y_center - GameConfiguration.WEAPON_RANGE, GameConfiguration.WEAPON_RANGE * 2, GameConfiguration.WEAPON_RANGE * 2);
         }
+
+        // Partie corps
 		graphics.fillRect(position.getX(), position.getY(), width, height); // Le corps
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10)); // Le nom
         graphics.drawString(name, position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
         graphics.fillRect(position.getX() + lifebar_xshift, position.getY() + height + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2); // La barre de vie
+
+        // Partie portée d'attaque
+        Position hitbox_center = character.getHitbox().getCenter();
+        int x_center = hitbox_center.getX();
+        int y_center = hitbox_center.getY();
+        Weapon weapon = (Weapon)character.getWeaponSlot().getSlotItem();
+        graphics.drawOval(x_center - weapon.getAttackRange(), y_center - weapon.getAttackRange(), weapon.getAttackRange() * 2, weapon.getAttackRange() * 2);
     }
 
 }

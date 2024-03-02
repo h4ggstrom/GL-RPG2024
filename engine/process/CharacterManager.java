@@ -126,7 +126,7 @@ public class CharacterManager {
      * @param ability la capacité utilisée pour attaquer.
      */
     public void attack(int distance, Ability ability) {
-        if(distance <= GameConfiguration.WEAPON_RANGE) {
+        if(distance <= ability.getRange()) {
             List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
 
             // On parcourt toutes les Hitbox d'Enemy
