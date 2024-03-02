@@ -15,7 +15,6 @@ import engine.dungeon.Position;
 public abstract class GameCharacter {
 
     // définition des attributs
-    private Position position;
     private Hitbox hitbox;
     private int health;
 
@@ -28,17 +27,12 @@ public abstract class GameCharacter {
      * @param health le nombre de PV du personnage
      */
     public GameCharacter (Position position, String characterType, int health) {
-        this.position = position;
         this.hitbox = new Hitbox(position, characterType, this);
         this.health = health;
     }
 
     public Position getPosition () {
-        return this.position;
-    }
-
-    public void setPosition (Position position) {
-        this.position = position;
+        return this.hitbox.getUpperLeft();
     }
 
     public Hitbox getHitbox () {
@@ -59,7 +53,7 @@ public abstract class GameCharacter {
 
     @Override
     public String toString() {
-        return "GameCharacter [position=" + position + ", hitbox=" + hitbox + ", health=" + health + "]";
+        return "GameCharacter [hitbox=" + hitbox + ", health=" + health + "]";
     }
     
     

@@ -71,6 +71,7 @@ public class CharacterManager {
         Position startPosition = player.getPosition();
         Position endPosition;
         Boolean canBeMoved = true;
+        // Switch case pour calculer la nouvelle position
         switch (direction) {
             case "up":
                 endPosition = new Position(startPosition.getX(), startPosition.getY() - GameConfiguration.PLAYER_DEFAULT_SPEED);
@@ -106,7 +107,6 @@ public class CharacterManager {
         }
 
         if (canBeMoved) // Si on a jugé que le joueur peut se déplacer
-            player.setPosition(endPosition); // On le déplace
             player.setHitbox(finaleHitbox); // On associe la nouvelle Hitbox au joueur
     }
 
