@@ -26,6 +26,7 @@ public class GameConfiguration {
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 40;
     public static final int PLAYER_HEALTH = 50;
+    public static final int PLAYER_LIFEBAR_XSHIFT = -15;
     
     // degats par défaut de l'arme
     public static final int WEAPON_DAMAGE = 5;
@@ -46,8 +47,13 @@ public class GameConfiguration {
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
     public static final int ENEMY_HEALTH = 30;
+    public static final int ENEMY_LIFEBAR_XSHIFT = -5;
 
     // corrections pour le MouseListener    
-    public static final int CORRECTCLICKSHIFT_X = -8; // Le MouseListener séléctionne une coordonnée en X incorrecte de 8 pixels en trop
-    public static final int CORRECTCLICKSHIFT_Y = -32; // Le MouseListener séléctionne une coordonnée en Y incorrecte de 31 pixels en trop
+    public static final int CORRECTCLICK_XSHIFT = -8; // Le MouseListener séléctionne une coordonnée en X incorrecte de 8 pixels en trop
+    public static final int CORRECTCLICK_YSHIFT = -32; // Le MouseListener séléctionne une coordonnée en Y incorrecte de 31 pixels en trop
+
+    public static final int CHARACTER_NAMETAG_XSHIFT = -5;
+    public static final int CHARACTER_NAMETAG_YSHIFT = -5;
+    public static final int CHARACTER_LIFEBAR_YSHIFT = 5;
 }

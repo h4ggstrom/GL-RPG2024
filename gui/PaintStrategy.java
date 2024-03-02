@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import config.GameConfiguration;
 import engine.characters.Enemy;
+import engine.characters.GameCharacter;
 import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
@@ -26,57 +27,36 @@ public class PaintStrategy {
             graphics.drawImage(Utility.readImage("./ressources/room_open.png"), 0, 0, null);
     }
 
-    // Stratégie d'affichage pour le joueur
-    public void paint (Player player, Graphics graphics) {
-        Position position = player.getPosition();
-        int x = position.getX();
-        int y = position.getY();
+    public void paint(GameCharacter character, Graphics graphics) {
+        Position position = character.getPosition();
+        int height = 0;
+        int width = 0;
+        String name = "";
+        int lifebar_xshift = 0;
+        if (character instanceof Enemy) {
+            graphics.setColor(Color.RED);
+            height = GameConfiguration.ENEMY_HEIGHT;
+            width = GameConfiguration.ENEMY_WIDTH;
+            name = "Enemy";
+            lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
+        }
+        else if (character instanceof Player) {
+            graphics.setColor(Color.MAGENTA);
+            height = GameConfiguration.ENEMY_HEIGHT;
+            width = GameConfiguration.ENEMY_WIDTH;
+            name = "Player";
+            lifebar_xshift = GameConfiguration.PLAYER_LIFEBAR_XSHIFT;
 
-        Position hitbox_center = player.getHitbox().getCenter();
-        int x_center = hitbox_center.getX();
-        int y_center = hitbox_center.getY();
-
-        Position hitbox_UL = player.getHitbox().getUpperLeft();
-        int x_UL = hitbox_UL.getX();
-        int y_UL = hitbox_UL.getY();
-
-        Position hitbox_UR = player.getHitbox().getUpperRight();
-        int x_UR = hitbox_UR.getX();
-        int y_UR = hitbox_UR.getY();
-
-        Position hitbox_BL = player.getHitbox().getBottomLeft();
-        int x_BL = hitbox_BL.getX();
-        int y_BL = hitbox_BL.getY();
-
-        Position hitbox_BR = player.getHitbox().getBottomRight();
-        int x_BR = hitbox_BR.getX();
-        int y_BR = hitbox_BR.getY();
-
-        // Partie Hitbox
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(x_UL, y_UL, 1, 1);
-        graphics.fillRect(x_UR, y_UR, 1, 1);
-        graphics.fillRect(x_BL, y_BL, 1, 1);
-        graphics.fillRect(x_BR, y_BR, 1, 1);
-        graphics.fillRect(x_center, y_center, 1, 1);
-
-        // Partie joueur
-        graphics.setColor(Color.MAGENTA);
-        graphics.fillRect(x, y, GameConfiguration.PLAYER_WIDTH, GameConfiguration.PLAYER_HEIGHT); // Le corps
-        graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
-        graphics.drawString("Player", x - 5, y - 5); // Le nom
-        graphics.fillRect(x - 15, y + GameConfiguration.PLAYER_HEIGHT + 5, player.getHealth(), 2); // La barre de vie
-        graphics.drawOval(x_center - GameConfiguration.WEAPON_RANGE, y_center - GameConfiguration.WEAPON_RANGE, GameConfiguration.WEAPON_RANGE * 2, GameConfiguration.WEAPON_RANGE * 2);
+            // Partie WEAPON_RANGE
+            Position hitbox_center = character.getHitbox().getCenter();
+            int x_center = hitbox_center.getX();
+            int y_center = hitbox_center.getY();
+            graphics.drawOval(x_center - GameConfiguration.WEAPON_RANGE, y_center - GameConfiguration.WEAPON_RANGE, GameConfiguration.WEAPON_RANGE * 2, GameConfiguration.WEAPON_RANGE * 2);
+        }
+		graphics.fillRect(position.getX(), position.getY(), width, height); // Le corps
+        graphics.setFont(new Font("Dialog", Font.PLAIN, 10)); // Le nom
+        graphics.drawString(name, position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
+        graphics.fillRect(position.getX() + lifebar_xshift, position.getY() + height + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2); // La barre de vie
     }
-
-    // Stratégie d'affichage pour les ennemis
-    public void paint(Enemy enemy, Graphics graphics) {
-		Position position = enemy.getPosition();
-
-		graphics.setColor(Color.RED);
-		graphics.fillRect(position.getX(), position.getY(), GameConfiguration.ENEMY_WIDTH, GameConfiguration.ENEMY_HEIGHT); // Le corps
-        graphics.drawString("Enemy", position.getX() - 5, position.getY() - 5); // Le nom
-        graphics.fillRect(position.getX() - 5, position.getY() + GameConfiguration.ENEMY_HEIGHT + 5, enemy.getHealth(), 2); // La barre de vie
-	}
 
 }

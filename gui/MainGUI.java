@@ -127,8 +127,8 @@ public class MainGUI extends JFrame implements Runnable {
         public void mouseClicked(java.awt.event.MouseEvent e) {
             
             // On récupère les coordonnées du clic en corrigeant l'incertitude du MouseListener
-            int x = e.getX() + GameConfiguration.CORRECTCLICKSHIFT_X;
-            int y = e.getY() + GameConfiguration.CORRECTCLICKSHIFT_Y;
+            int x = e.getX() + GameConfiguration.CORRECTCLICK_XSHIFT;
+            int y = e.getY() + GameConfiguration.CORRECTCLICK_YSHIFT;
 
             // On récupère les coordonnées du centre de la hitbox du joueur
             Position playerCenter = manager.getPlayer().getHitbox().getCenter();
