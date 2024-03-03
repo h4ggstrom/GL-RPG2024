@@ -28,6 +28,7 @@ public class CharacterManager {
     private Player player; // le contrôle
     private Room room; // la salle dans laquelle évolue le joueur 
     private ArrayList<Ability> abilities = new ArrayList<Ability>(); // liste des capacités du joueur
+    private Boolean newRoom;
 
     
     /**
@@ -171,5 +172,14 @@ public class CharacterManager {
      */
     public int calculateDistance(Position p1, Position p2) {
         return ((int)(Math.sqrt(Math.pow(Math.abs(p1.getX() - p2.getX()), 2) + Math.pow(Math.abs(p1.getY()) - p2.getY(), 2))));
+    }
+
+    public Boolean changeRoom() {
+        Position playerPosition = player.getPosition();
+        if (playerPosition.getX() > GameConfiguration.ROOM_RIGHT_LIMITATION) {
+            newRoom = true;
+            //player.set(new Position(GameConfiguration.ROOM_LEFT_LIMITATION, playerPosition.getY()));
+        }
+        return newRoom;
     }
 }
