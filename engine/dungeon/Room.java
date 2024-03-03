@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import config.GameConfiguration;
 import engine.characters.Enemy;
 import engine.characters.Hitbox;
+import engine.characters.Player;
 import engine.items.Item;
 
 /**
@@ -22,12 +24,15 @@ public class Room {
     
     // définition des attributs
     private Boolean cleaned; // booléen pour savoir si la salle a été nettoyée de toute entité hostile
+    private Boolean newRoom;
     private ArrayList<Enemy> enemies = new ArrayList<Enemy>(); // liste des ennemis présents dans la salle
     private ArrayList<Hitbox> enemyHitboxes = new ArrayList<Hitbox>(); // liste des hitboxes associées aux ennemis présents dans la salle
     private HashMap<Position, Item> itemsOnTheGround = new HashMap<Position, Item>();
+    private Player player;
 
     public Room () {
         this.cleaned = false; // Par défaut, une Room est remplie de monstres et doit-être nettoyée
+        this.newRoom = false;
     }
   
     /**
@@ -109,4 +114,11 @@ public class Room {
         return this.cleaned;
     }
 
+    public Boolean changeRoom() {
+            Position playerPosition = player.getPosition();
+            if (playerPosition.getX() > GameConfiguration.ROOM_RIGHT_LIMITATION) {
+                newRoom = true;
+            }
+            return newRoom;
+    }
 }
