@@ -38,7 +38,7 @@ public class GameDisplay extends JPanel {
     public void paintComponent (Graphics graphics) {
         super.paintComponent(graphics);
 
-        paintStrategy.paint(room, graphics);
+        paintStrategy.paint(manager, room, graphics);
 
         Player player = manager.getPlayer();
         paintStrategy.paint(player, graphics);
