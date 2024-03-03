@@ -12,6 +12,7 @@ import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.items.Item;
 import engine.items.weapons.Weapon;
+import engine.process.CharacterManager;
 import engine.process.Utility;
 
 /*
@@ -20,13 +21,16 @@ import engine.process.Utility;
 public class PaintStrategy {
       
     // Stratégie d'affichage pour la salle
-    public void paint (Room room, Graphics graphics) {
+    public void paint (CharacterManager manager,Room room, Graphics graphics) {
         // Si la Room n'a pas été nettoyée de tous ses monstres
         if (!room.getCleaned())
             graphics.drawImage(Utility.readImage("./ressources/room.png"), 0, 0, null);
         // Sinon
         else
             graphics.drawImage(Utility.readImage("./ressources/room_open.png"), 0, 0, null);
+            if (manager.changeRoom()){
+                graphics.drawImage(Utility.readImage("./ressources/new_room.png"), 0, 0, null);
+            }
     }
 
     public void paint(GameCharacter character, Graphics graphics) {
