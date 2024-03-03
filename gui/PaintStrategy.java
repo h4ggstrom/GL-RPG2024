@@ -28,9 +28,9 @@ public class PaintStrategy {
         // Sinon
         else
             graphics.drawImage(Utility.readImage("./ressources/room_open.png"), 0, 0, null);
-            if (manager.changeRoom()){
-                graphics.drawImage(Utility.readImage("./ressources/new_room.png"), 0, 0, null);
-            }
+            //if (manager.changeRoom()){
+                //graphics.drawImage(Utility.readImage("./ressources/new_room.png"), 0, 0, null);
+            //}
     }
 
     public void paint(GameCharacter character, Graphics graphics) {
