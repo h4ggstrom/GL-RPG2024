@@ -36,10 +36,6 @@ public abstract class GameCharacter {
         this.inventory = new Inventory();
     }
 
-    public Position getPosition () {
-        return this.hitbox.getCenter();
-    }
-
     public void setPosition (Position position) {
         this.hitbox.setPosition(position);
     }

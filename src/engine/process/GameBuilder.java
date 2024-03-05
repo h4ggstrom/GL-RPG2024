@@ -56,8 +56,9 @@ public class GameBuilder {
      * @see engine.process.CharacterManager pour les détails du processus de gestion des actions du joueur
      */
     private static void initializePlayer (CharacterManager manager) {
-        Position pixel = new Position( GameConfiguration.ROOM_CENTER_X - ( GameConfiguration.PLAYER_WIDTH / 2 ) , GameConfiguration.ROOM_CENTER_Y - ( GameConfiguration.PLAYER_HEIGHT / 2 ) );
-        Player player = new Player(pixel);
+        // Le centre du joueur au centre de la Room
+        Position center = new Position( GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y);
+        Player player = new Player(center);
         manager.set(player);
     }
 

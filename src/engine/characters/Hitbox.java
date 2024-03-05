@@ -55,14 +55,14 @@ public class Hitbox {
                 height = GameConfiguration.PLAYER_HEIGHT;
                 break;
             case "default" :
-                logger.warn(characterType + " is not a recongnized type of entity");
+                logger.warn(characterType + " is not a recognized type of entity");
                 break;
         }
         this.upperLeft = new Position(center.getX() - (width/2), center.getY() - (height/2));
         this.upperRight = new Position(center.getX() + (width/2), center.getY() - (height/2));
         this.bottomLeft = new Position(center.getX() - (width/2), center.getY() + (height/2));
         this.bottomRight = new Position(center.getX() + (width/2), center.getY() + (height/2));
-        logger.trace("new hitbox has been generated for " + this.characterType + " upperLeft = " + upperLeft + " upperRight = " + upperRight + " bottomLeft " + bottomLeft + " bottomRight = " + bottomRight);
+        logger.trace("New hitbox generated : " + this.toString());
     }
 
     public void setPosition(Position center) {
@@ -146,5 +146,4 @@ public class Hitbox {
                 + ", bottomRight=" + bottomRight + ", center=" + center + "]";
     }
     
-
 }

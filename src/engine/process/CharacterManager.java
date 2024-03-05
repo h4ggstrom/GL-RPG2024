@@ -77,7 +77,7 @@ public class CharacterManager {
      * @param direction l'input envoyé par le joueur, au format String
      */
     public void movePlayer (String direction) {
-        Position startPosition = player.getPosition();
+        Position startPosition = player.getHitbox().getCenter();
         Position endPosition;
         Boolean canBeMoved = true;
         // Switch case pour calculer la nouvelle position
@@ -103,14 +103,14 @@ public class CharacterManager {
 
         // Si la position finale du joueur n'est pas dans les limites de la Room
         if ( ! ( ( GameConfiguration.ROOM_LEFT_LIMITATION < finaleHitbox.getUpperLeft().getX() && finaleHitbox.getUpperRight().getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < finaleHitbox.getUpperRight().getY() && finaleHitbox.getBottomRight().getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) ) {
-            // Si la Room est pas nettoyée
+            // Si la Room n'est pas nettoyée
             if(!room.getCleaned()){
                 canBeMoved = false; // Il ne peut pas être déplacé
             }
-            // Si la Room est nettoyée, la porte à gauche est ouverte
+            // Si la Room est nettoyée, la porte à droite est ouverte
             else {
-                // Si il veut se déplacer derrière le mur de droite, entre le haut et le bas de la porte, et que la porte gauche est ouverte
-                if ( ( GameConfiguration.ROOM_RIGHT_LIMITATION < endPosition.getX() ) && ( (GameConfiguration.GATE_UP.getY() < endPosition.getY()) && (endPosition.getY() < GameConfiguration.GATE_DOWN.getY() - GameConfiguration.PLAYER_HEIGHT))) {
+                // Si il veut se déplacer derrière le mur de droite, entre le haut et le bas de la porte
+                if ( ( GameConfiguration.ROOM_RIGHT_LIMITATION < finaleHitbox.getUpperRight().getX() ) && ( (GameConfiguration.GATE_UP.getY() < endPosition.getY()) && (endPosition.getY() < GameConfiguration.GATE_DOWN.getY() - GameConfiguration.PLAYER_HEIGHT))) {
                     canBeMoved = true; // On peut le déplacer
                 }
                 else {
@@ -131,7 +131,7 @@ public class CharacterManager {
             player.setHitbox(finaleHitbox); // On associe la nouvelle Hitbox 
         }
 
-        if (player.getPosition().getX() > GameConfiguration.WINDOW_WIDTH) {
+        if (player.getHitbox().getCenter().getX() > GameConfiguration.WINDOW_WIDTH) {
             room.exit();
         }
     }
@@ -166,7 +166,7 @@ public class CharacterManager {
             // On parcourt les Enemy éliminés pour les retirer du jeu
             for (Enemy enemy : eliminatedEnemies) {
                 Weapon enemyWeapon = (Weapon)enemy.getWeaponSlot().getItem();
-                room.addItemOnTheGround(enemy.getPosition(), enemyWeapon);
+                room.addItemOnTheGround(enemy.getHitbox().getUpperLeft(), enemyWeapon);
                 room.removeEnemyHitbox(enemy.getHitbox());
                 room.removeEnemy(enemy);
                 }
