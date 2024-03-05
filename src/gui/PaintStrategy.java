@@ -24,10 +24,10 @@ public class PaintStrategy {
     public void paint (CharacterManager manager,Room room, Graphics graphics) {
         // Si la Room n'a pas été nettoyée de tous ses monstres
         if (!room.getCleaned())
-            graphics.drawImage(Utility.readImage("./ressources/room.png"), 0, 0, null);
+            graphics.drawImage(Utility.readImage("./src/ressources/room.png"), 0, 0, null);
         // Sinon
         else
-            graphics.drawImage(Utility.readImage("./ressources/room_open.png"), 0, 0, null);
+            graphics.drawImage(Utility.readImage("./src/ressources/room_open.png"), 0, 0, null);
             //if (manager.changeRoom()){
                 //graphics.drawImage(Utility.readImage("./ressources/new_room.png"), 0, 0, null);
             //}
@@ -70,7 +70,7 @@ public class PaintStrategy {
 
     public void paint(Position position, Item item, Graphics graphics) {
         String itemFilePath = "";
-        if (item instanceof Weapon)  itemFilePath = "./ressources/sword.png";
+        if (item instanceof Weapon)  itemFilePath = "./src/ressources/sword.png";
         graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
     }
 
