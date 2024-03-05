@@ -1,5 +1,7 @@
 package engine.process;
 
+import org.apache.log4j.Logger;
+
 import config.GameConfiguration;
 import engine.characters.Enemy;
 import engine.characters.Player;
@@ -17,24 +19,31 @@ import engine.dungeon.Room;
  * 
  */
 public class GameBuilder {
+
+    private static Logger logger = CharacterManager.getLogger();
       
     public static Room buildRoom() {
+        logger.trace("New instance of Room sent");
         return new Room();
     }
 
     /**
-     * génère la salle et les ennemis à l'apparition de la salle en utilisant le constructeur de la classe {@link engine.characters.GameCharacter}
+     * génère la salle et les ennemis à l'apparition de la salle en utilisant le constructeur de la classe {@link src.engine.characters.GameCharacter}
      * 
      * @param room la salle dans laquelle évolue le joueur
-     * @return le système de gestion de la partie. Pour plus de détails, voir {@link engine.characters.GameCharacter}
+     * @return le système de gestion de la partie. Pour plus de détails, voir {@link src.engine.characters.GameCharacter}
      */
     public static CharacterManager buildInitCharacters (Room room) {
         CharacterManager manager = new CharacterManager(room);
+        logger.trace("New instance of CharacterManager");
 
         initializePlayer(manager);
+        logger.trace("Initialized player");
 
         initializeEnemies(manager);
+        logger.trace("Initialized ennemies");
 
+        logger.trace("Returning manager");
         return manager;
     }
 
@@ -58,7 +67,7 @@ public class GameBuilder {
      * 
      * @see engine.process.CharacterManager pour les détails du processus de gestion des ennemis
      */
-    private static void initializeEnemies(CharacterManager manager) {
+    public static void initializeEnemies(CharacterManager manager) {
         for (int i = 0; i < GameConfiguration.ENEMIES_INIT_NUMBER; i++) {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH);
             int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT);

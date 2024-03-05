@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
+import org.apache.log4j.Logger;
+
 import engine.characters.Enemy;
 import engine.characters.Player;
 import engine.dungeon.Position;
@@ -23,6 +25,8 @@ import engine.process.CharacterManager;
  * 
  */
 public class GameDisplay extends JPanel {
+
+    private static Logger logger = CharacterManager.getLogger();
     
     // définition des attributs
     private Room room; //la salle dans laquelle évolue le joueur
@@ -32,6 +36,7 @@ public class GameDisplay extends JPanel {
     public GameDisplay (Room room, CharacterManager manager) {
         this.room = room;
         this.manager = manager;
+        logger.trace("New instance of GameDisplay");
     }
 
     @Override
@@ -50,6 +55,10 @@ public class GameDisplay extends JPanel {
         for (Map.Entry<Position, Item> couple : room.getItemsOnTheGround().entrySet()) {
             paintStrategy.paint(couple.getKey(), couple.getValue(), graphics);
         }
+
+        // for (attack attack : manager.getAbilities()) {
+		// 	paintStrategy.paint(attack, g);
+		// }
     }
    
 }

@@ -44,7 +44,7 @@ public class GameConfiguration {
     public static final Position GATE_DOWN = new Position(1028, 429); // Le pixel bas de la porte de sortie
 
     // nombre d'ennemis par défaut, dimensions, et points de vie
-    public static final int ENEMIES_INIT_NUMBER = 4;
+    public static final int ENEMIES_INIT_NUMBER = 1;
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
     public static final int ENEMY_HEALTH = 30;

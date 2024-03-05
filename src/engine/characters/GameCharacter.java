@@ -37,7 +37,11 @@ public abstract class GameCharacter {
     }
 
     public Position getPosition () {
-        return this.hitbox.getUpperLeft();
+        return this.hitbox.getCenter();
+    }
+
+    public void setPosition (Position position) {
+        this.hitbox.setPosition(position);
     }
 
     public Hitbox getHitbox () {

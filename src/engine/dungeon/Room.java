@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import engine.characters.Enemy;
 import engine.characters.Hitbox;
 import engine.items.Item;
+import engine.process.CharacterManager;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -19,15 +22,30 @@ import engine.items.Item;
  * 
  */
 public class Room {
+
+    private static Logger logger = CharacterManager.getLogger();
     
     // définition des attributs
-    private Boolean cleaned; // booléen pour savoir si la salle a été nettoyée de toute entité hostile
+    private Boolean cleaned = false; // booléen pour savoir si la salle a été nettoyée de toute entité hostile
+    private Boolean exited = false; // booléen  pour savoir si le joueur a quitté
+
     private ArrayList<Enemy> enemies = new ArrayList<Enemy>(); // liste des ennemis présents dans la salle
     private ArrayList<Hitbox> enemyHitboxes = new ArrayList<Hitbox>(); // liste des hitboxes associées aux ennemis présents dans la salle
     private HashMap<Position, Item> itemsOnTheGround = new HashMap<Position, Item>();
+    private String fileName = "room";
 
     public Room () {
         this.cleaned = false; // Par défaut, une Room est remplie de monstres et doit-être nettoyée
+        logger.trace("New instance of Room");
+    }
+
+    public void empty() {
+        this.cleaned = false;
+        this.exited = false;
+        this.enemies = new ArrayList<Enemy>();
+        this.enemyHitboxes = new ArrayList<Hitbox>();
+        this.itemsOnTheGround = new HashMap<Position, Item>();
+        fileName = "room";
     }
   
     /**
@@ -50,6 +68,7 @@ public class Room {
      */
     public void removeEnemy(Enemy enemy) {
         enemies.remove(enemy);
+        logger.trace(enemy + " removed");
     }
 
 
@@ -60,6 +79,7 @@ public class Room {
      */
     public void addEnemyHitbox (Hitbox hitbox) {
         enemyHitboxes.add(hitbox);
+        logger.trace("hitbox added to array");
     }
 
     public ArrayList<Hitbox> getEnemyHitboxes() {
@@ -73,10 +93,12 @@ public class Room {
      */
     public void removeEnemyHitbox(Hitbox hitbox) {
         enemyHitboxes.remove(hitbox);
+        logger.trace("hitbox removed from array");
     }
 
     public void addItemOnTheGround(Position position, Item item) {
         itemsOnTheGround.put(position, item);
+        logger.trace("new item spawned on ground at coords" + position.toString());
     }
 
     public void removeItemOnTheGround(Item item) {
@@ -102,10 +124,28 @@ public class Room {
      * Cette méthode permet de déclarer la salle comme etant nettoyée (de toute entité hostile)
      */
     public void clean () {
-        cleaned = true;
+        this.cleaned = true;
+        logger.info("room has been marked as cleaned");
+        this.fileName = "room_open";
     }
 
     public Boolean getCleaned () {
         return this.cleaned;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void exit() {
+        this.exited = true;
+    }
+
+    public Boolean getExited() {
+        return exited;
     }
 }

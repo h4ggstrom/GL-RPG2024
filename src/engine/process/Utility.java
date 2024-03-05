@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.apache.log4j.Logger;
+
 /**
  * Génie Logiciel - Projet RPG.
  * 
@@ -18,7 +20,8 @@ import javax.imageio.ImageIO;
  */
 public class Utility {
       
-
+	// déclaration des variables
+	private static Logger logger = CharacterManager.getLogger(); // récupération du logger
 	/**
 	 * Cette méthode récupère et renvoie un fichier image à partir d'un chemin spécifié
 	 * 
@@ -29,7 +32,7 @@ public class Utility {
 		try {
 			return ImageIO.read(new File(filePath));
 		} catch (IOException e) {
-			System.err.println("-- Can not read the image file ! --");
+			logger.error("Image cannot be read");
 			return null;
 		}
 	}

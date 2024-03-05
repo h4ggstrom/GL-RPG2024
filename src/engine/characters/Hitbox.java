@@ -1,7 +1,10 @@
 package engine.characters;
 
+import org.apache.log4j.Logger;
+
 import config.GameConfiguration;
 import engine.dungeon.Position;
+import engine.process.CharacterManager;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -16,12 +19,14 @@ import engine.dungeon.Position;
 public class Hitbox {
 
     // définition des attributs
+    private static Logger logger = CharacterManager.getLogger();
     private Position upperLeft;
     private Position upperRight;
     private Position bottomLeft;
     private Position bottomRight;
     private Position center;
     private GameCharacter character;
+    private String characterType;
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de hitbox contenant ses dimensions (dépendant du type de personnage).
@@ -30,11 +35,17 @@ public class Hitbox {
      * @param characterType le type de personnage
      * @param character le personnage à qui attribuer la hitbox
      */
-    public Hitbox(Position upperLeft, String characterType, GameCharacter character) {
-        this.upperLeft = upperLeft;
+    public Hitbox(Position center, String characterType, GameCharacter character) {
+        this.center = center;
+        this.characterType = characterType;
+        this.character = character;
+        this.calculateCorners();
+    }
+
+    public void calculateCorners() {
         int width = 0;
         int height = 0;
-        switch (characterType) {
+        switch (this.characterType) {
             case "enemy" :
                 width = GameConfiguration.ENEMY_WIDTH;
                 height = GameConfiguration.ENEMY_HEIGHT;
@@ -44,13 +55,19 @@ public class Hitbox {
                 height = GameConfiguration.PLAYER_HEIGHT;
                 break;
             case "default" :
+                logger.warn(characterType + " is not a recongnized type of entity");
                 break;
         }
-        this.upperRight = new Position(upperLeft.getX() + width, upperLeft.getY());
-        this.bottomLeft = new Position(upperLeft.getX(), upperLeft.getY() + height);
-        this.bottomRight = new Position(bottomLeft.getX() + width, bottomLeft.getY());
-        this.center = new Position(upperLeft.getX() + ( (upperRight.getX() - upperLeft.getX()) / 2), upperLeft.getY() + ( (bottomLeft.getY() - upperLeft.getY()) / 2));
-        this.character = character;
+        this.upperLeft = new Position(center.getX() - (width/2), center.getY() - (height/2));
+        this.upperRight = new Position(center.getX() + (width/2), center.getY() - (height/2));
+        this.bottomLeft = new Position(center.getX() - (width/2), center.getY() + (height/2));
+        this.bottomRight = new Position(center.getX() + (width/2), center.getY() + (height/2));
+        logger.trace("new hitbox has been generated for " + this.characterType + " upperLeft = " + upperLeft + " upperRight = " + upperRight + " bottomLeft " + bottomLeft + " bottomRight = " + bottomRight);
+    }
+
+    public void setPosition(Position center) {
+        this.center = center;
+        this.calculateCorners();
     }
 
     /**

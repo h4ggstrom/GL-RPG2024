@@ -2,6 +2,8 @@ package gui;
 
 import javax.swing.JFrame;
 
+import org.apache.log4j.Logger;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -39,6 +41,8 @@ public class MainGUI extends JFrame implements Runnable {
 
     private CharacterManager manager; // processus de gestion des actions
 
+    private Logger logger = CharacterManager.getLogger(); // récupération du logger
+
     public MainGUI (String title){
         super(title);
         init();
@@ -73,9 +77,13 @@ public class MainGUI extends JFrame implements Runnable {
 			try {
 				Thread.sleep(GameConfiguration.GAME_SPEED);
 			} catch (InterruptedException e) {
-				System.out.println(e.getMessage());
+				logger.fatal("game crashed");
 			}
 
+            if(room.getExited()) {
+                manager.nextRoom();
+            }
+            
 			dashboard.repaint();
 		}
     }
@@ -129,13 +137,15 @@ public class MainGUI extends JFrame implements Runnable {
             // On récupère les coordonnées du clic en corrigeant l'incertitude du MouseListener
             int x = e.getX() + GameConfiguration.CORRECTCLICK_XSHIFT;
             int y = e.getY() + GameConfiguration.CORRECTCLICK_YSHIFT;
+            logger.trace("mouse clicked at coords" + x + " ; " + y);
 
             // On récupère les coordonnées du centre de la hitbox du joueur
             Position playerCenter = manager.getPlayer().getHitbox().getCenter();
             Position click = new Position(x, y);
 
             // On récupère la distance entre ce pixel et notre centre
-            int distance = manager.calculateDistance(playerCenter, click); 
+            int distance = manager.calculateDistance(playerCenter, click);
+            logger.trace("distance to click = " + distance); 
 
             Ability ability = new Ability(manager.getPlayer(), new Position(x, y));
             manager.attack(distance, ability);
