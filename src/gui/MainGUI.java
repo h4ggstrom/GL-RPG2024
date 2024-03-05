@@ -43,6 +43,8 @@ public class MainGUI extends JFrame implements Runnable {
 
     private Logger logger = Gamelog.getLogger(); // récupération du logger
 
+    private InventoryDisplay inventoryDisplay;
+
     public MainGUI (String title){
         super(title);
         init();
@@ -61,6 +63,7 @@ public class MainGUI extends JFrame implements Runnable {
         room = GameBuilder.buildRoom();
         manager = GameBuilder.buildInitCharacters(room);
         dashboard = new GameDisplay(room, manager);
+        inventoryDisplay = new InventoryDisplay(manager.getPlayer());
 
         dashboard.setPreferredSize(preferredSize);
         contentPane.add(dashboard, BorderLayout.CENTER);
@@ -95,7 +98,7 @@ public class MainGUI extends JFrame implements Runnable {
         
         @Override
         public void keyPressed(KeyEvent event){
-            char keyChar = event.getKeyChar(); // On récupère le charactère associé à la touche enfoncée
+            char keyChar = event.getKeyChar(); // On récupère le caractère associé à la touche enfoncée
             switch (keyChar) {
                 case 'z':
                     manager.movePlayer("up");
@@ -108,6 +111,9 @@ public class MainGUI extends JFrame implements Runnable {
                     break;
                 case 'd':
                     manager.movePlayer("right");
+                    break;
+                case 'e':
+                    this.toggleInventoryDisplay();
                     break;
                 default:
                     break;
@@ -122,6 +128,11 @@ public class MainGUI extends JFrame implements Runnable {
         @Override
         public void keyReleased(KeyEvent event){
             
+        }
+
+        // Méthode pour afficher/cacher l'inventaire
+        private void toggleInventoryDisplay() {
+            inventoryDisplay.setVisible(true);
         }
     }
 

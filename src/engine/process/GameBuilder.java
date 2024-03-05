@@ -29,14 +29,14 @@ public class GameBuilder {
     }
 
     /**
-     * génère la salle et les ennemis à l'apparition de la salle en utilisant le constructeur de la classe {@link src.engine.characters.GameCharacter}
+     * génère la salle et les ennemis à l'apparition de la salle en utilisant le constructeur de la classe {@link src.engine.characters.EntityManager}
      * 
      * @param room la salle dans laquelle évolue le joueur
-     * @return le système de gestion de la partie. Pour plus de détails, voir {@link src.engine.characters.GameCharacter}
+     * @return le système de gestion de la partie. Pour plus de détails, voir {@link src.engine.characters.EntityManager}
      */
     public static EntityManager buildInitCharacters (Room room) {
         EntityManager manager = new EntityManager(room);
-        logger.trace("New instance of CharacterManager");
+        logger.trace("New instance of EntityManager");
 
         initializePlayer(manager);
         logger.trace("Initialized player");
