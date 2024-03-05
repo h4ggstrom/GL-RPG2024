@@ -13,7 +13,7 @@ import engine.items.weapons.Weapon;
 import engine.Abilities.Ability;
 import engine.characters.Enemy;
 import engine.characters.Hitbox;
-import log.LoggerUtility;
+import log.Gamelog;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -28,7 +28,7 @@ import log.LoggerUtility;
 public class CharacterManager {
 
     // définition des attributs
-    private static Logger logger = LoggerUtility.getLogger(CharacterManager.class, "html");
+    private static Logger logger = Gamelog.getLogger();
     private Player player; // le contrôle
     private Room room; // la salle dans laquelle évolue le joueur
     private ArrayList<Ability> abilities = new ArrayList<Ability>(); // liste des capacités du joueur

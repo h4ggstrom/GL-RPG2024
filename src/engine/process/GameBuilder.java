@@ -7,6 +7,7 @@ import engine.characters.Enemy;
 import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
+import log.Gamelog;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -20,7 +21,7 @@ import engine.dungeon.Room;
  */
 public class GameBuilder {
 
-    private static Logger logger = CharacterManager.getLogger();
+    private static Logger logger = Gamelog.getLogger();
       
     public static Room buildRoom() {
         logger.trace("New instance of Room sent");

@@ -13,6 +13,7 @@ import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.items.Item;
 import engine.process.CharacterManager;
+import log.Gamelog;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -26,7 +27,7 @@ import engine.process.CharacterManager;
  */
 public class GameDisplay extends JPanel {
 
-    private static Logger logger = CharacterManager.getLogger();
+    private static Logger logger = Gamelog.getLogger();
     
     // définition des attributs
     private Room room; //la salle dans laquelle évolue le joueur

@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 
+import log.Gamelog;
+
 /**
  * Génie Logiciel - Projet RPG.
  * 
@@ -21,7 +23,7 @@ import org.apache.log4j.Logger;
 public class Utility {
       
 	// déclaration des variables
-	private static Logger logger = CharacterManager.getLogger(); // récupération du logger
+	private static Logger logger = Gamelog.getLogger(); // récupération du logger
 	/**
 	 * Cette méthode récupère et renvoie un fichier image à partir d'un chemin spécifié
 	 * 

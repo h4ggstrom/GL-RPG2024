@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import engine.characters.Enemy;
 import engine.characters.Hitbox;
 import engine.items.Item;
-import engine.process.CharacterManager;
+import log.Gamelog;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -23,7 +23,7 @@ import engine.process.CharacterManager;
  */
 public class Room {
 
-    private static Logger logger = CharacterManager.getLogger();
+    private static Logger logger = Gamelog.getLogger();
     
     // définition des attributs
     private Boolean cleaned = false; // booléen pour savoir si la salle a été nettoyée de toute entité hostile

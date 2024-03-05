@@ -17,6 +17,7 @@ import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.process.CharacterManager;
 import engine.process.GameBuilder;
+import log.Gamelog;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -41,7 +42,7 @@ public class MainGUI extends JFrame implements Runnable {
 
     private CharacterManager manager; // processus de gestion des actions
 
-    private Logger logger = CharacterManager.getLogger(); // récupération du logger
+    private Logger logger = Gamelog.getLogger(); // récupération du logger
 
     public MainGUI (String title){
         super(title);

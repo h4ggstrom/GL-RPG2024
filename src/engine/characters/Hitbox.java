@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
-import engine.process.CharacterManager;
+import log.Gamelog;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -19,7 +19,7 @@ import engine.process.CharacterManager;
 public class Hitbox {
 
     // définition des attributs
-    private static Logger logger = CharacterManager.getLogger();
+    private static Logger logger = Gamelog.getLogger();
     private Position upperLeft;
     private Position upperRight;
     private Position bottomLeft;
