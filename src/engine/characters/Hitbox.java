@@ -3,6 +3,7 @@ package engine.characters;
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
+import engine.Entity;
 import engine.dungeon.Position;
 import log.Gamelog;
 
@@ -25,27 +26,29 @@ public class Hitbox {
     private Position bottomLeft;
     private Position bottomRight;
     private Position center;
-    private GameCharacter character;
-    private String characterType;
+    private Entity entity;
+    private String entityType;
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de hitbox contenant ses dimensions (dépendant du type de personnage).
      * 
      * @param upperLeft la position en haut à gauche du personnage. La hitbox est calculée à partir de ce point
-     * @param characterType le type de personnage
+     * @param entityType le type de l'entité
      * @param character le personnage à qui attribuer la hitbox
      */
-    public Hitbox(Position center, String characterType, GameCharacter character) {
+    public Hitbox(Position center, String entityType, Entity entity) {
         this.center = center;
-        this.characterType = characterType;
-        this.character = character;
-        this.calculateCorners();
+        this.entityType = entityType;
+        this.entity = entity;
+        if(center != null){
+            this.calculateCorners();
+        }
     }
 
     public void calculateCorners() {
         int width = 0;
         int height = 0;
-        switch (this.characterType) {
+        switch (this.entityType) {
             case "enemy" :
                 width = GameConfiguration.ENEMY_WIDTH;
                 height = GameConfiguration.ENEMY_HEIGHT;
@@ -54,8 +57,12 @@ public class Hitbox {
                 width = GameConfiguration.PLAYER_WIDTH;
                 height = GameConfiguration.PLAYER_HEIGHT;
                 break;
+            case "sword" :
+                width = GameConfiguration.SWORD_WIDTH;
+                height = GameConfiguration.SWORD_HEIGHT;
+                break;
             case "default" :
-                logger.warn(characterType + " is not a recognized type of entity");
+                logger.warn(entityType + " is not a recognized type of entity");
                 break;
         }
         this.upperLeft = new Position(center.getX() - (width/2), center.getY() - (height/2));
@@ -76,16 +83,17 @@ public class Hitbox {
      * @param hitbox la hitbox à comparer
      */
     public boolean isInCollision (Hitbox hitbox) {
-        return (this.isContaining(hitbox.upperLeft) || this.isContaining(hitbox.upperRight) || this.isContaining(hitbox.bottomLeft) || this.isContaining(hitbox.bottomRight));
+        return ((this.isContaining(hitbox.upperLeft) || this.isContaining(hitbox.upperRight) || this.isContaining(hitbox.bottomLeft) || this.isContaining(hitbox.bottomRight) || this.isContaining(hitbox.center))
+                || (hitbox.isContaining(this.upperLeft) || hitbox.isContaining(this.upperRight) || hitbox.isContaining(this.bottomLeft) || hitbox.isContaining(this.bottomRight) || hitbox.isContaining(this.center)));
     }
 
     /**
      * Cette méthode vérifie si un pixel est inclus dans la Hitbox
      * 
-     * @param pixel la position à comparer
+     * @param position la position à comparer
      */
-    public boolean isContaining(Position pixel) {
-        return ( ( this.upperLeft.getX() <= pixel.getX() && pixel.getX() <= this.upperRight.getX() ) && ( this.upperLeft.getY() <= pixel.getY() && pixel.getY() <= this.bottomLeft.getY() ));
+    public boolean isContaining(Position position) {
+        return ( ( ( this.upperLeft.getX() <= position.getX() ) && ( position.getX() <= this.upperRight.getX() ) ) && ( this.upperLeft.getY() <= position.getY() && position.getY() <= this.bottomLeft.getY() ));
     }
 
     public Position getUpperLeft() {
@@ -121,7 +129,7 @@ public class Hitbox {
     }
 
     public Enemy getEnemy() {
-        return (Enemy)this.character;
+        return (Enemy)this.entity;
     }
 
     public Position getCenter() {
@@ -132,12 +140,12 @@ public class Hitbox {
         this.center = center;
     }
 
-    public GameCharacter getCharacter() {
-        return character;
+    public Entity getEntity() {
+        return entity;
     }
 
-    public void setCharacter(GameCharacter character) {
-        this.character = character;
+    public void setEntity(Entity entity) {
+        this.entity = entity;
     }
 
     @Override

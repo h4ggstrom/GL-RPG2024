@@ -12,8 +12,8 @@ import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.items.Item;
+import engine.items.weapons.Sword;
 import engine.items.weapons.Weapon;
-import engine.process.CharacterManager;
 import engine.process.Utility;
 
 /*
@@ -22,7 +22,7 @@ import engine.process.Utility;
 public class PaintStrategy {
       
     // Stratégie d'affichage pour la salle
-    public void paint (CharacterManager manager,Room room, Graphics graphics) {
+    public void paint (Room room, Graphics graphics) {
         graphics.drawImage(Utility.readImage("./src/ressources/"+ room.getFileName() +".png"), 0, 0, null);
     }
 
@@ -75,22 +75,27 @@ public class PaintStrategy {
         graphics.fillRect(br.getX(), br.getY(),1, 1);
     }
 
-    public void paint(Position position, Item item, Graphics graphics) {
+    public void paint(Item item, Graphics graphics) {
         String itemFilePath = "";
-        if (item instanceof Weapon) {
+        // on prend le coin haut gauche pour des soucis d'affichage
+        Position position = item.getHitbox().getUpperLeft();
+        if (item instanceof Sword) {
             itemFilePath = "./src/ressources/sword.png";
         }
         graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
+
+        // Partie Hitbox (à des fins de débuggage)
+        Hitbox hitbox = item.getHitbox();
+        Position ul = hitbox.getUpperLeft();
+        Position ur = hitbox.getUpperRight();
+        Position ct = hitbox.getCenter();
+        Position bl = hitbox.getBottomLeft();
+        Position br = hitbox.getBottomLeft();
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(ul.getX(), ul.getY(),1, 1);
+        graphics.fillRect(ur.getX(), ur.getY(),1, 1);
+        graphics.fillRect(ct.getX(), ct.getY(),1, 1);
+        graphics.fillRect(bl.getX(), bl.getY(),1, 1);
+        graphics.fillRect(br.getX(), br.getY(),1, 1);
     }
-
-    //public void paint(attack Attack, Graphics graphics) {
-		//Position position = Attack.getPosition();
-		//int Enemy_hitbox = Hitbox.getEnemy;
-
-		//int y = position.getX();
-		//int x = position.getY();
-
-		//graphics.setColor(Color.PINK);
-		//graphics.fillRect(x * blockSize + blockSize / 3, y * blockSize, blockSize / 3, blockSize);
-	//}
 }

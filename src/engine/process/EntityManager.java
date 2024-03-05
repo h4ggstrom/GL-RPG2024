@@ -10,7 +10,7 @@ import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.items.weapons.Weapon;
-import engine.Abilities.Ability;
+import engine.Entity;
 import engine.characters.Enemy;
 import engine.characters.Hitbox;
 import log.Gamelog;
@@ -25,13 +25,12 @@ import log.Gamelog;
  * @author hayder.ur-rehman@etu.cyu.fr
  *
  */
-public class CharacterManager {
+public class EntityManager {
 
     // définition des attributs
     private static Logger logger = Gamelog.getLogger();
     private Player player; // le contrôle
     private Room room; // la salle dans laquelle évolue le joueur
-    private ArrayList<Ability> abilities = new ArrayList<Ability>(); // liste des capacités du joueur
 
 
     /**
@@ -39,7 +38,7 @@ public class CharacterManager {
      *
      * @param room la salle dans laquelle évoluera le joueur
      */
-    public CharacterManager (Room room) {
+    public EntityManager (Room room) {
         this.room = room;
     }
 
@@ -51,24 +50,12 @@ public class CharacterManager {
         this.player = player;
     }
 
-    public void add (Ability ability) {
-        this.abilities.add(ability);
-    }
-
-    public void emptyAbilities () {
-        this.abilities.clear();
-    }
-
     public Player getPlayer () {
         return this.player;
     }
 
     public Room getRoom() {
         return this.room;
-    }
-
-    public ArrayList<Ability> getAbilities() {
-        return abilities;
     }
 
     /**
@@ -119,8 +106,9 @@ public class CharacterManager {
             }
         }
 
-        // On parcourt toutes les Hitbox d'Enemy de la Room
-        for (Hitbox hitbox : room.getEnemyHitboxes()) {
+        // On parcourt toutes les Hitbox d'Entity de la Room
+        for (Entity entity : room.getEntities()) {
+            Hitbox hitbox = entity.getHitbox();
             if ( finaleHitbox.isInCollision(hitbox) ) { // Si la Hitbox finale du joueur est en collision avec une des Hitbox de la salle
                 canBeMoved = false; // Il ne peut pas être déplacé
             }
@@ -137,47 +125,76 @@ public class CharacterManager {
     }
 
     /**
-     * Cette méthode gère les attaques du joueur.
+     * Cette méthode gère les interactions du joueur avec les entités.
      *
-     * @param distance la distance du clic par rapport au joueur.
-     * @param ability la capacité utilisée pour attaquer.
+     * @param click la position du click
      */
-    public void attack(int distance, Ability ability) {
-        if(distance <= ability.getRange()) {
+    public void interact(Position click) {
+        
+        // On récupère les coordonnées du centre de la hitbox du joueur
+        Position playerCenter = player.getPosition();
+
+        // On récupère la distance entre le click et le centre du joueur
+        int distance = this.calculateDistance(playerCenter, click);
+        logger.trace("distance to click = " + distance); 
+
+        // Si le click visait une Entity, on la récupère
+        Entity selectedEntity = null;
+        for(Entity entity : this.room.getEntities()) {
+            Hitbox selectedHitbox = entity.getHitbox();
+            if(selectedHitbox.isContaining(click)) {
+                selectedEntity = entity;
+            }
+        }
+
+        // Si l'Entity sélectionnée est un Enemy
+        if(selectedEntity instanceof Enemy) {
+
+            Enemy selectedEnemy = (Enemy)selectedEntity;
+
             List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
 
-            // On parcourt toutes les Hitbox d'Enemy
-            for (Hitbox hitbox : room.getEnemyHitboxes()) {
-                // Si la Hitbox contient le pixel visé par l'attaque
-                if (hitbox.isContaining(ability.getTarget())) {
-                    logger.trace("player attacked");
-                    Enemy enemy = hitbox.getEnemy();
-                    enemy.setHealth(enemy.getHealth() - ability.getDamage());
-                    logger.trace("enemy now has "+ enemy.getHealth()+ " HP");
+            // On récupère l'instance de l'arme équipée par le joueur
+            Weapon playerWeapon = player.getWeaponSlot().getWeapon();
 
-                    // Si la vie de l'Enemy atteint 0 (ou moins)
-                    if (enemy.getHealth() <= 0)
-                        // On l'ajoute à la liste d'Enemy éliminés
-                        eliminatedEnemies.add(enemy);
-                        logger.trace("enemy eliminated");
-                    }
-                }
+            // On vérifie si le click du joueur est compris dans la range de son arme
+            if(distance <= playerWeapon.getAttackRange()) {
+                logger.trace("enemy attacked");
+                // Si c'est le cas, on attaque l'Enemy visé avec l'arme du joueur
+                selectedEnemy.setHealth(selectedEnemy.getHealth() - playerWeapon.getAttackDamage());
+                logger.trace("enemy now has "+ selectedEnemy.getHealth()+ " HP");
+            }
+
+            // Si la vie de l'Enemy atteint 0 (ou moins)
+            if (selectedEnemy.getHealth() <= 0) {
+                // On l'ajoute à la liste d'Enemy éliminés
+                eliminatedEnemies.add(selectedEnemy);
+                logger.trace("enemy eliminated");
+            }
 
             // On parcourt les Enemy éliminés pour les retirer du jeu
-            for (Enemy enemy : eliminatedEnemies) {
-                Weapon enemyWeapon = (Weapon)enemy.getWeaponSlot().getItem();
-                room.addItemOnTheGround(enemy.getHitbox().getUpperLeft(), enemyWeapon);
-                room.removeEnemyHitbox(enemy.getHitbox());
-                room.removeEnemy(enemy);
-                }
+            for (Enemy eliminatedEnemy : eliminatedEnemies) {
+                // on récupère l'instance de l'arme équipée de l'ennemi
+                Weapon enemyWeapon = eliminatedEnemy.getWeaponSlot().getWeapon();
+                // on lui associe la position de mort de l'ennemi
+                enemyWeapon.setPosition(eliminatedEnemy.getPosition());
+                // on ajoute l'arme à la liste d'entités de la Room
+                room.addEntity(enemyWeapon);
+                // on retire l'Enemy de la liste d'entités de la Room
+                room.removeEntity(selectedEnemy);
+            }
 
-            // On vérifie si il ne reste plus aucun ennemis
-            if (room.getEnemies().size() == 0) {
-                // Si c'est le cas la Room à été nettoyée
+            // On vérifie finalement si il ne reste plus aucun ennemis
+            Boolean hasBeenCleaned = true;
+            for(Entity entity : room.getEntities()) {
+                if (entity instanceof Enemy) {
+                    hasBeenCleaned = false;
+                }
+            }
+
+            if(hasBeenCleaned) {
                 room.clean();
-
-                abilities.remove(ability);
-                }
+            }
         }
     }
 

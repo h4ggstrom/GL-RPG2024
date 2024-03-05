@@ -1,14 +1,10 @@
 package engine.dungeon;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import engine.characters.Enemy;
-import engine.characters.Hitbox;
-import engine.items.Item;
+import engine.Entity;
 import log.Gamelog;
 
 /**
@@ -29,95 +25,41 @@ public class Room {
     private Boolean cleaned = false; // booléen pour savoir si la salle a été nettoyée de toute entité hostile
     private Boolean exited = false; // booléen  pour savoir si le joueur a quitté
 
-    private ArrayList<Enemy> enemies = new ArrayList<Enemy>(); // liste des ennemis présents dans la salle
-    private ArrayList<Hitbox> enemyHitboxes = new ArrayList<Hitbox>(); // liste des hitboxes associées aux ennemis présents dans la salle
-    private HashMap<Position, Item> itemsOnTheGround = new HashMap<Position, Item>();
+    private ArrayList<Entity> entities = new ArrayList<Entity>();
     private String fileName = "room";
 
     public Room () {
-        this.cleaned = false; // Par défaut, une Room est remplie de monstres et doit-être nettoyée
         logger.trace("New instance of Room");
     }
 
     public void empty() {
         this.cleaned = false;
         this.exited = false;
-        this.enemies = new ArrayList<Enemy>();
-        this.enemyHitboxes = new ArrayList<Hitbox>();
-        this.itemsOnTheGround = new HashMap<Position, Item>();
+        entities.clear();
         fileName = "room";
     }
   
     /**
-     * Cette méthode ajoute un personnage à la liste des ennemis présents dans la salle
+     * Cette méthode ajoute une entité à la salle
      * 
-     * @param character le personnage à ajouter
+     * @param entity l'entité à ajouter
      */
-    public void addEnemy (Enemy enemy) {
-        enemies.add(enemy);
+    public void addEntity (Entity entity) {
+        entities.add(entity);
     }
 
-    public ArrayList<Enemy> getEnemies() {
-        return this.enemies;
+    public ArrayList<Entity> getEntities() {
+        return this.entities;
     }
 
     /**
-     * Cette méthode retire un ennemi à la liste des ennemis présents dans la salle
+     * Cette méthode retire une entité à la liste d'entités de la salle
      * 
-     * @param enemy l'ennemi à retirer de la liste
+     * @param entity l'entité à retirer de la liste
      */
-    public void removeEnemy(Enemy enemy) {
-        enemies.remove(enemy);
-        logger.trace(enemy + " removed");
-    }
-
-
-    /**
-     * Cette méthode permet d'ajouter une hitbox (liée à un ennemi) à la liste des hitboxes.
-     * 
-     * @param hitbox la hitbox à ajouter
-     */
-    public void addEnemyHitbox (Hitbox hitbox) {
-        enemyHitboxes.add(hitbox);
-        logger.trace("hitbox added to array");
-    }
-
-    public ArrayList<Hitbox> getEnemyHitboxes() {
-        return this.enemyHitboxes;
-    }
-
-    /**
-     * Cette méthode permet de retirer une hitbox (liée à un ennemi) de la liste des hitboxes.
-     * 
-     * @param hitbox
-     */
-    public void removeEnemyHitbox(Hitbox hitbox) {
-        enemyHitboxes.remove(hitbox);
-        logger.trace("hitbox removed from array");
-    }
-
-    public void addItemOnTheGround(Position position, Item item) {
-        itemsOnTheGround.put(position, item);
-        logger.trace("new item spawned on ground at coords" + position.toString());
-    }
-
-    public void removeItemOnTheGround(Item item) {
-        // On initialise une variable pour la clé associée à notre item que l'on va trouver en parcourant la HashMap
-        Position positionOfItemToRemove = null;
-        // On parcourt chaque couple de la HashMap
-        for (Map.Entry<Position, Item> couple : itemsOnTheGround.entrySet()) {
-            // Si on trouve la valeur correspondant à l'item
-            if (couple.getValue().equals(item)) {
-                // On sauvegarde sa clé qui est sa position
-                positionOfItemToRemove = couple.getKey();
-            }
-        }
-        // On retire cet item de la HashMap grâce à sa clé : sa position
-        itemsOnTheGround.remove(positionOfItemToRemove);
-    }
-
-    public HashMap<Position, Item> getItemsOnTheGround () {
-        return this.itemsOnTheGround;
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
+        logger.trace(entity + " removed");
     }
 
     /**

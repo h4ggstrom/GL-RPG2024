@@ -34,8 +34,8 @@ public class GameBuilder {
      * @param room la salle dans laquelle évolue le joueur
      * @return le système de gestion de la partie. Pour plus de détails, voir {@link src.engine.characters.GameCharacter}
      */
-    public static CharacterManager buildInitCharacters (Room room) {
-        CharacterManager manager = new CharacterManager(room);
+    public static EntityManager buildInitCharacters (Room room) {
+        EntityManager manager = new EntityManager(room);
         logger.trace("New instance of CharacterManager");
 
         initializePlayer(manager);
@@ -53,9 +53,9 @@ public class GameBuilder {
      * 
      * @param manager le process de gestion des actions, auquel sera ajouté le joueur généré
      * 
-     * @see engine.process.CharacterManager pour les détails du processus de gestion des actions du joueur
+     * @see engine.process.EntityManager pour les détails du processus de gestion des actions du joueur
      */
-    private static void initializePlayer (CharacterManager manager) {
+    private static void initializePlayer (EntityManager manager) {
         // On récupère l'instance de Player
         Player player = Player.getInstance();
         manager.set(player);
@@ -66,16 +66,15 @@ public class GameBuilder {
      * 
      * @param manager le process de gestion des actions auquel seront ajoutés les ennemis générés.
      * 
-     * @see engine.process.CharacterManager pour les détails du processus de gestion des ennemis
+     * @see engine.process.EntityManager pour les détails du processus de gestion des ennemis
      */
-    public static void initializeEnemies(CharacterManager manager) {
+    public static void initializeEnemies(EntityManager manager) {
         for (int i = 0; i < GameConfiguration.ENEMIES_INIT_NUMBER; i++) {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH);
             int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT);
             Position position = new Position(enemyX, enemyY); // On instancie sa position
-            Enemy enemy = new Enemy(position); // On instancie l'Enemy
-            manager.getRoom().addEnemy(enemy); // On l'ajoute à la liste d'ennemis de la Room
-            manager.getRoom().addEnemyHitbox(enemy.getHitbox()); // On ajoute sa Hitbox à la liste de Hitboxes de la Room
+            Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
+            manager.getRoom().addEntity(enemy); // On l'ajoute à la liste d'entités de la Room
         }
     }
 

@@ -12,10 +12,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import config.GameConfiguration;
-import engine.Abilities.Ability;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
-import engine.process.CharacterManager;
+import engine.process.EntityManager;
 import engine.process.GameBuilder;
 import log.Gamelog;
 
@@ -40,7 +39,7 @@ public class MainGUI extends JFrame implements Runnable {
 
     private GameDisplay dashboard; // ATH à intégrer dans la fenêtre
 
-    private CharacterManager manager; // processus de gestion des actions
+    private EntityManager manager; // processus de gestion des actions
 
     private Logger logger = Gamelog.getLogger(); // récupération du logger
 
@@ -111,7 +110,6 @@ public class MainGUI extends JFrame implements Runnable {
                     manager.movePlayer("right");
                     break;
                 default:
-                    manager.emptyAbilities();
                     break;
             }
         }
@@ -140,16 +138,9 @@ public class MainGUI extends JFrame implements Runnable {
             int y = e.getY() + GameConfiguration.CORRECTCLICK_YSHIFT;
             logger.trace("mouse clicked at coords" + x + " ; " + y);
 
-            // On récupère les coordonnées du centre de la hitbox du joueur
-            Position playerCenter = manager.getPlayer().getHitbox().getCenter();
             Position click = new Position(x, y);
 
-            // On récupère la distance entre ce pixel et notre centre
-            int distance = manager.calculateDistance(playerCenter, click);
-            logger.trace("distance to click = " + distance); 
-
-            Ability ability = new Ability(manager.getPlayer(), new Position(x, y));
-            manager.attack(distance, ability);
+            manager.interact(click);
         }
 
         @Override

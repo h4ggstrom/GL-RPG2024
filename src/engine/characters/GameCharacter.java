@@ -1,9 +1,11 @@
 package engine.characters;
 
+import engine.Entity;
 import engine.dungeon.Position;
 import engine.items.Inventory;
 import engine.items.Slot;
 import engine.items.weapons.Sword;
+import engine.process.EntityFactory;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -15,37 +17,26 @@ import engine.items.weapons.Sword;
  * @author hayder.ur-rehman@etu.cyu.fr
  * 
  */
-public abstract class GameCharacter {
+public abstract class GameCharacter extends Entity {
 
     // définition des attributs
     private Hitbox hitbox;
     private int health;
     private Inventory inventory;
-    private Slot weaponSlot = new Slot(new Sword());
+    // On instancie directement l'épée dans le weaponSlot des personnages, la position de l'entité est null pour l'instant
+    private Slot weaponSlot = new Slot((Sword)EntityFactory.createEntity("sword", null));
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de personnage (gameCharacter) contenant sa position, sa hitbox, et ses PV
      * 
      * @param position la position du personnage
-     * @param characterType le type de personnage
+     * @param entityType le type de personnage
      * @param health le nombre de PV du personnage
      */
-    public GameCharacter (Position position, String characterType, int health) {
-        this.hitbox = new Hitbox(position, characterType, this);
+    public GameCharacter (Position position, String entityType, int health) {
+        super(position, entityType);
         this.health = health;
         this.inventory = new Inventory();
-    }
-
-    public void setPosition (Position position) {
-        this.hitbox.setPosition(position);
-    }
-
-    public Hitbox getHitbox () {
-        return this.hitbox;
-    }
-
-    public void setHitbox (Hitbox hitbox) {
-        this.hitbox = hitbox;
     }
 
     public int getHealth() {

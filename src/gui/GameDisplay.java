@@ -1,18 +1,17 @@
 package gui;
 
 import java.awt.Graphics;
-import java.util.Map;
 
 import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
+import engine.Entity;
 import engine.characters.Enemy;
 import engine.characters.Player;
-import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.items.Item;
-import engine.process.CharacterManager;
+import engine.process.EntityManager;
 import log.Gamelog;
 
 /**
@@ -31,10 +30,10 @@ public class GameDisplay extends JPanel {
     
     // définition des attributs
     private Room room; //la salle dans laquelle évolue le joueur
-    private CharacterManager manager; // le processus de gestion des actions
+    private EntityManager manager; // le processus de gestion des actions
     private PaintStrategy paintStrategy = new PaintStrategy();
 
-    public GameDisplay (Room room, CharacterManager manager) {
+    public GameDisplay (Room room, EntityManager manager) {
         this.room = room;
         this.manager = manager;
         logger.trace("New instance of GameDisplay");
@@ -44,17 +43,18 @@ public class GameDisplay extends JPanel {
     public void paintComponent (Graphics graphics) {
         super.paintComponent(graphics);
 
-        paintStrategy.paint(manager, room, graphics);
+        paintStrategy.paint(room, graphics);
 
         Player player = manager.getPlayer();
         paintStrategy.paint(player, graphics);
 
-        for (Enemy enemy : manager.getRoom().getEnemies()) {
-            paintStrategy.paint(enemy, graphics);
-        }
-
-        for (Map.Entry<Position, Item> couple : room.getItemsOnTheGround().entrySet()) {
-            paintStrategy.paint(couple.getKey(), couple.getValue(), graphics);
+        for (Entity entity : manager.getRoom().getEntities()) {
+            if(entity instanceof Enemy) {
+                paintStrategy.paint((Enemy)entity, graphics);
+            }
+            else if (entity instanceof Item) {
+                paintStrategy.paint((Item)entity, graphics);
+            }
         }
 
         // for (attack attack : manager.getAbilities()) {

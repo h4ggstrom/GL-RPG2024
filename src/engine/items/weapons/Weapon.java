@@ -1,5 +1,6 @@
 package engine.items.weapons;
 
+import engine.dungeon.Position;
 import engine.items.Item;
 
 public abstract class Weapon extends Item {
@@ -8,7 +9,8 @@ public abstract class Weapon extends Item {
     int attackSpeed;
     int attackRange;
     
-    public Weapon(int attackDamage, int attackSpeed, int attackRange) {
+    public Weapon(int attackDamage, int attackSpeed, int attackRange, String weaponType, Position position) {
+        super(position, weaponType);
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
         this.attackRange = attackRange;
