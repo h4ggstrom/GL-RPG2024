@@ -56,10 +56,6 @@ public class GameDisplay extends JPanel {
                 paintStrategy.paint((Item)entity, graphics);
             }
         }
-
-        // for (attack attack : manager.getAbilities()) {
-		// 	paintStrategy.paint(attack, g);
-		// }
     }
    
 }

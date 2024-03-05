@@ -9,6 +9,7 @@ import config.GameConfiguration;
 import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
+import engine.items.Item;
 import engine.items.weapons.Weapon;
 import engine.Entity;
 import engine.characters.Enemy;
@@ -150,6 +151,8 @@ public class EntityManager {
         // Si l'Entity sélectionnée est un Enemy
         if(selectedEntity instanceof Enemy) {
 
+            logger.trace("enemy selected");
+
             Enemy selectedEnemy = (Enemy)selectedEntity;
 
             List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
@@ -194,6 +197,21 @@ public class EntityManager {
 
             if(hasBeenCleaned) {
                 room.clean();
+            }
+        }
+
+        // Si l'entité sélectionnée est un Item
+        if(selectedEntity instanceof Item) {
+
+            logger.trace("item selected");
+
+            Item selectedItem = (Item)selectedEntity;
+            // Si la distance entre l'Item est le joueur est assez restreinte, on peut intéragir
+            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
+                // Le joueur ramasse l'Item et l'ajoute à son inventaire
+                logger.trace("item fetched");
+                player.getInventory().addItem(selectedItem); // ajout à l'inventaire
+                room.removeEntity(selectedItem); // on retire l'item de la room
             }
         }
     }

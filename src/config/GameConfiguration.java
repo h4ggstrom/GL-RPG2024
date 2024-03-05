@@ -27,7 +27,7 @@ public class GameConfiguration {
     public static final int PLAYER_HEIGHT = 40;
     public static final int PLAYER_HEALTH = 50;
     public static final int PLAYER_LIFEBAR_XSHIFT = -15;
-    public static final int PLAYER_ENTITY_INTERACTION_RANGE = 20;
+    public static final int PLAYER_ENTITY_INTERACTION_RANGE = 50;
     
     // dégats de l'epée
     public static final int SWORD_DAMAGE = 5;
@@ -43,8 +43,8 @@ public class GameConfiguration {
     public static final int ROOM_RIGHT_LIMITATION = 1020; // Le mur bloque le joueur après cette valeur en X
     public static final int ROOM_CENTER_X = 549;
     public static final int ROOM_CENTER_Y = 359;
-    public static final Position GATE_UP = new Position(1026, 292); // Le pixel haut de la porte de sortie
-    public static final Position GATE_DOWN = new Position(1028, 429); // Le pixel bas de la porte de sortie
+    public static final Position GATE_UP = new Position(1026, 309); // Le pixel haut de la porte de sortie
+    public static final Position GATE_DOWN = new Position(1028, 448); // Le pixel bas de la porte de sortie
 
     // nombre d'ennemis par défaut, dimensions, et points de vie
     public static final int ENEMIES_INIT_NUMBER = 1;

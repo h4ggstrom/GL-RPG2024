@@ -20,7 +20,6 @@ import engine.process.EntityFactory;
 public abstract class GameCharacter extends Entity {
 
     // définition des attributs
-    private Hitbox hitbox;
     private int health;
     private Inventory inventory;
     // On instancie directement l'épée dans le weaponSlot des personnages, la position de l'entité est null pour l'instant
@@ -65,8 +64,7 @@ public abstract class GameCharacter extends Entity {
 
     @Override
     public String toString() {
-        return "GameCharacter [hitbox=" + hitbox + ", health=" + health + "]";
+        return "GameCharacter [health=" + health + ", inventory=" + inventory + ", weaponSlot=" + weaponSlot + "]";
     }
-    
     
 }

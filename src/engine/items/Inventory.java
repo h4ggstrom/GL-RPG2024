@@ -18,4 +18,8 @@ public class Inventory {
         this.slots = slots;
     }
 
+    public void addItem(Item item) {
+        slots.add(new Slot(item));
+    }
+
 }
