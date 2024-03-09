@@ -201,7 +201,7 @@ public class EntityManager {
 
             Item selectedItem = (Item)selectedEntity;
             // Si la distance entre l'Item est le joueur est assez restreinte et qu'on a de la place dans l'inventaire, on peut intéragir
-            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE && player.getInventory().getNumberOfItems() <= GameConfiguration.INVENTORY_MAX) {
+            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE && player.getInventory().getNumberOfItems() < GameConfiguration.INVENTORY_MAX) {
                 // Le joueur ramasse l'Item et l'ajoute à son inventaire
                 logger.trace("item fetched");
                 player.getInventory().addItem(selectedItem); // ajout à l'inventaire

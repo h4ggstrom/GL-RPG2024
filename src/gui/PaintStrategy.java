@@ -108,7 +108,7 @@ public class PaintStrategy {
         graphics.fillRect(inventoryPosition.getX(), inventoryPosition.getY(), GameConfiguration.INVENTORY_WIDTH, GameConfiguration.INVENTORY_HEIGHT);
         graphics.setFont(new Font("Dialog", Font.PLAIN, GameConfiguration.INVENTORY_TITLEFONTSIZE));
         graphics.setColor(Color.BLACK);
-        graphics.drawString("INVENTORY", inventoryPosition.getX() + GameConfiguration.INVENTORY_WIDTH/4, inventoryPosition.getY() + GameConfiguration.INVENTORY_HEIGHT/7);
+        graphics.drawString("INVENTORY", GameConfiguration.INVENTORY_TITLE_POSITION.getX() , GameConfiguration.INVENTORY_TITLE_POSITION.getY());
         
         String itemFilePath = "";
         String name = "";
@@ -134,5 +134,23 @@ public class PaintStrategy {
             slotX += GameConfiguration.SLOT_DIMENSION + 20;
         }
 
+        // partie corps du joueur et équipement
+        graphics.drawImage(Utility.readImage("./src/ressources/bodyView.png"), 640, slotY, null);
+        if(Player.getInstance().getWeaponSlot().getItem() != null) {
+            Weapon weapon = (Weapon)Player.getInstance().getWeaponSlot().getItem();
+            if (weapon instanceof Sword) {
+                itemFilePath = "./src/ressources/sword.png";
+                name = "Sword";
+            }
+            // partie slot et visuel de l'item
+            graphics.setColor(Color.WHITE);
+            graphics.fillRect(740, slotY + 50, GameConfiguration.SLOT_DIMENSION, GameConfiguration.SLOT_DIMENSION);
+            graphics.drawImage(Utility.readImage(itemFilePath), 740, slotY + 50, null);
+
+            // partie nom de l'item
+            graphics.setColor(Color.BLACK);
+            graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
+            graphics.drawString(name, 740 + GameConfiguration.ITEM_NAMETAG_XSHIFT, slotY + GameConfiguration.ITEM_NAMETAG_YSHIFT + 50);
+        }
     }
 }

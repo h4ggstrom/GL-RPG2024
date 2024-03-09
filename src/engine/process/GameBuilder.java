@@ -75,7 +75,7 @@ public class GameBuilder {
             Position position = new Position(enemyX, enemyY); // On instancie sa position
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
             // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
-            if(manager.verifHitboxes(enemy.getHitbox())) {
+            if(manager.verifHitboxes(enemy.getHitbox()) || enemy.getHitbox().isInCollision(Player.getInstance().getHitbox())) {
                 manager.getRoom().addEntity(enemy); // On ajoute l'ennemi à la liste d'entités de la Room
             }
             else {
