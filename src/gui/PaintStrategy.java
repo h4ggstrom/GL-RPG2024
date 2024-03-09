@@ -111,16 +111,26 @@ public class PaintStrategy {
         graphics.drawString("INVENTORY", inventoryPosition.getX() + GameConfiguration.INVENTORY_WIDTH/4, inventoryPosition.getY() + GameConfiguration.INVENTORY_HEIGHT/7);
         
         String itemFilePath = "";
+        String name = "";
         int slotX = inventoryPosition.getX() + 20;
         int slotY = inventoryPosition.getY() + GameConfiguration.INVENTORY_WIDTH/4;
         for(Slot slot : inventory.getSlots()) {
             Item item = slot.getItem();
             if (item instanceof Sword) {
                 itemFilePath = "./src/ressources/sword.png";
+                name = "Sword";
             }
+
+            // partie slot et visuel de l'item
             graphics.setColor(Color.WHITE);
             graphics.fillRect(slotX, slotY, GameConfiguration.SLOT_DIMENSION, GameConfiguration.SLOT_DIMENSION);
             graphics.drawImage(Utility.readImage(itemFilePath), slotX, slotY, null);
+
+            // partie nom de l'item
+            graphics.setColor(Color.BLACK);
+            graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
+            graphics.drawString(name, slotX + GameConfiguration.ITEM_NAMETAG_XSHIFT, slotY + GameConfiguration.ITEM_NAMETAG_YSHIFT);
+
             slotX += GameConfiguration.SLOT_DIMENSION + 20;
         }
 

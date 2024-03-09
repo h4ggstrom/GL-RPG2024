@@ -65,12 +65,15 @@ public class GameConfiguration {
     public static final int CHARACTER_NAMETAG_YSHIFT = -5;
     public static final int CHARACTER_LIFEBAR_YSHIFT = 5;
 
+    // partie inventaire
     public static final int INVENTORY_HEIGHT = WINDOW_HEIGHT/3;
     public static final int INVENTORY_WIDTH = WINDOW_WIDTH/3;
     public static final Position INVENTORY_POSITION = new Position((WINDOW_WIDTH/2) - (INVENTORY_WIDTH/2),(WINDOW_HEIGHT/2) - (INVENTORY_HEIGHT/2)) ;
     public static final Color INVENTORY_COLOR = Color.getHSBColor(181, 10, 68);
     public static final int INVENTORY_TITLEFONTSIZE = 32;
     public static final int INVENTORY_MAX = 7;
+    public static final int ITEM_NAMETAG_XSHIFT = 0;
+    public static final int ITEM_NAMETAG_YSHIFT = -5;
 
     public static final int SLOT_DIMENSION = 30;
 }
