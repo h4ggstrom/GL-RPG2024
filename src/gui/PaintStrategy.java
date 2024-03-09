@@ -13,6 +13,7 @@ import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.items.Inventory;
 import engine.items.Item;
+import engine.items.Slot;
 import engine.items.weapons.Sword;
 import engine.items.weapons.Weapon;
 import engine.process.Utility;
@@ -101,6 +102,27 @@ public class PaintStrategy {
     }
 
     public void paint(Inventory inventory, Graphics graphics) {
+
+        Position inventoryPosition = GameConfiguration.INVENTORY_POSITION;
+        graphics.setColor(GameConfiguration.INVENTORY_COLOR);
+        graphics.fillRect(inventoryPosition.getX(), inventoryPosition.getY(), GameConfiguration.INVENTORY_WIDTH, GameConfiguration.INVENTORY_HEIGHT);
+        graphics.setFont(new Font("Dialog", Font.PLAIN, GameConfiguration.INVENTORY_TITLEFONTSIZE));
+        graphics.setColor(Color.BLACK);
+        graphics.drawString("INVENTORY", inventoryPosition.getX() + GameConfiguration.INVENTORY_WIDTH/4, inventoryPosition.getY() + GameConfiguration.INVENTORY_HEIGHT/7);
         
+        String itemFilePath = "";
+        int slotX = inventoryPosition.getX() + 20;
+        int slotY = inventoryPosition.getY() + GameConfiguration.INVENTORY_WIDTH/4;
+        for(Slot slot : inventory.getSlots()) {
+            Item item = slot.getItem();
+            if (item instanceof Sword) {
+                itemFilePath = "./src/ressources/sword.png";
+            }
+            graphics.setColor(Color.WHITE);
+            graphics.fillRect(slotX, slotY, GameConfiguration.SLOT_DIMENSION, GameConfiguration.SLOT_DIMENSION);
+            graphics.drawImage(Utility.readImage(itemFilePath), slotX, slotY, null);
+            slotX += GameConfiguration.SLOT_DIMENSION + 20;
+        }
+
     }
 }
