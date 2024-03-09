@@ -55,12 +55,14 @@ public class PaintStrategy {
         graphics.drawString(name, position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
         graphics.fillRect(position.getX() + lifebar_xshift, position.getY() + height + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2); // La barre de vie
 
-        // Partie portée d'attaque
-        Position hitbox_center = character.getHitbox().getCenter();
-        int x_center = hitbox_center.getX();
-        int y_center = hitbox_center.getY();
-        Weapon weapon = (Weapon)character.getWeaponSlot().getItem();
-        graphics.drawOval(x_center - weapon.getAttackRange(), y_center - weapon.getAttackRange(), weapon.getAttackRange() * 2, weapon.getAttackRange() * 2);
+        if(character instanceof Player) {
+            // Partie portée d'attaque
+            Position hitbox_center = character.getHitbox().getCenter();
+            int x_center = hitbox_center.getX();
+            int y_center = hitbox_center.getY();
+            Weapon weapon = (Weapon)character.getWeaponSlot().getItem();
+            graphics.drawOval(x_center - weapon.getAttackRange(), y_center - weapon.getAttackRange(), weapon.getAttackRange() * 2, weapon.getAttackRange() * 2);
+        }
 
         // Partie Hitbox (à des fins de débuggage)
         Hitbox hitbox = character.getHitbox();
