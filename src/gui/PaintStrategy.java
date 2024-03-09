@@ -11,6 +11,7 @@ import engine.characters.Hitbox;
 import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
+import engine.items.Inventory;
 import engine.items.Item;
 import engine.items.weapons.Sword;
 import engine.items.weapons.Weapon;
@@ -97,5 +98,9 @@ public class PaintStrategy {
         graphics.fillRect(ct.getX(), ct.getY(),1, 1);
         graphics.fillRect(bl.getX(), bl.getY(),1, 1);
         graphics.fillRect(br.getX(), br.getY(),1, 1);
+    }
+
+    public void paint(Inventory inventory, Graphics graphics) {
+        
     }
 }

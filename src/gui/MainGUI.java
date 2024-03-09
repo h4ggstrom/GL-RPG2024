@@ -12,6 +12,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import config.GameConfiguration;
+import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.process.EntityManager;
@@ -43,8 +44,6 @@ public class MainGUI extends JFrame implements Runnable {
 
     private Logger logger = Gamelog.getLogger(); // récupération du logger
 
-    private InventoryDisplay inventoryDisplay;
-
     public MainGUI (String title){
         super(title);
         init();
@@ -63,7 +62,6 @@ public class MainGUI extends JFrame implements Runnable {
         room = GameBuilder.buildRoom();
         manager = GameBuilder.buildInitCharacters(room);
         dashboard = new GameDisplay(room, manager);
-        inventoryDisplay = new InventoryDisplay(manager.getPlayer());
 
         dashboard.setPreferredSize(preferredSize);
         contentPane.add(dashboard, BorderLayout.CENTER);
@@ -113,7 +111,7 @@ public class MainGUI extends JFrame implements Runnable {
                     manager.movePlayer("right");
                     break;
                 case 'e':
-                    this.toggleInventoryDisplay();
+                    this.toggleInventory();
                     break;
                 default:
                     break;
@@ -131,8 +129,8 @@ public class MainGUI extends JFrame implements Runnable {
         }
 
         // Méthode pour afficher/cacher l'inventaire
-        private void toggleInventoryDisplay() {
-            inventoryDisplay.setVisible(true);
+        private void toggleInventory() {
+            Player.getInstance().getInventory().switchVisible();
         }
     }
 
