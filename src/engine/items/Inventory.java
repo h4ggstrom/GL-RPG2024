@@ -35,4 +35,8 @@ public class Inventory {
         this.visible = visible;
     }
 
+    public int getNumberOfItems() {
+        return slots.size();
+    }
+
 }

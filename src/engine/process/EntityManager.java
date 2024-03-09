@@ -107,13 +107,7 @@ public class EntityManager {
             }
         }
 
-        // On parcourt toutes les Hitbox d'Entity de la Room
-        for (Entity entity : room.getEntities()) {
-            Hitbox hitbox = entity.getHitbox();
-            if ( finaleHitbox.isInCollision(hitbox) ) { // Si la Hitbox finale du joueur est en collision avec une des Hitbox de la salle
-                canBeMoved = false; // Il ne peut pas être déplacé
-            }
-        }
+        canBeMoved = verifHitboxes(finaleHitbox);
 
         if (canBeMoved) { // Si on a jugé que le joueur peut se déplacer
             logger.trace("moved " + direction);
@@ -206,8 +200,8 @@ public class EntityManager {
             logger.trace("item selected");
 
             Item selectedItem = (Item)selectedEntity;
-            // Si la distance entre l'Item est le joueur est assez restreinte, on peut intéragir
-            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
+            // Si la distance entre l'Item est le joueur est assez restreinte et qu'on a de la place dans l'inventaire, on peut intéragir
+            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE && player.getInventory().getNumberOfItems() <= GameConfiguration.INVENTORY_MAX) {
                 // Le joueur ramasse l'Item et l'ajoute à son inventaire
                 logger.trace("item fetched");
                 player.getInventory().addItem(selectedItem); // ajout à l'inventaire
@@ -231,5 +225,17 @@ public class EntityManager {
         room.empty();
         player.setPosition(new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y));
         GameBuilder.initializeEnemies(this);
+    }
+
+    public boolean verifHitboxes(Hitbox finaleHitbox) {
+        boolean verif = true;
+        // On parcourt toutes les Hitbox d'Entity de la Room
+        for (Entity entity : room.getEntities()) {
+            Hitbox hitbox = entity.getHitbox();
+            if ( finaleHitbox.isInCollision(hitbox) ) { // Si la Hitbox finale du joueur est en collision avec une des Hitbox de la salle
+                verif = false; // Il ne peut pas être déplacé
+            }
+        }
+        return verif;
     }
 }

@@ -45,11 +45,12 @@ public class GameConfiguration {
     public static final int ROOM_RIGHT_LIMITATION = 1020; // Le mur bloque le joueur après cette valeur en X
     public static final int ROOM_CENTER_X = 549;
     public static final int ROOM_CENTER_Y = 359;
+    public static final Position ROOM_CENTER = new Position(ROOM_CENTER_X, ROOM_CENTER_Y);
     public static final Position GATE_UP = new Position(1026, 309); // Le pixel haut de la porte de sortie
     public static final Position GATE_DOWN = new Position(1028, 448); // Le pixel bas de la porte de sortie
 
     // nombre d'ennemis par défaut, dimensions, et points de vie
-    public static final int ENEMIES_INIT_NUMBER = 1;
+    public static final int ENEMIES_INIT_NUMBER = 50;
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
     public static final int ENEMY_HEALTH = 30;
@@ -69,6 +70,7 @@ public class GameConfiguration {
     public static final Position INVENTORY_POSITION = new Position((WINDOW_WIDTH/2) - (INVENTORY_WIDTH/2),(WINDOW_HEIGHT/2) - (INVENTORY_HEIGHT/2)) ;
     public static final Color INVENTORY_COLOR = Color.getHSBColor(181, 10, 68);
     public static final int INVENTORY_TITLEFONTSIZE = 32;
+    public static final int INVENTORY_MAX = 7;
 
     public static final int SLOT_DIMENSION = 30;
 }

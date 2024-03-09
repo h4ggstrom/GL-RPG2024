@@ -69,17 +69,18 @@ public class GameBuilder {
      * @see engine.process.EntityManager pour les détails du processus de gestion des ennemis
      */
     public static void initializeEnemies(EntityManager manager) {
-        int enemyX = GameConfiguration.ROOM_CENTER_X;
-        int enemyY = GameConfiguration.ROOM_CENTER_Y;
         for (int i = 0; i < GameConfiguration.ENEMIES_INIT_NUMBER; i++) {
-            // On s'assure que les ennemis ne soient pas placés au centre de la Room ce qui pourrait superposer le joueur et l'ennemi
-            while( (GameConfiguration.ROOM_CENTER_X - GameConfiguration.ENEMY_NOSPAWNAREA < enemyX ) && (GameConfiguration.ROOM_CENTER_X + GameConfiguration.ENEMY_NOSPAWNAREA > enemyX ) && (GameConfiguration.ROOM_CENTER_Y - GameConfiguration.ENEMY_NOSPAWNAREA < enemyY ) && (GameConfiguration.ROOM_CENTER_Y + GameConfiguration.ENEMY_NOSPAWNAREA > enemyY ) ) {
-                enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION + GameConfiguration.ENEMY_WIDTH/2, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH/2);
-                enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.ENEMY_HEIGHT/2, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT/2);
-            }
+            int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION + GameConfiguration.ENEMY_WIDTH/2, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH/2);
+            int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.ENEMY_HEIGHT/2, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT/2);
             Position position = new Position(enemyX, enemyY); // On instancie sa position
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
-            manager.getRoom().addEntity(enemy); // On l'ajoute à la liste d'entités de la Room
+            // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
+            if(manager.verifHitboxes(enemy.getHitbox())) {
+                manager.getRoom().addEntity(enemy); // On ajoute l'ennemi à la liste d'entités de la Room
+            }
+            else {
+                i--; // Sinon on refait un tour de boucle
+            }
         }
     }
 

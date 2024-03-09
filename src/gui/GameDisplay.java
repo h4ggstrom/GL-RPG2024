@@ -38,7 +38,7 @@ public class GameDisplay extends JPanel {
         this.manager = manager;
         logger.trace("New instance of GameDisplay");
     }
-
+    
     @Override
     public void paintComponent (Graphics graphics) {
         super.paintComponent(graphics);
@@ -47,10 +47,6 @@ public class GameDisplay extends JPanel {
 
         paintStrategy.paint(Player.getInstance(), graphics);
 
-        if(Player.getInstance().getInventory().isVisible()) {
-            paintStrategy.paint(Player.getInstance().getInventory(), graphics);
-        }
-
         for (Entity entity : manager.getRoom().getEntities()) {
             if(entity instanceof Enemy) {
                 paintStrategy.paint((Enemy)entity, graphics);
@@ -58,6 +54,10 @@ public class GameDisplay extends JPanel {
             else if (entity instanceof Item) {
                 paintStrategy.paint((Item)entity, graphics);
             }
+        }
+
+        if(Player.getInstance().getInventory().isVisible()) {
+            paintStrategy.paint(Player.getInstance().getInventory(), graphics);
         }
     }
    
