@@ -238,4 +238,87 @@ public class EntityManager {
         }
         return verif;
     }
+
+    /**
+     * Cette méthode génére les déplacement des ennemis.
+     */
+    public void moveEnemies() {
+        // Pour chaque entité présente dans la salle
+        for (Entity entity : room.getEntities()) {
+            if (entity instanceof Enemy) {
+                Enemy enemy = (Enemy) entity;
+                Position enemyPosition = enemy.getHitbox().getCenter();
+                Position playerPosition = player.getHitbox().getCenter();
+
+                // Calcul de la direction optimale pour se rapprocher du joueur
+                int dx = playerPosition.getX() - enemyPosition.getX();
+                int dy = playerPosition.getY() - enemyPosition.getY();
+                int absDx = Math.abs(dx);
+                int absDy = Math.abs(dy);
+
+                boolean moved = tryMoveEnemy(enemy, absDx > absDy ? dx > 0 ? "right" : "left" : dy > 0 ? "down" : "up");
+
+                if (!moved) {
+                    moved = tryMoveEnemy(enemy, absDx <= absDy ? dx > 0 ? "right" : "left" : dy > 0 ? "down" : "up");
+                }
+
+                // Si aucune des directions n'est possible, l'ennemi reste sur place
+            }
+        }
+    }
+
+    /**
+     * Tente de déplacer un ennemi dans une direction donnée.
+     *
+     * @param enemy L'ennemi à déplacer.
+     * @param direction La direction du mouvement.
+     * @return true si l'ennemi a pu être déplacé, false sinon.
+     */
+    private boolean tryMoveEnemy(Enemy enemy, String direction) {
+        Position enemyPosition = enemy.getHitbox().getCenter();
+        Position newPosition = calculateNewPosition(enemyPosition, direction, GameConfiguration.ENEMY_DEFAULT_SPEED);
+        Hitbox newHitbox = new Hitbox(newPosition, "enemy", enemy);
+        if (verifHitboxes(newHitbox) && checkRoomBounds(newHitbox)) {
+            enemy.setHitbox(newHitbox);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Calcule la nouvelle position.
+     *
+     * @param currentPosition La position actuelle.
+     * @param direction La direction du mouvement.
+     * @param speed La vitesse du mouvement.
+     * @return La nouvelle position.
+     */
+    private Position calculateNewPosition(Position currentPosition, String direction, int speed) {
+        switch (direction) {
+            case "up":
+                return new Position(currentPosition.getX(), currentPosition.getY() - speed);
+            case "down":
+                return new Position(currentPosition.getX(), currentPosition.getY() + speed);
+            case "left":
+                return new Position(currentPosition.getX() - speed, currentPosition.getY());
+            case "right":
+                return new Position(currentPosition.getX() + speed, currentPosition.getY());
+            default:
+                return currentPosition;
+        }
+    }
+
+
+    /**
+     * Vérifie si la Hitbox donnée est dans les limites de la salle.
+     * @param hitbox La Hitbox à vérifier.
+     * @return true si la Hitbox est dans les limites, false sinon.
+     */
+    private boolean checkRoomBounds(Hitbox hitbox) {
+        return (GameConfiguration.ROOM_LEFT_LIMITATION < hitbox.getUpperLeft().getX() &&
+                hitbox.getUpperRight().getX() < GameConfiguration.ROOM_RIGHT_LIMITATION) &&
+            (GameConfiguration.ROOM_UPPER_LIMITATION < hitbox.getUpperRight().getY() &&
+                hitbox.getBottomRight().getY() < GameConfiguration.ROOM_LOWER_LIMITATION);
+    }
+
 }
