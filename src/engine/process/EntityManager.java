@@ -104,7 +104,7 @@ public class EntityManager {
 
         // Si la position finale du personnage n'est pas dans les limites de la Room
         if ( ! checkRoomBounds(finaleHitbox) ) {
-            logger.debug("La position du " + entityType + "n'est pas dans les limites de la Room");
+            logger.trace("La position finale du " + entityType + "n'est pas dans les limites de la Room");
             // Si la Room n'est pas nettoyée
             if(!room.getCleaned()){
                 canBeMoved = false; // Il ne peut pas être déplacé
@@ -121,7 +121,7 @@ public class EntityManager {
             }
         }
         else {
-            logger.debug("La position du " + entityType + " est dans les limites de la room");
+            logger.trace("La position du " + entityType + " est dans les limites de la room");
         }
 
         if(canBeMoved) {
@@ -311,5 +311,12 @@ public class EntityManager {
                 (GameConfiguration.ROOM_UPPER_LIMITATION < hitbox.getUpperRight().getY() &&
                 hitbox.getBottomRight().getY() < GameConfiguration.ROOM_LOWER_LIMITATION);
     }
-
+    
+    public void attackPlayer(){
+        for (Entity entity : room.getEntities()) {
+            if (entity instanceof Enemy) {
+                Enemy enemy = (Enemy) entity;
+            }
+        }
+    }
 }

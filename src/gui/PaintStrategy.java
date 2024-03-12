@@ -30,27 +30,27 @@ public class PaintStrategy {
 
     public void paint(GameCharacter character, Graphics graphics) {
         Position position = character.getHitbox().getUpperLeft();
-        int height = 0;
-        int width = 0;
         String name = "";
         int lifebar_xshift = 0;
+        String filePath = "";
+        int height = 0;
         if (character instanceof Enemy) {
             graphics.setColor(Color.RED);
-            height = GameConfiguration.ENEMY_HEIGHT;
-            width = GameConfiguration.ENEMY_WIDTH;
             name = "Enemy";
             lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
+            filePath = "./src/ressources/enemy.png";
+            height = GameConfiguration.ENEMY_HEIGHT;
         }
         else if (character instanceof Player) {
-            graphics.setColor(Color.MAGENTA);
-            height = GameConfiguration.ENEMY_HEIGHT;
-            width = GameConfiguration.ENEMY_WIDTH;
+            graphics.setColor(Color.MAGENTA);;
             name = "Player";
             lifebar_xshift = GameConfiguration.PLAYER_LIFEBAR_XSHIFT;
+            filePath = "./src/ressources/player0.png";
+            height = GameConfiguration.PLAYER_HEIGHT;
         }
 
         // Partie corps
-		graphics.fillRect(position.getX(), position.getY(), width, height); // Le corps
+		graphics.drawImage(Utility.readImage(filePath), position.getX(), position.getY(), null);
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10)); // Le nom
         graphics.drawString(name, position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
         graphics.fillRect(position.getX() + lifebar_xshift, position.getY() + height + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2); // La barre de vie
