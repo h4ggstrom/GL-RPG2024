@@ -74,6 +74,7 @@ public class MainGUI extends JFrame implements Runnable {
     }
 
     public void run () {
+        int compteur = 0;
         while (true) {
 			try {
 				Thread.sleep(GameConfiguration.GAME_SPEED);
@@ -81,10 +82,15 @@ public class MainGUI extends JFrame implements Runnable {
 				logger.fatal("game crashed");
 			}
 
+            compteur++;
+
             if(room.getExited()) {
                 manager.nextRoom();
             }
             
+            if(compteur%500 == 0){
+               manager.moveEnemies();
+            }
 			dashboard.repaint();
 		}
     }
@@ -99,16 +105,16 @@ public class MainGUI extends JFrame implements Runnable {
             char keyChar = event.getKeyChar(); // On récupère le caractère associé à la touche enfoncée
             switch (keyChar) {
                 case 'z':
-                    manager.movePlayer("up");
+                    manager.moveCharacter(Player.getInstance(),"up");
                     break;
                 case 'q':
-                    manager.movePlayer("left");
+                    manager.moveCharacter(Player.getInstance(),"left");
                     break;
                 case 's':
-                    manager.movePlayer("down");
+                    manager.moveCharacter(Player.getInstance(),"down");
                     break;
                 case 'd':
-                    manager.movePlayer("right");
+                    manager.moveCharacter(Player.getInstance(),"right");
                     break;
                 case 'e':
                     this.toggleInventory();

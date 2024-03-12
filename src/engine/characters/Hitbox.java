@@ -158,8 +158,7 @@ public class Hitbox {
 
     @Override
     public String toString() {
-        return "Hitbox [upperLeft=" + upperLeft + ", upperRight=" + upperRight + ", bottomLeft=" + bottomLeft
-                + ", bottomRight=" + bottomRight + ", center=" + center + "]";
+        return "Milieu de la Hitbox : " + this.center;
     }
     
 }

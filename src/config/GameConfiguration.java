@@ -51,7 +51,7 @@ public class GameConfiguration {
 
     // nombre d'ennemis par défaut, dimensions, et points de vie
     public static final int ENEMY_DEFAULT_SPEED = 5;
-    public static final int ENEMIES_INIT_NUMBER = 10;
+    public static final int ENEMIES_INIT_NUMBER = 1;
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
     public static final int ENEMY_HEALTH = 30;

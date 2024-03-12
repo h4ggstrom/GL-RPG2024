@@ -13,6 +13,7 @@ import engine.items.Item;
 import engine.items.weapons.Weapon;
 import engine.Entity;
 import engine.characters.Enemy;
+import engine.characters.GameCharacter;
 import engine.characters.Hitbox;
 import log.Gamelog;
 
@@ -60,37 +61,50 @@ public class EntityManager {
     }
 
     /**
-     * Cette méthode gère les déplacements du joueur
+     * Cette méthode gère les déplacements du personnage
      *
-     * @param direction l'input envoyé par le joueur, au format String
+     * @param direction l'input envoyé par le personnage, au format String
      */
-    public void movePlayer (String direction) {
-        Position startPosition = player.getHitbox().getCenter();
+    public void moveCharacter (GameCharacter character, String direction) {
+        Position startPosition = character.getHitbox().getCenter();
         Position endPosition;
         Boolean canBeMoved = true;
+        String entityType = "";
+        int speed = 0;
+        if (character instanceof Player) {
+            logger.trace("L'entité sélectionnée pour être déplacée est le joueur.");
+            speed = GameConfiguration.PLAYER_DEFAULT_SPEED;
+            entityType = "player";
+        }
+        else if (character instanceof Enemy) {
+            logger.trace("L'entité sélectionnée pour être déplacée est un ennemi.");
+            speed = GameConfiguration.ENEMY_DEFAULT_SPEED;
+            entityType = "enemy";
+        }
         // Switch case pour calculer la nouvelle position
         switch (direction) {
             case "up":
-                endPosition = new Position(startPosition.getX(), startPosition.getY() - GameConfiguration.PLAYER_DEFAULT_SPEED);
+                endPosition = new Position(startPosition.getX(), startPosition.getY() - speed);
                 break;
             case "left":
-                endPosition = new Position(startPosition.getX() - GameConfiguration.PLAYER_DEFAULT_SPEED, startPosition.getY());
+                endPosition = new Position(startPosition.getX() - speed, startPosition.getY());
                 break;
             case "down":
-                endPosition = new Position(startPosition.getX(), startPosition.getY() + GameConfiguration.PLAYER_DEFAULT_SPEED);
+                endPosition = new Position(startPosition.getX(), startPosition.getY() + speed);
                 break;
             case "right":
-                endPosition = new Position(startPosition.getX() + GameConfiguration.PLAYER_DEFAULT_SPEED, startPosition.getY());
+                endPosition = new Position(startPosition.getX() + speed, startPosition.getY());
                 break;
             default:
                 endPosition = startPosition; // Sinon, on garde la même position
                 break;
         }
 
-        Hitbox finaleHitbox = new Hitbox(endPosition, "player", player); // On instancie la Hitbox sur l'emplacement final
+        Hitbox finaleHitbox = new Hitbox(endPosition, entityType, character); // On instancie la Hitbox sur l'emplacement final
 
-        // Si la position finale du joueur n'est pas dans les limites de la Room
-        if ( ! ( ( GameConfiguration.ROOM_LEFT_LIMITATION < finaleHitbox.getUpperLeft().getX() && finaleHitbox.getUpperRight().getX() < GameConfiguration.ROOM_RIGHT_LIMITATION ) && ( GameConfiguration.ROOM_UPPER_LIMITATION < finaleHitbox.getUpperRight().getY() && finaleHitbox.getBottomRight().getY() < GameConfiguration.ROOM_LOWER_LIMITATION ) ) ) {
+        // Si la position finale du personnage n'est pas dans les limites de la Room
+        if ( ! checkRoomBounds(finaleHitbox) ) {
+            logger.debug("La position du " + entityType + "n'est pas dans les limites de la Room");
             // Si la Room n'est pas nettoyée
             if(!room.getCleaned()){
                 canBeMoved = false; // Il ne peut pas être déplacé
@@ -106,15 +120,26 @@ public class EntityManager {
                 }
             }
         }
-
-        canBeMoved = verifHitboxes(finaleHitbox);
-
-        if (canBeMoved) { // Si on a jugé que le joueur peut se déplacer
-            logger.trace("moved " + direction);
-            player.setHitbox(finaleHitbox); // On associe la nouvelle Hitbox 
+        else {
+            logger.debug("La position du " + entityType + " est dans les limites de la room");
         }
 
-        if (player.getHitbox().getCenter().getX() > GameConfiguration.WINDOW_WIDTH) {
+        if(canBeMoved) {
+            logger.trace("On vérifie la collision avec les Hitbox des entités de la Room");
+            room.removeEntity(character); // on retire l'Entité de la Room pour ne pas vérifier la collision avec sa propre hitbox
+            canBeMoved = verifHitboxes(finaleHitbox);
+            logger.trace("Verification de canBeMoved après la verification des hitboxs : " + canBeMoved);
+            room.addEntity(character); // on replace l'entité dans le Room
+        }
+
+
+        if (canBeMoved) { // Si on a jugé que le personnage peut se déplacer
+            logger.trace(entityType + " peut se déplacer.");
+            logger.trace(character + "moved " + direction);
+            character.setHitbox(finaleHitbox); // On associe la nouvelle Hitbox
+        }
+
+        if (character.getHitbox().getCenter().getX() > GameConfiguration.WINDOW_WIDTH) {
             room.exit();
         }
     }
@@ -221,6 +246,9 @@ public class EntityManager {
         return ((int)(Math.sqrt(Math.pow(Math.abs(p1.getX() - p2.getX()), 2) + Math.pow(Math.abs(p1.getY()) - p2.getY(), 2))));
     }
 
+    /**
+     * set the next room by cleaning the current one and generating a new one
+     */
     public void nextRoom() {
         room.empty();
         player.setPosition(new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y));
@@ -232,7 +260,9 @@ public class EntityManager {
         // On parcourt toutes les Hitbox d'Entity de la Room
         for (Entity entity : room.getEntities()) {
             Hitbox hitbox = entity.getHitbox();
-            if ( finaleHitbox.isInCollision(hitbox) ) { // Si la Hitbox finale du joueur est en collision avec une des Hitbox de la salle
+            logger.trace("Les deux hitboxs à inspecter : " + hitbox + " et " + finaleHitbox);
+            if ( hitbox.isInCollision(finaleHitbox) ) { // Si la Hitbox finale est en collision avec une des Hitbox de la salle
+                logger.trace("finaleHitbox.isInCollision(hitbox) = " + finaleHitbox.isInCollision(hitbox));
                 verif = false; // Il ne peut pas être déplacé
             }
         }
@@ -243,71 +273,32 @@ public class EntityManager {
      * Cette méthode génére les déplacement des ennemis.
      */
     public void moveEnemies() {
+        ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
         // Pour chaque entité présente dans la salle
         for (Entity entity : room.getEntities()) {
             if (entity instanceof Enemy) {
                 Enemy enemy = (Enemy) entity;
-                Position enemyPosition = enemy.getHitbox().getCenter();
-                Position playerPosition = player.getHitbox().getCenter();
+                enemiesFetched.add(enemy);
+            }
+        }
+        for (Enemy enemy : enemiesFetched) {
+            Position enemyPosition = enemy.getHitbox().getCenter();
+            Position playerPosition = player.getHitbox().getCenter();
+    
+            // Calcul de la direction optimale pour se rapprocher du joueur
+            int dx = playerPosition.getX() - enemyPosition.getX();
+            logger.trace("La différence de x entre l'ennemi et le joueur est " + dx);
+            int dy = playerPosition.getY() - enemyPosition.getY();
+    
+            if(dx != 0) {
+                moveCharacter(enemy, dx > 0 ? "right" : "left");
+            }
 
-                // Calcul de la direction optimale pour se rapprocher du joueur
-                int dx = playerPosition.getX() - enemyPosition.getX();
-                int dy = playerPosition.getY() - enemyPosition.getY();
-                int absDx = Math.abs(dx);
-                int absDy = Math.abs(dy);
-
-                boolean moved = tryMoveEnemy(enemy, absDx > absDy ? dx > 0 ? "right" : "left" : dy > 0 ? "down" : "up");
-
-                if (!moved) {
-                    moved = tryMoveEnemy(enemy, absDx <= absDy ? dx > 0 ? "right" : "left" : dy > 0 ? "down" : "up");
-                }
-
-                // Si aucune des directions n'est possible, l'ennemi reste sur place
+            if(dy != 0) {
+                moveCharacter(enemy, dy > 0 ? "down" : "up");
             }
         }
     }
-
-    /**
-     * Tente de déplacer un ennemi dans une direction donnée.
-     *
-     * @param enemy L'ennemi à déplacer.
-     * @param direction La direction du mouvement.
-     * @return true si l'ennemi a pu être déplacé, false sinon.
-     */
-    private boolean tryMoveEnemy(Enemy enemy, String direction) {
-        Position enemyPosition = enemy.getHitbox().getCenter();
-        Position newPosition = calculateNewPosition(enemyPosition, direction, GameConfiguration.ENEMY_DEFAULT_SPEED);
-        Hitbox newHitbox = new Hitbox(newPosition, "enemy", enemy);
-        if (verifHitboxes(newHitbox) && checkRoomBounds(newHitbox)) {
-            enemy.setHitbox(newHitbox);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Calcule la nouvelle position.
-     *
-     * @param currentPosition La position actuelle.
-     * @param direction La direction du mouvement.
-     * @param speed La vitesse du mouvement.
-     * @return La nouvelle position.
-     */
-    private Position calculateNewPosition(Position currentPosition, String direction, int speed) {
-        switch (direction) {
-            case "up":
-                return new Position(currentPosition.getX(), currentPosition.getY() - speed);
-            case "down":
-                return new Position(currentPosition.getX(), currentPosition.getY() + speed);
-            case "left":
-                return new Position(currentPosition.getX() - speed, currentPosition.getY());
-            case "right":
-                return new Position(currentPosition.getX() + speed, currentPosition.getY());
-            default:
-                return currentPosition;
-        }
-    }
-
 
     /**
      * Vérifie si la Hitbox donnée est dans les limites de la salle.
@@ -317,7 +308,7 @@ public class EntityManager {
     private boolean checkRoomBounds(Hitbox hitbox) {
         return (GameConfiguration.ROOM_LEFT_LIMITATION < hitbox.getUpperLeft().getX() &&
                 hitbox.getUpperRight().getX() < GameConfiguration.ROOM_RIGHT_LIMITATION) &&
-            (GameConfiguration.ROOM_UPPER_LIMITATION < hitbox.getUpperRight().getY() &&
+                (GameConfiguration.ROOM_UPPER_LIMITATION < hitbox.getUpperRight().getY() &&
                 hitbox.getBottomRight().getY() < GameConfiguration.ROOM_LOWER_LIMITATION);
     }
 
