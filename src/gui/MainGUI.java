@@ -88,7 +88,7 @@ public class MainGUI extends JFrame implements Runnable {
                 manager.nextRoom();
             }
             
-            if(compteur%500 == 0){
+            if(compteur%100 == 0){
                manager.moveEnemies();
             }
 			dashboard.repaint();
