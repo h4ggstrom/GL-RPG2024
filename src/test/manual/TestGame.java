@@ -1,4 +1,4 @@
-package test;
+package test.manual;
 
 import gui.MainGUI;
 
