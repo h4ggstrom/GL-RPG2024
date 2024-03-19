@@ -311,12 +311,24 @@ public class EntityManager {
                 (GameConfiguration.ROOM_UPPER_LIMITATION < hitbox.getUpperRight().getY() &&
                 hitbox.getBottomRight().getY() < GameConfiguration.ROOM_LOWER_LIMITATION);
     }
-    
-    public void attackPlayer(){
+
+    public void attackforEnemy(){
+        ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
+        // Pour chaque entité présente dans la salle
         for (Entity entity : room.getEntities()) {
             if (entity instanceof Enemy) {
                 Enemy enemy = (Enemy) entity;
+                enemiesFetched.add(enemy);
             }
         }
+        for (Enemy enemy : enemiesFetched) {
+            Weapon enemyWeapon = enemy.getWeaponSlot().getWeapon();
+            Position enemyPosition = enemy.getHitbox().getCenter();
+            Position playerPosition = player.getHitbox().getCenter();
+            int distanceEnemyPlayer = calculateDistance(enemyPosition, playerPosition);
+            if(distanceEnemyPlayer <= enemyWeapon.getAttackRange()){ 
+                player.setHealth(player.getHealth() - enemyWeapon.getAttackDamage());
+            }
+        }   
     }
 }
