@@ -91,6 +91,10 @@ public class MainGUI extends JFrame implements Runnable {
             if(compteur%100 == 0){
                manager.moveEnemies();
             }
+
+            if(compteur%1000 == 0){
+                manager.attackforEnemy();
+             }
 			dashboard.repaint();
 		}
     }
