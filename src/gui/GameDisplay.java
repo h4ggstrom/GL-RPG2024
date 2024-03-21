@@ -45,11 +45,12 @@ public class GameDisplay extends JPanel {
 
         paintStrategy.paint(room, graphics);
 
-        paintStrategy.paint(Player.getInstance(), graphics);
-
         for (Entity entity : manager.getRoom().getEntities()) {
             if(entity instanceof Enemy) {
                 paintStrategy.paint((Enemy)entity, graphics);
+            }
+            else if(entity instanceof Player) {
+                paintStrategy.paint((Player)entity, graphics);
             }
             else if (entity instanceof Item) {
                 paintStrategy.paint((Item)entity, graphics);

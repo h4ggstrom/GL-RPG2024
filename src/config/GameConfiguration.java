@@ -32,7 +32,7 @@ public class GameConfiguration {
     public static final int PLAYER_ENTITY_INTERACTION_RANGE = 50;
     
     // dégats de l'epée
-    public static final int SWORD_DAMAGE = 5;
+    public static final int SWORD_DAMAGE = 30;
     public static final int SWORD_SPEED = 0;
     public static final int SWORD_RANGE = 100;
     public static final int SWORD_WIDTH = 30;
@@ -77,4 +77,10 @@ public class GameConfiguration {
     public static final int ITEM_NAMETAG_XSHIFT = 0;
     public static final int ITEM_NAMETAG_YSHIFT = -5;
     public static final int SLOT_DIMENSION = 30;
+
+    //Fin du jeu
+    public static final int GAME_OVER_HEIGHT = WINDOW_HEIGHT/2;
+    public static final int GAME_OVER_WIDTH = WINDOW_WIDTH/2;
+    public static final int GAME_OVER_TITLEFONTSIZE = 20;
+    public static final Position GAME_OVER_POSITION = new Position((GameConfiguration.WINDOW_WIDTH - GameConfiguration.GAME_OVER_WIDTH) / 2,(GameConfiguration.WINDOW_HEIGHT - GameConfiguration.GAME_OVER_HEIGHT) / 2) ;
 }
