@@ -96,6 +96,9 @@ public class MainGUI extends JFrame implements Runnable {
                 manager.attackforEnemy();
              }
 			dashboard.repaint();
+            if(Player.getInstance().getHealth() <= 0){
+                manager.gameOver();
+            }
 		}
     }
 

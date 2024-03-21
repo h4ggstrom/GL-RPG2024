@@ -329,6 +329,11 @@ public class EntityManager {
             if(distanceEnemyPlayer <= enemyWeapon.getAttackRange()){ 
                 player.setHealth(player.getHealth() - enemyWeapon.getAttackDamage());
             }
-        }   
+        }  
+    }
+
+    public void gameOver(){
+        room.empty();
+        room.removeEntity(player);
     }
 }
