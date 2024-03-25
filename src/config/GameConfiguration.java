@@ -32,7 +32,7 @@ public class GameConfiguration {
     public static final int PLAYER_ENTITY_INTERACTION_RANGE = 50;
     
     // dégats de l'epée
-    public static final int SWORD_DAMAGE = 30;
+    public static final int SWORD_DAMAGE = 5;
     public static final int SWORD_SPEED = 0;
     public static final int SWORD_RANGE = 100;
     public static final int SWORD_WIDTH = 30;
