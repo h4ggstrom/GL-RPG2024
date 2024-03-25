@@ -49,7 +49,7 @@ public class MainGUI extends JFrame implements Runnable {
         init();
     }
 
-    private void init() {
+    public void init() {
 
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
@@ -71,6 +71,8 @@ public class MainGUI extends JFrame implements Runnable {
 		setVisible(true);
 		setPreferredSize(preferredSize);
 		setResizable(false);
+
+        new Thread(this).start();
     }
 
     public void run () {
