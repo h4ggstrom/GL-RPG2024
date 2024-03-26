@@ -11,8 +11,9 @@ import config.GameConfiguration;
 
 public class InventoryGUI extends JFrame {
 
-    Inventory inventory = Player.getInstance().getInventory();
+    private Inventory inventory = Player.getInstance().getInventory();
 
+    private JFrame frame = new JFrame("Inventory");
     private JButton btnReturn = new JButton("Return");
     
     public InventoryGUI() {
@@ -23,10 +24,19 @@ public class InventoryGUI extends JFrame {
     private void initLayout(){
         btnReturn.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        setTitle("Inventory");
-        setSize(GameConfiguration.INVENTORY_WIDTH, GameConfiguration.INVENTORY_HEIGHT);
-        setLocationRelativeTo(null);
-		setVisible(true);
+        JPanel panel1 = new JPanel();
+        panel1.add(new JLabel("Player"));
+        panel1.add(btnReturn);
+        JPanel panel2 = new JPanel();
+        panel2.add(new JLabel("Items"));
+
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panel1, panel2);
+        splitPane.setDividerLocation(150); 
+
+        frame.add(splitPane);
+        frame.setSize(GameConfiguration.INVENTORY_WIDTH, GameConfiguration.INVENTORY_HEIGHT);
+        frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
     }
 
     private void initActions(){
