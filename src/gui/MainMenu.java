@@ -2,7 +2,6 @@ package gui;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Dimension;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -67,8 +66,10 @@ public class MainMenu extends JFrame {
     protected void initActions() {
 		btnNewGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MainGUI mainGUI = new MainGUI("Le Donjon de Cergy-Préfecture");
-                mainGUI.init();
+                MainGUI gameMainGUI = new MainGUI("RPG");
+
+                Thread gameThread = new Thread(gameMainGUI);
+                gameThread.start();
 
                 MainMenu.this.setVisible(false);
             }

@@ -71,6 +71,7 @@ public class MainGUI extends JFrame implements Runnable {
 		setVisible(true);
 		setPreferredSize(preferredSize);
 		setResizable(false);
+        setLocationRelativeTo(null);
 
         new Thread(this).start();
     }
