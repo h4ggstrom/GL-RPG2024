@@ -73,7 +73,6 @@ public class MainGUI extends JFrame implements Runnable {
 		setResizable(false);
         setLocationRelativeTo(null);
 
-        new Thread(this).start();
     }
 
     public void run () {

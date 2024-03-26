@@ -20,7 +20,7 @@ public class MainMenu extends JFrame {
         initActions();
     }
 
-	protected void initLayout() {
+	private void initLayout() {
 
 
         getContentPane().setLayout(new BorderLayout());
@@ -63,27 +63,34 @@ public class MainMenu extends JFrame {
 		setVisible(true);
 	}
 
-    protected void initActions() {
-		btnNewGame.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                MainGUI gameMainGUI = new MainGUI("RPG");
+    private void initActions() {
+		btnNewGame.addActionListener(new NewGame());
+
+        btnLoadGame.addActionListener(new LoadGame());
+
+        btnSettings.addActionListener(new Settings());
+	}
+
+    class NewGame implements ActionListener {
+		public void actionPerformed(ActionEvent e){
+			MainGUI gameMainGUI = new MainGUI("RPG");
 
                 Thread gameThread = new Thread(gameMainGUI);
                 gameThread.start();
 
                 MainMenu.this.setVisible(false);
-            }
-        });
+		}
+	}
 
-        btnLoadGame.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+    class LoadGame implements ActionListener {
+		public void actionPerformed(ActionEvent e){
+            
+		}
+	}
 
-        btnSettings.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+    class Settings implements ActionListener {
+		public void actionPerformed(ActionEvent e){
+		}
 	}
 
     public static void main(String[] args) {
