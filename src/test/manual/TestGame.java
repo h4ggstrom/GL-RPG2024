@@ -1,14 +1,10 @@
 package test.manual;
 
-import gui.MainGUI;
+import gui.MainMenu;
 
 public class TestGame {
 
     public static void main(String[] args){
-  
-        MainGUI gameMainGUI = new MainGUI("RPG");
-
-        Thread gameThread = new Thread(gameMainGUI);
-        gameThread.start();
+        new MainMenu();
     }
 }
