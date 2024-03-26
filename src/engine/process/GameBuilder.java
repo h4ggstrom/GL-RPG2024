@@ -6,7 +6,7 @@ import config.GameConfiguration;
 import engine.characters.Enemy;
 import engine.characters.Player;
 import engine.dungeon.Position;
-import engine.dungeon.Room;
+import engine.dungeon.Dungeon;
 import log.Gamelog;
 
 /**
@@ -22,10 +22,10 @@ import log.Gamelog;
 public class GameBuilder {
 
     private static Logger logger = Gamelog.getLogger();
-      
-    public static Room buildRoom() {
-        logger.trace("New instance of Room sent");
-        return new Room();
+
+    public static Dungeon buildDungeon() {
+        logger.trace("New instance of Dungeon sent");
+        return new Dungeon();
     }
 
     /**
@@ -34,8 +34,8 @@ public class GameBuilder {
      * @param room la salle dans laquelle évolue le joueur
      * @return le système de gestion de la partie. Pour plus de détails, voir {@link src.engine.characters.EntityManager}
      */
-    public static EntityManager buildInitCharacters (Room room) {
-        EntityManager manager = new EntityManager(room);
+    public static EntityManager buildInitCharacters (Dungeon dungeon) {
+        EntityManager manager = new EntityManager(dungeon);
         logger.trace("New instance of EntityManager");
 
         initializePlayer(manager);

@@ -23,6 +23,10 @@ public class GameConfiguration {
     // vitesse d'exécution du jeu
 	public static final int GAME_SPEED = 1;
 
+    // statistiques du donjon
+    public static final int NUMBER_OF_STAGES = 3;
+    public static final int NUMBER_OF_ROOMS = 7;
+
     // statistiques du joueur : vitesse par défaut, dimensions, et points de vie
     public static final int PLAYER_DEFAULT_SPEED = 10;
     public static final int PLAYER_WIDTH = 20;
