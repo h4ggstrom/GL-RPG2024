@@ -108,7 +108,7 @@ public class MainGUI extends JFrame implements Runnable {
      * Inner-class permettant d'écouter les touches
      */
     private class KeyControls implements KeyListener {
-        
+
         @Override
         public void keyPressed(KeyEvent event){
             char keyChar = event.getKeyChar(); // On récupère le caractère associé à la touche enfoncée
@@ -126,7 +126,7 @@ public class MainGUI extends JFrame implements Runnable {
                     manager.moveCharacter(Player.getInstance(),"right");
                     break;
                 case 'e':
-                    this.toggleInventory();
+                    new InventoryGUI();
                     break;
                 default:
                     break;
