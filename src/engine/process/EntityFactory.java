@@ -3,6 +3,7 @@ package engine.process;
 import engine.Entity;
 import engine.characters.Enemy;
 import engine.dungeon.Position;
+import engine.items.consumables.Health;
 import engine.items.weapons.Sword;
 
 /**
@@ -11,6 +12,7 @@ import engine.items.weapons.Sword;
 public class EntityFactory {
     private static final String ENEMY_LABEL = "enemy";
     private static final String SWORD_LABEL = "sword";
+    private static final String HEALTH_FLASK_LABEL = "health";
 
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
@@ -18,6 +20,8 @@ public class EntityFactory {
                 return new Enemy(position);
             case SWORD_LABEL:
                 return new Sword(position);
+            case HEALTH_FLASK_LABEL:
+                return new Health(position);
             default:
                 throw new IllegalArgumentException("Entité inconnue : " + entityType);
         }

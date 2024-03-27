@@ -11,6 +11,8 @@ import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.items.Item;
+import engine.items.consumables.Consumable;
+import engine.items.consumables.Health;
 import engine.items.weapons.Weapon;
 import engine.Entity;
 import engine.characters.Enemy;
@@ -223,6 +225,9 @@ public class EntityManager {
 
             if(hasBeenCleaned) {
                 this.getRoom().clean();
+                Position healthPosition = new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y);
+                Consumable healthPotion = new Health(healthPosition);
+                this.getRoom().addEntity(healthPotion);
             }
         }
 

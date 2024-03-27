@@ -14,6 +14,7 @@ import engine.dungeon.Room;
 import engine.items.Inventory;
 import engine.items.Item;
 import engine.items.Slot;
+import engine.items.consumables.Health;
 import engine.items.weapons.Sword;
 import engine.items.weapons.Weapon;
 import engine.process.Utility;
@@ -97,6 +98,9 @@ public class PaintStrategy {
         if (item instanceof Sword) {
             itemFilePath = "./src/ressources/sword.png";
         }
+        if (item instanceof Health) {
+            itemFilePath = "src/ressources/health_flask_4.png";
+        }
         graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
 
         // Partie Hitbox (à des fins de débuggage)
@@ -132,6 +136,10 @@ public class PaintStrategy {
             if (item instanceof Sword) {
                 itemFilePath = "./src/ressources/sword.png";
                 name = "Sword";
+            }
+            if (item instanceof Health) {
+                itemFilePath = "src/ressources/health_flask_4.png";
+                name = "Health Flask";
             }
 
             // partie slot et visuel de l'item

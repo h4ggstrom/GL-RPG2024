@@ -9,29 +9,25 @@ import engine.characters.Player;
 import engine.items.Inventory;
 import engine.items.Item;
 import engine.items.Slot;
+import engine.items.consumables.Health;
 import engine.items.weapons.Sword;
 import config.GameConfiguration;
 
 public class InventoryGUI extends JFrame {
 
     private Inventory inventory = Player.getInstance().getInventory();
-    private JButton btnReturn = new JButton("Return");
     private JPanel itemsPanel = new JPanel();
     private JPanel PlayerViewPanel = new JPanel();
     
     public InventoryGUI() {
         initLayout();
-        initActions(); 
         InventoryItems(); 
         ShowPlayer();
     }
 
     private void initLayout(){
-        btnReturn.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JPanel panel1 = new JPanel();
-        panel1.add(new JLabel());
-        panel1.add(btnReturn);
         panel1.add(PlayerViewPanel);
         JPanel panel2 = new JPanel();
         panel2.add(new JLabel("Items"));
@@ -49,9 +45,6 @@ public class InventoryGUI extends JFrame {
 		setVisible(true);
     }
 
-    private void initActions(){
-        btnReturn.addActionListener(new Return());
-    }
 
     private void ShowPlayer(){
         PlayerViewPanel.setLayout(new BorderLayout()); 
@@ -84,16 +77,27 @@ public class InventoryGUI extends JFrame {
                 String itemFilePath = "";
                 if (item instanceof Sword) {
                     itemFilePath = "src/ressources/sword.png";
+                    JLabel nameLabel = new JLabel("sword", JLabel.CENTER);
+                    ImageIcon itemIcon = new ImageIcon(itemFilePath);
+                    JLabel iconLabel = new JLabel(itemIcon, JLabel.CENTER);
+
+                    itemPanel.add(iconLabel, BorderLayout.CENTER);
+                    itemPanel.add(nameLabel, BorderLayout.PAGE_END);
+
+                    itemsPanel.add(itemPanel);
+                }
+                if (item instanceof Health) {
+                    itemFilePath = "src/ressources/health_flask_4.png";
+                    JLabel nameLabel = new JLabel("Health Flask", JLabel.CENTER);
+                    ImageIcon itemIcon = new ImageIcon(itemFilePath);
+                    JLabel iconLabel = new JLabel(itemIcon, JLabel.CENTER);
+
+                    itemPanel.add(iconLabel, BorderLayout.CENTER);
+                    itemPanel.add(nameLabel, BorderLayout.PAGE_END);
+
+                    itemsPanel.add(itemPanel);
                 }
 
-                JLabel nameLabel = new JLabel("sword", JLabel.CENTER);
-                ImageIcon itemIcon = new ImageIcon(itemFilePath);
-                JLabel iconLabel = new JLabel(itemIcon, JLabel.CENTER);
-
-                itemPanel.add(iconLabel, BorderLayout.CENTER);
-                itemPanel.add(nameLabel, BorderLayout.PAGE_END);
-
-                itemsPanel.add(itemPanel);
             }
         }
         itemsPanel.revalidate();
