@@ -44,8 +44,8 @@ public class GameConfiguration {
 
     // points de vie récupérés par le health
     public static final int HEALTH_POINTS = 10;
-    public static final int HEALTH_WIDTH = 30;
-    public static final int HEALTH_HEIGHT = 30;
+    public static final int HEALTH_WIDTH = 12;
+    public static final int HEALTH_HEIGHT = 32;
 
     // dimensions et limites de la salle
     public static final int ROOM_UPPER_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en Y
