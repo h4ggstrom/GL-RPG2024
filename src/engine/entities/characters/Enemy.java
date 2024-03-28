@@ -1,4 +1,4 @@
-package engine.characters;
+package engine.entities.characters;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
@@ -18,7 +18,7 @@ public class Enemy extends GameCharacter {
     
 
     /**
-     * Constructeur par défaut. Crée une nouvelle instance d'Enemy en utilisant le constructeur de {@link engine.characters.GameCharacter}
+     * Constructeur par défaut. Crée une nouvelle instance d'Enemy en utilisant le constructeur de {@link engine.entities.characters.GameCharacter}
      * 
      * @param position la position de départ de l'ennemi
      */

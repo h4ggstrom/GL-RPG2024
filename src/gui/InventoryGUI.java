@@ -17,7 +17,7 @@ public class InventoryGUI extends JFrame {
 
     private Inventory inventory = Player.getInstance().getInventory();
     private JPanel itemsPanel = new JPanel();
-    private JPanel PlayerViewPanel = new JPanel();
+    private JPanel playerViewPanel = new JPanel();
     
     public InventoryGUI() {
         initLayout();
@@ -28,7 +28,7 @@ public class InventoryGUI extends JFrame {
     private void initLayout(){
 
         JPanel panel1 = new JPanel();
-        panel1.add(PlayerViewPanel);
+        panel1.add(playerViewPanel);
         JPanel panel2 = new JPanel();
         panel2.add(new JLabel("Items"));
         panel2.add(itemsPanel, BorderLayout.CENTER);
@@ -47,7 +47,7 @@ public class InventoryGUI extends JFrame {
 
 
     private void ShowPlayer(){
-        PlayerViewPanel.setLayout(new BorderLayout()); 
+        playerViewPanel.setLayout(new BorderLayout()); 
 
         String playerFilePath = "src/ressources/bodyView.png";
         ImageIcon playerIcon = new ImageIcon(playerFilePath);
@@ -55,11 +55,11 @@ public class InventoryGUI extends JFrame {
         JLabel iconLabel = new JLabel(playerIcon, JLabel.CENTER);
 
 
-        PlayerViewPanel.add(iconLabel, BorderLayout.CENTER);
-        PlayerViewPanel.add(nameLabel, BorderLayout.PAGE_END);
+        playerViewPanel.add(iconLabel, BorderLayout.CENTER);
+        playerViewPanel.add(nameLabel, BorderLayout.PAGE_END);
 
-        PlayerViewPanel.revalidate(); 
-        PlayerViewPanel.repaint();
+        playerViewPanel.revalidate(); 
+        playerViewPanel.repaint();
 
     }
 

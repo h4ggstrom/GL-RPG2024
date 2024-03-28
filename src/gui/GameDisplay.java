@@ -56,10 +56,6 @@ public class GameDisplay extends JPanel {
                 paintStrategy.paint((Item)entity, graphics);
             }
         }
-
-        if(Player.getInstance().getInventory().isVisible()) {
-            paintStrategy.paint(Player.getInstance().getInventory(), graphics);
-        }
     }
    
 }

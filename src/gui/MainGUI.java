@@ -142,11 +142,6 @@ public class MainGUI extends JFrame implements Runnable {
         public void keyReleased(KeyEvent event){
             
         }
-
-        // Méthode pour afficher/cacher l'inventaire
-        private void toggleInventory() {
-            Player.getInstance().getInventory().switchVisible();
-        }
     }
 
     /*
