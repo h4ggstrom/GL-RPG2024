@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import engine.Entity;
+import engine.entities.Entity;
 import log.Gamelog;
 
 /**

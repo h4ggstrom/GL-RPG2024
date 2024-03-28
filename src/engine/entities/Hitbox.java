@@ -1,10 +1,10 @@
-package engine.characters;
+package engine.entities;
 
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
-import engine.Entity;
 import engine.dungeon.Position;
+import engine.entities.characters.Enemy;
 import log.Gamelog;
 
 /**

@@ -12,9 +12,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import config.GameConfiguration;
-import engine.characters.Player;
 import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
+import engine.entities.characters.Player;
 import engine.process.EntityManager;
 import engine.process.GameBuilder;
 import log.Gamelog;

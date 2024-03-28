@@ -3,9 +3,9 @@ package engine.process;
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
-import engine.characters.Enemy;
-import engine.characters.Player;
 import engine.dungeon.Position;
+import engine.entities.characters.Enemy;
+import engine.entities.characters.Player;
 import engine.dungeon.Dungeon;
 import log.Gamelog;
 

@@ -9,9 +9,9 @@ import org.junit.Test;
 import engine.process.EntityManager;
 import engine.process.GameBuilder;
 import engine.dungeon.Dungeon;
-import engine.Entity;
-import engine.characters.Enemy;
 import engine.dungeon.Position;
+import engine.entities.Entity;
+import engine.entities.characters.Enemy;
 
 
 public class TestDungeon {

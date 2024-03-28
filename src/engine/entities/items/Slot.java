@@ -1,7 +1,7 @@
-package engine.items;
+package engine.entities.items;
 
-import engine.items.consumables.Consumable;
-import engine.items.weapons.Weapon;
+import engine.entities.items.consumables.Consumable;
+import engine.entities.items.weapons.Weapon;
 
 public class Slot {
     

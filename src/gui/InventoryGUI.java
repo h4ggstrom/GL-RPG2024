@@ -5,12 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import engine.characters.Player;
-import engine.items.Inventory;
-import engine.items.Item;
-import engine.items.Slot;
-import engine.items.consumables.Health;
-import engine.items.weapons.Sword;
+
+import engine.entities.characters.Player;
+import engine.entities.items.Inventory;
+import engine.entities.items.Item;
+import engine.entities.items.Slot;
+import engine.entities.items.consumables.Health;
+import engine.entities.items.weapons.Sword;
 import config.GameConfiguration;
 
 public class InventoryGUI extends JFrame {

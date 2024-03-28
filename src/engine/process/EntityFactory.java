@@ -1,10 +1,10 @@
 package engine.process;
 
-import engine.Entity;
-import engine.characters.Enemy;
 import engine.dungeon.Position;
-import engine.items.consumables.Health;
-import engine.items.weapons.Sword;
+import engine.entities.Entity;
+import engine.entities.characters.Enemy;
+import engine.entities.items.consumables.Health;
+import engine.entities.items.weapons.Sword;
 
 /**
  * Cette classe permet la création d'entités de tout type concret.

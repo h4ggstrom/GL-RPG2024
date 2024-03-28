@@ -6,18 +6,18 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
-import engine.characters.Player;
 import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
-import engine.items.Item;
-import engine.items.consumables.Consumable;
-import engine.items.consumables.Health;
-import engine.items.weapons.Weapon;
-import engine.Entity;
-import engine.characters.Enemy;
-import engine.characters.GameCharacter;
-import engine.characters.Hitbox;
+import engine.entities.Entity;
+import engine.entities.Hitbox;
+import engine.entities.characters.Enemy;
+import engine.entities.characters.GameCharacter;
+import engine.entities.characters.Player;
+import engine.entities.items.Item;
+import engine.entities.items.consumables.Consumable;
+import engine.entities.items.consumables.Health;
+import engine.entities.items.weapons.Weapon;
 import log.Gamelog;
 
 /**

@@ -1,4 +1,4 @@
-package engine.items.consumables;
+package engine.entities.items.consumables;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;

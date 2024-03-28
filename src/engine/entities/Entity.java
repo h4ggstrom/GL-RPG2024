@@ -1,6 +1,5 @@
-package engine;
+package engine.entities;
 
-import engine.characters.Hitbox;
 import engine.dungeon.Position;
 
 public abstract class Entity {

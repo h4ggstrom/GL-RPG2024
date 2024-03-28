@@ -1,4 +1,4 @@
-package engine.characters;
+package engine.entities.characters;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
@@ -20,7 +20,7 @@ public class Player extends GameCharacter {
     private int currentRoom = 0;
   
     /**
-     * Constructeur par défaut. Génère une nouvelle instance de player en utilisant le constructeur de la classe abstraite {@link engine.characters.GameCharacter}
+     * Constructeur par défaut. Génère une nouvelle instance de player en utilisant le constructeur de la classe abstraite {@link engine.entities.characters.GameCharacter}
      * 
      * @param position la position du joueur.
      */

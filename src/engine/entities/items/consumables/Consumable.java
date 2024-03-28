@@ -1,7 +1,7 @@
-package engine.items.consumables;
+package engine.entities.items.consumables;
 
 import engine.dungeon.Position;
-import engine.items.Item;
+import engine.entities.items.Item;
 
 public abstract class Consumable extends Item {
     
