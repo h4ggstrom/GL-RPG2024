@@ -16,7 +16,6 @@ import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
 import engine.entities.items.Item;
 import engine.entities.items.consumables.Consumable;
-import engine.entities.items.consumables.Health;
 import engine.entities.items.weapons.Weapon;
 import log.Gamelog;
 
@@ -226,7 +225,7 @@ public class EntityManager {
             if(hasBeenCleaned) {
                 this.getRoom().clean();
                 Position healthPosition = new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y);
-                Consumable healthPotion = new Health(healthPosition);
+                Consumable healthPotion = (Consumable)EntityFactory.createEntity("healthFlask", healthPosition);
                 this.getRoom().addEntity(healthPotion);
             }
         }

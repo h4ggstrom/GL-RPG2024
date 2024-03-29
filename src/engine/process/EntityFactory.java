@@ -12,7 +12,7 @@ import engine.entities.items.weapons.Sword;
 public class EntityFactory {
     private static final String ENEMY_LABEL = "enemy";
     private static final String SWORD_LABEL = "sword";
-    private static final String HEALTH_FLASK_LABEL = "health";
+    private static final String HEALTH_FLASK_LABEL = "healthFlask";
 
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
