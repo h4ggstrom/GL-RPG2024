@@ -12,7 +12,7 @@ import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
 import engine.entities.items.Item;
-import engine.entities.items.consumables.Health;
+import engine.entities.items.consumables.HealthFlask;
 import engine.entities.items.weapons.Sword;
 import engine.entities.items.weapons.Weapon;
 import engine.process.Utility;
@@ -96,7 +96,7 @@ public class PaintStrategy {
         if (item instanceof Sword) {
             itemFilePath = "./src/ressources/sword.png";
         }
-        if (item instanceof Health) {
+        if (item instanceof HealthFlask) {
             itemFilePath = "src/ressources/health_flask_4.png";
         }
         graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);

@@ -10,7 +10,7 @@ import engine.entities.characters.Player;
 import engine.entities.items.Inventory;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
-import engine.entities.items.consumables.Health;
+import engine.entities.items.consumables.HealthFlask;
 import engine.entities.items.weapons.Sword;
 import config.GameConfiguration;
 
@@ -87,7 +87,7 @@ public class InventoryGUI extends JFrame {
 
                     itemsPanel.add(itemPanel);
                 }
-                if (item instanceof Health) {
+                if (item instanceof HealthFlask) {
                     itemFilePath = "src/ressources/health_flask_4.png";
                     JLabel nameLabel = new JLabel("Health Flask", JLabel.CENTER);
                     ImageIcon itemIcon = new ImageIcon(itemFilePath);

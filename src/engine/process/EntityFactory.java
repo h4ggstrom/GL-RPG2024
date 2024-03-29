@@ -3,7 +3,7 @@ package engine.process;
 import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.characters.Enemy;
-import engine.entities.items.consumables.Health;
+import engine.entities.items.consumables.HealthFlask;
 import engine.entities.items.weapons.Sword;
 
 /**
@@ -21,7 +21,7 @@ public class EntityFactory {
             case SWORD_LABEL:
                 return new Sword(position);
             case HEALTH_FLASK_LABEL:
-                return new Health(position);
+                return new HealthFlask(position);
             default:
                 throw new IllegalArgumentException("Entité inconnue : " + entityType);
         }
