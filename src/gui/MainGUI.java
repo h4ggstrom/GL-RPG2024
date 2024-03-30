@@ -97,10 +97,12 @@ public class MainGUI extends JFrame implements Runnable {
             if(compteur%1000 == 0){
                 manager.attackforEnemy();
              }
-			dashboard.repaint();
+
             if(Player.getInstance().getHealth() <= 0){
                 manager.gameOver();
             }
+
+            dashboard.repaint();
 		}
     }
 

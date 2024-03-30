@@ -21,7 +21,7 @@ public class GameConfiguration {
 	public static final int WINDOW_HEIGHT = 720;
 	
     // vitesse d'exécution du jeu
-	public static final int GAME_SPEED = 1;
+	public static final int GAME_SPEED = 0;
 
     // statistiques du donjon
     public static final int NUMBER_OF_STAGES = 3;
