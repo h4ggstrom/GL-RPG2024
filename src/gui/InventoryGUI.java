@@ -110,12 +110,4 @@ public class InventoryGUI extends JFrame {
             InventoryGUI.this.setVisible(false);
 		}
 	}
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new InventoryGUI().setVisible(true);
-            }
-        });
-    }
 }
