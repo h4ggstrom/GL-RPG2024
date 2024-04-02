@@ -34,7 +34,7 @@ public class PaintStrategy {
             graphics.fillRect(gameoverPosition.getX(), gameoverPosition.getY(), GameConfiguration.GAME_OVER_WIDTH, GameConfiguration.GAME_OVER_HEIGHT);
             graphics.setFont(new Font("Serif", Font.BOLD, GameConfiguration.GAME_OVER_TITLEFONTSIZE));
             graphics.setColor(Color.RED);
-            graphics.drawString("GAME OVER", 480 , 360);
+            graphics.drawString("GAME OVER", 470 , 360);
         }
     }
 

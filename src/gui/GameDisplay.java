@@ -29,12 +29,10 @@ public class GameDisplay extends JPanel {
     private static Logger logger = Gamelog.getLogger();
     
     // définition des attributs
-    private Room room; //la salle dans laquelle évolue le joueur
     private EntityManager manager; // le processus de gestion des actions
     private PaintStrategy paintStrategy = new PaintStrategy();
 
     public GameDisplay (EntityManager manager) {
-        this.room = manager.getRoom();
         this.manager = manager;
         logger.trace("New instance of GameDisplay");
     }
@@ -43,7 +41,7 @@ public class GameDisplay extends JPanel {
     public void paintComponent (Graphics graphics) {
         super.paintComponent(graphics);
 
-        paintStrategy.paint(room, graphics);
+        paintStrategy.paint(manager.getRoom(), graphics);
 
         for (Entity entity : manager.getRoom().getEntities()) {
             if(entity instanceof Enemy) {
