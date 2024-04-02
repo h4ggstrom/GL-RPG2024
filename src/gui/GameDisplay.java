@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
-import engine.dungeon.Room;
 import engine.entities.Entity;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;

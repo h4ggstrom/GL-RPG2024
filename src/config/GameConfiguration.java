@@ -1,7 +1,5 @@
 package config;
 
-import java.awt.Color;
-
 import engine.dungeon.Position;
 
 /**
