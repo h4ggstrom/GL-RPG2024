@@ -33,8 +33,8 @@ public class GameDisplay extends JPanel {
     private EntityManager manager; // le processus de gestion des actions
     private PaintStrategy paintStrategy = new PaintStrategy();
 
-    public GameDisplay (Room room, EntityManager manager) {
-        this.room = room;
+    public GameDisplay (EntityManager manager) {
+        this.room = manager.getRoom();
         this.manager = manager;
         logger.trace("New instance of GameDisplay");
     }

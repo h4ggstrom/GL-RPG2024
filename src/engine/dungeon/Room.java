@@ -25,10 +25,13 @@ public class Room {
     private Boolean cleaned = false; // booléen pour savoir si la salle a été nettoyée de toute entité hostile
     private Boolean exited = false; // booléen  pour savoir si le joueur a quitté
 
+    private int number;
+
     private ArrayList<Entity> entities = new ArrayList<Entity>();
     private String fileName = "room";
 
-    public Room () {
+    public Room (int number) {
+        this.number = number;
         logger.trace("New instance of Room");
     }
 
@@ -89,5 +92,9 @@ public class Room {
 
     public Boolean getExited() {
         return exited;
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

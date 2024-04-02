@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
 import engine.characters.Player;
+import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.items.Item;
@@ -31,17 +32,15 @@ public class EntityManager {
 
     // définition des attributs
     private static Logger logger = Gamelog.getLogger();
-    private Player player; // le contrôle
-    private Room room; // la salle dans laquelle évolue le joueur
-
+    private Player player = Player.getInstance(); // le joueur
+    private Dungeon dungeon; // la salle dans laquelle évolue le joueur
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de CharacterManager.
-     *
      * @param room la salle dans laquelle évoluera le joueur
      */
-    public EntityManager (Room room) {
-        this.room = room;
+    public EntityManager (Dungeon dungeon) {
+        this.dungeon = dungeon;
     }
 
     public static Logger getLogger() {
@@ -56,8 +55,16 @@ public class EntityManager {
         return this.player;
     }
 
+    public Dungeon getDungeon() {
+        return this.dungeon;
+    }
+
+    /**
+     * Méthode permettant de retourner l'instance de la Room ou le joueur se trouve
+     * @return room instance de la Room ou le joueur se trouve
+     */
     public Room getRoom() {
-        return this.room;
+        return this.dungeon.getStages().get(player.getCurrentStage()).getRooms().get(player.getCurrentRoom());
     }
 
     /**
@@ -106,7 +113,7 @@ public class EntityManager {
         if ( ! checkRoomBounds(finaleHitbox) ) {
             logger.trace("La position finale du " + entityType + "n'est pas dans les limites de la Room");
             // Si la Room n'est pas nettoyée
-            if(!room.getCleaned()){
+            if(!this.getRoom().getCleaned()){
                 canBeMoved = false; // Il ne peut pas être déplacé
             }
             // Si la Room est nettoyée, la porte à droite est ouverte
@@ -126,10 +133,10 @@ public class EntityManager {
 
         if(canBeMoved) {
             logger.trace("On vérifie la collision avec les Hitbox des entités de la Room");
-            room.removeEntity(character); // on retire l'Entité de la Room pour ne pas vérifier la collision avec sa propre hitbox
+            this.getRoom().removeEntity(character); // on retire l'Entité de la Room pour ne pas vérifier la collision avec sa propre hitbox
             canBeMoved = verifHitboxes(finaleHitbox);
             logger.trace("Verification de canBeMoved après la verification des hitboxs : " + canBeMoved);
-            room.addEntity(character); // on replace l'entité dans le Room
+            this.getRoom().addEntity(character); // on replace l'entité dans le Room
         }
 
 
@@ -140,7 +147,7 @@ public class EntityManager {
         }
 
         if (character.getHitbox().getCenter().getX() > GameConfiguration.WINDOW_WIDTH) {
-            room.exit();
+            this.getRoom().exit();
         }
     }
 
@@ -160,7 +167,7 @@ public class EntityManager {
 
         // Si le click visait une Entity, on la récupère
         Entity selectedEntity = null;
-        for(Entity entity : this.room.getEntities()) {
+        for(Entity entity : this.getRoom().getEntities()) {
             Hitbox selectedHitbox = entity.getHitbox();
             if(selectedHitbox.isContaining(click)) {
                 selectedEntity = entity;
@@ -201,21 +208,21 @@ public class EntityManager {
                 // on lui associe la position de mort de l'ennemi
                 enemyWeapon.setPosition(eliminatedEnemy.getPosition());
                 // on ajoute l'arme à la liste d'entités de la Room
-                room.addEntity(enemyWeapon);
+                this.getRoom().addEntity(enemyWeapon);
                 // on retire l'Enemy de la liste d'entités de la Room
-                room.removeEntity(selectedEnemy);
+                this.getRoom().removeEntity(selectedEnemy);
             }
 
             // On vérifie finalement si il ne reste plus aucun ennemis
             Boolean hasBeenCleaned = true;
-            for(Entity entity : room.getEntities()) {
+            for(Entity entity : this.getRoom().getEntities()) {
                 if (entity instanceof Enemy) {
                     hasBeenCleaned = false;
                 }
             }
 
             if(hasBeenCleaned) {
-                room.clean();
+                this.getRoom().clean();
             }
         }
 
@@ -230,7 +237,7 @@ public class EntityManager {
                 // Le joueur ramasse l'Item et l'ajoute à son inventaire
                 logger.trace("item fetched");
                 player.getInventory().addItem(selectedItem); // ajout à l'inventaire
-                room.removeEntity(selectedItem); // on retire l'item de la room
+                this.getRoom().removeEntity(selectedItem); // on retire l'item de la room
             }
         }
     }
@@ -250,7 +257,7 @@ public class EntityManager {
      * set the next room by cleaning the current one and generating a new one
      */
     public void nextRoom() {
-        room.empty();
+        player.moveToNextRoom();
         player.setPosition(new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y));
         GameBuilder.initializeEnemies(this);
     }
@@ -258,7 +265,7 @@ public class EntityManager {
     public boolean verifHitboxes(Hitbox finaleHitbox) {
         boolean verif = true;
         // On parcourt toutes les Hitbox d'Entity de la Room
-        for (Entity entity : room.getEntities()) {
+        for (Entity entity : this.getRoom().getEntities()) {
             Hitbox hitbox = entity.getHitbox();
             logger.trace("Les deux hitboxs à inspecter : " + hitbox + " et " + finaleHitbox);
             if ( hitbox.isInCollision(finaleHitbox) ) { // Si la Hitbox finale est en collision avec une des Hitbox de la salle
@@ -275,7 +282,7 @@ public class EntityManager {
     public void moveEnemies() {
         ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
         // Pour chaque entité présente dans la salle
-        for (Entity entity : room.getEntities()) {
+        for (Entity entity : this.getRoom().getEntities()) {
             if (entity instanceof Enemy) {
                 Enemy enemy = (Enemy) entity;
                 enemiesFetched.add(enemy);
@@ -315,7 +322,7 @@ public class EntityManager {
     public void attackforEnemy(){
         ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
         // Pour chaque entité présente dans la salle
-        for (Entity entity : room.getEntities()) {
+        for (Entity entity : this.getRoom().getEntities()) {
             if (entity instanceof Enemy) {
                 Enemy enemy = (Enemy) entity;
                 enemiesFetched.add(enemy);
@@ -333,7 +340,7 @@ public class EntityManager {
     }
 
     public void gameOver(){
-        room.empty();
-        room.removeEntity(player);
+        this.getRoom().empty();
+        this.getRoom().removeEntity(player);
     }
 }

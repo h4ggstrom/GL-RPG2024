@@ -13,8 +13,8 @@ import java.awt.event.MouseListener;
 
 import config.GameConfiguration;
 import engine.characters.Player;
+import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
-import engine.dungeon.Room;
 import engine.process.EntityManager;
 import engine.process.GameBuilder;
 import log.Gamelog;
@@ -36,7 +36,7 @@ public class MainGUI extends JFrame implements Runnable {
 
     private final static Dimension preferredSize = new Dimension(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT); // définit la taille de la fenêtre
 
-    private Room room; // la salle dans laquelle évolue le joueur
+    private Dungeon dungeon; // le donjon dans lequel le joueur évolue
 
     private GameDisplay dashboard; // ATH à intégrer dans la fenêtre
 
@@ -59,9 +59,9 @@ public class MainGUI extends JFrame implements Runnable {
         MouseControls mouseControls = new MouseControls();
         addMouseListener(mouseControls);
 
-        room = GameBuilder.buildRoom();
-        manager = GameBuilder.buildInitCharacters(room);
-        dashboard = new GameDisplay(room, manager);
+        dungeon = GameBuilder.buildDungeon();
+        manager = GameBuilder.buildInitCharacters(dungeon);
+        dashboard = new GameDisplay(manager);
 
         dashboard.setPreferredSize(preferredSize);
         contentPane.add(dashboard, BorderLayout.CENTER);
@@ -86,7 +86,7 @@ public class MainGUI extends JFrame implements Runnable {
 
             compteur++;
 
-            if(room.getExited()) {
+            if(manager.getRoom().getExited()) {
                 manager.nextRoom();
             }
             
