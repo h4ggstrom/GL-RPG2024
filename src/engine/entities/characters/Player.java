@@ -16,8 +16,8 @@ import engine.dungeon.Position;
 public class Player extends GameCharacter {
 
     private static Player player;
-    private int currentStage = 0;
-    private int currentRoom = 0;
+    private int currentStage = 1;
+    private int currentRoom = 1;
   
     /**
      * Constructeur par défaut. Génère une nouvelle instance de player en utilisant le constructeur de la classe abstraite {@link engine.entities.characters.GameCharacter}
