@@ -6,11 +6,11 @@ import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
-import engine.Entity;
-import engine.characters.Enemy;
-import engine.characters.Player;
 import engine.dungeon.Room;
-import engine.items.Item;
+import engine.entities.Entity;
+import engine.entities.characters.Enemy;
+import engine.entities.characters.Player;
+import engine.entities.items.Item;
 import engine.process.EntityManager;
 import log.Gamelog;
 
@@ -55,10 +55,6 @@ public class GameDisplay extends JPanel {
             else if (entity instanceof Item) {
                 paintStrategy.paint((Item)entity, graphics);
             }
-        }
-
-        if(Player.getInstance().getInventory().isVisible()) {
-            paintStrategy.paint(Player.getInstance().getInventory(), graphics);
         }
     }
    

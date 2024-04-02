@@ -1,7 +1,7 @@
-package engine.items.weapons;
+package engine.entities.items.weapons;
 
 import engine.dungeon.Position;
-import engine.items.Item;
+import engine.entities.items.Item;
 
 public abstract class Weapon extends Item {
     

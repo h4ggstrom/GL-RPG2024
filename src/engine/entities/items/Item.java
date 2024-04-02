@@ -1,7 +1,7 @@
-package engine.items;
+package engine.entities.items;
 
-import engine.Entity;
 import engine.dungeon.Position;
+import engine.entities.Entity;
 
 public abstract class Item extends Entity {
     

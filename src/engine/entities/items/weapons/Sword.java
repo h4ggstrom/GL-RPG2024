@@ -1,4 +1,4 @@
-package engine.items.weapons;
+package engine.entities.items.weapons;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;

@@ -1,6 +1,7 @@
-package engine.items;
+package engine.entities.items;
 
-import engine.items.weapons.Weapon;
+import engine.entities.items.consumables.Consumable;
+import engine.entities.items.weapons.Weapon;
 
 public class Slot {
     
@@ -14,6 +15,9 @@ public class Slot {
         return (Weapon)item;
     }
 
+    public Consumable getConsumable(){
+        return  (Consumable)item;
+    }
     public Item getItem() {
         return item;
     }

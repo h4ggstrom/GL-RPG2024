@@ -92,12 +92,4 @@ public class MainMenuGUI extends JFrame {
 		public void actionPerformed(ActionEvent e){
 		}
 	}
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new MainMenuGUI().setVisible(true);
-            }
-        });
-    }
 }

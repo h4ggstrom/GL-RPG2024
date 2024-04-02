@@ -1,10 +1,10 @@
-package engine.characters;
+package engine.entities;
 
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
-import engine.Entity;
 import engine.dungeon.Position;
+import engine.entities.characters.Enemy;
 import log.Gamelog;
 
 /**
@@ -61,6 +61,9 @@ public class Hitbox {
                 width = GameConfiguration.SWORD_WIDTH;
                 height = GameConfiguration.SWORD_HEIGHT;
                 break;
+            case"health" : 
+                width = GameConfiguration.HEALTH_WIDTH;
+                height = GameConfiguration.HEALTH_HEIGHT;
             case "default" :
                 logger.warn(entityType + " is not a recognized type of entity");
                 break;

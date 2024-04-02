@@ -1,10 +1,10 @@
-package engine.characters;
+package engine.entities.characters;
 
-import engine.Entity;
 import engine.dungeon.Position;
-import engine.items.Inventory;
-import engine.items.Slot;
-import engine.items.weapons.Sword;
+import engine.entities.Entity;
+import engine.entities.items.Inventory;
+import engine.entities.items.Slot;
+import engine.entities.items.weapons.Sword;
 import engine.process.EntityFactory;
 
 /**

@@ -12,9 +12,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import config.GameConfiguration;
-import engine.characters.Player;
 import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
+import engine.entities.characters.Player;
 import engine.process.EntityManager;
 import engine.process.GameBuilder;
 import log.Gamelog;
@@ -97,10 +97,12 @@ public class MainGUI extends JFrame implements Runnable {
             if(compteur%1000 == 0){
                 manager.attackforEnemy();
              }
-			dashboard.repaint();
+
             if(Player.getInstance().getHealth() <= 0){
                 manager.gameOver();
             }
+
+            dashboard.repaint();
 		}
     }
 
@@ -108,7 +110,7 @@ public class MainGUI extends JFrame implements Runnable {
      * Inner-class permettant d'écouter les touches
      */
     private class KeyControls implements KeyListener {
-        
+
         @Override
         public void keyPressed(KeyEvent event){
             char keyChar = event.getKeyChar(); // On récupère le caractère associé à la touche enfoncée
@@ -126,7 +128,7 @@ public class MainGUI extends JFrame implements Runnable {
                     manager.moveCharacter(Player.getInstance(),"right");
                     break;
                 case 'e':
-                    this.toggleInventory();
+                    new InventoryGUI();
                     break;
                 default:
                     break;
@@ -141,11 +143,6 @@ public class MainGUI extends JFrame implements Runnable {
         @Override
         public void keyReleased(KeyEvent event){
             
-        }
-
-        // Méthode pour afficher/cacher l'inventaire
-        private void toggleInventory() {
-            Player.getInstance().getInventory().switchVisible();
         }
     }
 

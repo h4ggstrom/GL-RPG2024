@@ -5,17 +5,16 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import config.GameConfiguration;
-import engine.characters.Enemy;
-import engine.characters.GameCharacter;
-import engine.characters.Hitbox;
-import engine.characters.Player;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
-import engine.items.Inventory;
-import engine.items.Item;
-import engine.items.Slot;
-import engine.items.weapons.Sword;
-import engine.items.weapons.Weapon;
+import engine.entities.Hitbox;
+import engine.entities.characters.Enemy;
+import engine.entities.characters.GameCharacter;
+import engine.entities.characters.Player;
+import engine.entities.items.Item;
+import engine.entities.items.consumables.HealthFlask;
+import engine.entities.items.weapons.Sword;
+import engine.entities.items.weapons.Weapon;
 import engine.process.Utility;
 
 /*
@@ -97,6 +96,9 @@ public class PaintStrategy {
         if (item instanceof Sword) {
             itemFilePath = "./src/ressources/sword.png";
         }
+        if (item instanceof HealthFlask) {
+            itemFilePath = "src/ressources/health_flask_4.png";
+        }
         graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
 
         // Partie Hitbox (à des fins de débuggage)
@@ -112,58 +114,5 @@ public class PaintStrategy {
         graphics.fillRect(ct.getX(), ct.getY(),1, 1);
         graphics.fillRect(bl.getX(), bl.getY(),1, 1);
         graphics.fillRect(br.getX(), br.getY(),1, 1);
-    }
-
-    public void paint(Inventory inventory, Graphics graphics) {
-
-        Position inventoryPosition = GameConfiguration.INVENTORY_POSITION;
-        graphics.setColor(GameConfiguration.INVENTORY_COLOR);
-        graphics.fillRect(inventoryPosition.getX(), inventoryPosition.getY(), GameConfiguration.INVENTORY_WIDTH, GameConfiguration.INVENTORY_HEIGHT);
-        graphics.setFont(new Font("Dialog", Font.PLAIN, GameConfiguration.INVENTORY_TITLEFONTSIZE));
-        graphics.setColor(Color.BLACK);
-        graphics.drawString("INVENTORY", GameConfiguration.INVENTORY_TITLE_POSITION.getX() , GameConfiguration.INVENTORY_TITLE_POSITION.getY());
-        
-        String itemFilePath = "";
-        String name = "";
-        int slotX = inventoryPosition.getX() + 20;
-        int slotY = inventoryPosition.getY() + GameConfiguration.INVENTORY_WIDTH/4;
-        for(Slot slot : inventory.getSlots()) {
-            Item item = slot.getItem();
-            if (item instanceof Sword) {
-                itemFilePath = "./src/ressources/sword.png";
-                name = "Sword";
-            }
-
-            // partie slot et visuel de l'item
-            graphics.setColor(Color.WHITE);
-            graphics.fillRect(slotX, slotY, GameConfiguration.SLOT_DIMENSION, GameConfiguration.SLOT_DIMENSION);
-            graphics.drawImage(Utility.readImage(itemFilePath), slotX, slotY, null);
-
-            // partie nom de l'item
-            graphics.setColor(Color.BLACK);
-            graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
-            graphics.drawString(name, slotX + GameConfiguration.ITEM_NAMETAG_XSHIFT, slotY + GameConfiguration.ITEM_NAMETAG_YSHIFT);
-
-            slotX += GameConfiguration.SLOT_DIMENSION + 20;
-        }
-
-        // partie corps du joueur et équipement
-        graphics.drawImage(Utility.readImage("./src/ressources/bodyView.png"), 640, slotY, null);
-        if(Player.getInstance().getWeaponSlot().getItem() != null) {
-            Weapon weapon = (Weapon)Player.getInstance().getWeaponSlot().getItem();
-            if (weapon instanceof Sword) {
-                itemFilePath = "./src/ressources/sword.png";
-                name = "Sword";
-            }
-            // partie slot et visuel de l'item
-            graphics.setColor(Color.WHITE);
-            graphics.fillRect(740, slotY + 50, GameConfiguration.SLOT_DIMENSION, GameConfiguration.SLOT_DIMENSION);
-            graphics.drawImage(Utility.readImage(itemFilePath), 740, slotY + 50, null);
-
-            // partie nom de l'item
-            graphics.setColor(Color.BLACK);
-            graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
-            graphics.drawString(name, 740 + GameConfiguration.ITEM_NAMETAG_XSHIFT, slotY + GameConfiguration.ITEM_NAMETAG_YSHIFT + 50);
-        }
     }
 }

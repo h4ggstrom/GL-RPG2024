@@ -21,7 +21,7 @@ public class GameConfiguration {
 	public static final int WINDOW_HEIGHT = 720;
 	
     // vitesse d'exécution du jeu
-	public static final int GAME_SPEED = 1;
+	public static final int GAME_SPEED = 0;
 
     // statistiques du donjon
     public static final int NUMBER_OF_STAGES = 3;
@@ -41,6 +41,11 @@ public class GameConfiguration {
     public static final int SWORD_RANGE = 100;
     public static final int SWORD_WIDTH = 30;
     public static final int SWORD_HEIGHT = 30;
+
+    // points de vie récupérés par le health
+    public static final int HEALTH_POINTS = 10;
+    public static final int HEALTH_WIDTH = 12;
+    public static final int HEALTH_HEIGHT = 32;
 
     // dimensions et limites de la salle
     public static final int ROOM_UPPER_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en Y
