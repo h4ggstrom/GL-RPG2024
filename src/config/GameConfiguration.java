@@ -21,7 +21,7 @@ public class GameConfiguration {
 	public static final int WINDOW_HEIGHT = 720;
 	
     // vitesse d'exécution du jeu
-	public static final int GAME_SPEED = 0;
+	public static final int GAME_SPEED = 1;
 
     // statistiques du donjon
     public static final int NUMBER_OF_STAGES = 3;
@@ -78,14 +78,7 @@ public class GameConfiguration {
     // partie inventaire
     public static final int INVENTORY_HEIGHT = WINDOW_HEIGHT/2;
     public static final int INVENTORY_WIDTH = WINDOW_WIDTH/2;
-    public static final Position INVENTORY_POSITION = new Position((WINDOW_WIDTH/2) - (INVENTORY_WIDTH/2),(WINDOW_HEIGHT/2) - (INVENTORY_HEIGHT/2)) ;
-    public static final Color INVENTORY_COLOR = Color.getHSBColor(181, 10, 68);
-    public static final int INVENTORY_TITLEFONTSIZE = 32;
-    public static final Position INVENTORY_TITLE_POSITION = new Position(INVENTORY_POSITION.getX() + INVENTORY_WIDTH/3, INVENTORY_POSITION.getY() + INVENTORY_HEIGHT/7);
     public static final int INVENTORY_MAX = 7;
-    public static final int ITEM_NAMETAG_XSHIFT = 0;
-    public static final int ITEM_NAMETAG_YSHIFT = -5;
-    public static final int SLOT_DIMENSION = 30;
 
     //Fin du jeu
     public static final int GAME_OVER_HEIGHT = WINDOW_HEIGHT/2;
