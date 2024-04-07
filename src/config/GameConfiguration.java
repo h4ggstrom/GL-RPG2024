@@ -26,10 +26,12 @@ public class GameConfiguration {
     public static final int NUMBER_OF_ROOMS = 7;
 
     // statistiques du joueur : vitesse par défaut, dimensions, et points de vie
-    public static final int PLAYER_DEFAULT_SPEED = 10;
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 40;
-    public static final int PLAYER_HEALTH = 50;
+    public static final int PLAYER_DEFAULT_HEALTH = 50;
+    public static final int PLAYER_DEFAULT_ARMOR = 20;
+    public static final int PLAYER_DEFAULT_ATTACKSPEED = 10;
+    public static final int PLAYER_DEFAULT_MOVESPEED = 10;
     public static final int PLAYER_LIFEBAR_XSHIFT = -15;
     public static final int PLAYER_ENTITY_INTERACTION_RANGE = 50;
     
@@ -57,11 +59,13 @@ public class GameConfiguration {
     public static final Position GATE_DOWN = new Position(1028, 448); // Le pixel bas de la porte de sortie
 
     // nombre d'ennemis par défaut, dimensions, et points de vie
-    public static final int ENEMY_DEFAULT_SPEED = 5;
     public static final int ENEMIES_INIT_NUMBER = 2;
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
-    public static final int ENEMY_HEALTH = 30;
+    public static final int ENEMY_DEFAULT_HEALTH = 30;
+    public static final int ENEMY_DEFAULT_ARMOR = 10;
+    public static final int ENEMY_DEFAULT_ATTACKSPEED = 5;
+    public static final int ENEMY_DEFAULT_MOVESPEED = 5;
     public static final int ENEMY_LIFEBAR_XSHIFT = -5;
     public static final int ENEMY_NOSPAWNAREA = 100;
 

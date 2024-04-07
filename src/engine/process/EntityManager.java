@@ -77,17 +77,15 @@ public class EntityManager {
         Position startPosition = character.getHitbox().getCenter();
         Position endPosition;
         Boolean canBeMoved = true;
-        String entityType = "";
+        String entityType = character.getEntityType();
         int speed = 0;
         if (character instanceof Player) {
             logger.trace("L'entité sélectionnée pour être déplacée est le joueur.");
-            speed = GameConfiguration.PLAYER_DEFAULT_SPEED;
-            entityType = "player";
+            speed = GameConfiguration.PLAYER_DEFAULT_MOVESPEED;
         }
         else if (character instanceof Enemy) {
             logger.trace("L'entité sélectionnée pour être déplacée est un ennemi.");
-            speed = GameConfiguration.ENEMY_DEFAULT_SPEED;
-            entityType = "enemy";
+            speed = GameConfiguration.ENEMY_DEFAULT_MOVESPEED;
         }
         // Switch case pour calculer la nouvelle position
         switch (direction) {

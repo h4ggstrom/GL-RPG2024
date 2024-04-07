@@ -12,7 +12,8 @@ import engine.entities.items.Slot;
 
 public class InventoryGUI extends JFrame {
 
-    private Inventory inventory = Player.getInstance().getInventory();
+    private Player player = Player.getInstance();
+    private Inventory inventory = player.getInventory();
     private JPanel inventoryPanel = new JPanel();
     private JPanel playerViewPanel = new JPanel();
     private JPanel playerStatisticsPanel = new JPanel();
@@ -75,7 +76,27 @@ public class InventoryGUI extends JFrame {
     }
 
     public void initPlayerStatisticsPanel() {
+        // Une colonne et une ligne par statistique
+        playerStatisticsPanel.setLayout(new GridLayout(4, 1));
+        JTextField healthTextField = new JTextField();
+        JTextField armorTextField = new JTextField();
+        JTextField attackSpeedTextField = new JTextField();
+        JTextField moveSpeedTextField = new JTextField();
 
+        healthTextField.setEditable(false);
+        armorTextField.setEditable(false);
+        attackSpeedTextField.setEditable(false);
+        moveSpeedTextField.setEditable(false);
+
+        healthTextField.setText("Nombre de points de vie actuels : " + player.getHealth());
+        armorTextField.setText("Nombre de points d'armure : " + player.getArmor());
+        attackSpeedTextField.setText("Vitesse d'attaque : " + player.getAttackSpeed());
+        moveSpeedTextField.setText("Vitesse de déplacement : " + player.getMoveSpeed());
+
+        playerStatisticsPanel.add(healthTextField);
+        playerStatisticsPanel.add(armorTextField);
+        playerStatisticsPanel.add(attackSpeedTextField);
+        playerStatisticsPanel.add(moveSpeedTextField);
     }
 
     class Return implements ActionListener {

@@ -21,6 +21,9 @@ public abstract class GameCharacter extends Entity {
 
     // définition des attributs
     private int health;
+    private int armor;
+    private int attackSpeed;
+    private int moveSpeed;
     private Inventory inventory;
     // On instancie directement l'épée dans le weaponSlot des personnages, la position de l'entité est null pour l'instant
     private Slot weaponSlot = new Slot((Sword)EntityFactory.createEntity("sword", null));
@@ -32,9 +35,12 @@ public abstract class GameCharacter extends Entity {
      * @param entityType le type de personnage
      * @param health le nombre de PV du personnage
      */
-    public GameCharacter (Position position, String entityType, int health) {
+    public GameCharacter (Position position, String entityType, int health, int armor, int attackSpeed, int moveSpeed) {
         super(position, entityType);
         this.health = health;
+        this.armor = armor;
+        this.attackSpeed = attackSpeed;
+        this.moveSpeed = moveSpeed;
         this.inventory = new Inventory();
     }
 
@@ -44,6 +50,30 @@ public abstract class GameCharacter extends Entity {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
+
+    public int getAttackSpeed() {
+        return attackSpeed;
+    }
+
+    public void setAttackSpeed(int attackSpeed) {
+        this.attackSpeed = attackSpeed;
+    }
+
+    public int getMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public void setMoveSpeed(int moveSpeed) {
+        this.moveSpeed = moveSpeed;
     }
 
     public Inventory getInventory() {

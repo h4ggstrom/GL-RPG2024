@@ -25,7 +25,7 @@ public class Player extends GameCharacter {
      * @param position la position du joueur.
      */
     private Player(Position position) {
-        super(position, "player", GameConfiguration.PLAYER_HEALTH);
+        super(position, "player", GameConfiguration.PLAYER_DEFAULT_HEALTH, GameConfiguration.PLAYER_DEFAULT_ARMOR, GameConfiguration.PLAYER_DEFAULT_ATTACKSPEED, GameConfiguration.PLAYER_DEFAULT_MOVESPEED);
     }
 
     public static Player getInstance() {
