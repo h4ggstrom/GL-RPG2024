@@ -128,7 +128,7 @@ public class MainGUI extends JFrame implements Runnable {
                     manager.moveCharacter(Player.getInstance(),"right");
                     break;
                 case 'e':
-                    new InventoryGUI();
+                    new InventoryGUI(manager);
                     break;
                 default:
                     break;

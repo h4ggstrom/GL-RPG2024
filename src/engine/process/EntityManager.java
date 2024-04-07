@@ -15,6 +15,7 @@ import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
 import engine.entities.items.Item;
+import engine.entities.items.Slot;
 import engine.entities.items.consumables.Consumable;
 import engine.entities.items.weapons.Weapon;
 import log.Gamelog;
@@ -222,7 +223,7 @@ public class EntityManager {
 
             if(hasBeenCleaned) {
                 this.getRoom().clean();
-                Position healthPosition = new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y);
+                Position healthPosition = new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.HEALTHFLASK_HEIGHT/2);
                 Consumable healthPotion = (Consumable)EntityFactory.createEntity("healthFlask", healthPosition);
                 this.getRoom().addEntity(healthPotion);
             }
@@ -343,5 +344,19 @@ public class EntityManager {
 
     public void gameOver(){
         this.getRoom().empty();
+    }
+
+    public void inventorySlotUsed(int slotNumber) {
+        Slot slot = player.getInventory().getSlots().get(slotNumber);
+        Item item = slot.getItem();
+        if(item instanceof Consumable) {
+            Consumable consumable = (Consumable)item;
+            player.setHealth(player.getHealth() + consumable.getConsumableValue());
+            if(consumable.getConsumableEffect() == "heal") {
+                player.setHealth(player.getHealth() + consumable.getConsumableValue());
+            }
+        }
+        // On supprime l'item du slot et donc de l'inventaire
+        slot.setItem(null);
     }
 }

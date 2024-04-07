@@ -5,24 +5,24 @@ import engine.entities.items.Item;
 
 public abstract class Consumable extends Item {
     
-    int uses;
+    int value;
     String effect;
     
-    public Consumable(int uses, String effect, String consumableType, Position position) {
+    public Consumable(int value, String effect, String consumableType, Position position) {
         super(position, consumableType);
-        this.uses = uses;
+        this.value = value;
         this.effect = effect;
     }
 
-    public int getConsumableUses() {
-        return uses;
+    public int getConsumableValue() {
+        return value;
     }
 
-    public void setConsumableUse(int uses) {
-        this.uses = uses;
+    public void setConsumableValue(int value) {
+        this.value = value;
     }
 
-    public String getConsumableEffet(){
+    public String getConsumableEffect(){
         return effect;
     }
 

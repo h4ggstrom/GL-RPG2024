@@ -43,7 +43,7 @@ public class GameConfiguration {
     public static final int SWORD_HEIGHT = 30;
 
     // points de vie récupérés par le heal
-    public static final int HEAL_POINTS = 10;
+    public static final int HEALTHFLASK_HEALPOINTS = 10;
     public static final int HEALTHFLASK_WIDTH = 12;
     public static final int HEALTHFLASK_HEIGHT = 32;
 
