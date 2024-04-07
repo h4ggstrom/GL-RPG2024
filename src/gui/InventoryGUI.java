@@ -52,13 +52,15 @@ public class InventoryGUI extends JFrame {
             itemPanel.setBackground(Color.WHITE);
             itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-            String itemFilePath = "src/ressources/" +  item.getEntityType() + ".png";
-            JLabel nameLabel = new JLabel(item.getEntityType(), JLabel.CENTER);
-            ImageIcon itemIcon = new ImageIcon(itemFilePath);
-            JLabel itemIconLabel = new JLabel(itemIcon, JLabel.CENTER);
+            if(item != null) {
+                String itemFilePath = "src/ressources/" +  item.getEntityType() + ".png";
+                JLabel nameLabel = new JLabel(item.getEntityType(), JLabel.CENTER);
+                ImageIcon itemIcon = new ImageIcon(itemFilePath);
+                JLabel itemIconLabel = new JLabel(itemIcon, JLabel.CENTER);
 
-            itemPanel.add(itemIconLabel, BorderLayout.CENTER);
-            itemPanel.add(nameLabel, BorderLayout.PAGE_START);
+                itemPanel.add(itemIconLabel, BorderLayout.CENTER);
+                itemPanel.add(nameLabel, BorderLayout.PAGE_START);
+            }
 
             JButton useButton = new JButton("Use");
             itemPanel.add(useButton, BorderLayout.PAGE_END);

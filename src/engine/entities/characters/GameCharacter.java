@@ -26,7 +26,7 @@ public abstract class GameCharacter extends Entity {
     private int moveSpeed;
     private Inventory inventory;
     // On instancie directement l'épée dans le weaponSlot des personnages, la position de l'entité est null pour l'instant
-    private Slot weaponSlot = new Slot((Sword)EntityFactory.createEntity("sword", null));
+    private Slot weaponSlot = new Slot();
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de personnage (gameCharacter) contenant sa position, sa hitbox, et ses PV
@@ -41,6 +41,7 @@ public abstract class GameCharacter extends Entity {
         this.armor = armor;
         this.attackSpeed = attackSpeed;
         this.moveSpeed = moveSpeed;
+        weaponSlot.setItem((Sword)EntityFactory.createEntity("sword", null));
         this.inventory = new Inventory();
     }
 

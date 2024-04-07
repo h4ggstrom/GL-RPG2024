@@ -7,8 +7,11 @@ public class Slot {
     
     private Item item;
 
-    public Slot(Item item) {
-        this.item = item;
+    /**
+     * Ce constructeur instancie un Slot vide
+     */
+    public Slot() {
+        this.item = null;
     }
 
     public Weapon getWeapon () {
@@ -18,6 +21,7 @@ public class Slot {
     public Consumable getConsumable(){
         return  (Consumable)item;
     }
+    
     public Item getItem() {
         return item;
     }
