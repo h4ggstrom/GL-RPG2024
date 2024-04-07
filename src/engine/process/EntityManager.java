@@ -345,6 +345,5 @@ public class EntityManager {
 
     public void gameOver(){
         this.getRoom().empty();
-        this.getRoom().removeEntity(player);
     }
 }

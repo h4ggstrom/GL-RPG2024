@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -42,7 +43,10 @@ public class GameDisplay extends JPanel {
 
         paintStrategy.paint(manager.getRoom(), graphics);
 
-        for (Entity entity : manager.getRoom().getEntities()) {
+        // Permet d'empêcher l'Exception : ConcurrentModificationException
+        ArrayList<Entity> entitiesToDraw = manager.getRoom().getEntitiesToDraw();
+
+        for (Entity entity : entitiesToDraw) {
             if(entity instanceof Enemy) {
                 paintStrategy.paint((Enemy)entity, graphics);
             }

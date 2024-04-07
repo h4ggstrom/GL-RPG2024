@@ -27,6 +27,7 @@ public class Room {
 
     private int number;
 
+    // Liste des entités présentes dans la salle
     private ArrayList<Entity> entities = new ArrayList<Entity>();
     private String fileName = "room";
 
@@ -96,5 +97,13 @@ public class Room {
 
     public int getNumber() {
         return number;
+    }
+
+    /**
+     * Méthode permettant de créer une liste d'entitées destinées à être dessinées dans le GUI, évitant ainsi l'Exception : ConcurrentModificationException
+     * @return Une nouvelle liste avec les entitées de la Room, destinée au dessin dans le GUI
+     */
+    public ArrayList<Entity> getEntitiesToDraw() {
+        return new ArrayList<>(entities);
     }
 }

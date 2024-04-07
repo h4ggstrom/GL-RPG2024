@@ -70,7 +70,7 @@ public class GameBuilder {
      * @see engine.process.EntityManager pour les détails du processus de gestion des ennemis
      */
     public static void initializeEnemies(EntityManager manager) {
-        for (int i = 0; i < GameConfiguration.ENEMIES_INIT_NUMBER; i++) {
+        for (int i = 0; i < (manager.getPlayer().getCurrentStage() * manager.getPlayer().getCurrentRoom()); i++) {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION + GameConfiguration.ENEMY_WIDTH/2, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH/2);
             int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.ENEMY_HEIGHT/2, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT/2);
             Position position = new Position(enemyX, enemyY); // On instancie sa position
