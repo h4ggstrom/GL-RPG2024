@@ -9,6 +9,7 @@ import engine.entities.characters.Player;
 import engine.entities.items.Inventory;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
+import engine.entities.items.weapons.Weapon;
 
 public class InventoryGUI extends JFrame {
 
@@ -16,6 +17,7 @@ public class InventoryGUI extends JFrame {
     private Inventory inventory = player.getInventory();
     private JPanel inventoryPanel = new JPanel();
     private JPanel playerViewPanel = new JPanel();
+    private JPanel equipedItems = new JPanel();
     private JPanel playerStatisticsPanel = new JPanel();
     
     public InventoryGUI() {
@@ -70,11 +72,49 @@ public class InventoryGUI extends JFrame {
     }
 
     public void initPlayerViewPanel() {
-        playerViewPanel.setLayout(new GridLayout(1, 1));
+        playerViewPanel.setLayout(new GridLayout(1, 2));
+
+        playerViewPanel.add(equipedItems);
+        initEquipedItems();
+
         String playerFilePath = "src/ressources/mainCharacter.png";
         ImageIcon playerIcon = new ImageIcon(playerFilePath);
         JLabel iconLabel = new JLabel(playerIcon, JLabel.CENTER);
         playerViewPanel.add(iconLabel);
+    }
+
+    public void initEquipedItems() {
+        // Une ligne pour le JLabel puis des lignes pour les items équipés
+        equipedItems.setLayout(new GridLayout(7, 1));
+        JLabel equipedItemsLabel = new JLabel("Items équipés", JLabel.CENTER);
+        equipedItems.add(equipedItemsLabel);
+
+        Weapon weapon = (Weapon)player.getWeaponSlot().getItem();
+        initEquipedItem(weapon, "Arme");
+        initEquipedItem(null, "Casque");
+        initEquipedItem(null, "Plastron");
+        initEquipedItem(null, "Gants");
+        initEquipedItem(null, "Jambières");
+        initEquipedItem(null, "Bottes");
+    }
+
+    public void initEquipedItem(Item item, String slotName) {
+        JPanel itemPanel = new JPanel();
+        itemPanel.setLayout(new BorderLayout());
+        itemPanel.setBackground(Color.WHITE);
+        itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JLabel nameLabel = new JLabel(slotName, JLabel.CENTER);
+        itemPanel.add(nameLabel, BorderLayout.PAGE_START);
+
+        if(item != null) {
+            String itemFilePath = "src/ressources/" +  item.getEntityType() + ".png";
+            ImageIcon itemIcon = new ImageIcon(itemFilePath);
+            JLabel itemIconLabel = new JLabel(itemIcon, JLabel.CENTER);
+
+            itemPanel.add(itemIconLabel, BorderLayout.CENTER);
+        }
+
+        equipedItems.add(itemPanel);
     }
 
     public void initPlayerStatisticsPanel() {
