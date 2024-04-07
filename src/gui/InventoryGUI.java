@@ -49,25 +49,7 @@ public class InventoryGUI extends JFrame {
         inventoryPanel.setLayout(new GridLayout(1, 7));
         for(Slot slot : inventory.getSlots()) {
             Item item = slot.getItem();
-            JPanel itemPanel = new JPanel();
-            itemPanel.setLayout(new BorderLayout());
-            itemPanel.setBackground(Color.WHITE);
-            itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-            if(item != null) {
-                String itemFilePath = "src/ressources/" +  item.getEntityType() + ".png";
-                JLabel nameLabel = new JLabel(item.getEntityType(), JLabel.CENTER);
-                ImageIcon itemIcon = new ImageIcon(itemFilePath);
-                JLabel itemIconLabel = new JLabel(itemIcon, JLabel.CENTER);
-
-                itemPanel.add(itemIconLabel, BorderLayout.CENTER);
-                itemPanel.add(nameLabel, BorderLayout.PAGE_START);
-            }
-
-            JButton useButton = new JButton("Use");
-            itemPanel.add(useButton, BorderLayout.PAGE_END);
-
-            inventoryPanel.add(itemPanel);
+            initItemSlot(inventoryPanel, item, (item == null) ? "" : item.getEntityType(), true);
         }
     }
 
@@ -90,15 +72,15 @@ public class InventoryGUI extends JFrame {
         equipedItems.add(equipedItemsLabel);
 
         Weapon weapon = (Weapon)player.getWeaponSlot().getItem();
-        initEquipedItem(weapon, "Arme");
-        initEquipedItem(null, "Casque");
-        initEquipedItem(null, "Plastron");
-        initEquipedItem(null, "Gants");
-        initEquipedItem(null, "Jambières");
-        initEquipedItem(null, "Bottes");
+        initItemSlot(equipedItems, weapon, "Arme", false);
+        initItemSlot(equipedItems, null, "Casque", false);
+        initItemSlot(equipedItems, null, "Plastron", false);
+        initItemSlot(equipedItems, null, "Gants", false);
+        initItemSlot(equipedItems, null, "Jambières", false);
+        initItemSlot(equipedItems, null, "Bottes", false);
     }
 
-    public void initEquipedItem(Item item, String slotName) {
+    public void initItemSlot(JPanel panel, Item item, String slotName, boolean button) {
         JPanel itemPanel = new JPanel();
         itemPanel.setLayout(new BorderLayout());
         itemPanel.setBackground(Color.WHITE);
@@ -114,7 +96,12 @@ public class InventoryGUI extends JFrame {
             itemPanel.add(itemIconLabel, BorderLayout.CENTER);
         }
 
-        equipedItems.add(itemPanel);
+        if(button) {
+            JButton useButton = new JButton("Use");
+            itemPanel.add(useButton, BorderLayout.PAGE_END);
+        }
+
+        panel.add(itemPanel);
     }
 
     public void initPlayerStatisticsPanel() {
