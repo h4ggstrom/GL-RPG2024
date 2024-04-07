@@ -40,10 +40,10 @@ public class GameConfiguration {
     public static final int SWORD_WIDTH = 30;
     public static final int SWORD_HEIGHT = 30;
 
-    // points de vie récupérés par le health
-    public static final int HEALTH_POINTS = 10;
-    public static final int HEALTH_WIDTH = 12;
-    public static final int HEALTH_HEIGHT = 32;
+    // points de vie récupérés par le heal
+    public static final int HEAL_POINTS = 10;
+    public static final int HEALTHFLASK_WIDTH = 12;
+    public static final int HEALTHFLASK_HEIGHT = 32;
 
     // dimensions et limites de la salle
     public static final int ROOM_UPPER_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en Y
@@ -74,8 +74,6 @@ public class GameConfiguration {
     public static final int CHARACTER_LIFEBAR_YSHIFT = 5;
 
     // partie inventaire
-    public static final int INVENTORY_HEIGHT = WINDOW_HEIGHT/2;
-    public static final int INVENTORY_WIDTH = WINDOW_WIDTH/2;
     public static final int INVENTORY_MAX = 7;
 
     //Fin du jeu

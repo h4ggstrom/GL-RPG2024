@@ -4,105 +4,78 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import engine.entities.characters.Player;
 import engine.entities.items.Inventory;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
-import engine.entities.items.consumables.HealthFlask;
-import engine.entities.items.weapons.Sword;
-import config.GameConfiguration;
 
 public class InventoryGUI extends JFrame {
 
     private Inventory inventory = Player.getInstance().getInventory();
-    private JPanel itemsPanel = new JPanel();
+    private JPanel inventoryPanel = new JPanel();
     private JPanel playerViewPanel = new JPanel();
+    private JPanel playerStatisticsPanel = new JPanel();
     
     public InventoryGUI() {
-        initLayout();
-        InventoryItems(); 
-        ShowPlayer();
-    }
+        // On veut séparer notre première fenêtre en deux parties, gauche et droite
+        this.getContentPane().setLayout(new GridLayout(1, 2));
+        // À gauche on ajoute la vue du joueur
+        this.add(playerViewPanel);
+        initPlayerViewPanel();
+        // À droite on ajoute un autre Panel
+        JPanel panelDroite = new JPanel();
+        this.add(panelDroite);
+        // Que l'on va aussi découper en 2 parties, haute et basse
+        panelDroite.setLayout(new GridLayout(2, 1));
+        // En haut on met la partie inventaire
+        panelDroite.add(inventoryPanel);
+        initInventoryPanel();
+        // En bas on met les statistiques du joueur
+        panelDroite.add(playerStatisticsPanel);
+        initPlayerStatisticsPanel();
 
-    private void initLayout(){
-
-        JPanel panel1 = new JPanel();
-        panel1.add(playerViewPanel);
-        JPanel panel2 = new JPanel();
-        panel2.add(new JLabel("Items"));
-        panel2.add(itemsPanel, BorderLayout.CENTER);
-
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panel1, panel2);
-        splitPane.setDividerLocation(150); 
-
-        itemsPanel.setLayout(new GridLayout(5, 1));
-
-        add(splitPane);
-        setSize(GameConfiguration.INVENTORY_WIDTH, GameConfiguration.INVENTORY_HEIGHT);
+        pack();
         setLocationRelativeTo(null);
         setTitle("Inventory");
 		setVisible(true);
     }
 
+    public void initInventoryPanel() {
+        // La vue de l'inventaire sera comme une ligne avec une colonne par item
+        inventoryPanel.setLayout(new GridLayout(1, 7));
+        for(Slot slot : inventory.getSlots()) {
+            Item item = slot.getItem();
+            JPanel itemPanel = new JPanel();
+            itemPanel.setLayout(new BorderLayout());
+            itemPanel.setBackground(Color.WHITE);
+            itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-    private void ShowPlayer(){
-        playerViewPanel.setLayout(new BorderLayout()); 
+            String itemFilePath = "src/ressources/" +  item.getEntityType() + ".png";
+            JLabel nameLabel = new JLabel(item.getEntityType(), JLabel.CENTER);
+            ImageIcon itemIcon = new ImageIcon(itemFilePath);
+            JLabel itemIconLabel = new JLabel(itemIcon, JLabel.CENTER);
 
-        String playerFilePath = "src/ressources/bodyView.png";
-        ImageIcon playerIcon = new ImageIcon(playerFilePath);
-        JLabel nameLabel = new JLabel("Player", JLabel.CENTER);
-        JLabel iconLabel = new JLabel(playerIcon, JLabel.CENTER);
+            itemPanel.add(itemIconLabel, BorderLayout.CENTER);
+            itemPanel.add(nameLabel, BorderLayout.PAGE_START);
 
+            JButton useButton = new JButton("Use");
+            itemPanel.add(useButton, BorderLayout.PAGE_END);
 
-        playerViewPanel.add(iconLabel, BorderLayout.CENTER);
-        playerViewPanel.add(nameLabel, BorderLayout.PAGE_END);
-
-        playerViewPanel.revalidate(); 
-        playerViewPanel.repaint();
-
+            inventoryPanel.add(itemPanel);
+        }
     }
 
+    public void initPlayerViewPanel() {
+        playerViewPanel.setLayout(new GridLayout(1, 1));
+        String playerFilePath = "src/ressources/mainCharacter.png";
+        ImageIcon playerIcon = new ImageIcon(playerFilePath);
+        JLabel iconLabel = new JLabel(playerIcon, JLabel.CENTER);
+        playerViewPanel.add(iconLabel);
+    }
 
-    private void InventoryItems() {
-        List<Slot> slots = inventory.getSlots();
-        for (Slot slot : slots) {
-            Item item = slot.getItem();
-            if (item != null) {
-                JPanel itemPanel = new JPanel();
-                itemPanel.setLayout(new BorderLayout());
-                itemPanel.setBackground(Color.WHITE);
-                itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    public void initPlayerStatisticsPanel() {
 
-                String itemFilePath = "";
-                if (item instanceof Sword) {
-                    itemFilePath = "src/ressources/sword.png";
-                    JLabel nameLabel = new JLabel("sword", JLabel.CENTER);
-                    ImageIcon itemIcon = new ImageIcon(itemFilePath);
-                    JLabel iconLabel = new JLabel(itemIcon, JLabel.CENTER);
-
-                    itemPanel.add(iconLabel, BorderLayout.CENTER);
-                    itemPanel.add(nameLabel, BorderLayout.PAGE_END);
-
-                    itemsPanel.add(itemPanel);
-                }
-                if (item instanceof HealthFlask) {
-                    itemFilePath = "src/ressources/health_flask_4.png";
-                    JLabel nameLabel = new JLabel("Health Flask", JLabel.CENTER);
-                    ImageIcon itemIcon = new ImageIcon(itemFilePath);
-                    JLabel iconLabel = new JLabel(itemIcon, JLabel.CENTER);
-
-                    itemPanel.add(iconLabel, BorderLayout.CENTER);
-                    itemPanel.add(nameLabel, BorderLayout.PAGE_END);
-
-                    itemsPanel.add(itemPanel);
-                }
-
-            }
-        }
-        itemsPanel.revalidate();
-        itemsPanel.repaint();
     }
 
     class Return implements ActionListener {

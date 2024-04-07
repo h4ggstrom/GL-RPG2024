@@ -43,7 +43,6 @@ public class GameDisplay extends JPanel {
 
         paintStrategy.paint(manager.getRoom(), graphics);
 
-        // Permet d'empêcher l'Exception : ConcurrentModificationException
         ArrayList<Entity> entitiesToDraw = manager.getRoom().getEntitiesToDraw();
 
         for (Entity entity : entitiesToDraw) {
