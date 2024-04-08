@@ -13,19 +13,31 @@ import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.weapons.Weapon;
 import engine.process.EntityManager;
+import engine.process.InventoryRefreshListener;
 
-public class InventoryGUI extends JFrame {
+public class InventoryGUI extends JFrame implements InventoryRefreshListener {
 
     private EntityManager manager;
     private Player player = Player.getInstance();
     private Inventory inventory = player.getInventory();
     private JPanel inventoryPanel = new JPanel();
     private JPanel playerViewPanel = new JPanel();
-    private JPanel equipedItems = new JPanel();
+    private JPanel equipedItemsPanel = new JPanel();
     private JPanel playerStatisticsPanel = new JPanel();
     
     public InventoryGUI(EntityManager manager) {
         this.manager = manager;
+        this.manager.setInventoryRefreshListener(this);
+
+        initOverallView();
+
+        pack();
+        setLocationRelativeTo(null);
+        setTitle("Inventory");
+		setVisible(true);
+    }
+
+    public void initOverallView() {
         // On veut séparer notre première fenêtre en deux parties, gauche et droite
         this.getContentPane().setLayout(new GridLayout(1, 2));
         // À gauche on ajoute la vue du joueur
@@ -42,15 +54,11 @@ public class InventoryGUI extends JFrame {
         // En bas on met les statistiques du joueur
         panelDroite.add(playerStatisticsPanel);
         initPlayerStatisticsPanel();
-
-        pack();
-        setLocationRelativeTo(null);
-        setTitle("Inventory");
-		setVisible(true);
     }
 
     public void initInventoryPanel() {
-        inventoryPanel.setLayout(new GridLayout(1, 7)); // Configurer le GridLayout une seule fois
+        // La vue de l'inventaire sera comme une ligne avec une colonne par item
+        inventoryPanel.setLayout(new GridLayout(1, 7));
         ArrayList<Slot> slots = inventory.getSlots();
     
         // Itérer sur chaque slot de l'inventaire
@@ -81,8 +89,8 @@ public class InventoryGUI extends JFrame {
     public void initPlayerViewPanel() {
         playerViewPanel.setLayout(new GridLayout(1, 2));
 
-        playerViewPanel.add(equipedItems);
-        initEquipedItems();
+        playerViewPanel.add(equipedItemsPanel);
+        initEquipedItemsPanel();
 
         String playerFilePath = "src/ressources/mainCharacter.png";
         ImageIcon playerIcon = new ImageIcon(playerFilePath);
@@ -90,11 +98,11 @@ public class InventoryGUI extends JFrame {
         playerViewPanel.add(iconLabel);
     }
 
-    public void initEquipedItems() {
+    public void initEquipedItemsPanel() {
         // Une ligne pour le JLabel puis des lignes pour les items équipés
-        equipedItems.setLayout(new GridLayout(7, 1));
-        JLabel equipedItemsLabel = new JLabel("Items équipés", JLabel.CENTER);
-        equipedItems.add(equipedItemsLabel);
+        equipedItemsPanel.setLayout(new GridLayout(7, 1));
+        JLabel equipedItemsPanelLabel = new JLabel("Items équipés", JLabel.CENTER);
+        equipedItemsPanel.add(equipedItemsPanelLabel);
 
         Weapon weapon = (Weapon)player.getWeaponSlot().getItem();
         JPanel weaponPanel = new JPanel();
@@ -103,12 +111,12 @@ public class InventoryGUI extends JFrame {
         JPanel glovesPanel = new JPanel();
         JPanel pantsPanel = new JPanel();
         JPanel bootsPanel = new JPanel();
-        initItemSlot(equipedItems, weaponPanel, weapon, "Arme");
-        initItemSlot(equipedItems, helmetPanel, null, "Casque");
-        initItemSlot(equipedItems, chestplatePanel, null, "Plastron");
-        initItemSlot(equipedItems, glovesPanel, null, "Gants");
-        initItemSlot(equipedItems, pantsPanel, null, "Jambières");
-        initItemSlot(equipedItems, bootsPanel, null, "Bottes");
+        initItemSlot(equipedItemsPanel, weaponPanel, weapon, "Arme");
+        initItemSlot(equipedItemsPanel, helmetPanel, null, "Casque");
+        initItemSlot(equipedItemsPanel, chestplatePanel, null, "Plastron");
+        initItemSlot(equipedItemsPanel, glovesPanel, null, "Gants");
+        initItemSlot(equipedItemsPanel, pantsPanel, null, "Jambières");
+        initItemSlot(equipedItemsPanel, bootsPanel, null, "Bottes");
     }
 
     public void initItemSlot(JPanel panel, JPanel itemPanel, Item item, String slotName) {
@@ -151,6 +159,27 @@ public class InventoryGUI extends JFrame {
         playerStatisticsPanel.add(armorTextField);
         playerStatisticsPanel.add(attackSpeedTextField);
         playerStatisticsPanel.add(moveSpeedTextField);
+    }
+
+    /**
+     * Méthode permettant de rafraîchir l'affichage des 3 panels principaux de la fenêtre
+     */
+    @Override
+    public void refreshInventory() {
+        inventoryPanel.removeAll(); // Supprime tous les composants du panel
+        initInventoryPanel(); // Reconstruit le panel
+        inventoryPanel.revalidate(); // Indique que le layout manager doit recalculer le layout
+        inventoryPanel.repaint(); // Demande la redessin du panel
+
+        equipedItemsPanel.removeAll();
+        initEquipedItemsPanel();
+        equipedItemsPanel.revalidate();
+        equipedItemsPanel.repaint();
+
+        playerStatisticsPanel.removeAll();
+        initPlayerStatisticsPanel();
+        playerStatisticsPanel.revalidate();
+        playerStatisticsPanel.repaint();
     }
 
     class Return implements ActionListener {

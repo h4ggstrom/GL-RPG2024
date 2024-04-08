@@ -34,6 +34,15 @@ public class Inventory {
         numberOfItems++;
     }
 
+    /**
+     * Cette méthode permet de retirer l'item du slot correspondant
+     * @param slotNumber le numéro du Slot à vider
+     */
+    public void removeItem(int slotNumber) {
+        slots.get(slotNumber).setItem(null);;
+        numberOfItems--;
+    }
+
     public int getNumberOfItems() {
         return numberOfItems;
     }

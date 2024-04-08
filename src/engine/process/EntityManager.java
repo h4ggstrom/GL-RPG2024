@@ -36,6 +36,7 @@ public class EntityManager {
     private static Logger logger = Gamelog.getLogger();
     private Player player = Player.getInstance(); // le joueur
     private Dungeon dungeon; // la salle dans laquelle évolue le joueur
+    private InventoryRefreshListener inventoryRefreshListener;
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de CharacterManager.
@@ -355,8 +356,18 @@ public class EntityManager {
             if(consumable.getConsumableEffect() == "heal") {
                 player.setHealth(player.getHealth() + consumable.getConsumableValue());
             }
+            // On supprime l'item du slot et donc de l'inventaire
+            slot.setItem(null);
         }
-        // On supprime l'item du slot et donc de l'inventaire
-        slot.setItem(null);
+        // On signale à notre InventoryChangeListener de procéder au rafraîchissement de l'affichage
+        inventoryRefreshListener.refreshInventory();
+    }
+
+    /**
+     * Ce setter permet d'associer à notre EntityManager, dans InventoryGUI, l'instance d'InventoryChangeListener qui est en fait InventoryGUI
+     * @param listener InventoryGUI qui implémente InventoryChangeListener
+     */
+    public void setInventoryRefreshListener(InventoryRefreshListener listener) {
+        this.inventoryRefreshListener = listener;
     }
 }
