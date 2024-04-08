@@ -50,94 +50,31 @@ public class InventoryGUI extends JFrame {
     }
 
     public void initInventoryPanel() {
-        // La vue de l'inventaire sera comme une ligne avec une colonne par item
-        inventoryPanel.setLayout(new GridLayout(1, 7));
+        inventoryPanel.setLayout(new GridLayout(1, 7)); // Configurer le GridLayout une seule fois
         ArrayList<Slot> slots = inventory.getSlots();
-        Slot slot1 = slots.get(0);
-        Slot slot2 = slots.get(1);
-        Slot slot3 = slots.get(2);
-        Slot slot4 = slots.get(3);
-        Slot slot5 = slots.get(4);
-        Slot slot6 = slots.get(5);
-        Slot slot7 = slots.get(6);
-        Item item1 = slot1.getItem();
-        Item item2 = slot2.getItem();
-        Item item3 = slot3.getItem();
-        Item item4 = slot4.getItem();
-        Item item5 = slot5.getItem();
-        Item item6 = slot6.getItem();
-        Item item7 = slot7.getItem();
-        JPanel item1Panel = new JPanel();
-        JPanel item2Panel = new JPanel();
-        JPanel item3Panel = new JPanel();
-        JPanel item4Panel = new JPanel();
-        JPanel item5Panel = new JPanel();
-        JPanel item6Panel = new JPanel();
-        JPanel item7Panel = new JPanel();
-        initItemSlot(inventoryPanel, item1Panel, item1, (item1 == null) ? "" : item1.getEntityType());
-        initItemSlot(inventoryPanel, item2Panel, item2, (item2 == null) ? "" : item2.getEntityType());
-        initItemSlot(inventoryPanel, item3Panel, item3, (item3 == null) ? "" : item3.getEntityType());
-        initItemSlot(inventoryPanel, item4Panel, item4, (item4 == null) ? "" : item4.getEntityType());
-        initItemSlot(inventoryPanel, item5Panel, item5, (item5 == null) ? "" : item5.getEntityType());
-        initItemSlot(inventoryPanel, item6Panel, item6, (item6 == null) ? "" : item6.getEntityType());
-        initItemSlot(inventoryPanel, item7Panel, item7, (item7 == null) ? "" : item7.getEntityType());
-        JButton item1Button = new JButton("Use");
-        JButton item2Button = new JButton("Use");
-        JButton item3Button = new JButton("Use");
-        JButton item4Button = new JButton("Use");
-        JButton item5Button = new JButton("Use");
-        JButton item6Button = new JButton("Use");
-        JButton item7Button = new JButton("Use");
-        item1Panel.add(item1Button, BorderLayout.PAGE_END);
-        item2Panel.add(item2Button, BorderLayout.PAGE_END);
-        item3Panel.add(item3Button, BorderLayout.PAGE_END);
-        item4Panel.add(item4Button, BorderLayout.PAGE_END);
-        item5Panel.add(item5Button, BorderLayout.PAGE_END);
-        item6Panel.add(item6Button, BorderLayout.PAGE_END);
-        item7Panel.add(item7Button, BorderLayout.PAGE_END);
-        item1Button.addActionListener(new ActionItem1());
-    }
-
-    class ActionItem1 implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            manager.inventorySlotUsed(0);
-            
-        }
-    }
-
-    class ActionItem2 implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            manager.inventorySlotUsed(1);
-        }
-    }
-
-    class ActionItem3 implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            manager.inventorySlotUsed(2);
-        }
-    }
-
-    class ActionItem4 implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            manager.inventorySlotUsed(3);
-        }
-    }
-
-    class ActionItem5 implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            manager.inventorySlotUsed(4);
-        }
-    }
-
-    class ActionItem6 implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            manager.inventorySlotUsed(5);
-        }
-    }
-
-    class ActionItem7 implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            manager.inventorySlotUsed(6);
+    
+        // Itérer sur chaque slot de l'inventaire
+        for (int i = 0; i < slots.size(); i++) {
+            final int slotNumber = i;
+            Item item = slots.get(i).getItem();
+            JPanel itemPanel = new JPanel(new BorderLayout());
+            itemPanel.setBackground(Color.WHITE);
+            itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    
+            // Initialiser et ajouter le panel de l'item à inventoryPanel
+            initItemSlot(inventoryPanel, itemPanel, item, ((item == null) ? "" : item.getEntityType()));
+            inventoryPanel.add(itemPanel);
+    
+            // Créer et ajouter un bouton "Use" au panel de l'item
+            JButton useButton = new JButton("Use");
+            itemPanel.add(useButton, BorderLayout.PAGE_END);
+    
+            // Attacher un ActionListener au bouton, avec l'indice du slot comme paramètre
+            useButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    manager.inventorySlotUsed(slotNumber);
+                }
+            });
         }
     }
 
