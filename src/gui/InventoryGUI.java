@@ -11,7 +11,8 @@ import engine.entities.characters.Player;
 import engine.entities.items.Inventory;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
-import engine.entities.items.weapons.Weapon;
+import engine.entities.items.weapons.*;
+import engine.entities.items.armor.*;
 import engine.process.EntityManager;
 import engine.process.InventoryRefreshListener;
 
@@ -105,6 +106,11 @@ public class InventoryGUI extends JFrame implements InventoryRefreshListener {
         equipedItemsPanel.add(equipedItemsPanelLabel);
 
         Weapon weapon = (Weapon)player.getWeaponSlot().getItem();
+        Helmet helmet = (Helmet)player.getHelmetSlot().getItem();
+        Gloves gloves = (Gloves)player.getGlovesSlot().getItem();
+        Chestplate chestplate = (Chestplate)player.getChestplateSlot().getItem();
+        Pants pants = (Pants)player.getPantsSlot().getItem();
+        Boots boots = (Boots)player.getBootsSlot().getItem();
         JPanel weaponPanel = new JPanel();
         JPanel helmetPanel = new JPanel();
         JPanel chestplatePanel = new JPanel();
@@ -112,11 +118,11 @@ public class InventoryGUI extends JFrame implements InventoryRefreshListener {
         JPanel pantsPanel = new JPanel();
         JPanel bootsPanel = new JPanel();
         initItemSlot(equipedItemsPanel, weaponPanel, weapon, "Arme");
-        initItemSlot(equipedItemsPanel, helmetPanel, null, "Casque");
-        initItemSlot(equipedItemsPanel, chestplatePanel, null, "Plastron");
-        initItemSlot(equipedItemsPanel, glovesPanel, null, "Gants");
-        initItemSlot(equipedItemsPanel, pantsPanel, null, "Jambières");
-        initItemSlot(equipedItemsPanel, bootsPanel, null, "Bottes");
+        initItemSlot(equipedItemsPanel, helmetPanel, helmet, "Casque");
+        initItemSlot(equipedItemsPanel, chestplatePanel, gloves, "Plastron");
+        initItemSlot(equipedItemsPanel, glovesPanel, chestplate, "Gants");
+        initItemSlot(equipedItemsPanel, pantsPanel, pants, "Jambières");
+        initItemSlot(equipedItemsPanel, bootsPanel, boots, "Bottes");
     }
 
     public void initItemSlot(JPanel panel, JPanel itemPanel, Item item, String slotName) {
@@ -139,26 +145,34 @@ public class InventoryGUI extends JFrame implements InventoryRefreshListener {
 
     public void initPlayerStatisticsPanel() {
         // Une colonne et une ligne par statistique
-        playerStatisticsPanel.setLayout(new GridLayout(4, 1));
+        playerStatisticsPanel.setLayout(new GridLayout(6, 1));
         JTextField healthTextField = new JTextField();
         JTextField armorTextField = new JTextField();
         JTextField attackSpeedTextField = new JTextField();
         JTextField moveSpeedTextField = new JTextField();
+        JTextField abilityCooldownTextField = new JTextField();
+        JTextField stunCooldownTextField = new JTextField();
 
         healthTextField.setEditable(false);
         armorTextField.setEditable(false);
         attackSpeedTextField.setEditable(false);
         moveSpeedTextField.setEditable(false);
+        abilityCooldownTextField.setEditable(false);
+        stunCooldownTextField.setEditable(false);
 
         healthTextField.setText("Nombre de points de vie actuels : " + player.getHealth());
         armorTextField.setText("Nombre de points d'armure : " + player.getArmor());
         attackSpeedTextField.setText("Vitesse d'attaque : " + player.getAttackSpeed());
         moveSpeedTextField.setText("Vitesse de déplacement : " + player.getMoveSpeed());
+        abilityCooldownTextField.setText("Délai de récupération des abilités : " + player.getAbilityCooldown() + "ms");
+        stunCooldownTextField.setText("Réduction de la durée d'immobilisation : " + player.getStunCooldown() + "ms");
 
         playerStatisticsPanel.add(healthTextField);
         playerStatisticsPanel.add(armorTextField);
         playerStatisticsPanel.add(attackSpeedTextField);
         playerStatisticsPanel.add(moveSpeedTextField);
+        playerStatisticsPanel.add(abilityCooldownTextField);
+        playerStatisticsPanel.add(stunCooldownTextField);
     }
 
     /**

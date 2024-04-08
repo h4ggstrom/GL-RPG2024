@@ -5,10 +5,10 @@ import engine.entities.items.Item;
 
 public abstract class Consumable extends Item {
     
-    int value;
     String effect;
+    int value;
     
-    public Consumable(int value, String effect, String consumableType, Position position) {
+    public Consumable(String effect, int value, String consumableType, Position position) {
         super(position, consumableType);
         this.value = value;
         this.effect = effect;
