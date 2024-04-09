@@ -18,6 +18,8 @@ import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.consumables.Consumable;
 import engine.entities.items.containers.Bag;
+import engine.entities.items.weapons.*;
+import engine.entities.items.equipment.*;
 import gui.containersGUI.BagGUI;
 import log.Gamelog;
 
@@ -348,19 +350,63 @@ public class EntityManager {
         this.getRoom().empty();
     }
 
-    public void inventorySlotUsed(int slotNumber) {
-        Slot slot = player.getInventory().getSlots().get(slotNumber);
+    /**
+     * Méthode récupérant le numéro de slot de l'inventaire et équipant l'item contenu si la place n'est pas déjà prise dans le slot d'équipement correspondant
+     * @param slot
+     */
+    public void equipItem(int i) {
+        Slot slot = player.getInventory().getSlots().get(i);
         Item item = slot.getItem();
-        if(item instanceof Consumable) {
-            Consumable consumable = (Consumable)item;
-            if(consumable.getConsumableEffect() == "heal") {
-                player.healCharacter(consumable.getConsumableValue());
+        if(item instanceof Weapon) {
+            if(player.getEquipment().getWeapon() == null) {
+                player.getEquipment().setWeapon((Weapon)item);
+                slot.setItem(null);
             }
-            // On supprime l'item du slot et donc de l'inventaire
-            slot.setItem(null);
         }
-        // On signale à notre InventoryChangeListener de procéder au rafraîchissement de l'affichage
+        else if(item instanceof Helmet) {
+            if(player.getEquipment().getHelmet() == null) {
+                player.getEquipment().setHelmet((Helmet)item);
+                slot.setItem(null);
+            }
+        }
+        else if(item instanceof Gloves) {
+            if(player.getEquipment().getGloves() == null) {
+                player.getEquipment().setGloves((Gloves)item);
+                slot.setItem(null);
+            }
+        }
+        else if(item instanceof Chestplate) {
+            if(player.getEquipment().getChestplate() == null) {
+                player.getEquipment().setChestplate((Chestplate)item);
+                slot.setItem(null);
+            }
+        }
+        else if(item instanceof Pants) {
+            if(player.getEquipment().getPants() == null) {
+                player.getEquipment().setPants((Pants)item);
+                slot.setItem(null);
+            }
+        }
+        else if(item instanceof Boots) {
+            if(player.getEquipment().getBoots() == null) {
+                player.getEquipment().setBoots((Boots)item);
+                slot.setItem(null);
+            }
+        }
+
         containerRefreshListener.refreshContainer();
+    }
+
+    /**
+     * Permet de ramasser un objet dans un sac
+     * @param slot
+     */
+    public void pickupBagItem(Slot slot) {
+        if(player.getInventory().getNumberOfItems() < GameConfiguration.INVENTORY_MAX) {
+            player.getInventory().addItem(slot.getItem());
+            slot.setItem(null);
+            containerRefreshListener.refreshContainer();
+        }
     }
 
     /**

@@ -53,8 +53,6 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
     public void initSlotsPanels(JPanel basePanel, ArrayList<Slot> slots) {
         // On boucle autant de fois qu'il y a de slots en gardant le compte
         for (int i = 0; i < slots.size(); i++) {
-            // On garde le compte
-            final int slotNumber = i;
             // On récupère l'Item du Slot
             Item item = slots.get(i).getItem();
             // On créé le Panel qui recevra l'Item
@@ -71,7 +69,6 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
             // Attacher un ActionListener au bouton, avec l'indice du slot comme paramètre
             useButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    manager.inventorySlotUsed(slotNumber);
                 }
             });
         }
