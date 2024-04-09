@@ -17,7 +17,8 @@ import engine.entities.characters.Player;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.consumables.Consumable;
-import engine.entities.items.weapons.Weapon;
+import engine.entities.items.containers.Bag;
+import gui.containersGUI.BagGUI;
 import log.Gamelog;
 
 /**
@@ -36,7 +37,7 @@ public class EntityManager {
     private static Logger logger = Gamelog.getLogger();
     private Player player = Player.getInstance(); // le joueur
     private Dungeon dungeon; // la salle dans laquelle évolue le joueur
-    private InventoryRefreshListener inventoryRefreshListener;
+    private ContainerRefreshListener containerRefreshListener;
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de CharacterManager.
@@ -67,7 +68,7 @@ public class EntityManager {
      * @return room instance de la Room ou le joueur se trouve
      */
     public Room getRoom() {
-        return this.dungeon.getStages().get(player.getCurrentStage()).getRooms().get(player.getCurrentRoom());
+        return this.dungeon.getStages().get(player.getCurrentStage() - 1).getRooms().get(player.getCurrentRoom() - 1);
     }
 
     /**
@@ -182,14 +183,11 @@ public class EntityManager {
 
             List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
 
-            // On récupère l'instance de l'arme équipée par le joueur
-            Weapon playerWeapon = player.getWeaponSlot().getWeapon();
-
             // On vérifie si le click du joueur est compris dans la range de son arme
-            if(distance <= playerWeapon.getAttackRange()) {
+            if(distance <= player.getAttackRange()) {
                 logger.trace("enemy attacked");
                 // Si c'est le cas, on attaque l'Enemy visé avec l'arme du joueur
-                selectedEnemy.setHealth(selectedEnemy.getHealth() - playerWeapon.getAttackDamage());
+                selectedEnemy.hurtCharacter(player.getAttackDamage());;
                 logger.trace("enemy now has "+ selectedEnemy.getHealth()+ " HP");
             }
 
@@ -200,14 +198,14 @@ public class EntityManager {
                 logger.trace("enemy eliminated");
             }
 
-            // On parcourt les Enemy éliminés pour les retirer du jeu
+            // On parcourt les Enemy éliminés pour les retirer du jeu et faire tomber leur sac
             for (Enemy eliminatedEnemy : eliminatedEnemies) {
-                // on récupère l'instance de l'arme équipée de l'ennemi
-                Weapon enemyWeapon = eliminatedEnemy.getWeaponSlot().getWeapon();
-                // on lui associe la position de mort de l'ennemi
-                enemyWeapon.setPosition(eliminatedEnemy.getPosition());
-                // on ajoute l'arme à la liste d'entités de la Room
-                this.getRoom().addEntity(enemyWeapon);
+                // On crée un sac
+                Bag bag = (Bag)EntityFactory.createEntity(GameConfiguration.BAG_LABEL, eliminatedEnemy.getPosition());
+                // On le remplit avec tout ce qu'il y a sur l'Enemy
+                bag.fillBagWithGameCharacterItems(selectedEnemy);
+                // On ajoute le sac à la liste d'entités de la Room
+                this.getRoom().addEntity(bag);
                 // on retire l'Enemy de la liste d'entités de la Room
                 this.getRoom().removeEntity(selectedEnemy);
             }
@@ -228,8 +226,14 @@ public class EntityManager {
             }
         }
 
+        // Si l'entité sélectionnée est un Sac
+        else if(selectedEntity instanceof Bag) {
+            Bag bag = (Bag)selectedEntity;
+            new BagGUI(this, bag);
+        }
+
         // Si l'entité sélectionnée est un Item
-        if(selectedEntity instanceof Item) {
+        else if(selectedEntity instanceof Item) {
 
             logger.trace("item selected");
 
@@ -331,12 +335,11 @@ public class EntityManager {
             }
         }
         for (Enemy enemy : enemiesFetched) {
-            Weapon enemyWeapon = enemy.getWeaponSlot().getWeapon();
             Position enemyPosition = enemy.getHitbox().getCenter();
             Position playerPosition = player.getHitbox().getCenter();
             int distanceEnemyPlayer = calculateDistance(enemyPosition, playerPosition);
-            if(distanceEnemyPlayer <= enemyWeapon.getAttackRange()){ 
-                player.setHealth(player.getHealth() - enemyWeapon.getAttackDamage());
+            if(distanceEnemyPlayer <= enemy.getAttackRange()){ 
+                player.hurtCharacter(enemy.getAttackDamage());;
             }
         }  
     }
@@ -350,22 +353,21 @@ public class EntityManager {
         Item item = slot.getItem();
         if(item instanceof Consumable) {
             Consumable consumable = (Consumable)item;
-            player.setHealth(player.getHealth() + consumable.getConsumableValue());
             if(consumable.getConsumableEffect() == "heal") {
-                player.setHealth(player.getHealth() + consumable.getConsumableValue());
+                player.healCharacter(consumable.getConsumableValue());
             }
             // On supprime l'item du slot et donc de l'inventaire
             slot.setItem(null);
         }
         // On signale à notre InventoryChangeListener de procéder au rafraîchissement de l'affichage
-        inventoryRefreshListener.refreshInventory();
+        containerRefreshListener.refreshContainer();
     }
 
     /**
      * Ce setter permet d'associer à notre EntityManager, dans InventoryGUI, l'instance d'InventoryChangeListener qui est en fait InventoryGUI
      * @param listener InventoryGUI qui implémente InventoryChangeListener
      */
-    public void setInventoryRefreshListener(InventoryRefreshListener listener) {
-        this.inventoryRefreshListener = listener;
+    public void setContainerRefreshListener(ContainerRefreshListener listener) {
+        this.containerRefreshListener = listener;
     }
 }

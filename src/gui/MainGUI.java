@@ -17,6 +17,7 @@ import engine.dungeon.Position;
 import engine.entities.characters.Player;
 import engine.process.EntityManager;
 import engine.process.GameBuilder;
+import gui.containersGUI.InventoryGUI;
 import log.Gamelog;
 
 /**

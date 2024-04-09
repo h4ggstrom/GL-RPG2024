@@ -7,14 +7,10 @@ import java.awt.Graphics;
 import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
-import engine.entities.Hitbox;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
 import engine.entities.items.Item;
-import engine.entities.items.consumables.HealthFlask;
-import engine.entities.items.weapons.Sword;
-import engine.entities.items.weapons.Weapon;
 import engine.process.Utility;
 
 /*
@@ -70,49 +66,14 @@ public class PaintStrategy {
             Position hitbox_center = character.getHitbox().getCenter();
             int x_center = hitbox_center.getX();
             int y_center = hitbox_center.getY();
-            Weapon weapon = (Weapon)character.getWeaponSlot().getItem();
-            graphics.drawOval(x_center - weapon.getAttackRange(), y_center - weapon.getAttackRange(), weapon.getAttackRange() * 2, weapon.getAttackRange() * 2);
+            graphics.drawOval(x_center - character.getAttackRange(), y_center - character.getAttackRange(), character.getAttackRange() * 2, character.getAttackRange() * 2);
         }
-
-        // Partie Hitbox (à des fins de débuggage)
-        Hitbox hitbox = character.getHitbox();
-        Position ul = hitbox.getUpperLeft();
-        Position ur = hitbox.getUpperRight();
-        Position ct = hitbox.getCenter();
-        Position bl = hitbox.getBottomLeft();
-        Position br = hitbox.getBottomLeft();
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(ul.getX(), ul.getY(),1, 1);
-        graphics.fillRect(ur.getX(), ur.getY(),1, 1);
-        graphics.fillRect(ct.getX(), ct.getY(),1, 1);
-        graphics.fillRect(bl.getX(), bl.getY(),1, 1);
-        graphics.fillRect(br.getX(), br.getY(),1, 1);
     }
 
     public void paint(Item item, Graphics graphics) {
-        String itemFilePath = "";
+        String itemFilePath = "./src/ressources/" + item.getEntityType() + ".png";
         // on prend le coin haut gauche pour des soucis d'affichage
         Position position = item.getHitbox().getUpperLeft();
-        if (item instanceof Sword) {
-            itemFilePath = "./src/ressources/sword.png";
-        }
-        if (item instanceof HealthFlask) {
-            itemFilePath = "src/ressources/health_flask_4.png";
-        }
         graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
-
-        // Partie Hitbox (à des fins de débuggage)
-        Hitbox hitbox = item.getHitbox();
-        Position ul = hitbox.getUpperLeft();
-        Position ur = hitbox.getUpperRight();
-        Position ct = hitbox.getCenter();
-        Position bl = hitbox.getBottomLeft();
-        Position br = hitbox.getBottomLeft();
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(ul.getX(), ul.getY(),1, 1);
-        graphics.fillRect(ur.getX(), ur.getY(),1, 1);
-        graphics.fillRect(ct.getX(), ct.getY(),1, 1);
-        graphics.fillRect(bl.getX(), bl.getY(),1, 1);
-        graphics.fillRect(br.getX(), br.getY(),1, 1);
     }
 }

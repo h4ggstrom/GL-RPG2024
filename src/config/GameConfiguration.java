@@ -38,11 +38,18 @@ public class GameConfiguration {
 
     public static final int CHESTPLATE_WIDTH = 30;
     public static final int CHESTPLATE_HEIGHT = 30;
+
     public static final int PANTS_WIDTH = 30;
     public static final int PANTS_HEIGHT = 30;
 
     public static final int BOOTS_WIDTH = 30;
     public static final int BOOTS_HEIGHT = 30;
+
+    public static final int BAG_WIDTH = 30;
+    public static final int BAG_HEIGHT = 30;
+
+    public static final int SCEPTER_WIDTH = 10;
+    public static final int SCEPTER_HEIGHT = 20;
 
     public static final int GAME_OVER_HEIGHT = WINDOW_HEIGHT/2;
     public static final int GAME_OVER_WIDTH = WINDOW_WIDTH/2;
@@ -54,53 +61,48 @@ public class GameConfiguration {
     public static final int NUMBER_OF_STAGES = 3;
     public static final int NUMBER_OF_ROOMS = 7;
 
-    // statistiques du joueur : vitesse par défaut, dimensions, et points de vie
-    public static final int PLAYER_DEFAULT_HEALTH = 50;
+    // statistiques par défaut du joueur
+    public static final int PLAYER_DEFAULT_MAXHEALTH = 50;
     public static final int PLAYER_DEFAULT_ARMOR = 20;
     public static final int PLAYER_DEFAULT_ATTACKSPEED = 10;
+    public static final int PLAYER_DEFAULT_ATTACKRANGE = 50;
+    public static final int PLAYER_DEFAULT_ATTACKDAMAGE = 100;
     public static final int PLAYER_DEFAULT_MOVESPEED = 10;
     public static final int PLAYER_DEFAULT_ABILITYCOOLDOWN = 1000;
     public static final int PLAYER_DEFAULT_STUNCOOLDOWN = 4000;
     public static final int PLAYER_LIFEBAR_XSHIFT = -15;
     public static final int PLAYER_ENTITY_INTERACTION_RANGE = 50;
+    
+    // PARTIE ARMES
 
-    // capacité du fouet
+    // Épée
+    public static final int SWORD_DAMAGE = 5;
+    public static final int SWORD_RANGE = 100;
+
+    // Fouet
     public static final int WHIP_DAMAGE = 3;
-    public static final int WHIP_SPEED = 0;
     public static final int WHIP_RANGE = 100;
     public static final int WHIP_AREA_DAMAGE = 1;
 
-    // capacité du sceptre
+    // Sceptre
     public static final int SCEPTER_BURN_DAMAGE = 1;
     public static final int SCEPTER_DAMAGE = 5;
-    public static final int SCEPTER_SPEED = 0;
     public static final int SCEPTER_RANGE = 250;
-    public static final int SCEPTER_WIDTH = 10;
-    public static final int SCEPTER_HEIGHT = 20;
 
-    // capacité du grimoire
+    // Grimoire
     public static final int GRIMOIRE_ROOT_DURATION = 3;
     public static final int GRIMOIRE_DAMAGE = 2;
-    public static final int GRIMOIRE_SPEED = 0;
     public static final int GRIMOIRE_RANGE = 250;
 
-    // capacité de la dague
+    // Dague
     public static final int DAGGER_DAMAGE = 3;
-    public static final int DAGGER_SPEED = 0;
     public static final int DAGGER_RANGE = 50;
     public static final int DAGGER_BLEED_DAMAGE = 1;
 
-    // capacité de l'arc
+    // Arc
     public static final int BOW_DAMAGE = 5;
-    public static final int BOW_SPEED = 0;
     public static final int BOW_RANGE = 300;
     public static final int BOW_DAMAGE_OVER_RANGE = 5;
-
-    
-    // capacité de l'epée
-    public static final int SWORD_DAMAGE = 5;
-    public static final int SWORD_SPEED = 0;
-    public static final int SWORD_RANGE = 100;
 
     // dimensions et limites de la salle
     public static final int ROOM_UPPER_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en Y
@@ -113,11 +115,13 @@ public class GameConfiguration {
     public static final Position GATE_UP = new Position(1026, 309); // Le pixel haut de la porte de sortie
     public static final Position GATE_DOWN = new Position(1028, 448); // Le pixel bas de la porte de sortie
 
-    // nombre d'ennemis par défaut, dimensions, et points de vie
+    // statistiques par défaut des ennemis
     public static final int ENEMIES_INIT_NUMBER = 2;
-    public static final int ENEMY_DEFAULT_HEALTH = 30;
+    public static final int ENEMY_DEFAULT_MAXHEALTH = 30;
     public static final int ENEMY_DEFAULT_ARMOR = 10;
     public static final int ENEMY_DEFAULT_ATTACKSPEED = 5;
+    public static final int ENEMY_DEFAULT_ATTACKRANGE = 50;
+    public static final int ENEMY_DEFAULT_ATTACKDAMAGE = 1;
     public static final int ENEMY_DEFAULT_MOVESPEED = 5;
     public static final int ENEMY_DEFAULT_ABILITYCOOLDOWN = 1000;
     public static final int ENEMY_DEFAULT_STUNCOOLDOWN = 4000;
@@ -132,41 +136,45 @@ public class GameConfiguration {
     public static final int CHARACTER_NAMETAG_YSHIFT = -5;
     public static final int CHARACTER_LIFEBAR_YSHIFT = 5;
 
-    // partie inventaire
-    public static final int INVENTORY_MAX = 7;
+    // partie inventaire et sac
+    public static final int INVENTORY_MAX = 6;
+    public static final int BAG_MAX = 12;
 
     // partie noms d'entités
+    public static final String INVENTORY_LABEL = "inventory";
+    public static final String BAG_LABEL = "bag";
+    public static final String PLAYER_LABEL = "player";
     public static final String ENEMY_LABEL = "enemy";
     public static final String SWORD_LABEL = "sword";
-    public static final String DAGGER_LABEL = "dagger";
-    public static final String WHIP_LABEL = "whip";
-    public static final String SCEPTER_LABEL = "scepter";
-    public static final String GRIMOIRE_LABEL = "grimoire";
-    public static final String BOW_LABEL = "bow";
     public static final String HEALTHFLASK_LABEL = "healthFlask";
     public static final String HELMET_LABEL = "helmet";
     public static final String GLOVES_LABEL = "gloves";
     public static final String CHESTPLATE_LABEL = "chestplate";
     public static final String PANTS_LABEL = "pants";
     public static final String BOOTS_LABEL = "boots";
+    public static final String DAGGER_LABEL = "dagger";
+    public static final String WHIP_LABEL = "whip";
+    public static final String SCEPTER_LABEL = "scepter";
+    public static final String GRIMOIRE_LABEL = "grimoire";
+    public static final String BOW_LABEL = "bow";
 
-    // partie armure
+    // partie effets
+    public static final String HEALTHFLASK_EFFECT = "heal";
     public static final String HELMET_EFFECT = "abilityCooldown";
-    public static final int HELMET_BONUS = 3;
     public static final String GLOVES_EFFECT = "attackSpeed";
-    public static final int GLOVES_BONUS = 4;
     public static final String CHESTPLATE_EFFECT = "armor";
-    public static final int CHESTPLATE_BONUS = 10;
     public static final String PANTS_EFFECT = "stunCooldown";
-    public static final int PANTS_BONUS = 2;
     public static final String BOOTS_EFFECT = "moveSpeed";
+
+    // partie bonus
+    public static final int HEALTHFLASK_BONUS = 10;
+    public static final int HELMET_BONUS = 3;
+    public static final int GLOVES_BONUS = 4;
+    public static final int CHESTPLATE_BONUS = 10;
+    public static final int PANTS_BONUS = 2;
     public static final int BOOTS_BONUS = 5;
 
-    // partie consommables
-    public static final String HEALTHFLASK_EFFECT = "heal";
-    public static final int HEALTHFLASK_BONUS = 10;
-
-    //Fin du jeu
+    // écran gameover
     public static final int GAME_OVER_TITLEFONTSIZE = 20;
     public static final Position GAME_OVER_POSITION = new Position((GameConfiguration.WINDOW_WIDTH - GameConfiguration.GAME_OVER_WIDTH) / 2,(GameConfiguration.WINDOW_HEIGHT - GameConfiguration.GAME_OVER_HEIGHT) / 2) ;
 }

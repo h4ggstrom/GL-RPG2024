@@ -2,11 +2,10 @@ package engine.entities.characters;
 
 import engine.dungeon.Position;
 import engine.entities.Entity;
-import engine.entities.items.Inventory;
-import engine.entities.items.Slot;
-import engine.entities.items.armor.*;
-import engine.entities.items.weapons.Sword;
-import engine.process.EntityFactory;
+import engine.entities.items.Item;
+import engine.entities.items.containers.Inventory;
+import engine.entities.items.equipment.*;
+import engine.entities.items.weapons.Weapon;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -21,21 +20,18 @@ import engine.process.EntityFactory;
 public abstract class GameCharacter extends Entity {
 
     // définition des attributs
+    private int maxHealth;
     private int health;
     private int armor;
     private int attackSpeed;
+    private int attackRange;
+    private int attackDamage;
     private int moveSpeed;
     private int abilityCooldown;
     private int stunCooldown;
 
     private Inventory inventory;
-
-    private Slot weaponSlot = new Slot();
-    private Slot helmetSlot = new Slot();
-    private Slot glovesSlot = new Slot();
-    private Slot chestplateSlot = new Slot();
-    private Slot pantsSlot = new Slot();
-    private Slot bootsSlot = new Slot();
+    private Equipment equipment;
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de personnage (gameCharacter) contenant sa position, sa hitbox, et ses PV
@@ -44,38 +40,47 @@ public abstract class GameCharacter extends Entity {
      * @param entityType le type de personnage
      * @param health le nombre de PV du personnage
      */
-    public GameCharacter (Position position, String entityType, int health, int armor, int attackSpeed, int moveSpeed, int abilityCooldown, int stunCooldown) {
+    public GameCharacter (Position position, String entityType, int maxHealth, int health, int armor, int attackSpeed, int attackRange, int attackDamage, int moveSpeed, int abilityCooldown, int stunCooldown) {
         super(position, entityType);
+        this.maxHealth = maxHealth;
         this.health = health;
         this.armor = armor;
         this.attackSpeed = attackSpeed;
+        this.attackRange = attackRange;
+        this.attackDamage = attackDamage;
         this.moveSpeed = moveSpeed;
         this.abilityCooldown = abilityCooldown;
         this.stunCooldown = stunCooldown;
-        weaponSlot.setItem((Sword)EntityFactory.createEntity("sword", null));
-        helmetSlot.setItem((Helmet)EntityFactory.createEntity("helmet", null));
-        glovesSlot.setItem((Gloves)EntityFactory.createEntity("gloves", null));
-        chestplateSlot.setItem((Chestplate)EntityFactory.createEntity("chestplate", null));
-        pantsSlot.setItem((Pants)EntityFactory.createEntity("pants", null));
-        bootsSlot.setItem((Boots)EntityFactory.createEntity("boots", null));
+        this.equipment = new Equipment();
         this.inventory = new Inventory();
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void healCharacter(int heal) {
+        int finalHealth = this.getHealth() + heal;
+        if(finalHealth > this.getMaxHealth()) {
+            finalHealth = this.getMaxHealth();
+        }
+        this.health = finalHealth;
+    }
+
+    public void hurtCharacter(int damage) {
+        this.health = this.getHealth() - damage;
     }
 
     public int getArmor() {
-        Chestplate equipedChestplate = (Chestplate)chestplateSlot.getItem();
-        int armorBonus = 0;
-        if(equipedChestplate != null) {
-            armorBonus = equipedChestplate.getValue();
-        }
-        return armor + armorBonus;
+        return this.getItemBonus(armor, equipment.getChestplate());
     }
 
     public void setArmor(int armor) {
@@ -83,29 +88,62 @@ public abstract class GameCharacter extends Entity {
     }
 
     public int getAttackSpeed() {
-        Gloves equipedGloves = (Gloves)glovesSlot.getItem();
-        int attackSpeedBonus = 0;
-        if(equipedGloves != null) {
-            attackSpeedBonus = equipedGloves.getValue();
-        }
-        return attackSpeed + attackSpeedBonus;
+        return this.getItemBonus(attackSpeed, equipment.getGloves());
     }
 
     public void setAttackSpeed(int attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
 
+    public int getAttackRange() {
+        return attackRange + ((equipment.getWeapon() == null) ? 0 : ((Weapon)equipment.getWeapon()).getAttackRange());
+    }
+
+    public void setAttackRange(int attackRange) {
+        this.attackRange = attackRange;
+    }
+
+    public int getAttackDamage() {
+        return attackDamage + ((equipment.getWeapon() == null) ? 0 : ((Weapon)equipment.getWeapon()).getAttackDamage());
+    }
+
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage;
+    }
+
     public int getMoveSpeed() {
-        Boots equipedBoots = (Boots)bootsSlot.getItem();
-        int moveSpeedBonus = 0;
-        if(equipedBoots != null) {
-            moveSpeedBonus = equipedBoots.getValue();
-        }
-        return moveSpeed + moveSpeedBonus;
+        return this.getItemBonus(moveSpeed, equipment.getBoots());
     }
 
     public void setMoveSpeed(int moveSpeed) {
         this.moveSpeed = moveSpeed;
+    }
+
+    public int getAbilityCooldown() {
+        return this.getItemBonus(abilityCooldown, equipment.getHelmet());
+    }
+
+    public void setAbilityCooldown(int abilityCooldown) {
+        this.abilityCooldown = abilityCooldown;
+    }
+
+    public int getStunCooldown() {
+        return this.getItemBonus(stunCooldown, equipment.getPants());
+    }
+
+    public void setStunCooldown(int stunCooldown) {
+        this.stunCooldown = stunCooldown;
+    }
+
+    public int getItemBonus(int baseValue, Item item) {
+        int itemBonus = 0;
+        if(item != null) {
+            if(item instanceof Clothe) {
+                Clothe clothe = (Clothe)item;
+                itemBonus = clothe.getValue();
+            }
+        }
+        return baseValue + itemBonus;
     }
 
     public Inventory getInventory() {
@@ -116,64 +154,11 @@ public abstract class GameCharacter extends Entity {
         this.inventory = inventory;
     }
 
-    public Slot getWeaponSlot() {
-        return weaponSlot;
-    }
-
-    public void setWeaponSlot(Slot weaponSlot) {
-        this.weaponSlot = weaponSlot;
-    }
-
-    public Slot getHelmetSlot() {
-        return helmetSlot;
+    public Equipment getEquipment() {
+        return equipment;
     }
     
-    public Slot getGlovesSlot() {
-        return glovesSlot;
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
     }
-    
-    public Slot getChestplateSlot() {
-        return chestplateSlot;
-    }
-    
-    public Slot getPantsSlot() {
-        return pantsSlot;
-    }
-    
-    public Slot getBootsSlot() {
-        return bootsSlot;
-    }
-
-    public int getAbilityCooldown() {
-        Helmet equipedHelmet = (Helmet)helmetSlot.getItem();
-        int abilityCooldownBonus = 0;
-        if(equipedHelmet != null) {
-            abilityCooldownBonus = equipedHelmet.getValue();
-        }
-        return abilityCooldown + abilityCooldownBonus;
-    }
-
-    public void setAbilityCooldown(int abilityCooldown) {
-        this.abilityCooldown = abilityCooldown;
-    }
-
-    public int getStunCooldown() {
-        Pants equipedPants = (Pants)pantsSlot.getItem();
-        int stunCooldownBonus = 0;
-        if(equipedPants != null) {
-            stunCooldownBonus = equipedPants.getValue();
-        }
-        return stunCooldown + stunCooldownBonus;
-    }
-
-    public void setStunCooldown(int stunCooldown) {
-        this.stunCooldown = stunCooldown;
-    }
-
-
-    @Override
-    public String toString() {
-        return "GameCharacter [health=" + health + ", inventory=" + inventory + ", weaponSlot=" + weaponSlot + "]";
-    }
-    
 }

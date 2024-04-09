@@ -6,6 +6,8 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
+import engine.entities.items.weapons.Sword;
+import engine.entities.items.equipment.*;
 import engine.dungeon.Dungeon;
 import log.Gamelog;
 
@@ -75,6 +77,15 @@ public class GameBuilder {
             int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.ENEMY_HEIGHT/2, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT/2);
             Position position = new Position(enemyX, enemyY); // On instancie sa position
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
+
+            // Partie stuff de l'Enemy
+            enemy.getEquipment().setWeapon((Sword)EntityFactory.createEntity(GameConfiguration.SWORD_LABEL, null));
+            enemy.getEquipment().setHelmet((Helmet)EntityFactory.createEntity(GameConfiguration.HELMET_LABEL, null));
+            enemy.getEquipment().setGloves((Gloves)EntityFactory.createEntity(GameConfiguration.GLOVES_LABEL, null));
+            enemy.getEquipment().setChestplate((Chestplate)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_LABEL, null));
+            enemy.getEquipment().setPants((Pants)EntityFactory.createEntity(GameConfiguration.PANTS_LABEL, null));
+            enemy.getEquipment().setBoots((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_LABEL, null));
+
             // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
             if(manager.verifHitboxes(enemy.getHitbox()) || enemy.getHitbox().isInCollision(Player.getInstance().getHitbox())) {
                 manager.getRoom().addEntity(enemy); // On ajoute l'ennemi à la liste d'entités de la Room

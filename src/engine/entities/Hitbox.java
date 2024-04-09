@@ -49,21 +49,24 @@ public class Hitbox {
         int width = 0;
         int height = 0;
         switch (this.entityType) {
-            case "enemy" :
+            case GameConfiguration.ENEMY_LABEL :
                 width = GameConfiguration.ENEMY_WIDTH;
                 height = GameConfiguration.ENEMY_HEIGHT;
                 break;
-            case "player" :
+            case GameConfiguration.PLAYER_LABEL :
                 width = GameConfiguration.PLAYER_WIDTH;
                 height = GameConfiguration.PLAYER_HEIGHT;
                 break;
-            case "sword" :
+            case GameConfiguration.SWORD_LABEL :
                 width = GameConfiguration.SWORD_WIDTH;
                 height = GameConfiguration.SWORD_HEIGHT;
                 break;
-            case"healthFlask" : 
+            case GameConfiguration.HEALTHFLASK_LABEL : 
                 width = GameConfiguration.HEALTHFLASK_WIDTH;
                 height = GameConfiguration.HEALTHFLASK_HEIGHT;
+            case GameConfiguration.BAG_LABEL :
+                width = GameConfiguration.BAG_WIDTH;
+                height = GameConfiguration.BAG_HEIGHT;
             case "default" :
                 logger.warn(entityType + " is not a recognized type of entity");
                 break;

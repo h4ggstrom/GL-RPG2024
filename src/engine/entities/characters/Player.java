@@ -18,6 +18,7 @@ public class Player extends GameCharacter {
     private static Player player;
     private int currentStage = 1;
     private int currentRoom = 1;
+    private int experience = 0;
   
     /**
      * Constructeur par défaut. Génère une nouvelle instance de player en utilisant le constructeur de la classe abstraite {@link engine.entities.characters.GameCharacter}
@@ -25,7 +26,7 @@ public class Player extends GameCharacter {
      * @param position la position du joueur.
      */
     private Player(Position position) {
-        super(position, "player", GameConfiguration.PLAYER_DEFAULT_HEALTH, GameConfiguration.PLAYER_DEFAULT_ARMOR, GameConfiguration.PLAYER_DEFAULT_ATTACKSPEED, GameConfiguration.PLAYER_DEFAULT_MOVESPEED, GameConfiguration.PLAYER_DEFAULT_ABILITYCOOLDOWN, GameConfiguration.PLAYER_DEFAULT_STUNCOOLDOWN);
+        super(position, "player", GameConfiguration.PLAYER_DEFAULT_MAXHEALTH, GameConfiguration.PLAYER_DEFAULT_MAXHEALTH, GameConfiguration.PLAYER_DEFAULT_ARMOR, GameConfiguration.PLAYER_DEFAULT_ATTACKSPEED, GameConfiguration.PLAYER_DEFAULT_ATTACKRANGE, GameConfiguration.PLAYER_DEFAULT_ATTACKDAMAGE, GameConfiguration.PLAYER_DEFAULT_MOVESPEED, GameConfiguration.PLAYER_DEFAULT_ABILITYCOOLDOWN, GameConfiguration.PLAYER_DEFAULT_STUNCOOLDOWN);
     }
 
     public static Player getInstance() {
@@ -55,6 +56,14 @@ public class Player extends GameCharacter {
 
     public void moveToNextRoom() {
         this.currentRoom++;
+    }
+
+    public void gainExp(int exp) {
+        this.experience += exp;
+    }
+
+    public int getExp() {
+        return this.experience;
     }
     
 }

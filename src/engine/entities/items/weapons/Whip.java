@@ -20,5 +20,5 @@ public class Whip extends Weapon {
     public void setAreaOfEffectDamage(int areaOfEffectDamage) {
         this.areaOfEffectDamage = areaOfEffectDamage;
     }
-    
+
 }
