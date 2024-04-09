@@ -63,8 +63,41 @@ public class GameConfiguration {
     public static final int PLAYER_DEFAULT_STUNCOOLDOWN = 4000;
     public static final int PLAYER_LIFEBAR_XSHIFT = -15;
     public static final int PLAYER_ENTITY_INTERACTION_RANGE = 50;
+
+    // capacité du fouet
+    public static final int WHIP_DAMAGE = 3;
+    public static final int WHIP_SPEED = 0;
+    public static final int WHIP_RANGE = 100;
+    public static final int WHIP_AREA_DAMAGE = 1;
+
+    // capacité du sceptre
+    public static final int SCEPTER_BURN_DAMAGE = 1;
+    public static final int SCEPTER_DAMAGE = 5;
+    public static final int SCEPTER_SPEED = 0;
+    public static final int SCEPTER_RANGE = 250;
+    public static final int SCEPTER_WIDTH = 10;
+    public static final int SCEPTER_HEIGHT = 20;
+
+    // capacité du grimoire
+    public static final int GRIMOIRE_ROOT_DURATION = 3;
+    public static final int GRIMOIRE_DAMAGE = 2;
+    public static final int GRIMOIRE_SPEED = 0;
+    public static final int GRIMOIRE_RANGE = 250;
+
+    // capacité de la dague
+    public static final int DAGGER_DAMAGE = 3;
+    public static final int DAGGER_SPEED = 0;
+    public static final int DAGGER_RANGE = 50;
+    public static final int DAGGER_BLEED_DAMAGE = 1;
+
+    // capacité de l'arc
+    public static final int BOW_DAMAGE = 5;
+    public static final int BOW_SPEED = 0;
+    public static final int BOW_RANGE = 300;
+    public static final int BOW_DAMAGE_OVER_RANGE = 5;
+
     
-    // dégats de l'epée
+    // capacité de l'epée
     public static final int SWORD_DAMAGE = 5;
     public static final int SWORD_SPEED = 0;
     public static final int SWORD_RANGE = 100;
@@ -105,6 +138,11 @@ public class GameConfiguration {
     // partie noms d'entités
     public static final String ENEMY_LABEL = "enemy";
     public static final String SWORD_LABEL = "sword";
+    public static final String DAGGER_LABEL = "dagger";
+    public static final String WHIP_LABEL = "whip";
+    public static final String SCEPTER_LABEL = "scepter";
+    public static final String GRIMOIRE_LABEL = "grimoire";
+    public static final String BOW_LABEL = "bow";
     public static final String HEALTHFLASK_LABEL = "healthFlask";
     public static final String HELMET_LABEL = "helmet";
     public static final String GLOVES_LABEL = "gloves";
