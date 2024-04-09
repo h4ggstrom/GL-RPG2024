@@ -8,7 +8,7 @@ public class Dagger extends Weapon {
     int bleedDamage;
 
     public Dagger(Position position) {
-        super(GameConfiguration.DAGGER_DAMAGE, GameConfiguration.DAGGER_SPEED, GameConfiguration.DAGGER_RANGE, "dagger", position);
+        super(GameConfiguration.DAGGER_DAMAGE, GameConfiguration.DAGGER_RANGE, "dagger", position);
         this.bleedDamage = GameConfiguration.DAGGER_BLEED_DAMAGE;
     }
 
