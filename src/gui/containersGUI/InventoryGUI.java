@@ -33,7 +33,7 @@ public class InventoryGUI extends ContainerGUI {
     
     public InventoryGUI(EntityManager manager) {
         super(manager);
-        super.manager.setInventoryRefreshListener(this);
+        EntityManager.inventoryRefreshListener = this;
 
         initOverallView();
 
@@ -96,7 +96,7 @@ public class InventoryGUI extends ContainerGUI {
                         popupMenu.add(equipItem);
                         equipItem.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                manager.equipInventoryItem(inventory.getSlots().get(slotNumber));
+                                manager.equipInventoryItem(slotNumber);
                             }
                         });
                     }
@@ -106,13 +106,13 @@ public class InventoryGUI extends ContainerGUI {
                         popupMenu.add(consumeItem);
                         consumeItem.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                ConsumableManager.consumeItem(inventory.getSlots().get(slotNumber));
+                                ConsumableManager.consumeInventoryItem(slotNumber);
                             }
                         });
                     }
                     deleteItem.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            manager.deleteInventoryItem(inventory.getSlots().get(slotNumber));
+                            manager.deleteInventoryItem(slotNumber);
                         }
                     });
 
@@ -155,10 +155,33 @@ public class InventoryGUI extends ContainerGUI {
         JPanel bootsPanel = new JPanel();
         initItemSlot(equipedItemsPanel, weaponPanel, weapon, "Arme");
         initItemSlot(equipedItemsPanel, helmetPanel, helmet, "Casque");
-        initItemSlot(equipedItemsPanel, chestplatePanel, gloves, "Plastron");
-        initItemSlot(equipedItemsPanel, glovesPanel, chestplate, "Gants");
+        initItemSlot(equipedItemsPanel, glovesPanel, gloves, "Gants");
+        initItemSlot(equipedItemsPanel, chestplatePanel, chestplate, "Plastron");
         initItemSlot(equipedItemsPanel, pantsPanel, pants, "Jambières");
         initItemSlot(equipedItemsPanel, bootsPanel, boots, "Bottes");
+        initEquipmentSlotListener(weaponPanel, "weapon");
+        initEquipmentSlotListener(helmetPanel, "helmet");
+        initEquipmentSlotListener(glovesPanel, "gloves");
+        initEquipmentSlotListener(chestplatePanel, "chestplate");
+        initEquipmentSlotListener(pantsPanel, "pants");
+        initEquipmentSlotListener(bootsPanel, "boots");
+    }
+
+    public void initEquipmentSlotListener(JPanel panel, String entityType) {
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JPopupMenu popupMenu = new JPopupMenu();
+                JMenuItem desequipItem = new JMenuItem("Déséquiper");
+                popupMenu.add(desequipItem);
+                desequipItem.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        manager.desequipInventoryItem(entityType);
+                    }
+                });
+                popupMenu.show(e.getComponent(), e.getX(), e.getY());
+            }
+        });
     }
 
     public void initPlayerStatisticsPanel() {

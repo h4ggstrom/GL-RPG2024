@@ -9,10 +9,13 @@ import engine.entities.items.consumables.Consumable;
  */
 public class ConsumableManager {
 
-    public static void consumeItem(Slot slot) {
+    public static void consumeInventoryItem(int slotNumber) {
+        // On récupère le slot d'inventaire concerné
+        Slot slot = Player.getInstance().getInventory().getSlots().get(slotNumber);
         // On récupère le consommable
         Consumable consumable = (Consumable)slot.getItem();
-        // On le supprime du slot
+        // On supprime l'item de l'inventaire
+        Player.getInstance().getInventory().removeItem(slotNumber);
         slot.setItem(null);
         // On vérifie son effet et on fait en fonction
         switch (consumable.getConsumableEffect()) {
@@ -22,5 +25,6 @@ public class ConsumableManager {
             default:
                 throw new IllegalArgumentException("Effet du consommable inconnu : " + consumable.getConsumableEffect());
         }
+        EntityManager.refreshContainers();
     }
 }

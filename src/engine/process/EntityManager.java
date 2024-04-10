@@ -39,8 +39,8 @@ public class EntityManager {
     private static Logger logger = Gamelog.getLogger();
     private Player player = Player.getInstance(); // le joueur
     private Dungeon dungeon; // la salle dans laquelle évolue le joueur
-    private ContainerRefreshListener bagRefreshListener;
-    private ContainerRefreshListener inventoryRefreshListener;
+    public static ContainerRefreshListener bagRefreshListener;
+    public static ContainerRefreshListener inventoryRefreshListener;
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de CharacterManager.
@@ -357,54 +357,88 @@ public class EntityManager {
      * Méthode récupérant un Slot de l'inventaire et équipant l'item contenu si la place n'est pas déjà prise dans le slot d'équipement correspondant
      * @param slot
      */
-    public void equipInventoryItem(Slot slot) {
+    public void equipInventoryItem(int slotNumber) {
+        Slot slot = player.getInventory().getSlots().get(slotNumber);
         Item item = slot.getItem();
         if(item instanceof Weapon) {
             if(player.getEquipment().getWeapon() == null) {
                 player.getEquipment().setWeapon((Weapon)item);
-                slot.setItem(null);
             }
         }
         else if(item instanceof Helmet) {
             if(player.getEquipment().getHelmet() == null) {
                 player.getEquipment().setHelmet((Helmet)item);
-                slot.setItem(null);
             }
         }
         else if(item instanceof Gloves) {
             if(player.getEquipment().getGloves() == null) {
                 player.getEquipment().setGloves((Gloves)item);
-                slot.setItem(null);
             }
         }
         else if(item instanceof Chestplate) {
             if(player.getEquipment().getChestplate() == null) {
                 player.getEquipment().setChestplate((Chestplate)item);
-                slot.setItem(null);
             }
         }
         else if(item instanceof Pants) {
             if(player.getEquipment().getPants() == null) {
                 player.getEquipment().setPants((Pants)item);
-                slot.setItem(null);
             }
         }
         else if(item instanceof Boots) {
             if(player.getEquipment().getBoots() == null) {
                 player.getEquipment().setBoots((Boots)item);
-                slot.setItem(null);
             }
         }
-
+        // On supprime l'item de l'inventaire
+        player.getInventory().removeItem(slotNumber);
         refreshContainers();
+    }
+
+    public void desequipInventoryItem(String entityType) {
+        if(!player.getInventory().isFull()) {
+            switch(entityType) {
+                case "weapon":
+                    Weapon weapon = player.getEquipment().getWeapon();
+                    player.getInventory().addItem(weapon);
+                    player.getEquipment().setWeapon(null);
+                    break;
+                case "helmet":
+                    Helmet helmet = player.getEquipment().getHelmet();
+                    player.getInventory().addItem(helmet);
+                    player.getEquipment().setHelmet(null);
+                    break;
+                case "gloves":
+                    Gloves gloves = player.getEquipment().getGloves();
+                    player.getInventory().addItem(gloves);
+                    player.getEquipment().setGloves(null);
+                    break;
+                case "chestplate":
+                    Chestplate chestplate = player.getEquipment().getChestplate();
+                    player.getInventory().addItem(chestplate);
+                    player.getEquipment().setChestplate(null);
+                    break;
+                case "pants":
+                    Pants pants = player.getEquipment().getPants();
+                    player.getInventory().addItem(pants);
+                    player.getEquipment().setPants(null);
+                    break;
+                case "boots":
+                    Boots boots = player.getEquipment().getBoots();
+                    player.getInventory().addItem(boots);
+                    player.getEquipment().setBoots(null);
+                    break;
+            }
+            refreshContainers();
+        }
     }
 
     /**
      * Méthode permettant de supprimer un Item de l'inventaire du joueur
-     * @param slot
+     * @param slotNumber le numéro du slot dans l'inventaire
      */
-    public void deleteInventoryItem(Slot slot) {
-        slot.setItem(null);
+    public void deleteInventoryItem(int slotNumber) {
+        player.getInventory().removeItem(slotNumber);
         refreshContainers();
     }
 
@@ -420,28 +454,12 @@ public class EntityManager {
         }
     }
 
-    public void refreshContainers() {
+    public static void refreshContainers() {
         if(bagRefreshListener != null) {
             bagRefreshListener.refreshContainer();
         }
         if(inventoryRefreshListener != null) {
             inventoryRefreshListener.refreshContainer();
         }
-    }
-
-    /**
-     * Ce setter permet d'associer à notre EntityManager, dans InventoryGUI, l'instance de ContainerChangeListener qui est en fait BagGUI
-     * @param listener InventoryGUI qui implémente InventoryChangeListener
-     */
-    public void setBagRefreshListener(ContainerRefreshListener listener) {
-        this.bagRefreshListener = listener;
-    }
-
-        /**
-     * Ce setter permet d'associer à notre EntityManager, dans InventoryGUI, l'instance de ContainerChangeListener qui est en fait InventoryGUI
-     * @param listener InventoryGUI qui implémente InventoryChangeListener
-     */
-    public void setInventoryRefreshListener(ContainerRefreshListener listener) {
-        this.inventoryRefreshListener = listener;
     }
 }

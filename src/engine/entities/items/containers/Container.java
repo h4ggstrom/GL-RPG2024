@@ -68,4 +68,8 @@ public class Container extends Item {
     public void setNumberOfItems(int numberOfItems) {
         this.numberOfItems = numberOfItems;
     }
+
+    public boolean isFull() {
+        return numberOfItems == maxNumberOfItems;
+    }
 }
