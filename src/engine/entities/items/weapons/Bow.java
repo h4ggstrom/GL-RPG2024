@@ -8,7 +8,7 @@ public class Bow extends Weapon {
     int dmgOverRange;
 
     public Bow(Position position) {
-        super(GameConfiguration.BOW_DAMAGE, GameConfiguration.BOW_RANGE, "bow", position);
+        super(GameConfiguration.BOW_DAMAGE, GameConfiguration.BOW_RANGE, GameConfiguration.BOW_NAME, GameConfiguration.BOW_ENTITYTYPE, position);
         this.dmgOverRange = GameConfiguration.BOW_DAMAGE_OVER_RANGE;
     }
 

@@ -10,7 +10,7 @@ import engine.entities.items.equipment.*;
 public class Bag extends Container {
 
     public Bag (Position position) {
-        super(position, GameConfiguration.BAG_LABEL, GameConfiguration.BAG_MAX);
+        super(position, GameConfiguration.BAG_NAME, GameConfiguration.BAG_ENTITYTYPE, GameConfiguration.BAG_MAX);
     }
 
     /**

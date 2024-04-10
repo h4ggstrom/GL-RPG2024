@@ -40,8 +40,8 @@ public abstract class GameCharacter extends Entity {
      * @param entityType le type de personnage
      * @param health le nombre de PV du personnage
      */
-    public GameCharacter (Position position, String entityType, int maxHealth, int health, int armor, int attackSpeed, int attackRange, int attackDamage, int moveSpeed, int abilityCooldown, int stunCooldown) {
-        super(position, entityType);
+    public GameCharacter (Position position, String characterName, String characterType, int maxHealth, int health, int armor, int attackSpeed, int attackRange, int attackDamage, int moveSpeed, int abilityCooldown, int stunCooldown) {
+        super(position, characterName, characterType);
         this.maxHealth = maxHealth;
         this.health = health;
         this.armor = armor;

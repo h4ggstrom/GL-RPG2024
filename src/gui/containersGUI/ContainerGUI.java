@@ -29,13 +29,19 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
         itemPanel.add(nameLabel, BorderLayout.PAGE_START);
 
         if(item != null) {
-            String itemFilePath = "src/ressources/" +  item.getEntityType() + ".png";
+            String itemFilePath = "src/ressources/" + item.getEntityType() + ".png";
             ImageIcon itemIcon = new ImageIcon(itemFilePath);
             JLabel itemIconLabel = new JLabel(itemIcon, JLabel.CENTER);
-
             itemPanel.add(itemIconLabel, BorderLayout.CENTER);
+            
+            // Configurer le tooltip avec des informations de l'item
+            String tooltipText = "<html>" + "Nom : " + item.getEntityName() + "<br>" + "Effet : " + "<br>" + "Valeur : " + "</html>";
+            itemPanel.setToolTipText(tooltipText);
+        } else {
+            // Configurer un texte de tooltip par défaut si l'item est null
+            itemPanel.setToolTipText("Slot vide");
         }
-
+    
         panel.add(itemPanel);
     }
 }

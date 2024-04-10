@@ -12,8 +12,8 @@ public class Container extends Item {
     private int numberOfItems;
     private int maxNumberOfItems;
 
-    public Container (Position position, String containerType, int numberOfSlots) {
-        super(position, containerType);
+    public Container (Position position, String containerName, String containerType, int numberOfSlots) {
+        super(position, containerName, containerType);
         this.slots = new ArrayList<Slot>();
         this.numberOfItems = 0;
         this.maxNumberOfItems = numberOfSlots;

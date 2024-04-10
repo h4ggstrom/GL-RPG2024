@@ -204,7 +204,7 @@ public class EntityManager {
             // On parcourt les Enemy éliminés pour les retirer du jeu et faire tomber leur sac
             for (Enemy eliminatedEnemy : eliminatedEnemies) {
                 // On crée un sac
-                Bag bag = (Bag)EntityFactory.createEntity(GameConfiguration.BAG_LABEL, eliminatedEnemy.getPosition());
+                Bag bag = (Bag)EntityFactory.createEntity(GameConfiguration.BAG_ENTITYTYPE, eliminatedEnemy.getPosition());
                 // On le remplit avec tout ce qu'il y a sur l'Enemy
                 bag.fillBagWithGameCharacterItems(selectedEnemy);
                 // On ajoute le sac à la liste d'entités de la Room

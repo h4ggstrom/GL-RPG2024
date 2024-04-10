@@ -49,22 +49,22 @@ public class Hitbox {
         int width = 0;
         int height = 0;
         switch (this.entityType) {
-            case GameConfiguration.ENEMY_LABEL :
+            case GameConfiguration.ENEMY_ENTITYTYPE :
                 width = GameConfiguration.ENEMY_WIDTH;
                 height = GameConfiguration.ENEMY_HEIGHT;
                 break;
-            case GameConfiguration.PLAYER_LABEL :
+            case GameConfiguration.PLAYER_ENTITYTYPE :
                 width = GameConfiguration.PLAYER_WIDTH;
                 height = GameConfiguration.PLAYER_HEIGHT;
                 break;
-            case GameConfiguration.SWORD_LABEL :
+            case GameConfiguration.SWORD_ENTITYTYPE :
                 width = GameConfiguration.SWORD_WIDTH;
                 height = GameConfiguration.SWORD_HEIGHT;
                 break;
-            case GameConfiguration.HEALTHFLASK_LABEL : 
+            case GameConfiguration.HEALTHFLASK_ENTITYTYPE : 
                 width = GameConfiguration.HEALTHFLASK_WIDTH;
                 height = GameConfiguration.HEALTHFLASK_HEIGHT;
-            case GameConfiguration.BAG_LABEL :
+            case GameConfiguration.BAG_ENTITYTYPE :
                 width = GameConfiguration.BAG_WIDTH;
                 height = GameConfiguration.BAG_HEIGHT;
             case "default" :

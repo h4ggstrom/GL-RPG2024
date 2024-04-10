@@ -8,7 +8,7 @@ public class Grimoire extends Weapon {
     int rootDuration;
 
     public Grimoire(Position position) {
-        super(GameConfiguration.GRIMOIRE_DAMAGE, GameConfiguration.GRIMOIRE_RANGE, "grimoire", position);
+        super(GameConfiguration.GRIMOIRE_DAMAGE, GameConfiguration.GRIMOIRE_RANGE, GameConfiguration.GRIMOIRE_NAME, GameConfiguration.GRIMOIRE_ENTITYTYPE, position);
         this.rootDuration = GameConfiguration.GRIMOIRE_ROOT_DURATION;
     }
 

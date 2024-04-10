@@ -6,7 +6,7 @@ import engine.dungeon.Position;
 public class Sword extends Weapon {
 
     public Sword(Position position) {
-        super(GameConfiguration.SWORD_DAMAGE, GameConfiguration.SWORD_RANGE, GameConfiguration.SWORD_LABEL, position);
+        super(GameConfiguration.SWORD_DAMAGE, GameConfiguration.SWORD_RANGE,  GameConfiguration.SWORD_NAME, GameConfiguration.SWORD_ENTITYTYPE, position);
     }
     
 }

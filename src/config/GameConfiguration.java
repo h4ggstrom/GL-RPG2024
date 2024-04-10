@@ -141,22 +141,40 @@ public class GameConfiguration {
     public static final int BAG_MAX = 12;
 
     // partie noms d'entités
-    public static final String INVENTORY_LABEL = "inventory";
-    public static final String BAG_LABEL = "bag";
-    public static final String PLAYER_LABEL = "player";
-    public static final String ENEMY_LABEL = "enemy";
-    public static final String SWORD_LABEL = "sword";
-    public static final String HEALTHFLASK_LABEL = "healthFlask";
-    public static final String HELMET_LABEL = "helmet";
-    public static final String GLOVES_LABEL = "gloves";
-    public static final String CHESTPLATE_LABEL = "chestplate";
-    public static final String PANTS_LABEL = "pants";
-    public static final String BOOTS_LABEL = "boots";
-    public static final String DAGGER_LABEL = "dagger";
-    public static final String WHIP_LABEL = "whip";
-    public static final String SCEPTER_LABEL = "scepter";
-    public static final String GRIMOIRE_LABEL = "grimoire";
-    public static final String BOW_LABEL = "bow";
+    public static final String INVENTORY_ENTITYTYPE = "inventory";
+    public static final String BAG_ENTITYTYPE = "bag";
+    public static final String PLAYER_ENTITYTYPE = "player";
+    public static final String ENEMY_ENTITYTYPE = "enemy";
+    public static final String SWORD_ENTITYTYPE = "sword";
+    public static final String HEALTHFLASK_ENTITYTYPE = "healthFlask";
+    public static final String HELMET_ENTITYTYPE = "helmet";
+    public static final String GLOVES_ENTITYTYPE = "gloves";
+    public static final String CHESTPLATE_ENTITYTYPE = "chestplate";
+    public static final String PANTS_ENTITYTYPE = "pants";
+    public static final String BOOTS_ENTITYTYPE = "boots";
+    public static final String DAGGER_ENTITYTYPE = "dagger";
+    public static final String WHIP_ENTITYTYPE = "whip";
+    public static final String SCEPTER_ENTITYTYPE = "scepter";
+    public static final String GRIMOIRE_ENTITYTYPE = "grimoire";
+    public static final String BOW_ENTITYTYPE = "bow";
+
+    // partie noms d'objets
+    public static final String INVENTORY_NAME = "inventory";
+    public static final String BAG_NAME = "bag";
+    public static final String PLAYER_NAME = "player";
+    public static final String ENEMY_NAME = "enemy";
+    public static final String SWORD_NAME = "sword";
+    public static final String HEALTHFLASK_NAME = "healthFlask";
+    public static final String HELMET_NAME = "helmet";
+    public static final String GLOVES_NAME = "gloves";
+    public static final String CHESTPLATE_NAME = "chestplate";
+    public static final String PANTS_NAME = "pants";
+    public static final String BOOTS_NAME = "boots";
+    public static final String DAGGER_NAME = "dagger";
+    public static final String WHIP_NAME = "whip";
+    public static final String SCEPTER_NAME = "scepter";
+    public static final String GRIMOIRE_NAME = "grimoire";
+    public static final String BOW_NAME = "bow";
 
     // partie effets
     public static final String HEALTHFLASK_EFFECT = "heal";

@@ -16,33 +16,33 @@ public class EntityFactory {
 
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
-            case GameConfiguration.ENEMY_LABEL:
+            case GameConfiguration.ENEMY_ENTITYTYPE:
                 return new Enemy(position);
-            case GameConfiguration.SWORD_LABEL:
+            case GameConfiguration.SWORD_ENTITYTYPE:
                 return new Sword(position);
-            case GameConfiguration.HEALTHFLASK_LABEL:
+            case GameConfiguration.HEALTHFLASK_ENTITYTYPE:
                 return new HealthFlask(position);
-            case GameConfiguration.HELMET_LABEL:
+            case GameConfiguration.HELMET_ENTITYTYPE:
                 return new Helmet(position);
-            case GameConfiguration.GLOVES_LABEL:
+            case GameConfiguration.GLOVES_ENTITYTYPE:
                 return new Gloves(position);
-            case GameConfiguration.CHESTPLATE_LABEL:
+            case GameConfiguration.CHESTPLATE_ENTITYTYPE:
                 return new Chestplate(position);
-            case GameConfiguration.PANTS_LABEL:
+            case GameConfiguration.PANTS_ENTITYTYPE:
                 return new Pants(position);
-            case GameConfiguration.BOOTS_LABEL:
+            case GameConfiguration.BOOTS_ENTITYTYPE:
                 return new Boots(position);
-            case GameConfiguration.BAG_LABEL:
+            case GameConfiguration.BAG_ENTITYTYPE:
                 return new Bag(position);
-                case GameConfiguration.DAGGER_LABEL:
+                case GameConfiguration.DAGGER_ENTITYTYPE:
                 return new Dagger(position);
-            case GameConfiguration.WHIP_LABEL:
+            case GameConfiguration.WHIP_ENTITYTYPE:
                 return new Whip(position);
-            case GameConfiguration.SCEPTER_LABEL:
+            case GameConfiguration.SCEPTER_ENTITYTYPE:
                 return new Scepter(position);
-            case GameConfiguration.GRIMOIRE_LABEL:
+            case GameConfiguration.GRIMOIRE_ENTITYTYPE:
                 return new Grimoire(position);
-            case GameConfiguration.BOW_LABEL:
+            case GameConfiguration.BOW_ENTITYTYPE:
                 return new Bow(position);
             default:
                 throw new IllegalArgumentException("Entité inconnue : " + entityType);

@@ -8,8 +8,8 @@ public abstract class Armor extends Item {
     String effect;
     int value;
     
-    public Armor(String effect, int value, String armorType, Position position) {
-        super(position, armorType);
+    public Armor(String effect, int value, String armorName, String armorType, Position position) {
+        super(position, armorName, armorType);
         this.effect = effect;
         this.value = value;
     }

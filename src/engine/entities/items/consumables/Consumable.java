@@ -8,8 +8,8 @@ public abstract class Consumable extends Item {
     String effect;
     int value;
     
-    public Consumable(String effect, int value, String consumableType, Position position) {
-        super(position, consumableType);
+    public Consumable(String effect, int value, String consumableName, String consumableType, Position position) {
+        super(position, consumableName, consumableType);
         this.value = value;
         this.effect = effect;
     }

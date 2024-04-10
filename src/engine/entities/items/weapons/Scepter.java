@@ -8,7 +8,7 @@ public class Scepter extends Weapon {
     int burnDamage;
 
     public Scepter(Position position) {
-        super(GameConfiguration.SCEPTER_DAMAGE, GameConfiguration.SCEPTER_RANGE, "scepter", position);
+        super(GameConfiguration.SCEPTER_DAMAGE, GameConfiguration.SCEPTER_RANGE,  GameConfiguration.SCEPTER_NAME, GameConfiguration.SCEPTER_ENTITYTYPE, position);
         this.burnDamage = GameConfiguration.SCEPTER_BURN_DAMAGE;
     }
 

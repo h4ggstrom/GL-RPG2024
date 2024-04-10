@@ -23,6 +23,6 @@ public class Enemy extends GameCharacter {
      * @param position la position de départ de l'ennemi
      */
     public Enemy(Position position) {
-        super(position, "enemy", GameConfiguration.ENEMY_DEFAULT_MAXHEALTH, GameConfiguration.ENEMY_DEFAULT_MAXHEALTH, GameConfiguration.ENEMY_DEFAULT_ARMOR, GameConfiguration.ENEMY_DEFAULT_ATTACKSPEED, GameConfiguration.ENEMY_DEFAULT_ATTACKRANGE, GameConfiguration.ENEMY_DEFAULT_ATTACKDAMAGE, GameConfiguration.ENEMY_DEFAULT_MOVESPEED, GameConfiguration.ENEMY_DEFAULT_ABILITYCOOLDOWN, GameConfiguration.ENEMY_DEFAULT_STUNCOOLDOWN);
+        super(position, GameConfiguration.ENEMY_NAME, GameConfiguration.ENEMY_ENTITYTYPE, GameConfiguration.ENEMY_DEFAULT_MAXHEALTH, GameConfiguration.ENEMY_DEFAULT_MAXHEALTH, GameConfiguration.ENEMY_DEFAULT_ARMOR, GameConfiguration.ENEMY_DEFAULT_ATTACKSPEED, GameConfiguration.ENEMY_DEFAULT_ATTACKRANGE, GameConfiguration.ENEMY_DEFAULT_ATTACKDAMAGE, GameConfiguration.ENEMY_DEFAULT_MOVESPEED, GameConfiguration.ENEMY_DEFAULT_ABILITYCOOLDOWN, GameConfiguration.ENEMY_DEFAULT_STUNCOOLDOWN);
     }
 }

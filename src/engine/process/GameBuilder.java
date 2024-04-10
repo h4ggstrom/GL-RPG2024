@@ -79,12 +79,12 @@ public class GameBuilder {
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
 
             // Partie stuff de l'Enemy
-            enemy.getEquipment().setWeapon((Sword)EntityFactory.createEntity(GameConfiguration.SWORD_LABEL, null));
-            enemy.getEquipment().setHelmet((Helmet)EntityFactory.createEntity(GameConfiguration.HELMET_LABEL, null));
-            enemy.getEquipment().setGloves((Gloves)EntityFactory.createEntity(GameConfiguration.GLOVES_LABEL, null));
-            enemy.getEquipment().setChestplate((Chestplate)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_LABEL, null));
-            enemy.getEquipment().setPants((Pants)EntityFactory.createEntity(GameConfiguration.PANTS_LABEL, null));
-            enemy.getEquipment().setBoots((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_LABEL, null));
+            enemy.getEquipment().setWeapon((Sword)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
+            enemy.getEquipment().setHelmet((Helmet)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
+            enemy.getEquipment().setGloves((Gloves)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
+            enemy.getEquipment().setChestplate((Chestplate)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
+            enemy.getEquipment().setPants((Pants)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
+            enemy.getEquipment().setBoots((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
 
             // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
             if(manager.verifHitboxes(enemy.getHitbox()) || enemy.getHitbox().isInCollision(Player.getInstance().getHitbox())) {

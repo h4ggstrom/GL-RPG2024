@@ -8,8 +8,8 @@ public abstract class Weapon extends Item {
     int attackDamage;
     int attackRange;
     
-    public Weapon(int attackDamage, int attackRange, String weaponType, Position position) {
-        super(position, weaponType);
+    public Weapon(int attackDamage, int attackRange, String weaponName, String weaponType, Position position) {
+        super(position, weaponName, weaponType);
         this.attackDamage = attackDamage;
         this.attackRange = attackRange;
     }
