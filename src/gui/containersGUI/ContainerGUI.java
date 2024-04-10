@@ -2,19 +2,14 @@ package gui.containersGUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import engine.entities.items.Item;
-import engine.entities.items.Slot;
 import engine.process.ContainerRefreshListener;
 import engine.process.EntityManager;
 
@@ -24,7 +19,6 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
 
     public ContainerGUI (EntityManager manager) {
         this.manager = manager;
-        this.manager.setContainerRefreshListener(this);
     }
 
     public void initItemSlot(JPanel panel, JPanel itemPanel, Item item, String slotName) {
@@ -43,34 +37,5 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
         }
 
         panel.add(itemPanel);
-    }
-
-    /**
-     * Méthode permettant de dessiner les panels correspondant aux slots des containers (avec nom et image de l'item, bouton utiliser)
-     * @param basePanel
-     * @param slots
-     */
-    public void initSlotsPanels(JPanel basePanel, ArrayList<Slot> slots) {
-        // On boucle autant de fois qu'il y a de slots en gardant le compte
-        for (int i = 0; i < slots.size(); i++) {
-            // On récupère l'Item du Slot
-            Item item = slots.get(i).getItem();
-            // On créé le Panel qui recevra l'Item
-            JPanel itemPanel = new JPanel();
-    
-            // Initialiser et ajouter le panel de l'item à inventoryPanel
-            initItemSlot(basePanel, itemPanel, item, (item == null) ? "" : item.getEntityType());
-            basePanel.add(itemPanel);
-    
-            // Créer et ajouter un bouton "Use" au panel de l'item
-            JButton useButton = new JButton("Use");
-            itemPanel.add(useButton, BorderLayout.PAGE_END);
-    
-            // Attacher un ActionListener au bouton, avec l'indice du slot comme paramètre
-            useButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                }
-            });
-        }
     }
 }

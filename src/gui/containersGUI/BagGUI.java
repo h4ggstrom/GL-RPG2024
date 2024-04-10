@@ -26,6 +26,7 @@ public class BagGUI extends ContainerGUI {
     public BagGUI(EntityManager manager, Bag bag) {
         super(manager);
         this.bag = bag;
+        super.manager.setBagRefreshListener(this);
 
         initOverallView();
 

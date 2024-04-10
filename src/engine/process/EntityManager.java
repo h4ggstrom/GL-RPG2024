@@ -39,7 +39,8 @@ public class EntityManager {
     private static Logger logger = Gamelog.getLogger();
     private Player player = Player.getInstance(); // le joueur
     private Dungeon dungeon; // la salle dans laquelle évolue le joueur
-    private ContainerRefreshListener containerRefreshListener;
+    private ContainerRefreshListener bagRefreshListener;
+    private ContainerRefreshListener inventoryRefreshListener;
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de CharacterManager.
@@ -342,6 +343,8 @@ public class EntityManager {
             int distanceEnemyPlayer = calculateDistance(enemyPosition, playerPosition);
             if(distanceEnemyPlayer <= enemy.getAttackRange()){ 
                 player.hurtCharacter(enemy.getAttackDamage());;
+                // On indique aux conteneurs si ils sont ouverts que des nouvelles valeurs pour les PV sont à afficher
+                refreshContainers();
             }
         }  
     }
@@ -351,11 +354,10 @@ public class EntityManager {
     }
 
     /**
-     * Méthode récupérant le numéro de slot de l'inventaire et équipant l'item contenu si la place n'est pas déjà prise dans le slot d'équipement correspondant
+     * Méthode récupérant un Slot de l'inventaire et équipant l'item contenu si la place n'est pas déjà prise dans le slot d'équipement correspondant
      * @param slot
      */
-    public void equipItem(int i) {
-        Slot slot = player.getInventory().getSlots().get(i);
+    public void equipInventoryItem(Slot slot) {
         Item item = slot.getItem();
         if(item instanceof Weapon) {
             if(player.getEquipment().getWeapon() == null) {
@@ -394,7 +396,16 @@ public class EntityManager {
             }
         }
 
-        containerRefreshListener.refreshContainer();
+        refreshContainers();
+    }
+
+    /**
+     * Méthode permettant de supprimer un Item de l'inventaire du joueur
+     * @param slot
+     */
+    public void deleteInventoryItem(Slot slot) {
+        slot.setItem(null);
+        refreshContainers();
     }
 
     /**
@@ -405,15 +416,32 @@ public class EntityManager {
         if(player.getInventory().getNumberOfItems() < GameConfiguration.INVENTORY_MAX) {
             player.getInventory().addItem(slot.getItem());
             slot.setItem(null);
-            containerRefreshListener.refreshContainer();
+            refreshContainers();
+        }
+    }
+
+    public void refreshContainers() {
+        if(bagRefreshListener != null) {
+            bagRefreshListener.refreshContainer();
+        }
+        if(inventoryRefreshListener != null) {
+            inventoryRefreshListener.refreshContainer();
         }
     }
 
     /**
-     * Ce setter permet d'associer à notre EntityManager, dans InventoryGUI, l'instance d'InventoryChangeListener qui est en fait InventoryGUI
+     * Ce setter permet d'associer à notre EntityManager, dans InventoryGUI, l'instance de ContainerChangeListener qui est en fait BagGUI
      * @param listener InventoryGUI qui implémente InventoryChangeListener
      */
-    public void setContainerRefreshListener(ContainerRefreshListener listener) {
-        this.containerRefreshListener = listener;
+    public void setBagRefreshListener(ContainerRefreshListener listener) {
+        this.bagRefreshListener = listener;
+    }
+
+        /**
+     * Ce setter permet d'associer à notre EntityManager, dans InventoryGUI, l'instance de ContainerChangeListener qui est en fait InventoryGUI
+     * @param listener InventoryGUI qui implémente InventoryChangeListener
+     */
+    public void setInventoryRefreshListener(ContainerRefreshListener listener) {
+        this.inventoryRefreshListener = listener;
     }
 }

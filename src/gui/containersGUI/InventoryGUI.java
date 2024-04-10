@@ -5,9 +5,14 @@ import javax.swing.*;
 import config.GameConfiguration;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import engine.entities.characters.Player;
+import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.containers.Inventory;
 import engine.entities.items.equipment.*;
@@ -19,12 +24,14 @@ public class InventoryGUI extends ContainerGUI {
     private Player player = Player.getInstance();
     private Inventory inventory = player.getInventory();
     private JPanel inventoryPanel = new JPanel();
+    private JPanel itemsPanel = new JPanel();
     private JPanel playerViewPanel = new JPanel();
     private JPanel equipedItemsPanel = new JPanel();
     private JPanel playerStatisticsPanel = new JPanel();
     
     public InventoryGUI(EntityManager manager) {
         super(manager);
+        super.manager.setInventoryRefreshListener(this);
 
         initOverallView();
 
@@ -58,12 +65,48 @@ public class InventoryGUI extends ContainerGUI {
         JLabel inventaireLabel = new JLabel("Inventaire", JLabel.CENTER);
         inventoryPanel.add(inventaireLabel);
         // La vue des items de l'inventaire sera comme une ligne avec une colonne par Slot (donc le nombre max d'objets dans l'inventaire)
-        JPanel itemsPanel = new JPanel();
         itemsPanel.setLayout(new GridLayout(1, GameConfiguration.INVENTORY_MAX));
         inventoryPanel.add(itemsPanel);
+        initInventorySlotsPanels();
+    }
+
+    public void initInventorySlotsPanels() {
+        // On récupère la liste des slots du sac
         ArrayList<Slot> slots = inventory.getSlots();
-    
-        initSlotsPanels(itemsPanel, slots);
+        for(int i = 0 ; i < GameConfiguration.INVENTORY_MAX ; i++) {
+            // On garde le compte
+            final int slotNumber = i;
+            // On récupère l'Item du Slot
+            Item item = slots.get(i).getItem();
+            // On créé le Panel qui recevra l'Item
+            JPanel itemPanel = new JPanel();
+
+            initItemSlot(itemsPanel, itemPanel, item, (item == null) ? "" : item.getEntityType());
+
+            itemPanel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    JPopupMenu popupMenu = new JPopupMenu();
+                    JMenuItem equipItem = new JMenuItem("Équiper");
+                    JMenuItem deleteItem = new JMenuItem("Supprimer");
+                    popupMenu.add(equipItem);
+                    popupMenu.add(deleteItem);
+                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
+
+                    equipItem.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            manager.equipInventoryItem(inventory.getSlots().get(slotNumber));
+                        }
+                    });
+
+                    deleteItem.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            manager.deleteInventoryItem(inventory.getSlots().get(slotNumber));
+                        }
+                    });
+                }
+            });
+        }
     }
 
     public void initPlayerViewPanel() {
@@ -156,9 +199,12 @@ public class InventoryGUI extends ContainerGUI {
     @Override
     public void refreshContainer() {
         inventoryPanel.removeAll(); // Supprime tous les composants du panel
+        itemsPanel.removeAll();
         initInventoryPanel(); // Reconstruit le panel
         inventoryPanel.revalidate(); // Indique que le layout manager doit recalculer le layout
         inventoryPanel.repaint(); // Demande la redessin du panel
+        itemsPanel.revalidate();
+        itemsPanel.repaint();
 
         equipedItemsPanel.removeAll();
         initEquipedItemsPanel();

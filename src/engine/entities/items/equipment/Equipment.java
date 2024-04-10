@@ -73,7 +73,7 @@ public class Equipment {
         equipmentList.add(gloves);
         equipmentList.add(chestplate);
         equipmentList.add(pants);
-        equipmentList.add(gloves);
+        equipmentList.add(boots);
         return equipmentList;
     }
 
