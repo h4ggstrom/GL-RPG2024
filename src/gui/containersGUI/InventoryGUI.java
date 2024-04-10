@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import engine.entities.characters.Player;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
+import engine.entities.items.consumables.Consumable;
 import engine.entities.items.containers.Inventory;
 import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.*;
+import engine.process.ConsumableManager;
 import engine.process.EntityManager;
 
 public class InventoryGUI extends ContainerGUI {
@@ -87,23 +89,35 @@ public class InventoryGUI extends ContainerGUI {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     JPopupMenu popupMenu = new JPopupMenu();
-                    JMenuItem equipItem = new JMenuItem("Équiper");
                     JMenuItem deleteItem = new JMenuItem("Supprimer");
-                    popupMenu.add(equipItem);
-                    popupMenu.add(deleteItem);
-                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
 
-                    equipItem.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            manager.equipInventoryItem(inventory.getSlots().get(slotNumber));
-                        }
-                    });
+                    if(item instanceof Clothe || item instanceof Weapon) {
+                        JMenuItem equipItem = new JMenuItem("Équiper");
+                        popupMenu.add(equipItem);
+                        equipItem.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                manager.equipInventoryItem(inventory.getSlots().get(slotNumber));
+                            }
+                        });
+                    }
 
+                    if(item instanceof Consumable) {
+                        JMenuItem consumeItem = new JMenuItem("Consommer");
+                        popupMenu.add(consumeItem);
+                        consumeItem.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                ConsumableManager.consumeItem(inventory.getSlots().get(slotNumber));
+                            }
+                        });
+                    }
                     deleteItem.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             manager.deleteInventoryItem(inventory.getSlots().get(slotNumber));
                         }
                     });
+
+                    popupMenu.add(deleteItem);
+                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             });
         }
