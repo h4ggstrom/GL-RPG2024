@@ -16,7 +16,7 @@ import engine.dungeon.Position;
 public class Coin extends Entity {
     private int value;
 
-    public Coin(Position position, int value) {
+    public Coin(Position position) {
         super(position, GameConfiguration.COIN_NAME, GameConfiguration.COIN_ENTITYPE);
         this.value = GameConfiguration.COIN_VALUE;
     }
