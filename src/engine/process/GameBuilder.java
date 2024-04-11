@@ -74,6 +74,8 @@ public class GameBuilder {
         Player player = Player.getInstance();
         int currentRoom = player.getCurrentRoom();
         int currentStage = player.getCurrentStage();
+        int enemyCount = 0; 
+        boolean isNewEquipement = currentRoom > 2;
         for (int i = 0; i < (manager.getPlayer().getCurrentStage() * manager.getPlayer().getCurrentRoom()); i++) {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION + GameConfiguration.ENEMY_WIDTH/2, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH/2);
             int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.ENEMY_HEIGHT/2, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT/2);
@@ -81,33 +83,34 @@ public class GameBuilder {
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
 
             // Partie stuff de l'Enemy
-
-            if(currentRoom < 2 && currentStage == 1){
-            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
-            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
-            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
-            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
-            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
-            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
-            } else {
-                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
-                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
-                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
-                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
-                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
-                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
-            }
+            initializeEquipmentToEnemy(enemy, isNewEquipement, enemyCount);
 
             // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
             if(manager.verifHitboxes(enemy.getHitbox()) || enemy.getHitbox().isInCollision(Player.getInstance().getHitbox())) {
                 manager.getRoom().addEntity(enemy); // On ajoute l'ennemi à la liste d'entités de la Room
+                enemyCount++;
             }
             else {
                 i--; // Sinon on refait un tour de boucle
             }
         }
     }
-
+    
+    private static void initializeEquipmentToEnemy(Enemy enemy, boolean isNewEquipement, int enemyCount) {
+        // On équipe un enemy sur deux d'un Scepter
+        if (isNewEquipement && enemyCount % 2 == 0) {
+            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
+        } else {
+            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
+        }
+    
+        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
+        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
+        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
+        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
+        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
+    }
+    
     /**
      * Cette méthode génère un nombre aléatoire compris entre un minimum et un maximum
      * 
