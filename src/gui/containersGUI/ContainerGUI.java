@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import engine.entities.items.Item;
+import engine.entities.items.equipment.Clothe;
+import engine.entities.items.weapons.Weapon;
 import engine.process.ContainerRefreshListener;
 import engine.process.EntityManager;
 
@@ -27,6 +29,7 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
         itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         JLabel nameLabel = new JLabel(slotName, JLabel.CENTER);
         itemPanel.add(nameLabel, BorderLayout.PAGE_START);
+        String tooltipText = "Slot vide";
 
         if(item != null) {
             String itemFilePath = "src/ressources/" + item.getEntityType() + ".png";
@@ -35,13 +38,18 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
             itemPanel.add(itemIconLabel, BorderLayout.CENTER);
             
             // Configurer le tooltip avec des informations de l'item
-            String tooltipText = "<html>" + "Nom : " + item.getEntityName() + "<br>" + "Effet : " + "<br>" + "Valeur : " + "</html>";
+            if(item instanceof Weapon) {
+                Weapon weapon = (Weapon)item;
+                tooltipText = "<html>" + "Nom : " + weapon.getEntityName() + "<br>" + "Dégâts : " + weapon.getAttackDamage() + "<br>" + "Portée : " + weapon.getAttackRange() + "</html>";
+            }
+            else if(item instanceof Clothe) {
+                Clothe clothe = (Clothe)item;
+                tooltipText = "<html>" + "Nom : " + clothe.getEntityName() + "<br>" + "Effet : " + clothe.getEffect() + "<br>" + "Valeur : " + clothe.getValue() + "</html>";
+            }
             itemPanel.setToolTipText(tooltipText);
-        } else {
-            // Configurer un texte de tooltip par défaut si l'item est null
-            itemPanel.setToolTipText("Slot vide");
         }
-    
+        
+        itemPanel.setToolTipText(tooltipText);
         panel.add(itemPanel);
     }
 }

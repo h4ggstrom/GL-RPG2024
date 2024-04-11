@@ -14,11 +14,11 @@ public abstract class Clothe extends Item {
         this.value = value;
     }
 
-    public String geteffect() {
+    public String getEffect() {
         return effect;
     }
 
-    public void seteffect(String effect) {
+    public void setEffect(String effect) {
         this.effect = effect;
     }
 
