@@ -159,22 +159,22 @@ public class GameConfiguration {
     public static final String BOW_ENTITYTYPE = "bow";
 
     // partie noms d'objets
-    public static final String INVENTORY_NAME = "inventory";
-    public static final String BAG_NAME = "bag";
-    public static final String PLAYER_NAME = "player";
-    public static final String ENEMY_NAME = "enemy";
-    public static final String SWORD_NAME = "sword";
-    public static final String HEALTHFLASK_NAME = "healthFlask";
-    public static final String HELMET_NAME = "helmet";
-    public static final String GLOVES_NAME = "gloves";
-    public static final String CHESTPLATE_NAME = "chestplate";
-    public static final String PANTS_NAME = "pants";
-    public static final String BOOTS_NAME = "boots";
-    public static final String DAGGER_NAME = "dagger";
-    public static final String WHIP_NAME = "whip";
-    public static final String SCEPTER_NAME = "scepter";
-    public static final String GRIMOIRE_NAME = "grimoire";
-    public static final String BOW_NAME = "bow";
+    public static final String INVENTORY_NAME = "Inventaire";
+    public static final String BAG_NAME = "Sac";
+    public static final String PLAYER_NAME = "Joueur";
+    public static final String ENEMY_NAME = "Ennemi";
+    public static final String SWORD_NAME = "Épée de rat";
+    public static final String HEALTHFLASK_NAME = "Potion de santé";
+    public static final String HELMET_NAME = "Casque de rat";
+    public static final String GLOVES_NAME = "Gants de rat";
+    public static final String CHESTPLATE_NAME = "Plastron de rat";
+    public static final String PANTS_NAME = "Pantalon de rat";
+    public static final String BOOTS_NAME = "Bottes de rat";
+    public static final String DAGGER_NAME = "Dague de rat";
+    public static final String WHIP_NAME = "Fouet de rat";
+    public static final String SCEPTER_NAME = "Sceptre de rat";
+    public static final String GRIMOIRE_NAME = "Grimoire de rat";
+    public static final String BOW_NAME = "Arc de rat";
 
     // partie effets
     public static final String HEALTHFLASK_EFFECT = "heal";

@@ -83,7 +83,7 @@ public class InventoryGUI extends ContainerGUI {
             // On créé le Panel qui recevra l'Item
             JPanel itemPanel = new JPanel();
 
-            initItemSlot(itemsPanel, itemPanel, item, (item == null) ? "" : item.getEntityType());
+            initItemSlot(itemsPanel, itemPanel, item, (item == null) ? "" : item.getEntityName());
 
             itemPanel.addMouseListener(new MouseAdapter() {
                 @Override

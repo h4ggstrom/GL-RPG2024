@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import engine.entities.items.Item;
+import engine.entities.items.consumables.Consumable;
 import engine.entities.items.equipment.Clothe;
 import engine.entities.items.weapons.Weapon;
 import engine.process.ContainerRefreshListener;
@@ -45,6 +46,10 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
             else if(item instanceof Clothe) {
                 Clothe clothe = (Clothe)item;
                 tooltipText = "<html>" + "Nom : " + clothe.getEntityName() + "<br>" + "Effet : " + clothe.getEffect() + "<br>" + "Valeur : " + clothe.getValue() + "</html>";
+            }
+            else if(item instanceof Consumable) {
+                Consumable consumable = (Consumable)item;
+                tooltipText = "<html>" + "Nom : " + consumable.getEntityName() + "<br>" + "Effet : " + consumable.getConsumableEffect() + "<br>" + "Valeur : " + consumable.getConsumableValue() + "</html>";
             }
             itemPanel.setToolTipText(tooltipText);
         }
