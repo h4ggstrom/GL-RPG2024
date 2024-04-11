@@ -71,6 +71,9 @@ public class GameBuilder {
      * @see engine.process.EntityManager pour les détails du processus de gestion des ennemis
      */
     public static void initializeEnemies(EntityManager manager) {
+        Player player = Player.getInstance();
+        int currentRoom = player.getCurrentRoom();
+        int currentStage = player.getCurrentStage();
         for (int i = 0; i < (manager.getPlayer().getCurrentStage() * manager.getPlayer().getCurrentRoom()); i++) {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION + GameConfiguration.ENEMY_WIDTH/2, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH/2);
             int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.ENEMY_HEIGHT/2, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT/2);
@@ -78,12 +81,22 @@ public class GameBuilder {
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
 
             // Partie stuff de l'Enemy
+
+            if(currentRoom < 2 && currentStage == 1){
             enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
             enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
             enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
             enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
             enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
             enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
+            } else {
+                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
+                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
+                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
+                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
+                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
+                enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
+            }
 
             // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
             if(manager.verifHitboxes(enemy.getHitbox()) || enemy.getHitbox().isInCollision(Player.getInstance().getHitbox())) {
