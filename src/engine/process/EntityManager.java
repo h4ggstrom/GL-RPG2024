@@ -187,11 +187,13 @@ public class EntityManager {
             List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
 
             // On vérifie si le click du joueur est compris dans la range de son arme
-            if(distance <= player.getAttackRange()) {
+            if(distance <= player.getAttackRange() && player.canAttack()) {
                 logger.trace("enemy attacked");
                 // Si c'est le cas, on attaque l'Enemy visé avec l'arme du joueur
                 selectedEnemy.hurtCharacter(player.getAttackDamage());;
                 logger.trace("enemy now has "+ selectedEnemy.getHealth()+ " HP");
+                // On indique que le joueur ne peut plus attaquer
+                player.setCanAttack(false);
             }
 
             // Si la vie de l'Enemy atteint 0 (ou moins)

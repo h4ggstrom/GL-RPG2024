@@ -30,6 +30,8 @@ public abstract class GameCharacter extends Entity {
     private int abilityCooldown;
     private int stunCooldown;
 
+    private boolean canAttack = true;
+
     private Inventory inventory;
     private Equipment equipment;
 
@@ -160,5 +162,13 @@ public abstract class GameCharacter extends Entity {
     
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
+    }
+
+    public boolean canAttack() {
+        return canAttack;
+    }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
     }
 }

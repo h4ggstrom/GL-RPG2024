@@ -64,9 +64,9 @@ public class GameConfiguration {
     // statistiques par défaut du joueur
     public static final int PLAYER_DEFAULT_MAXHEALTH = 50;
     public static final int PLAYER_DEFAULT_ARMOR = 20;
-    public static final int PLAYER_DEFAULT_ATTACKSPEED = 10;
+    public static final int PLAYER_DEFAULT_ATTACKSPEED = 4000; // En millisecondes
     public static final int PLAYER_DEFAULT_ATTACKRANGE = 50;
-    public static final int PLAYER_DEFAULT_ATTACKDAMAGE = 100;
+    public static final int PLAYER_DEFAULT_ATTACKDAMAGE = 5;
     public static final int PLAYER_DEFAULT_MOVESPEED = 10;
     public static final int PLAYER_DEFAULT_ABILITYCOOLDOWN = 1000;
     public static final int PLAYER_DEFAULT_STUNCOOLDOWN = 4000;
@@ -76,8 +76,8 @@ public class GameConfiguration {
     // PARTIE ARMES
 
     // Épée
-    public static final int SWORD_DAMAGE = 5;
-    public static final int SWORD_RANGE = 100;
+    public static final int SWORD_DAMAGE = 15;
+    public static final int SWORD_RANGE = 50;
 
     // Fouet
     public static final int WHIP_DAMAGE = 3;
@@ -121,7 +121,7 @@ public class GameConfiguration {
     public static final int ENEMY_DEFAULT_ARMOR = 10;
     public static final int ENEMY_DEFAULT_ATTACKSPEED = 5;
     public static final int ENEMY_DEFAULT_ATTACKRANGE = 50;
-    public static final int ENEMY_DEFAULT_ATTACKDAMAGE = 1;
+    public static final int ENEMY_DEFAULT_ATTACKDAMAGE = 3;
     public static final int ENEMY_DEFAULT_MOVESPEED = 5;
     public static final int ENEMY_DEFAULT_ABILITYCOOLDOWN = 1000;
     public static final int ENEMY_DEFAULT_STUNCOOLDOWN = 4000;
@@ -187,7 +187,7 @@ public class GameConfiguration {
     // partie bonus
     public static final int HEALTHFLASK_BONUS = 10;
     public static final int HELMET_BONUS = 3;
-    public static final int GLOVES_BONUS = 4;
+    public static final int GLOVES_BONUS = -2000; // En millisecondes
     public static final int CHESTPLATE_BONUS = 10;
     public static final int PANTS_BONUS = 2;
     public static final int BOOTS_BONUS = 5;

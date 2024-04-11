@@ -103,6 +103,11 @@ public class MainGUI extends JFrame implements Runnable {
                 manager.gameOver();
             }
 
+            // Chaque tick correspondant à la vitesse d'attaque du joueur, on lui rend la possibilité d'attaquer
+            if(compteur%Player.getInstance().getAttackSpeed() == 0){
+                Player.getInstance().setCanAttack(true);
+            }
+
             dashboard.repaint();
 		}
     }
@@ -154,7 +159,6 @@ public class MainGUI extends JFrame implements Runnable {
   
         @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
-            
             // On récupère les coordonnées du clic en corrigeant l'incertitude du MouseListener
             int x = e.getX() + GameConfiguration.CORRECTCLICK_XSHIFT;
             int y = e.getY() + GameConfiguration.CORRECTCLICK_YSHIFT;
