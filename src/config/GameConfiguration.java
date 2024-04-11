@@ -157,6 +157,7 @@ public class GameConfiguration {
     public static final String SCEPTER_ENTITYTYPE = "scepter";
     public static final String GRIMOIRE_ENTITYTYPE = "grimoire";
     public static final String BOW_ENTITYTYPE = "bow";
+    public static final String COIN_ENTITYPE = "coin";
 
     // partie noms d'objets
     public static final String INVENTORY_NAME = "Inventaire";
@@ -175,6 +176,7 @@ public class GameConfiguration {
     public static final String SCEPTER_NAME = "Sceptre de rat";
     public static final String GRIMOIRE_NAME = "Grimoire de rat";
     public static final String BOW_NAME = "Arc de rat";
+    public static final String COIN_NAME = "pièce";
 
     // partie effets
     public static final String HEALTHFLASK_EFFECT = "heal";
@@ -191,6 +193,9 @@ public class GameConfiguration {
     public static final int CHESTPLATE_BONUS = 10;
     public static final int PANTS_BONUS = 2;
     public static final int BOOTS_BONUS = 5;
+
+    // partie monnaie
+    public static final int COIN_VALUE = 1;
 
     // écran gameover
     public static final int GAME_OVER_TITLEFONTSIZE = 20;

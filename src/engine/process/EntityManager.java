@@ -9,6 +9,7 @@ import config.GameConfiguration;
 import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
+import engine.entities.Coin;
 import engine.entities.Entity;
 import engine.entities.Hitbox;
 import engine.entities.characters.Enemy;
@@ -249,6 +250,18 @@ public class EntityManager {
                 logger.trace("item fetched");
                 player.getInventory().addItem(selectedItem); // ajout à l'inventaire
                 this.getRoom().removeEntity(selectedItem); // on retire l'item de la room
+            }
+        }
+
+        else if(selectedEntity instanceof Coin){
+
+            Coin selectedCoin = (Coin)selectedEntity;
+
+            logger.trace("coin selected");
+            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
+                // Le joueur ramasse le coin
+                player.addCoins(GameConfiguration.COIN_VALUE);
+                this.getRoom().removeEntity(selectedCoin); 
             }
         }
     }

@@ -129,12 +129,21 @@ public class InventoryGUI extends ContainerGUI {
         playerViewPanel.add(equipedItemsPanel);
         initEquipedItemsPanel();
 
+        JPanel imageAndCoinPanel = new JPanel(new BorderLayout());
+
         String playerFilePath = "src/ressources/mainCharacter.png";
         ImageIcon playerIcon = new ImageIcon(playerFilePath);
         JLabel iconLabel = new JLabel(playerIcon, JLabel.CENTER);
-        playerViewPanel.add(iconLabel);
-    }
+        imageAndCoinPanel.add(iconLabel, BorderLayout.CENTER);
 
+        JTextField coinCounterLabel = new JTextField("Coins: " + player.getCoinCount());
+        coinCounterLabel.setEditable(false);
+        coinCounterLabel.setHorizontalAlignment(JTextField.CENTER);
+        imageAndCoinPanel.add(coinCounterLabel, BorderLayout.SOUTH);
+        
+        playerViewPanel.add(imageAndCoinPanel);
+    }
+    
     public void initEquipedItemsPanel() {
         // Une ligne pour le JLabel puis des lignes pour les items équipés
         equipedItemsPanel.setLayout(new GridLayout(7, 1));

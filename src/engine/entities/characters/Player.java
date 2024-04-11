@@ -15,10 +15,12 @@ import engine.dungeon.Position;
  */
 public class Player extends GameCharacter {
 
+    // définition des attributs
     private static Player player;
     private int currentStage = 1;
     private int currentRoom = 1;
     private int experience = 0;
+    private int coinCounter = 0;
   
     /**
      * Constructeur par défaut. Génère une nouvelle instance de player en utilisant le constructeur de la classe abstraite {@link engine.entities.characters.GameCharacter}
@@ -65,5 +67,13 @@ public class Player extends GameCharacter {
     public int getExp() {
         return this.experience;
     }
-    
+
+    public void addCoins(int number) {
+        this.coinCounter += number;
+    }
+
+    public int getCoinCount() {
+        return this.coinCounter;
+    }
+
 }
