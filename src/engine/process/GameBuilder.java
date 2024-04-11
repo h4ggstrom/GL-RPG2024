@@ -8,6 +8,7 @@ import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
 import engine.entities.items.Item;
 import engine.dungeon.Dungeon;
+import engine.entities.Coin;
 import log.Gamelog;
 
 /**
@@ -109,6 +110,7 @@ public class GameBuilder {
         enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
         enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
         enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
+        enemy.getInventory().addCoin((Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYPE, null));
     }
     
     /**

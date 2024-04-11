@@ -40,6 +40,7 @@ public class EntityManager {
     private static Logger logger = Gamelog.getLogger();
     private Player player = Player.getInstance(); // le joueur
     private Dungeon dungeon; // la salle dans laquelle évolue le joueur
+    private Bag bag;
     public static ContainerRefreshListener bagRefreshListener;
     public static ContainerRefreshListener inventoryRefreshListener;
 
@@ -476,5 +477,10 @@ public class EntityManager {
         if(inventoryRefreshListener != null) {
             inventoryRefreshListener.refreshContainer();
         }
+    }
+
+    public void pickUpCoin(Coin coin) {
+        bag.removeCoin(coin);
+        player.addCoins(coin.getValue());
     }
 }

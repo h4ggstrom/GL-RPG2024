@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import config.GameConfiguration;
+import engine.entities.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.containers.Bag;

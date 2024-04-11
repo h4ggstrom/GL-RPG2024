@@ -3,12 +3,14 @@ package engine.entities.items.containers;
 import java.util.ArrayList;
 
 import engine.dungeon.Position;
+import engine.entities.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 
 public class Container extends Item {
 
     private ArrayList<Slot> slots;
+    private ArrayList<Coin> coins; 
     private int numberOfItems;
     private int maxNumberOfItems;
 
@@ -28,6 +30,14 @@ public class Container extends Item {
 
     public void setSlots(ArrayList<Slot> slots) {
         this.slots = slots;
+    }
+
+    public ArrayList<Coin> getCoins() {
+        return coins;
+    }
+
+    public void setCoins(ArrayList<Coin> coins) {
+        this.coins = coins;
     }
 
     /**
@@ -52,6 +62,13 @@ public class Container extends Item {
         }
     }
 
+    public void addCoin(Coin coin) {
+        coins.add(coin);
+    }
+
+    public void removeCoin(Coin coin){
+        coins.remove(coin);
+    }
     /**
      * Cette méthode permet de retirer l'item du slot correspondant
      * @param slotNumber le numéro du Slot à vider
