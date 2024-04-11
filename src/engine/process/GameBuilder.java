@@ -75,7 +75,6 @@ public class GameBuilder {
         int currentRoom = player.getCurrentRoom();
         int currentStage = player.getCurrentStage();
         int enemyCount = 0; 
-        boolean isNewEquipement = currentRoom > 2;
         for (int i = 0; i < (manager.getPlayer().getCurrentStage() * manager.getPlayer().getCurrentRoom()); i++) {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION + GameConfiguration.ENEMY_WIDTH/2, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH/2);
             int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.ENEMY_HEIGHT/2, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT/2);
@@ -83,7 +82,8 @@ public class GameBuilder {
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
 
             // Partie stuff de l'Enemy
-            initializeEquipmentToEnemy(enemy, isNewEquipement, enemyCount);
+           initializeEquipmentToEnemy(enemy, currentRoom, enemyCount);
+            
 
             // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
             if(manager.verifHitboxes(enemy.getHitbox()) || enemy.getHitbox().isInCollision(Player.getInstance().getHitbox())) {
@@ -96,12 +96,12 @@ public class GameBuilder {
         }
     }
     
-    private static void initializeEquipmentToEnemy(Enemy enemy, boolean isNewEquipement, int enemyCount) {
+    private static void initializeEquipmentToEnemy(Enemy enemy, int currentRoom, int enemyCount) {
         // On équipe un enemy sur deux d'un Scepter
-        if (isNewEquipement && enemyCount % 2 == 0) {
-            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
-        } else {
+        if ( currentRoom > 2 && enemyCount % 2 == 0) {
             enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
+        } else {
+            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
         }
     
         enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
