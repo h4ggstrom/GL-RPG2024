@@ -197,6 +197,13 @@ public class GameConfiguration {
     // partie monnaie
     public static final int COIN_VALUE = 1;
 
+    // partie asset
+
+    public static final String TREE_ASSET_ENTITYTYPE = "tree";
+    public static final String TREE_ASSET_NAME = "arbre";
+    public static final int TREE_WIDTH = 75;
+    public static final int TREE_HEIGHT = 75;
+
     // écran gameover
     public static final int GAME_OVER_TITLEFONTSIZE = 20;
     public static final Position GAME_OVER_POSITION = new Position((GameConfiguration.WINDOW_WIDTH - GameConfiguration.GAME_OVER_WIDTH) / 2,(GameConfiguration.WINDOW_HEIGHT - GameConfiguration.GAME_OVER_HEIGHT) / 2) ;

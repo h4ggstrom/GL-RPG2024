@@ -1,12 +1,15 @@
 package engine.process;
 
+import java.util.ArrayList;
+
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
+import engine.dungeon.Room;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
-import engine.entities.items.Coin;
+import engine.entities.environment.TreeAsset;
 import engine.entities.items.Item;
 import engine.dungeon.Dungeon;
 import log.Gamelog;
@@ -45,6 +48,8 @@ public class GameBuilder {
 
         initializeEnemies(manager);
         logger.trace("Initialized ennemies");
+
+        initializeTreesInRoom(manager);
 
         logger.trace("Returning manager");
         return manager;
@@ -121,6 +126,26 @@ public class GameBuilder {
      */
     private static int getRandomNumber(int min, int max) {
 		return (int) (Math.random() * (max + 1 - min)) + min;
+    }
+
+    public static void initializeTreesInRoom(EntityManager manager) {
+        ArrayList<TreeAsset> trees = new ArrayList<>();
+
+        Position TreePosition1 = new Position(300, 500);
+        TreeAsset Tree1 = (TreeAsset)EntityFactory.createEntity("tree", TreePosition1);
+        trees.add(Tree1);
+
+        Position TreePosition2 = new Position(550, 200);
+        TreeAsset Tree2 = (TreeAsset)EntityFactory.createEntity("tree", TreePosition2);
+        trees.add(Tree2);
+
+        Position TreePosition3 = new Position(800, 500);
+        TreeAsset Tree3 = (TreeAsset)EntityFactory.createEntity("tree", TreePosition3);
+        trees.add(Tree3);
+
+        for (TreeAsset tree : trees) {
+            manager.getRoom().addEntity(tree);
+        }
     }
 
 }

@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import engine.entities.Entity;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
+import engine.entities.environment.TreeAsset;
 import engine.entities.items.Item;
 import engine.process.EntityManager;
 import log.Gamelog;

@@ -67,6 +67,9 @@ public class Hitbox {
             case GameConfiguration.BAG_ENTITYTYPE :
                 width = GameConfiguration.BAG_WIDTH;
                 height = GameConfiguration.BAG_HEIGHT;
+            case GameConfiguration.TREE_ASSET_ENTITYTYPE:
+                width = GameConfiguration.TREE_WIDTH;
+                height = GameConfiguration.TREE_HEIGHT;
             case "default" :
                 logger.warn(entityType + " is not a recognized type of entity");
                 break;

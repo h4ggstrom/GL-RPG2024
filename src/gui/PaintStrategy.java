@@ -7,9 +7,11 @@ import java.awt.Graphics;
 import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
+import engine.entities.Entity;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
+import engine.entities.environment.TreeAsset;
 import engine.entities.items.Item;
 import engine.process.Utility;
 
@@ -31,6 +33,13 @@ public class PaintStrategy {
             graphics.setFont(new Font("Serif", Font.BOLD, GameConfiguration.GAME_OVER_TITLEFONTSIZE));
             graphics.setColor(Color.RED);
             graphics.drawString("GAME OVER", 470 , 360);
+        }
+        for (Entity entity : room.getEntitiesToDraw()) {
+            if (entity instanceof TreeAsset) { 
+                String filePath = "./src/ressources/tree.png"; 
+                Position position = entity.getHitbox().getUpperLeft();
+                graphics.drawImage(Utility.readImage(filePath), position.getX(), position.getY(), null);
+            }
         }
     }
 
@@ -76,4 +85,5 @@ public class PaintStrategy {
         Position position = item.getHitbox().getUpperLeft();
         graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
     }
+
 }

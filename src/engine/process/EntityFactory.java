@@ -3,6 +3,7 @@ package engine.process;
 import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.characters.Enemy;
+import engine.entities.environment.TreeAsset;
 import engine.entities.items.weapons.*;
 import engine.entities.items.Coin;
 import engine.entities.items.consumables.*;
@@ -47,6 +48,8 @@ public class EntityFactory {
                 return new Bow(position);
             case GameConfiguration.COIN_ENTITYTYPE:
                 return new Coin(position);
+            case GameConfiguration.TREE_ASSET_ENTITYTYPE:
+                return new TreeAsset(position);
             default:
                 throw new IllegalArgumentException("Entité inconnue : " + entityType);
         }
