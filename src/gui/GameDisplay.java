@@ -12,7 +12,6 @@ import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
 import engine.entities.items.Item;
 import engine.process.EntityManager;
-import engine.entities.Coin;
 import log.Gamelog;
 
 /**
@@ -55,9 +54,6 @@ public class GameDisplay extends JPanel {
             }
             else if (entity instanceof Item) {
                 paintStrategy.paint((Item)entity, graphics);
-            }
-            else if (entity instanceof Coin) {
-                paintStrategy.paint((Coin)entity, graphics);
             }
         }
     }

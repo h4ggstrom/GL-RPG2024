@@ -1,10 +1,10 @@
 package engine.process;
 
 import engine.dungeon.Position;
-import engine.entities.Coin;
 import engine.entities.Entity;
 import engine.entities.characters.Enemy;
 import engine.entities.items.weapons.*;
+import engine.entities.items.Coin;
 import engine.entities.items.consumables.*;
 import engine.entities.items.containers.*;
 import engine.entities.items.equipment.*;
@@ -45,7 +45,7 @@ public class EntityFactory {
                 return new Grimoire(position);
             case GameConfiguration.BOW_ENTITYTYPE:
                 return new Bow(position);
-            case GameConfiguration.COIN_ENTITYPE:
+            case GameConfiguration.COIN_ENTITYTYPE:
                 return new Coin(position);
             default:
                 throw new IllegalArgumentException("Entité inconnue : " + entityType);

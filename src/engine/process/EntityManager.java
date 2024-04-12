@@ -9,12 +9,12 @@ import config.GameConfiguration;
 import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
-import engine.entities.Coin;
 import engine.entities.Entity;
 import engine.entities.Hitbox;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
+import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.consumables.Consumable;
@@ -40,7 +40,6 @@ public class EntityManager {
     private static Logger logger = Gamelog.getLogger();
     private Player player = Player.getInstance(); // le joueur
     private Dungeon dungeon; // la salle dans laquelle évolue le joueur
-    private Bag bag;
     public static ContainerRefreshListener bagRefreshListener;
     public static ContainerRefreshListener inventoryRefreshListener;
 
@@ -261,7 +260,7 @@ public class EntityManager {
             logger.trace("coin selected");
             if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
                 // Le joueur ramasse le coin
-                player.addCoins(GameConfiguration.COIN_VALUE);
+                player.addCoins();
                 this.getRoom().removeEntity(selectedCoin); 
             }
         }
@@ -479,8 +478,4 @@ public class EntityManager {
         }
     }
 
-    public void pickUpCoin(Coin coin) {
-        bag.removeCoin(coin);
-        player.addCoins(coin.getValue());
-    }
 }

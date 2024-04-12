@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.consumables.Consumable;
 import engine.entities.items.equipment.Clothe;
@@ -50,6 +51,10 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
             else if(item instanceof Consumable) {
                 Consumable consumable = (Consumable)item;
                 tooltipText = "<html>" + "Nom : " + consumable.getEntityName() + "<br>" + "Effet : " + consumable.getConsumableEffect() + "<br>" + "Valeur : " + consumable.getConsumableValue() + "</html>";
+            }
+            else if(item instanceof Coin) {
+                Coin coin = (Coin)item;
+                tooltipText = "<html>" + "Nom : " + coin.getEntityName() + "<br>" + "Valeur : " + coin.getValue() + "</html>";
             }
             itemPanel.setToolTipText(tooltipText);
         }

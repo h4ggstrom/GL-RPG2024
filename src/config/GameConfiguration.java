@@ -157,7 +157,7 @@ public class GameConfiguration {
     public static final String SCEPTER_ENTITYTYPE = "scepter";
     public static final String GRIMOIRE_ENTITYTYPE = "grimoire";
     public static final String BOW_ENTITYTYPE = "bow";
-    public static final String COIN_ENTITYPE = "coin";
+    public static final String COIN_ENTITYTYPE = "coin";
 
     // partie noms d'objets
     public static final String INVENTORY_NAME = "Inventaire";

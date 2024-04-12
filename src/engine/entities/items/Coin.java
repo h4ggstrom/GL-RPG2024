@@ -1,4 +1,4 @@
-package engine.entities;
+package engine.entities.items;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
@@ -13,11 +13,11 @@ import engine.dungeon.Position;
  * @author hayder.ur-rehman@etu.cyu.fr
  * 
  */
-public class Coin extends Entity {
+public class Coin extends Item {
     private int value;
 
     public Coin(Position position) {
-        super(position, GameConfiguration.COIN_NAME, GameConfiguration.COIN_ENTITYPE);
+        super(position, GameConfiguration.COIN_NAME, GameConfiguration.COIN_ENTITYTYPE);
         this.value = GameConfiguration.COIN_VALUE;
     }
 

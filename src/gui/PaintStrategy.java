@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
-import engine.entities.Coin;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
@@ -75,13 +74,6 @@ public class PaintStrategy {
         String itemFilePath = "./src/ressources/" + item.getEntityType() + ".png";
         // on prend le coin haut gauche pour des soucis d'affichage
         Position position = item.getHitbox().getUpperLeft();
-        graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
-    }
-
-    public void paint(Coin coin , Graphics graphics) {
-        String itemFilePath = "./src/ressources/" + coin.getEntityType() + ".png";
-        // on prend le coin haut gauche pour des soucis d'affichage
-        Position position = coin.getHitbox().getUpperLeft();
         graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
     }
 }

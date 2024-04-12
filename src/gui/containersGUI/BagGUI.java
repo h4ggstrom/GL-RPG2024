@@ -12,7 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import config.GameConfiguration;
-import engine.entities.Coin;
+import engine.entities.characters.Player;
+import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.containers.Bag;
@@ -76,6 +77,16 @@ public class BagGUI extends ContainerGUI {
                     JMenuItem pickupItem = new JMenuItem("Ramasser");
                     popupMenu.add(pickupItem);
                     popupMenu.show(e.getComponent(), e.getX(), e.getY());
+
+                    if(item instanceof Coin) {
+                        pickupItem.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                Slot currentSlot = bag.getSlots().get(slotNumber);
+                                currentSlot.setItem(null); 
+                                Player.getInstance().addCoins();
+                            }
+                        });
+                    }
 
                     pickupItem.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {

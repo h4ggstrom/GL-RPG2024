@@ -6,9 +6,9 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
+import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.dungeon.Dungeon;
-import engine.entities.Coin;
 import log.Gamelog;
 
 /**
@@ -74,7 +74,6 @@ public class GameBuilder {
     public static void initializeEnemies(EntityManager manager) {
         Player player = Player.getInstance();
         int currentRoom = player.getCurrentRoom();
-        int currentStage = player.getCurrentStage();
         int enemyCount = 0; 
         for (int i = 0; i < (manager.getPlayer().getCurrentStage() * manager.getPlayer().getCurrentRoom()); i++) {
             int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION + GameConfiguration.ENEMY_WIDTH/2, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH/2);
@@ -110,7 +109,7 @@ public class GameBuilder {
         enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
         enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
         enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
-        enemy.getInventory().addCoin((Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYPE, null));
+        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null));
     }
     
     /**

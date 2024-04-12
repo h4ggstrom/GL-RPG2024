@@ -3,7 +3,7 @@ package engine.entities.items.containers;
 import java.util.ArrayList;
 
 import engine.dungeon.Position;
-import engine.entities.Coin;
+import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 
@@ -62,13 +62,6 @@ public class Container extends Item {
         }
     }
 
-    public void addCoin(Coin coin) {
-        coins.add(coin);
-    }
-
-    public void removeCoin(Coin coin){
-        coins.remove(coin);
-    }
     /**
      * Cette méthode permet de retirer l'item du slot correspondant
      * @param slotNumber le numéro du Slot à vider
