@@ -8,6 +8,7 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.entities.Entity;
+import engine.entities.Hitbox;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
@@ -64,5 +65,19 @@ public class PaintStrategy {
             // Barre de vie du personnage
             graphics.fillRect(position.getX() + lifebar_xshift, entity.getHitbox().getBottomLeft().getY() + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2);
         }
+
+        // Partie Hitbox (à des fins de débuggage)
+        Hitbox hitbox = entity.getHitbox();
+        Position ul = hitbox.getUpperLeft();
+        Position ur = hitbox.getUpperRight();
+        Position ct = hitbox.getCenter();
+        Position bl = hitbox.getBottomLeft();
+        Position br = hitbox.getBottomLeft();
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(ct.getX(), ct.getY(),1, 1);
+        graphics.drawLine(ul.getX(), ul.getY(), ur.getX(), ur.getY());
+        graphics.drawLine(ul.getX(), ul.getY(), bl.getX(), bl.getY());
+        graphics.drawLine(bl.getX(), bl.getY(), br.getX(), br.getY());
+        graphics.drawLine(ur.getX(), ur.getY(), br.getX(), br.getY());
     }
 }
