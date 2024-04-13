@@ -72,7 +72,7 @@ public class PaintStrategy {
         Position ur = hitbox.getUpperRight();
         Position ct = hitbox.getCenter();
         Position bl = hitbox.getBottomLeft();
-        Position br = hitbox.getBottomLeft();
+        Position br = hitbox.getBottomRight();
         graphics.setColor(Color.BLACK);
         graphics.fillRect(ct.getX(), ct.getY(),1, 1);
         graphics.drawLine(ul.getX(), ul.getY(), ur.getX(), ur.getY());
