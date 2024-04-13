@@ -11,8 +11,6 @@ import engine.entities.Entity;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
-import engine.entities.environment.TreeAsset;
-import engine.entities.items.Item;
 import engine.process.Utility;
 
 /*
@@ -34,56 +32,40 @@ public class PaintStrategy {
             graphics.setColor(Color.RED);
             graphics.drawString("GAME OVER", 470 , 360);
         }
-        for (Entity entity : room.getEntitiesToDraw()) {
-            if (entity instanceof TreeAsset) { 
-                String filePath = "./src/ressources/tree.png"; 
-                Position position = entity.getHitbox().getUpperLeft();
-                graphics.drawImage(Utility.readImage(filePath), position.getX(), position.getY(), null);
-            }
-        }
     }
 
-    public void paint(GameCharacter character, Graphics graphics) {
-        Position position = character.getHitbox().getUpperLeft();
-        String name = "";
-        int lifebar_xshift = 0;
-        String filePath = "";
+    public void paint(Entity entity, Graphics graphics) {
+        Position position = entity.getHitbox().getUpperLeft();
+        String filePath = "./src/ressources/" + entity.getEntityType() + ".png";
         int height = 0;
-        if (character instanceof Enemy) {
-            graphics.setColor(Color.RED);
-            name = "Enemy";
-            lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
-            filePath = "./src/ressources/enemy.png";
-            height = GameConfiguration.ENEMY_HEIGHT;
-        }
-        else if (character instanceof Player) {
-            graphics.setColor(Color.MAGENTA);;
-            name = "Player";
-            lifebar_xshift = GameConfiguration.PLAYER_LIFEBAR_XSHIFT;
-            filePath = "./src/ressources/player0.png";
-            height = GameConfiguration.PLAYER_HEIGHT;
-        }
+        graphics.drawImage(Utility.readImage(filePath), position.getX(), position.getY(), null);
+        
+        if(entity instanceof GameCharacter) {
+            GameCharacter character = (GameCharacter)entity;
+            int lifebar_xshift = 0;
+            if (character instanceof Enemy) {
+                graphics.setColor(Color.RED);
+                lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
+                height = GameConfiguration.ENEMY_HEIGHT;
+            }
+            else if (character instanceof Player) {
+                graphics.setColor(Color.MAGENTA);
+                lifebar_xshift = GameConfiguration.PLAYER_LIFEBAR_XSHIFT;
+                height = GameConfiguration.PLAYER_HEIGHT;
 
-        // Partie corps
-		graphics.drawImage(Utility.readImage(filePath), position.getX(), position.getY(), null);
-        graphics.setFont(new Font("Dialog", Font.PLAIN, 10)); // Le nom
-        graphics.drawString(name, position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
-        graphics.fillRect(position.getX() + lifebar_xshift, position.getY() + height + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2); // La barre de vie
+                // Partie portée d'attaque pour le joueur
+                Position hitbox_center = character.getHitbox().getCenter();
+                int x_center = hitbox_center.getX();
+                int y_center = hitbox_center.getY();
+                graphics.drawOval(x_center - character.getAttackRange(), y_center - character.getAttackRange(), character.getAttackRange() * 2, character.getAttackRange() * 2);
+            }
+            
+            // Nom du personnage
+            graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
+            graphics.drawString(character.getEntityName(), position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
 
-        if(character instanceof Player) {
-            // Partie portée d'attaque
-            Position hitbox_center = character.getHitbox().getCenter();
-            int x_center = hitbox_center.getX();
-            int y_center = hitbox_center.getY();
-            graphics.drawOval(x_center - character.getAttackRange(), y_center - character.getAttackRange(), character.getAttackRange() * 2, character.getAttackRange() * 2);
+            // Barre de vie du personnage
+            graphics.fillRect(position.getX() + lifebar_xshift, position.getY() + height + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2);
         }
     }
-
-    public void paint(Item item, Graphics graphics) {
-        String itemFilePath = "./src/ressources/" + item.getEntityType() + ".png";
-        // on prend le coin haut gauche pour des soucis d'affichage
-        Position position = item.getHitbox().getUpperLeft();
-        graphics.drawImage(Utility.readImage(itemFilePath), position.getX(), position.getY(), null);
-    }
-
 }

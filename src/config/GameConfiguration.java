@@ -53,6 +53,9 @@ public class GameConfiguration {
 
     public static final int GAME_OVER_HEIGHT = WINDOW_HEIGHT/2;
     public static final int GAME_OVER_WIDTH = WINDOW_WIDTH/2;
+
+    public static final int TREE_WIDTH = 75;
+    public static final int TREE_HEIGHT = 75;
 	
     // vitesse d'exécution du jeu
 	public static final int GAME_SPEED = 1;
@@ -140,10 +143,10 @@ public class GameConfiguration {
     public static final int INVENTORY_MAX = 6;
     public static final int BAG_MAX = 12;
 
-    // partie noms d'entités
+    // partie noms d'entités (utile pour les assets par exemple)
     public static final String INVENTORY_ENTITYTYPE = "inventory";
     public static final String BAG_ENTITYTYPE = "bag";
-    public static final String PLAYER_ENTITYTYPE = "player";
+    public static final String PLAYER_ENTITYTYPE = "player0";
     public static final String ENEMY_ENTITYTYPE = "enemy";
     public static final String SWORD_ENTITYTYPE = "sword";
     public static final String HEALTHFLASK_ENTITYTYPE = "healthFlask";
@@ -158,6 +161,7 @@ public class GameConfiguration {
     public static final String GRIMOIRE_ENTITYTYPE = "grimoire";
     public static final String BOW_ENTITYTYPE = "bow";
     public static final String COIN_ENTITYTYPE = "coin";
+    public static final String TREE_ASSET_ENTITYTYPE = "tree";
 
     // partie noms d'objets
     public static final String INVENTORY_NAME = "Inventaire";
@@ -176,7 +180,8 @@ public class GameConfiguration {
     public static final String SCEPTER_NAME = "Sceptre de rat";
     public static final String GRIMOIRE_NAME = "Grimoire de rat";
     public static final String BOW_NAME = "Arc de rat";
-    public static final String COIN_NAME = "pièce";
+    public static final String COIN_NAME = "Pièce";
+    public static final String TREE_ASSET_NAME = "Arbre";
 
     // partie effets
     public static final String HEALTHFLASK_EFFECT = "heal";
@@ -196,13 +201,6 @@ public class GameConfiguration {
 
     // partie monnaie
     public static final int COIN_VALUE = 1;
-
-    // partie asset
-
-    public static final String TREE_ASSET_ENTITYTYPE = "tree";
-    public static final String TREE_ASSET_NAME = "arbre";
-    public static final int TREE_WIDTH = 75;
-    public static final int TREE_HEIGHT = 75;
 
     // écran gameover
     public static final int GAME_OVER_TITLEFONTSIZE = 20;

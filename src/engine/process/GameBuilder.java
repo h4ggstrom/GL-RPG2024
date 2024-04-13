@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
-import engine.dungeon.Room;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
 import engine.entities.environment.TreeAsset;
