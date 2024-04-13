@@ -37,7 +37,6 @@ public class PaintStrategy {
     public void paint(Entity entity, Graphics graphics) {
         Position position = entity.getHitbox().getUpperLeft();
         String filePath = "./src/ressources/" + entity.getEntityType() + ".png";
-        int height = 0;
         graphics.drawImage(Utility.readImage(filePath), position.getX(), position.getY(), null);
         
         if(entity instanceof GameCharacter) {
@@ -46,12 +45,10 @@ public class PaintStrategy {
             if (character instanceof Enemy) {
                 graphics.setColor(Color.RED);
                 lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
-                height = GameConfiguration.ENEMY_HEIGHT;
             }
             else if (character instanceof Player) {
                 graphics.setColor(Color.MAGENTA);
                 lifebar_xshift = GameConfiguration.PLAYER_LIFEBAR_XSHIFT;
-                height = GameConfiguration.PLAYER_HEIGHT;
 
                 // Partie portée d'attaque pour le joueur
                 Position hitbox_center = character.getHitbox().getCenter();
@@ -65,7 +62,7 @@ public class PaintStrategy {
             graphics.drawString(character.getEntityName(), position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
 
             // Barre de vie du personnage
-            graphics.fillRect(position.getX() + lifebar_xshift, position.getY() + height + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2);
+            graphics.fillRect(position.getX() + lifebar_xshift, entity.getHitbox().getBottomLeft().getY() + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2);
         }
     }
 }
