@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
+import engine.entities.items.weapons.Weapon;
+import engine.process.EntityFactory;
 import log.Gamelog;
 
 /**
@@ -105,6 +107,7 @@ public class Player extends GameCharacter {
                 super.setMaxHealth(150);
                 super.setMoveSpeed(8);
                 super.setAttackSpeed(5000);
+                this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
                 this.mana = 100;
                 this.playerHeight = 40;
                 this.playerWidth = 20;
@@ -115,6 +118,7 @@ public class Player extends GameCharacter {
                 super.setMaxHealth(100);
                 super.setMoveSpeed(10);
                 super.setAttackSpeed(4000);
+                this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null)); 
                 this.mana = 200;
                 this.playerHeight = 40;
                 this.playerWidth = 20;

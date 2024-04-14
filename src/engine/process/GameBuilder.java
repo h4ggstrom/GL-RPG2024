@@ -9,7 +9,7 @@ import engine.dungeon.Position;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
 import engine.entities.environment.TreeAsset;
-import engine.entities.items.Item;
+import engine.entities.items.Coin;
 import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.*;
 import engine.dungeon.Dungeon;
@@ -66,6 +66,7 @@ public class GameBuilder {
     private static void initializePlayer (EntityManager manager) {
         // On récupère l'instance de Player
         Player player = Player.getInstance();
+        player.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
         manager.getRoom().addEntity(player);
         manager.set(player);
     }
@@ -88,7 +89,7 @@ public class GameBuilder {
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
 
             // Partie stuff de l'Enemy
-           initializeEquipmentToEnemy(enemy, currentRoom, enemyCount);
+            initializeEquipmentToEnemy(enemy, currentRoom, enemyCount);
             
 
             // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
@@ -115,6 +116,7 @@ public class GameBuilder {
         int max = 5;
         int randomNumber = (int)Math.floor(Math.random() *(max - min + 1) + min);
 
+        // L'ennemi aura un des 5 habits en équipement
         switch(randomNumber) {
             case 1:
                 enemy.getEquipment().setHelmet((Helmet)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
@@ -132,8 +134,16 @@ public class GameBuilder {
                 enemy.getEquipment().setBoots((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
                 break;
         }
-    
-        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null));
+        
+        // On génère ensuite un nombre aléatoire entre 1 et 10 * le numéro de la room
+        min = 1;
+        max = 10*currentRoom;
+        randomNumber = (int)Math.floor(Math.random() *(max - min + 1) + min);
+
+        // On ajoute cette fois-ci à l'inventaire de l'ennemi des pièces
+        Coin coins = (Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null);
+        coins.setValue(randomNumber);
+        enemy.getInventory().addItem(coins);
     }
     
     /**
