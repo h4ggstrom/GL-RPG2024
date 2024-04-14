@@ -3,6 +3,7 @@ package engine.entities.containers;
 import java.util.ArrayList;
 
 import engine.dungeon.Position;
+import engine.entities.Entity;
 import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;

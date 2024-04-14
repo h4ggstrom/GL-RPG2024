@@ -25,4 +25,8 @@ public class Stage {
         return number;
     }
 
+    public int setNumber(int number) {
+        return this.number=number;
+    }
+
 }

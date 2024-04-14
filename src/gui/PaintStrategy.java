@@ -24,7 +24,10 @@ public class PaintStrategy {
         graphics.drawImage(Utility.readImage("./src/ressources/"+ room.getFileName() +".png"), 0, 0, null);
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10)); // Le nom
         graphics.drawString("Etage : " + Player.getInstance().getCurrentStage(), 30,30);
-        graphics.drawString("Salle : " + Player.getInstance().getCurrentRoom(), 100,30);        
+        graphics.drawString("Salle : " + Player.getInstance().getCurrentRoom(), 100,30); 
+        graphics.setColor(Color.RED);
+        graphics.drawString("Difficulté : " + room.getDifficulty(), 30, 45);
+        graphics.setColor(Color.BLACK);    
         if(Player.getInstance().getHealth() <= 0){
             Position gameoverPosition = GameConfiguration.GAME_OVER_POSITION;
             graphics.setColor(Color.BLACK);

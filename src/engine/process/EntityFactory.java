@@ -7,7 +7,7 @@ import engine.entities.environment.TreeAsset;
 import engine.entities.items.weapons.*;
 import engine.entities.items.Coin;
 import engine.entities.items.consumables.*;
-import engine.entities.items.containers.*;
+import engine.entities.containers.*;
 import engine.entities.items.equipment.*;
 import config.GameConfiguration;
 

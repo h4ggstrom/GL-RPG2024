@@ -52,6 +52,10 @@ public class Player extends GameCharacter {
     }
 
     public int getCurrentStage() {
+        if (currentRoom > 7) {
+            currentStage++;
+            currentRoom = 1;
+        }
         return currentStage;
     }
 
@@ -70,6 +74,7 @@ public class Player extends GameCharacter {
     public void moveToNextRoom() {
         this.currentRoom++;
     }
+
 
     public void gainExp(int exp) {
         this.experience += exp;

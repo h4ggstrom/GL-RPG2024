@@ -3,7 +3,7 @@ package engine.entities.characters;
 import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.items.Item;
-import engine.entities.items.containers.Inventory;
+import engine.entities.containers.Inventory;
 import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.Weapon;
 

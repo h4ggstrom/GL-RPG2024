@@ -15,7 +15,7 @@ import engine.entities.characters.Player;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.consumables.Consumable;
-import engine.entities.items.containers.Inventory;
+import engine.entities.containers.Inventory;
 import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.*;
 import engine.process.ConsumableManager;

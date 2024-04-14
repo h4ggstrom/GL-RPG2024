@@ -16,7 +16,7 @@ import engine.entities.characters.Player;
 import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
-import engine.entities.items.containers.Bag;
+import engine.entities.containers.Bag;
 import engine.process.EntityManager;
 
 public class BagGUI extends ContainerGUI {

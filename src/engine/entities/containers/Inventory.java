@@ -1,4 +1,4 @@
-package engine.entities.items.containers;
+package engine.entities.containers;
 
 import config.GameConfiguration;
 

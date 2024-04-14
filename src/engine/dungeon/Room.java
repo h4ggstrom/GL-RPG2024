@@ -27,6 +27,7 @@ public class Room {
 
     private int number;
 
+
     // Liste des entités présentes dans la salle
     private ArrayList<Entity> entities = new ArrayList<Entity>();
     private String fileName = "room";
@@ -105,5 +106,16 @@ public class Room {
      */
     public ArrayList<Entity> getEntitiesToDraw() {
         return new ArrayList<>(entities);
+    }
+
+    public String getDifficulty() {
+        if (this.number >= 1 && this.number <= 2) {
+            return "facile";
+        } else if (this.number >= 3 && this.number <= 5) {
+            return "moyenne";
+        } else if (this.number >= 6 && this.number <= 7) {
+            return "difficile";
+        }
+        return "undefined";
     }
 }
