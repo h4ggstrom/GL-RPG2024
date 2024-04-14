@@ -10,6 +10,8 @@ import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
 import engine.entities.environment.TreeAsset;
 import engine.entities.items.Item;
+import engine.entities.items.equipment.*;
+import engine.entities.items.weapons.*;
 import engine.dungeon.Dungeon;
 import log.Gamelog;
 
@@ -103,16 +105,34 @@ public class GameBuilder {
     private static void initializeEquipmentToEnemy(Enemy enemy, int currentRoom, int enemyCount) {
         // On équipe un enemy sur deux d'un Scepter
         if ( currentRoom > 2 && enemyCount % 2 == 0) {
-            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
+            enemy.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
         } else {
-            enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
+            enemy.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
+        }
+
+        // On génère ensuite un nombre aléatoire entre 1 et 5
+        int min = 1;
+        int max = 5;
+        int randomNumber = (int)Math.floor(Math.random() *(max - min + 1) + min);
+
+        switch(randomNumber) {
+            case 1:
+                enemy.getEquipment().setHelmet((Helmet)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
+                break;
+            case 2:
+                enemy.getEquipment().setGloves((Gloves)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
+                break;
+            case 3:
+                enemy.getEquipment().setChestplate((Chestplate)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
+                break;
+            case 4:
+                enemy.getEquipment().setPants((Pants)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
+                break;
+            case 5:
+                enemy.getEquipment().setBoots((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
+                break;
         }
     
-        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
-        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
-        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
-        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
-        enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
         enemy.getInventory().addItem((Item)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null));
     }
     
