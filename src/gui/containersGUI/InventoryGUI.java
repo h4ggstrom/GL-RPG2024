@@ -131,7 +131,18 @@ public class InventoryGUI extends ContainerGUI {
 
         JPanel imageAndCoinPanel = new JPanel(new BorderLayout());
 
-        String playerFilePath = "src/ressources/mainCharacter.png";
+        String playerFilePath = "";
+        switch(player.getPlayerClass()){
+            case "heavy":
+                playerFilePath = "src/ressources/costaud.png";
+                break;
+            case "sorcerer":
+                playerFilePath = "src/ressources/sorcier.png";
+                break;
+            case "fast":
+                playerFilePath = "src/ressources/rapide.png";
+                break;
+        }
         ImageIcon playerIcon = new ImageIcon(playerFilePath);
         JLabel iconLabel = new JLabel(playerIcon, JLabel.CENTER);
         imageAndCoinPanel.add(iconLabel, BorderLayout.CENTER);
