@@ -1,7 +1,10 @@
 package engine.entities.characters;
 
+import org.apache.log4j.Logger;
+
 import config.GameConfiguration;
 import engine.dungeon.Position;
+import log.Gamelog;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -21,20 +24,29 @@ public class Player extends GameCharacter {
     private int currentRoom = 1;
     private int experience = 0;
     private int coinCounter = 0;
+    private int health;
+    private int moveSpeed;
+    private int atkSpeed;
+    private int mana;
+    private String playerClass;
+    private int playerHeight;
+    private int playerWidth;
+    private static Logger logger = Gamelog.getLogger();
   
     /**
      * Constructeur par défaut. Génère une nouvelle instance de player en utilisant le constructeur de la classe abstraite {@link engine.entities.characters.GameCharacter}
      * 
      * @param position la position du joueur.
      */
-    public Player(Position position) {
+    private Player(Position position, String playerClass) {
         super(position, GameConfiguration.PLAYER_NAME, GameConfiguration.PLAYER_ENTITYTYPE, GameConfiguration.PLAYER_DEFAULT_MAXHEALTH, GameConfiguration.PLAYER_DEFAULT_MAXHEALTH, GameConfiguration.PLAYER_DEFAULT_ARMOR, GameConfiguration.PLAYER_DEFAULT_ATTACKSPEED, GameConfiguration.PLAYER_DEFAULT_ATTACKRANGE, GameConfiguration.PLAYER_DEFAULT_ATTACKDAMAGE, GameConfiguration.PLAYER_DEFAULT_MOVESPEED, GameConfiguration.PLAYER_DEFAULT_ABILITYCOOLDOWN, GameConfiguration.PLAYER_DEFAULT_STUNCOOLDOWN);
+        setPlayerClass(playerClass);
     }
 
     public static Player getInstance() {
         // Si l'instance n'a pas encore été créée, on la crée
         if (player == null) {
-            player = new Player(new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y));
+            player = new Player(new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y), "sorcerer");
         }
         // On retourne l'instance unique
         return player;
@@ -75,5 +87,99 @@ public class Player extends GameCharacter {
     public int getCoinCount() {
         return this.coinCounter;
     }
+
+    public int getHealth() {
+        return this.health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+        return;
+    }
+
+    public int getMoveSpeed() {
+        return this.moveSpeed;
+    }
+
+    public void setMoveSpeed(int moveSpeed) {
+        this.moveSpeed = moveSpeed;
+        return;
+    }
+
+    public int getAtkSpeed() {
+        return this.atkSpeed;
+    }
+
+    public void setAtkSpeed(int atkSpeed) {
+        this.atkSpeed = atkSpeed;
+        return;
+    }
+
+    public int getMana() {
+        return this.mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+        return;
+    }
+
+    public String getPlayerClass() {
+        return this.playerClass;
+    }
+
+    public void setPlayerClass(String playerClass) {
+        this.playerClass = playerClass;
+        switch (playerClass) {
+            case "heavy":
+                this.health = 150;
+                this.moveSpeed = 8;
+                this.atkSpeed = 5000;
+                this.mana = 100;
+                this.playerHeight = 40;
+                this.playerWidth = 20;
+                // FIXME : corriger les dimensions pour le HEAVY qd on aura un spray convenable
+                break;
+
+            case "sorcerer":
+                this.health = 100;
+                this.moveSpeed = 10;
+                this.atkSpeed = 4000;
+                this.mana = 200;
+                this.playerHeight = 40;
+                this.playerWidth = 20;
+                break;
+
+            case "fast":
+                this.health = 85;
+                this.moveSpeed = 15;
+                this.atkSpeed = 3000;
+                this.mana = 80;
+                this.playerHeight = 40;
+                this.playerWidth = 20;
+                // FIXME : corriger les dimensions pour le FAST qd on aura un spray convenable
+                break;
+
+            default:
+                logger.error("specified class doesn't exist : " + playerClass);
+                break;
+        }
+    }
+
+    public int getPlayerHeight() {
+        return this.playerHeight;
+    }
+
+    public void setPlayerHeight(int playerHeight) {
+        this.playerHeight = playerHeight;
+    }
+    
+    public int getPlayerWidth() {
+        return this.playerWidth;
+    }
+
+    public void setPlayerWidth(int playerWidth) {
+        this.playerWidth = playerWidth;
+    } 
 
 }

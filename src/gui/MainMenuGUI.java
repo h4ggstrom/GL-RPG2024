@@ -73,12 +73,8 @@ public class MainMenuGUI extends JFrame {
 
     class NewGame implements ActionListener {
 		public void actionPerformed(ActionEvent e){
-			MainGUI gameMainGUI = new MainGUI("RPG");
-
-            Thread gameThread = new Thread(gameMainGUI);
-            gameThread.start();
-
-            MainMenuGUI.this.setVisible(false);
+			new PlayerSetup();
+            dispose();
 		}
 	}
 
