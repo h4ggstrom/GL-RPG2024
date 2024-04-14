@@ -66,7 +66,6 @@ public class GameBuilder {
     private static void initializePlayer (EntityManager manager) {
         // On récupère l'instance de Player
         Player player = Player.getInstance();
-        player.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
         manager.getRoom().addEntity(player);
         manager.set(player);
     }

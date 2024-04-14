@@ -14,11 +14,11 @@ import engine.entities.Hitbox;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
+import engine.entities.containers.Bag;
 import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.consumables.Consumable;
-import engine.entities.items.containers.Bag;
 import engine.entities.items.weapons.*;
 import engine.entities.items.equipment.*;
 import gui.containersGUI.BagGUI;
@@ -232,8 +232,8 @@ public class EntityManager {
             }
         }
 
-        // Si l'entité sélectionnée est un Sac
-        else if(selectedEntity instanceof Bag) {
+        // Si l'entité sélectionnée est un Sac et qu'on est à portée de l'ouvrir
+        else if(selectedEntity instanceof Bag && distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
             Bag bag = (Bag)selectedEntity;
             new BagGUI(this, bag);
         }
