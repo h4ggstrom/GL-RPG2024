@@ -34,7 +34,7 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
         String tooltipText = "Slot vide";
 
         if(item != null) {
-            String itemFilePath = "src/ressources/" + item.getEntityType() + ".png";
+            String itemFilePath = "src/ressources/assets/entity/" + item.getEntityType() + ".png";
             ImageIcon itemIcon = new ImageIcon(itemFilePath);
             JLabel itemIconLabel = new JLabel(itemIcon, JLabel.CENTER);
             itemPanel.add(itemIconLabel, BorderLayout.CENTER);

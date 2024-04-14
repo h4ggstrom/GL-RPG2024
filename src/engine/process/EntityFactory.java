@@ -5,10 +5,14 @@ import engine.entities.Entity;
 import engine.entities.characters.Enemy;
 import engine.entities.environment.TreeAsset;
 import engine.entities.items.weapons.*;
+import ressources.ResourceManager;
 import engine.entities.items.Coin;
 import engine.entities.items.consumables.*;
 import engine.entities.containers.*;
 import engine.entities.items.equipment.*;
+
+import java.awt.image.BufferedImage;
+
 import config.GameConfiguration;
 
 /**
@@ -19,7 +23,8 @@ public class EntityFactory {
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
             case GameConfiguration.ENEMY_ENTITYTYPE:
-                return new Enemy(position);
+                BufferedImage enemySprite = ResourceManager.loadSprite("enemy.png");
+                return new Enemy(position, enemySprite);
             case GameConfiguration.SWORD_ENTITYTYPE:
                 return new Sword(position);
             case GameConfiguration.HEALTHFLASK_ENTITYTYPE:

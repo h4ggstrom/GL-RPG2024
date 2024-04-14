@@ -54,10 +54,10 @@ public class PlayerSetup extends JFrame{
 
         private static Logger logger = Gamelog.getLogger();
 
-        private ImageIcon initIcon = new ImageIcon("src/ressources/choose.png");
-        private ImageIcon heavyIcon = new ImageIcon("src/ressources/costaud.png");
-        private ImageIcon sorcererIcon = new ImageIcon("src/ressources/sorcier.png");
-        private ImageIcon fastIcon = new ImageIcon("src/ressources/rapide.png");
+        private ImageIcon initIcon = new ImageIcon("src/ressources/assets/choose.png");
+        private ImageIcon heavyIcon = new ImageIcon("src/ressources/assets/entity/costaud.png");
+        private ImageIcon sorcererIcon = new ImageIcon("src/ressources/assets/entity/sorcier.png");
+        private ImageIcon fastIcon = new ImageIcon("src/ressources/assets/entity/rapide.png");
 
         private JLabel playerDisplay = new JLabel(initIcon);
 

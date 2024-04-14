@@ -134,13 +134,13 @@ public class InventoryGUI extends ContainerGUI {
         String playerFilePath = "";
         switch(player.getPlayerClass()){
             case "heavy":
-                playerFilePath = "src/ressources/costaud.png";
+                playerFilePath = "src/ressources/assets/entity/costaud.png";
                 break;
             case "sorcerer":
-                playerFilePath = "src/ressources/sorcier.png";
+                playerFilePath = "src/ressources/assets/entity/sorcier.png";
                 break;
             case "fast":
-                playerFilePath = "src/ressources/rapide.png";
+                playerFilePath = "src/ressources/assets/entity/rapide.png";
                 break;
         }
         ImageIcon playerIcon = new ImageIcon(playerFilePath);

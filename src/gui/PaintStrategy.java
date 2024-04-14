@@ -21,7 +21,7 @@ public class PaintStrategy {
       
     // Stratégie d'affichage pour la salle
     public void paint (Room room, Graphics graphics) {
-        graphics.drawImage(Utility.readImage("./src/ressources/"+ room.getFileName() +".png"), 0, 0, null);
+        graphics.drawImage(Utility.readImage("./src/ressources/assets/room/"+ room.getFileName() +".png"), 0, 0, null);
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10)); // Le nom
         graphics.drawString("Etage : " + Player.getInstance().getCurrentStage(), 30,30);
         graphics.drawString("Salle : " + Player.getInstance().getCurrentRoom(), 100,30); 
@@ -40,7 +40,7 @@ public class PaintStrategy {
 
     public void paint(Entity entity, Graphics graphics) {
         Position position = entity.getHitbox().getUpperLeft();
-        String filePath = "./src/ressources/" + entity.getEntityType() + ".png";
+        String filePath = "./src/ressources/assets/entity/" + entity.getEntityType() + ".png";
         graphics.drawImage(Utility.readImage(filePath), position.getX(), position.getY(), null);
         
         if(entity instanceof GameCharacter) {
