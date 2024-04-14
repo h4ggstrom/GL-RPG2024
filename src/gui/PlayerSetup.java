@@ -54,9 +54,11 @@ public class PlayerSetup extends JFrame{
 
         private static Logger logger = Gamelog.getLogger();
 
-        private ImageIcon playerSpray = new ImageIcon("src/ressources/mainCharacter.png");
+        private ImageIcon heavyIcon = new ImageIcon("src/ressources/costaud.png");
+        private ImageIcon sorcererIcon = new ImageIcon("src/ressources/sorcier.png");
+        private ImageIcon fastIcon = new ImageIcon("src/ressources/rapide.png");
 
-        private JLabel playerDisplay = new JLabel(playerSpray);
+        private JLabel playerDisplay = new JLabel(heavyIcon);
 
         private JPanel ClassButtonsPanel;
         private JPanel ControlButtonsPanel;
@@ -110,39 +112,21 @@ public class PlayerSetup extends JFrame{
             heavyButton.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
-                    player.setPlayerClass("heavy");
-                    values[0] = player.getHealth();
-                    values[1] = player.getMoveSpeed();
-                    values[2] = player.getAttackSpeed()/10;
-                    values[3] = player.getMana();
-                    chart = createChart();
-                    validateButton.setEnabled(true);
+                    updateClass("heavy");
                 };
             });
 
             fastButton.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
-                    player.setPlayerClass("fast");
-                    values[0] = player.getHealth();
-                    values[1] = player.getMoveSpeed();
-                    values[2] = player.getAttackSpeed()/10;
-                    values[3] = player.getMana();
-                    validateButton.setEnabled(true);
-                    chart = createChart();
+                    updateClass("fast");
                 };
             });
 
             sorcererButton.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
-                    player.setPlayerClass("sorcerer");
-                    values[0] = player.getHealth();
-                    values[1] = player.getMoveSpeed();
-                    values[2] = player.getAttackSpeed()/10;
-                    values[3] = player.getMana();
-                    chart = createChart();
-                    validateButton.setEnabled(true);
+                    updateClass("sorcerer");
                 };
             });
 
@@ -175,6 +159,28 @@ public class PlayerSetup extends JFrame{
             this.dataset.addValue(this.values[3],"series","Mana");
             JFreeChart chartPanel = ChartFactory.createBarChart("Aptitudes","","",dataset,PlotOrientation.HORIZONTAL,false,false,false);
             return new ChartPanel(chartPanel);
+        }
+
+        private void updateClass(String className) {
+            player.setPlayerClass(className);
+            values[0] = player.getHealth();
+            values[1] = player.getMoveSpeed();
+            values[2] = player.getAttackSpeed()/10;
+            values[3] = player.getMana();
+            chart = createChart();
+            validateButton.setEnabled(true);
+    
+            switch(className) {
+                case "heavy":
+                    playerDisplay.setIcon(heavyIcon);
+                    break;
+                case "fast":
+                    playerDisplay.setIcon(fastIcon);
+                    break;
+                case "sorcerer":
+                    playerDisplay.setIcon(sorcererIcon);
+                    break;
+            }
         }
     }
 }
