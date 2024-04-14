@@ -24,9 +24,6 @@ public class Player extends GameCharacter {
     private int currentRoom = 1;
     private int experience = 0;
     private int coinCounter = 0;
-    private int health;
-    private int moveSpeed;
-    private int atkSpeed;
     private int mana;
     private String playerClass;
     private int playerHeight;
@@ -88,33 +85,6 @@ public class Player extends GameCharacter {
         return this.coinCounter;
     }
 
-    public int getHealth() {
-        return this.health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-        return;
-    }
-
-    public int getMoveSpeed() {
-        return this.moveSpeed;
-    }
-
-    public void setMoveSpeed(int moveSpeed) {
-        this.moveSpeed = moveSpeed;
-        return;
-    }
-
-    public int getAtkSpeed() {
-        return this.atkSpeed;
-    }
-
-    public void setAtkSpeed(int atkSpeed) {
-        this.atkSpeed = atkSpeed;
-        return;
-    }
-
     public int getMana() {
         return this.mana;
     }
@@ -132,9 +102,9 @@ public class Player extends GameCharacter {
         this.playerClass = playerClass;
         switch (playerClass) {
             case "heavy":
-                this.health = 150;
-                this.moveSpeed = 8;
-                this.atkSpeed = 5000;
+                super.setMaxHealth(150);
+                super.setMoveSpeed(8);
+                super.setAttackSpeed(5000);
                 this.mana = 100;
                 this.playerHeight = 40;
                 this.playerWidth = 20;
@@ -142,18 +112,18 @@ public class Player extends GameCharacter {
                 break;
 
             case "sorcerer":
-                this.health = 100;
-                this.moveSpeed = 10;
-                this.atkSpeed = 4000;
+                super.setMaxHealth(100);
+                super.setMoveSpeed(10);
+                super.setAttackSpeed(4000);
                 this.mana = 200;
                 this.playerHeight = 40;
                 this.playerWidth = 20;
                 break;
 
             case "fast":
-                this.health = 85;
-                this.moveSpeed = 15;
-                this.atkSpeed = 3000;
+                super.setMaxHealth(85);
+                super.setMoveSpeed(15);
+                super.setAttackSpeed(3000);
                 this.mana = 80;
                 this.playerHeight = 40;
                 this.playerWidth = 20;

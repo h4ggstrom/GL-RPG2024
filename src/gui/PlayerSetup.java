@@ -113,7 +113,7 @@ public class PlayerSetup extends JFrame{
                     player.setPlayerClass("heavy");
                     values[0] = player.getHealth();
                     values[1] = player.getMoveSpeed();
-                    values[2] = player.getAtkSpeed()/10;
+                    values[2] = player.getAttackSpeed()/10;
                     values[3] = player.getMana();
                     chart = createChart();
                     validateButton.setEnabled(true);
@@ -126,7 +126,7 @@ public class PlayerSetup extends JFrame{
                     player.setPlayerClass("fast");
                     values[0] = player.getHealth();
                     values[1] = player.getMoveSpeed();
-                    values[2] = player.getAtkSpeed()/10;
+                    values[2] = player.getAttackSpeed()/10;
                     values[3] = player.getMana();
                     validateButton.setEnabled(true);
                     chart = createChart();
@@ -139,7 +139,7 @@ public class PlayerSetup extends JFrame{
                     player.setPlayerClass("sorcerer");
                     values[0] = player.getHealth();
                     values[1] = player.getMoveSpeed();
-                    values[2] = player.getAtkSpeed()/10;
+                    values[2] = player.getAttackSpeed()/10;
                     values[3] = player.getMana();
                     chart = createChart();
                     validateButton.setEnabled(true);
