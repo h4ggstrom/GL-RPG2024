@@ -54,8 +54,8 @@ public class GameConfiguration {
     public static final int GAME_OVER_HEIGHT = WINDOW_HEIGHT/2;
     public static final int GAME_OVER_WIDTH = WINDOW_WIDTH/2;
 
-    public static final int TREE_WIDTH = 75;
-    public static final int TREE_HEIGHT = 75;
+    public static final int TREE_WIDTH = 56;
+    public static final int TREE_HEIGHT = 51;
 	
     // vitesse d'exécution du jeu
 	public static final int GAME_SPEED = 1;
