@@ -11,7 +11,7 @@ import engine.entities.characters.Player;
 import engine.entities.environment.GateEnv;
 import engine.entities.environment.TreeEnv;
 import engine.entities.environment.WallEnv;
-import engine.entities.items.Coin;
+import engine.entities.items.consumables.Coin;
 import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.*;
 import engine.dungeon.Dungeon;
@@ -57,16 +57,17 @@ public class GameBuilder {
     }
 
     /**
-     * Permet l'initialisation de toutes les entités de la salle actuelle
+     * Permet l'initialisation de toutes les entités de la salle actuelle, l'ordre de génération est important
      * @param manager
      */
     public static void initializeEntities(EntityManager manager) {
 
+        initializeEnvironment(manager);
+        logger.trace("Initialized environment");
+
         initializeEnemies(manager);
         logger.trace("Initialized ennemies");
 
-        initializeEnvironment(manager);
-        logger.trace("Initialized environment");
     }
 
     /**
@@ -136,7 +137,7 @@ public class GameBuilder {
 
         // On ajoute cette fois-ci à l'inventaire de l'ennemi des pièces
         Coin coins = (Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null);
-        coins.setValue(randomNumber);
+        coins.setConsumableValue(randomNumber);
         enemy.getInventory().addItem(coins);
     }
 

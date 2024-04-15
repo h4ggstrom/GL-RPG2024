@@ -30,6 +30,7 @@ public class InventoryGUI extends ContainerGUI {
     private JPanel playerViewPanel = new JPanel();
     private JPanel equipedItemsPanel = new JPanel();
     private JPanel playerStatisticsPanel = new JPanel();
+    private JPanel imageAndCoinPanel = new JPanel();
     
     public InventoryGUI(EntityManager manager) {
         super(manager);
@@ -129,30 +130,8 @@ public class InventoryGUI extends ContainerGUI {
         playerViewPanel.add(equipedItemsPanel);
         initEquipedItemsPanel();
 
-        JPanel imageAndCoinPanel = new JPanel(new BorderLayout());
-
-        String playerFilePath = "";
-        switch(player.getPlayerClass()){
-            case "heavy":
-                playerFilePath = "src/ressources/assets/entity/costaud.png";
-                break;
-            case "sorcerer":
-                playerFilePath = "src/ressources/assets/entity/sorcier.png";
-                break;
-            case "fast":
-                playerFilePath = "src/ressources/assets/entity/rapide.png";
-                break;
-        }
-        ImageIcon playerIcon = new ImageIcon(playerFilePath);
-        JLabel iconLabel = new JLabel(playerIcon, JLabel.CENTER);
-        imageAndCoinPanel.add(iconLabel, BorderLayout.CENTER);
-
-        JTextField coinCounterLabel = new JTextField("Coins: " + player.getCoinCount());
-        coinCounterLabel.setEditable(false);
-        coinCounterLabel.setHorizontalAlignment(JTextField.CENTER);
-        imageAndCoinPanel.add(coinCounterLabel, BorderLayout.SOUTH);
-        
         playerViewPanel.add(imageAndCoinPanel);
+        initImageAndCoinsPanel();
     }
     
     public void initEquipedItemsPanel() {
@@ -185,6 +164,32 @@ public class InventoryGUI extends ContainerGUI {
         initEquipmentSlotListener(chestplatePanel, "chestplate");
         initEquipmentSlotListener(pantsPanel, "pants");
         initEquipmentSlotListener(bootsPanel, "boots");
+    }
+
+    public void initImageAndCoinsPanel() {
+        imageAndCoinPanel.setLayout(new BorderLayout());
+
+        String playerFilePath = "";
+        switch(player.getPlayerClass()){
+            case "heavy":
+                playerFilePath = "src/ressources/assets/entity/costaud.png";
+                break;
+            case "sorcerer":
+                playerFilePath = "src/ressources/assets/entity/sorcier.png";
+                break;
+            case "fast":
+                playerFilePath = "src/ressources/assets/entity/rapide.png";
+                break;
+        }
+
+        ImageIcon playerIcon = new ImageIcon(playerFilePath);
+        JLabel iconLabel = new JLabel(playerIcon, JLabel.CENTER);
+        imageAndCoinPanel.add(iconLabel, BorderLayout.CENTER);
+
+        JTextField coinCounterLabel = new JTextField("Coins: " + player.getCoinCount());
+        coinCounterLabel.setEditable(false);
+        coinCounterLabel.setHorizontalAlignment(JTextField.CENTER);
+        imageAndCoinPanel.add(coinCounterLabel, BorderLayout.SOUTH);
     }
 
     public void initEquipmentSlotListener(JPanel panel, String entityType) {
@@ -267,6 +272,11 @@ public class InventoryGUI extends ContainerGUI {
         initEquipedItemsPanel();
         equipedItemsPanel.revalidate();
         equipedItemsPanel.repaint();
+
+        imageAndCoinPanel.removeAll();
+        initImageAndCoinsPanel();
+        imageAndCoinPanel.revalidate();
+        imageAndCoinPanel.repaint();
 
         playerStatisticsPanel.removeAll();
         initPlayerStatisticsPanel();

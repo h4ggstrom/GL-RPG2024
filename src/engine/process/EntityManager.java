@@ -15,9 +15,9 @@ import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
 import engine.entities.containers.Bag;
-import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
+import engine.entities.items.consumables.Coin;
 import engine.entities.items.consumables.Consumable;
 import engine.entities.items.weapons.*;
 import engine.entities.items.equipment.*;
@@ -239,7 +239,7 @@ public class EntityManager {
             logger.trace("coin selected");
             if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
                 // Le joueur ramasse le coin
-                player.addCoins();
+                player.addCoins(selectedCoin.getConsumableValue());
                 this.getRoom().removeEntity(selectedCoin); 
             }
         }

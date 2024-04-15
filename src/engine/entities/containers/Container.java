@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import engine.dungeon.Position;
 import engine.entities.Entity;
-import engine.entities.items.Coin;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
+import engine.entities.items.consumables.Coin;
 
 public class Container extends Entity {
 

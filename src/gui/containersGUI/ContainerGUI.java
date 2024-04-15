@@ -9,8 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import engine.entities.items.Coin;
 import engine.entities.items.Item;
+import engine.entities.items.consumables.Coin;
 import engine.entities.items.consumables.Consumable;
 import engine.entities.items.equipment.Clothe;
 import engine.entities.items.weapons.Weapon;
@@ -48,13 +48,13 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
                 Clothe clothe = (Clothe)item;
                 tooltipText = "<html>" + "Nom : " + clothe.getEntityName() + "<br>" + "Effet : " + clothe.getEffect() + "<br>" + "Valeur : " + clothe.getValue() + "</html>";
             }
+            else if(item instanceof Coin) {
+                Coin coin = (Coin)item;
+                tooltipText = "<html>" + "Nom : " + coin.getEntityName() + "<br>" + "Valeur : " + coin.getConsumableValue() + "</html>";
+            }
             else if(item instanceof Consumable) {
                 Consumable consumable = (Consumable)item;
                 tooltipText = "<html>" + "Nom : " + consumable.getEntityName() + "<br>" + "Effet : " + consumable.getConsumableEffect() + "<br>" + "Valeur : " + consumable.getConsumableValue() + "</html>";
-            }
-            else if(item instanceof Coin) {
-                Coin coin = (Coin)item;
-                tooltipText = "<html>" + "Nom : " + coin.getEntityName() + "<br>" + "Valeur : " + coin.getValue() + "</html>";
             }
             itemPanel.setToolTipText(tooltipText);
         }

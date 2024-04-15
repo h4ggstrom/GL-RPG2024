@@ -22,6 +22,9 @@ public class ConsumableManager {
             case "heal":
                 Player.getInstance().healCharacter(consumable.getConsumableValue());
                 break;
+            case "money":
+                Player.getInstance().addCoins(consumable.getConsumableValue());
+                break;
             default:
                 throw new IllegalArgumentException("Effet du consommable inconnu : " + consumable.getConsumableEffect());
         }

@@ -89,7 +89,7 @@ public class GameConfiguration {
 
     // Sceptre
     public static final int SCEPTER_BURN_DAMAGE = 1;
-    public static final int SCEPTER_DAMAGE = 5;
+    public static final int SCEPTER_DAMAGE = 80;
     public static final int SCEPTER_RANGE = 250;
 
     // Grimoire
@@ -209,9 +209,6 @@ public class GameConfiguration {
     public static final int CHESTPLATE_BONUS = 10;
     public static final int PANTS_BONUS = 2;
     public static final int BOOTS_BONUS = 5;
-
-    // partie monnaie
-    public static final int COIN_VALUE = 1;
 
     // écran gameover
     public static final int GAME_OVER_TITLEFONTSIZE = 20;

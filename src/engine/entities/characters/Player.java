@@ -84,8 +84,8 @@ public class Player extends GameCharacter {
         return this.experience;
     }
 
-    public void addCoins() {
-        this.coinCounter += GameConfiguration.COIN_VALUE;
+    public void addCoins(int numberOfCoins) {
+        this.coinCounter += numberOfCoins;
     }
 
     public int getCoinCount() {
