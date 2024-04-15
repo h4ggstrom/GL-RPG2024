@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import config.GameConfiguration;
 import engine.entities.Entity;
 import engine.entities.environment.GateEnv;
-import engine.entities.environment.WallEnv;
 import log.Gamelog;
 
 /**
@@ -33,34 +31,7 @@ public class Room {
 
     public Room (int number) {
         this.number = number;
-        buildWalls();
         logger.trace("New instance of Room");
-    }
-    
-    public void buildWalls() {
-        WallEnv leftWall = new WallEnv(null);
-        leftWall.getHitbox().drawHitbox(new Position(0, 0), new Position(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.WINDOW_HEIGHT));
-        addEntity(leftWall);
-
-        WallEnv upperWall = new WallEnv(null);
-        upperWall.getHitbox().drawHitbox(new Position(0, 0), new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.ROOM_UPPER_LIMITATION));
-        addEntity(upperWall);
-
-        WallEnv lowerWall = new WallEnv(null);
-        lowerWall.getHitbox().drawHitbox(new Position(0, GameConfiguration.ROOM_LOWER_LIMITATION), new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT));
-        addEntity(lowerWall);
-
-        WallEnv upperGateWall = new WallEnv(null);
-        upperGateWall.getHitbox().drawHitbox(new Position(GameConfiguration.ROOM_RIGHT_LIMITATION, 0), GameConfiguration.GATE_UPPERRIGHT);
-        addEntity(upperGateWall);
-
-        WallEnv lowerGateWall = new WallEnv(null);
-        lowerGateWall.getHitbox().drawHitbox(GameConfiguration.GATE_BOTTOMLEFT, new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT));
-        addEntity(lowerGateWall);
-
-        gate = new GateEnv(null);
-        gate.getHitbox().drawHitbox(GameConfiguration.GATE_UPPERLEFT, GameConfiguration.GATE_BOTTOMRIGHT);
-        addEntity(gate);
     }
 
     public void empty() {
@@ -99,6 +70,10 @@ public class Room {
 
     public int getNumber() {
         return number;
+    }
+
+    public void setGate(GateEnv gate) {
+        this.gate = gate;
     }
 
     /**

@@ -1,14 +1,16 @@
 package engine.process;
 
-import java.util.ArrayList;
-
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
+import engine.dungeon.Room;
+import engine.entities.Entity;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
+import engine.entities.environment.GateEnv;
 import engine.entities.environment.TreeEnv;
+import engine.entities.environment.WallEnv;
 import engine.entities.items.Coin;
 import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.*;
@@ -35,7 +37,7 @@ public class GameBuilder {
     }
 
     /**
-     * génère la salle et les ennemis à l'apparition de la salle en utilisant le constructeur de la classe {@link src.engine.characters.EntityManager}
+     * Génère la salle et les ennemis à l'apparition de la salle en utilisant le constructeur de la classe {@link src.engine.characters.EntityManager}
      * 
      * @param room la salle dans laquelle évolue le joueur
      * @return le système de gestion de la partie. Pour plus de détails, voir {@link src.engine.characters.EntityManager}
@@ -47,13 +49,24 @@ public class GameBuilder {
         initializePlayer(manager);
         logger.trace("Initialized player");
 
-        initializeEnemies(manager);
-        logger.trace("Initialized ennemies");
-
-        initializeTreesInRoom(manager);
+        initializeEntities(manager);
+        logger.trace("Initialized entities");
 
         logger.trace("Returning manager");
         return manager;
+    }
+
+    /**
+     * Permet l'initialisation de toutes les entités de la salle actuelle
+     * @param manager
+     */
+    public static void initializeEntities(EntityManager manager) {
+
+        initializeEnemies(manager);
+        logger.trace("Initialized ennemies");
+
+        initializeEnvironment(manager);
+        logger.trace("Initialized environment");
     }
 
     /**
@@ -80,29 +93,15 @@ public class GameBuilder {
     public static void initializeEnemies(EntityManager manager) {
         Player player = Player.getInstance();
         int currentRoom = player.getCurrentRoom();
-        int enemyCount = 0; 
-        for (int i = 0; i < (manager.getPlayer().getCurrentStage() * manager.getPlayer().getCurrentRoom()); i++) {
-            int enemyX = getRandomNumber(GameConfiguration.ROOM_LEFT_LIMITATION + GameConfiguration.ENEMY_WIDTH/2, GameConfiguration.ROOM_RIGHT_LIMITATION - GameConfiguration.ENEMY_WIDTH/2);
-            int enemyY = getRandomNumber(GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.ENEMY_HEIGHT/2, GameConfiguration.ROOM_LOWER_LIMITATION - GameConfiguration.ENEMY_HEIGHT/2);
-            Position position = new Position(enemyX, enemyY); // On instancie sa position
-            Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", position); // On instancie l'Enemy
-
-            // Partie stuff de l'Enemy
-            initializeEquipmentToEnemy(enemy, currentRoom, enemyCount);
-            
-
-            // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
-            if(manager.verifHitboxes(enemy.getHitbox()) || enemy.getHitbox().isInCollision(Player.getInstance().getHitbox())) {
-                manager.getRoom().addEntity(enemy); // On ajoute l'ennemi à la liste d'entités de la Room
-                enemyCount++;
-            }
-            else {
-                i--; // Sinon on refait un tour de boucle
-            }
+        int enemyCount = manager.getPlayer().getCurrentStage() * manager.getPlayer().getCurrentRoom(); 
+        for (int i = 0; i < enemyCount; i++) {
+            Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", null); // On instancie l'Enemy
+            randomPlaceEntity(manager, enemy); // On le place de manière aléatoire
+            initializeEquipmentOfEnemy(enemy, currentRoom, enemyCount); // On l'équipe
         }
     }
     
-    private static void initializeEquipmentToEnemy(Enemy enemy, int currentRoom, int enemyCount) {
+    private static void initializeEquipmentOfEnemy(Enemy enemy, int currentRoom, int enemyCount) {
         // On équipe un enemy sur deux d'un Scepter
         if ( currentRoom > 2 && enemyCount % 2 == 0) {
             enemy.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
@@ -111,9 +110,7 @@ public class GameBuilder {
         }
 
         // On génère ensuite un nombre aléatoire entre 1 et 5
-        int min = 1;
-        int max = 5;
-        int randomNumber = (int)Math.floor(Math.random() *(max - min + 1) + min);
+        int randomNumber = getRandomNumber(1, 5);
 
         // L'ennemi aura un des 5 habits en équipement
         switch(randomNumber) {
@@ -135,14 +132,73 @@ public class GameBuilder {
         }
         
         // On génère ensuite un nombre aléatoire entre 1 et 10 * le numéro de la room
-        min = 1;
-        max = 10*currentRoom;
-        randomNumber = (int)Math.floor(Math.random() *(max - min + 1) + min);
+        randomNumber = getRandomNumber(1, 10*currentRoom);
 
         // On ajoute cette fois-ci à l'inventaire de l'ennemi des pièces
         Coin coins = (Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null);
         coins.setValue(randomNumber);
         enemy.getInventory().addItem(coins);
+    }
+
+    /**
+     * On initialise l'environnement dans un ordre particulier : les murs avant le reste pour que tout soit contenu à l'intérieur des murs
+     * @param manager
+     */
+    public static void initializeEnvironment(EntityManager manager) {
+        initializeWalls(manager);
+        initializeTrees(manager);
+    }
+
+    public static void initializeTrees(EntityManager manager) {
+        // on veut entre 7 et 11 arbres
+        int treeNumber = getRandomNumber(7, 11);
+        for(int i = 0 ; i < treeNumber ; i++) {
+            TreeEnv tree = (TreeEnv)EntityFactory.createEntity(GameConfiguration.TREE_ASSET_ENTITYTYPE, null);
+            randomPlaceEntity(manager, tree);
+        }
+    }
+
+    public static void initializeWalls(EntityManager manager) {
+        Room currentRoom = manager.getRoom();
+        WallEnv sideWall = new WallEnv(null);
+        sideWall.getHitbox().drawHitbox(new Position(0, 0), new Position(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.WINDOW_HEIGHT));
+        currentRoom.addEntity(sideWall);
+
+        WallEnv upperWall = new WallEnv(null);
+        upperWall.getHitbox().drawHitbox(new Position(0, 0), new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.ROOM_UPPER_LIMITATION));
+        currentRoom.addEntity(upperWall);
+
+        WallEnv lowerWall = new WallEnv(null);
+        lowerWall.getHitbox().drawHitbox(new Position(0, GameConfiguration.ROOM_LOWER_LIMITATION), new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT));
+        currentRoom.addEntity(lowerWall);
+
+        WallEnv upperGateWall = new WallEnv(null);
+        upperGateWall.getHitbox().drawHitbox(new Position(GameConfiguration.ROOM_RIGHT_LIMITATION, 0), GameConfiguration.GATE_UPPERRIGHT);
+        currentRoom.addEntity(upperGateWall);
+
+        WallEnv lowerGateWall = new WallEnv(null);
+        lowerGateWall.getHitbox().drawHitbox(GameConfiguration.GATE_BOTTOMLEFT, new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT));
+        currentRoom.addEntity(lowerGateWall);
+
+        GateEnv gate = new GateEnv(null);
+        gate.getHitbox().drawHitbox(GameConfiguration.GATE_UPPERLEFT, GameConfiguration.GATE_BOTTOMRIGHT);
+        currentRoom.setGate(gate);
+        currentRoom.addEntity(gate);
+    }
+
+    public static void randomPlaceEntity(EntityManager manager, Entity entity) {
+        boolean cannotBePlaced = true;
+        while(cannotBePlaced) {
+            int randomX = getRandomNumber(0, GameConfiguration.WINDOW_WIDTH);
+            int randomY = getRandomNumber(0, GameConfiguration.WINDOW_HEIGHT);
+            Position randomPosition = new Position(randomX, randomY);
+            entity.setPosition(randomPosition);
+            // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
+            if(manager.verifHitboxes(entity.getHitbox())) {
+                manager.getRoom().addEntity(entity); // On ajoute l'entité à la liste d'entités de la Room
+                break; // On sort de la boucle
+            }
+        }
     }
     
     /**
@@ -155,25 +211,4 @@ public class GameBuilder {
     private static int getRandomNumber(int min, int max) {
 		return (int) (Math.random() * (max + 1 - min)) + min;
     }
-
-    public static void initializeTreesInRoom(EntityManager manager) {
-        ArrayList<TreeEnv> trees = new ArrayList<>();
-
-        Position TreePosition1 = new Position(300, 500);
-        TreeEnv Tree1 = (TreeEnv)EntityFactory.createEntity("tree", TreePosition1);
-        trees.add(Tree1);
-
-        Position TreePosition2 = new Position(550, 200);
-        TreeEnv Tree2 = (TreeEnv)EntityFactory.createEntity("tree", TreePosition2);
-        trees.add(Tree2);
-
-        Position TreePosition3 = new Position(800, 500);
-        TreeEnv Tree3 = (TreeEnv)EntityFactory.createEntity("tree", TreePosition3);
-        trees.add(Tree3);
-
-        for (TreeEnv tree : trees) {
-            manager.getRoom().addEntity(tree);
-        }
-    }
-
 }

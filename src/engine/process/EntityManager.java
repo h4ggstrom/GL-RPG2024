@@ -257,12 +257,14 @@ public class EntityManager {
     }
 
     /**
-     * set the next room by cleaning the current one and generating a new one
+     * Méthode pour changer de Room
      */
     public void nextRoom() {
+        // On incrémente la room
         player.moveToNextRoom();
         player.setPosition(new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y));
-        GameBuilder.initializeEnemies(this);
+        // On regènère toutes les entités pour cette room
+        GameBuilder.initializeEntities(this);
     }
 
     public boolean verifHitboxes(Hitbox finaleHitbox) {
