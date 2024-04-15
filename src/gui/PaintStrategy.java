@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
@@ -12,6 +13,7 @@ import engine.entities.Hitbox;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
+import engine.entities.environment.WallAsset;
 import engine.process.Utility;
 
 /*
@@ -21,13 +23,18 @@ public class PaintStrategy {
       
     // Stratégie d'affichage pour la salle
     public void paint (Room room, Graphics graphics) {
-        graphics.drawImage(Utility.readImage("./src/ressources/assets/room/"+ room.getFileName() +".png"), 0, 0, null);
+        // On dessine le sol
+        graphics.drawImage(Utility.readImage("./src/ressources/assets/ground.png"), 0, 0, null);
+
+        // Informations sur la salle
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10)); // Le nom
         graphics.drawString("Etage : " + Player.getInstance().getCurrentStage(), 30,30);
         graphics.drawString("Salle : " + Player.getInstance().getCurrentRoom(), 100,30); 
         graphics.setColor(Color.RED);
         graphics.drawString("Difficulté : " + room.getDifficulty(), 30, 45);
-        graphics.setColor(Color.BLACK);    
+        graphics.setColor(Color.BLACK);
+        
+        // Écran de fin de partie
         if(Player.getInstance().getHealth() <= 0){
             Position gameoverPosition = GameConfiguration.GAME_OVER_POSITION;
             graphics.setColor(Color.BLACK);
@@ -43,6 +50,7 @@ public class PaintStrategy {
         String filePath = "./src/ressources/assets/entity/" + entity.getEntityType() + ".png";
         graphics.drawImage(Utility.readImage(filePath), position.getX(), position.getY(), null);
         
+        // Cas si l'entité est un personnage
         if(entity instanceof GameCharacter) {
             GameCharacter character = (GameCharacter)entity;
             int lifebar_xshift = 0;
@@ -67,6 +75,22 @@ public class PaintStrategy {
 
             // Barre de vie du personnage
             graphics.fillRect(position.getX() + lifebar_xshift, entity.getHitbox().getBottomLeft().getY() + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2);
+        }
+
+        if(entity instanceof WallAsset) {
+            WallAsset wall = (WallAsset) entity;
+            Position upperLeft = wall.getHitbox().getUpperLeft();
+            int width = wall.getHitbox().getWidth();
+            int height = wall.getHitbox().getHeight();
+
+            // Charger l'image de texture de pierre
+            filePath = "./src/ressources/assets/stone.png";
+            BufferedImage stoneImage = Utility.readBufferedImage(filePath);
+            // Redimensionner l'image pour qu'elle corresponde à la hitbox du mur
+            BufferedImage scaledImage = stoneImage.getSubimage(0, 0, width, height);
+
+            // Dessiner l'image redimensionnée à la position spécifiée par la hitbox
+            graphics.drawImage(scaledImage, upperLeft.getX(), upperLeft.getY(), null);
         }
 
         // Partie Hitbox (à des fins de débuggage)

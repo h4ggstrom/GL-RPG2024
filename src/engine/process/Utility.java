@@ -1,6 +1,7 @@
 package engine.process;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -31,6 +32,15 @@ public class Utility {
 	 * @return l'image en tant qu'objet File
 	 */
 	public static Image readImage(String filePath) {
+		try {
+			return ImageIO.read(new File(filePath));
+		} catch (IOException e) {
+			logger.error("Image cannot be read");
+			return null;
+		}
+	}
+
+	public static BufferedImage readBufferedImage(String filePath) {
 		try {
 			return ImageIO.read(new File(filePath));
 		} catch (IOException e) {

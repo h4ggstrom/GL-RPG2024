@@ -112,9 +112,11 @@ public class GameConfiguration {
     public static final int ROOM_LOWER_LIMITATION = 669; // Le mur bloque le joueur après cette valeur en Y
     public static final int ROOM_LEFT_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en X
     public static final int ROOM_RIGHT_LIMITATION = 1026; // Le mur bloque le joueur après cette valeur en X
+
     public static final int ROOM_CENTER_X = 549;
     public static final int ROOM_CENTER_Y = 359;
     public static final Position ROOM_CENTER = new Position(ROOM_CENTER_X, ROOM_CENTER_Y);
+    
     public static final Position GATE_UPPERLEFT = new Position(1026, 309); // Le pixel haut droit de la porte de sortie
     public static final Position GATE_UPPERRIGHT = new Position(1080, 309); // Le pixel haut droit de la porte de sortie
     public static final Position GATE_BOTTOMLEFT = new Position(1026, 448); // Le pixel bas gauche de la porte de sortie

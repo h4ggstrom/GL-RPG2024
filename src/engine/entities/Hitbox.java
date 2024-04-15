@@ -26,6 +26,8 @@ public class Hitbox {
     private Position bottomLeft;
     private Position bottomRight;
     private Position center;
+    private int width;
+    private int height;
     private Entity entity;
     private String entityType;
 
@@ -85,7 +87,13 @@ public class Hitbox {
         this.upperRight = new Position(center.getX() + (width/2), center.getY() - (height/2));
         this.bottomLeft = new Position(center.getX() - (width/2), center.getY() + (height/2));
         this.bottomRight = new Position(center.getX() + (width/2), center.getY() + (height/2));
+        calculateProportions();
         logger.trace("New hitbox generated : " + this.toString());
+    }
+
+    public void calculateProportions() {
+        this.width = upperRight.getX() - upperRight.getY();
+        this.height = bottomLeft.getY() - upperLeft.getY();
     }
 
     public void setPosition(Position center) {
@@ -126,6 +134,8 @@ public class Hitbox {
         setUpperRight(new Position(bottomRight.getX(), upperLeft.getY()));
         setBottomLeft(new Position(upperLeft.getX(), bottomRight.getY()));
         setCenter(new Position( upperLeft.getX() + (upperRight.getX() - upperLeft.getX())/2, upperLeft.getY() + (bottomLeft.getY() - upperLeft.getY())/2 ));
+
+        calculateProportions();
     }
 
     public Position getUpperLeft() {
@@ -186,6 +196,14 @@ public class Hitbox {
 
     public void setEntityType(String entityType) {
         this.entityType = entityType;
+    }
+    
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     @Override
