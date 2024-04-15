@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
 import engine.entities.Entity;
-import engine.entities.environment.GateAsset;
-import engine.entities.environment.WallAsset;
+import engine.entities.environment.GateEnv;
+import engine.entities.environment.WallEnv;
 import log.Gamelog;
 
 /**
@@ -42,27 +42,27 @@ public class Room {
     }
     
     public void buildWalls() {
-        WallAsset leftWall = new WallAsset(null);
+        WallEnv leftWall = new WallEnv(null);
         leftWall.getHitbox().drawHitbox(new Position(0, 0), new Position(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.WINDOW_HEIGHT));
         addEntity(leftWall);
 
-        WallAsset upperWall = new WallAsset(null);
+        WallEnv upperWall = new WallEnv(null);
         upperWall.getHitbox().drawHitbox(new Position(0, 0), new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.ROOM_UPPER_LIMITATION));
         addEntity(upperWall);
 
-        WallAsset lowerWall = new WallAsset(null);
+        WallEnv lowerWall = new WallEnv(null);
         lowerWall.getHitbox().drawHitbox(new Position(0, GameConfiguration.ROOM_LOWER_LIMITATION), new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT));
         addEntity(lowerWall);
 
-        WallAsset upperGateWall = new WallAsset(null);
+        WallEnv upperGateWall = new WallEnv(null);
         upperGateWall.getHitbox().drawHitbox(new Position(GameConfiguration.ROOM_RIGHT_LIMITATION, 0), GameConfiguration.GATE_UPPERRIGHT);
         addEntity(upperGateWall);
 
-        WallAsset lowerGateWall = new WallAsset(null);
+        WallEnv lowerGateWall = new WallEnv(null);
         lowerGateWall.getHitbox().drawHitbox(GameConfiguration.GATE_BOTTOMLEFT, new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT));
         addEntity(lowerGateWall);
 
-        GateAsset gate = new GateAsset(null);
+        GateEnv gate = new GateEnv(null);
         gate.getHitbox().drawHitbox(GameConfiguration.GATE_UPPERLEFT, GameConfiguration.GATE_BOTTOMRIGHT);
         addEntity(gate);
     }

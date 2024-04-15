@@ -2,11 +2,10 @@ package engine.entities.environment;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
-import engine.entities.Entity;
 
-public class WallAsset extends Entity {
+public class WallEnv extends Environment {
     
-    public WallAsset(Position position) {
+    public WallEnv(Position position) {
         super(position, GameConfiguration.WALL_ASSET_NAME, GameConfiguration.WALL_ASSET_ENTITYTYPE);
     }
 

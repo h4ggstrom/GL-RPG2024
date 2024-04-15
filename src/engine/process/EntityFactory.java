@@ -3,7 +3,7 @@ package engine.process;
 import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.characters.Enemy;
-import engine.entities.environment.TreeAsset;
+import engine.entities.environment.TreeEnv;
 import engine.entities.items.weapons.*;
 import engine.entities.items.Coin;
 import engine.entities.items.consumables.*;
@@ -22,7 +22,7 @@ public class EntityFactory {
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
             case GameConfiguration.ENEMY_ENTITYTYPE:
-                BufferedImage enemySprite = ResourceManager.loadSprite("enemy.png");
+                BufferedImage enemySprite = RessourceManager.getInstance().getImage("./src/ressources/assets/entity/enemy.png");
                 return new Enemy(position, enemySprite);
             case GameConfiguration.SWORD_ENTITYTYPE:
                 return new Sword(position);
@@ -53,7 +53,7 @@ public class EntityFactory {
             case GameConfiguration.COIN_ENTITYTYPE:
                 return new Coin(position);
             case GameConfiguration.TREE_ASSET_ENTITYTYPE:
-                return new TreeAsset(position);
+                return new TreeEnv(position);
             default:
                 throw new IllegalArgumentException("Entité inconnue : " + entityType);
         }

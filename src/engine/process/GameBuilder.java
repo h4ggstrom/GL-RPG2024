@@ -8,7 +8,7 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
-import engine.entities.environment.TreeAsset;
+import engine.entities.environment.TreeEnv;
 import engine.entities.items.Coin;
 import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.*;
@@ -157,21 +157,21 @@ public class GameBuilder {
     }
 
     public static void initializeTreesInRoom(EntityManager manager) {
-        ArrayList<TreeAsset> trees = new ArrayList<>();
+        ArrayList<TreeEnv> trees = new ArrayList<>();
 
         Position TreePosition1 = new Position(300, 500);
-        TreeAsset Tree1 = (TreeAsset)EntityFactory.createEntity("tree", TreePosition1);
+        TreeEnv Tree1 = (TreeEnv)EntityFactory.createEntity("tree", TreePosition1);
         trees.add(Tree1);
 
         Position TreePosition2 = new Position(550, 200);
-        TreeAsset Tree2 = (TreeAsset)EntityFactory.createEntity("tree", TreePosition2);
+        TreeEnv Tree2 = (TreeEnv)EntityFactory.createEntity("tree", TreePosition2);
         trees.add(Tree2);
 
         Position TreePosition3 = new Position(800, 500);
-        TreeAsset Tree3 = (TreeAsset)EntityFactory.createEntity("tree", TreePosition3);
+        TreeEnv Tree3 = (TreeEnv)EntityFactory.createEntity("tree", TreePosition3);
         trees.add(Tree3);
 
-        for (TreeAsset tree : trees) {
+        for (TreeEnv tree : trees) {
             manager.getRoom().addEntity(tree);
         }
     }
