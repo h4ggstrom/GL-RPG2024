@@ -92,7 +92,7 @@ public class Hitbox {
     }
 
     public void calculateProportions() {
-        this.width = upperRight.getX() - upperRight.getY();
+        this.width = upperRight.getX() - upperLeft.getX();
         this.height = bottomLeft.getY() - upperLeft.getY();
     }
 
