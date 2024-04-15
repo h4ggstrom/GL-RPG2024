@@ -73,6 +73,10 @@ public class Hitbox {
                 width = GameConfiguration.TREE_WIDTH;
                 height = GameConfiguration.TREE_HEIGHT;
                 break;
+            case GameConfiguration.WALL_ASSET_ENTITYTYPE:
+                width = 0;
+                height = 0;
+                break;
             case "default" :
                 logger.warn(entityType + " is not a recognized type of entity");
                 break;
@@ -106,6 +110,22 @@ public class Hitbox {
      */
     public boolean isContaining(Position position) {
         return ( ( ( this.upperLeft.getX() <= position.getX() ) && ( position.getX() <= this.upperRight.getX() ) ) && ( this.upperLeft.getY() <= position.getY() && position.getY() <= this.bottomLeft.getY() ));
+    }
+
+    /**
+     * Méthode permettant de redéfinir les positions des points de la Hitbox en fonction des deux points extrêmes
+     * @param upperLeft le point tout en haut à gauche
+     * @param bottomRight le point tout en bas à droite
+     */
+    public void drawHitbox(Position upperLeft, Position bottomRight) {
+        setUpperLeft(upperLeft);
+        setBottomRight(bottomRight);
+
+        // Recalcul des autres points
+
+        setUpperRight(new Position(bottomRight.getX(), upperLeft.getY()));
+        setBottomLeft(new Position(upperLeft.getX(), bottomRight.getY()));
+        setCenter(new Position( upperLeft.getX() + (upperRight.getX() - upperLeft.getX())/2, upperLeft.getY() + (bottomLeft.getY() - upperLeft.getY())/2 ));
     }
 
     public Position getUpperLeft() {

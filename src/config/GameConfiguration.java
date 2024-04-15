@@ -111,12 +111,14 @@ public class GameConfiguration {
     public static final int ROOM_UPPER_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en Y
     public static final int ROOM_LOWER_LIMITATION = 669; // Le mur bloque le joueur après cette valeur en Y
     public static final int ROOM_LEFT_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en X
-    public static final int ROOM_RIGHT_LIMITATION = 1020; // Le mur bloque le joueur après cette valeur en X
+    public static final int ROOM_RIGHT_LIMITATION = 1026; // Le mur bloque le joueur après cette valeur en X
     public static final int ROOM_CENTER_X = 549;
     public static final int ROOM_CENTER_Y = 359;
     public static final Position ROOM_CENTER = new Position(ROOM_CENTER_X, ROOM_CENTER_Y);
-    public static final Position GATE_UP = new Position(1026, 309); // Le pixel haut de la porte de sortie
-    public static final Position GATE_DOWN = new Position(1028, 448); // Le pixel bas de la porte de sortie
+    public static final Position GATE_UPPERLEFT = new Position(1026, 309); // Le pixel haut droit de la porte de sortie
+    public static final Position GATE_UPPERRIGHT = new Position(1080, 309); // Le pixel haut droit de la porte de sortie
+    public static final Position GATE_BOTTOMLEFT = new Position(1026, 448); // Le pixel bas gauche de la porte de sortie
+    public static final Position GATE_BOTTOMRIGHT = new Position(1080, 448); // Le pixel bas gauche de la porte de sortie
 
     // statistiques par défaut des ennemis
     public static final int ENEMIES_INIT_NUMBER = 2;
@@ -162,6 +164,8 @@ public class GameConfiguration {
     public static final String BOW_ENTITYTYPE = "bow";
     public static final String COIN_ENTITYTYPE = "coin";
     public static final String TREE_ASSET_ENTITYTYPE = "tree";
+    public static final String WALL_ASSET_ENTITYTYPE = "wall";
+    public static final String GATE_ASSET_ENTITYTYPE = "gate";
 
     // partie noms d'objets
     public static final String INVENTORY_NAME = "Inventaire";
@@ -182,6 +186,8 @@ public class GameConfiguration {
     public static final String BOW_NAME = "Arc de rat";
     public static final String COIN_NAME = "Pièce";
     public static final String TREE_ASSET_NAME = "Arbre";
+    public static final String WALL_ASSET_NAME = "Mur";
+    public static final String GATE_ASSET_NAME = "Porte";
 
     // partie effets
     public static final String HEALTHFLASK_EFFECT = "heal";

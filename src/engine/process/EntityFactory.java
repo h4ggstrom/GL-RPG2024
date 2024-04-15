@@ -5,7 +5,6 @@ import engine.entities.Entity;
 import engine.entities.characters.Enemy;
 import engine.entities.environment.TreeAsset;
 import engine.entities.items.weapons.*;
-import ressources.ResourceManager;
 import engine.entities.items.Coin;
 import engine.entities.items.consumables.*;
 import engine.entities.containers.*;

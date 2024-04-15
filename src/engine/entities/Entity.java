@@ -6,7 +6,6 @@ public abstract class Entity {
     
     private Hitbox hitbox;
     private String entityName;
-
     private String entityType;
 
     public Entity (Position position, String entityName, String entityType) {

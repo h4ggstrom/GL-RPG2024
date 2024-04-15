@@ -77,10 +77,14 @@ public class PaintStrategy {
         Position bl = hitbox.getBottomLeft();
         Position br = hitbox.getBottomRight();
         graphics.setColor(Color.BLACK);
-        graphics.fillRect(ct.getX(), ct.getY(),1, 1);
         graphics.drawLine(ul.getX(), ul.getY(), ur.getX(), ur.getY());
         graphics.drawLine(ul.getX(), ul.getY(), bl.getX(), bl.getY());
         graphics.drawLine(bl.getX(), bl.getY(), br.getX(), br.getY());
         graphics.drawLine(ur.getX(), ur.getY(), br.getX(), br.getY());
+
+        graphics.drawLine(ul.getX(), ul.getY(), ct.getX(), ct.getY());
+        graphics.drawLine(bl.getX(), bl.getY(), ct.getX(), ct.getY());
+        graphics.drawLine(ur.getX(), ur.getY(), ct.getX(), ct.getY());
+        graphics.drawLine(br.getX(), br.getY(), ct.getX(), ct.getY());
     }
 }

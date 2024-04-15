@@ -123,7 +123,7 @@ public class EntityManager {
             // Si la Room est nettoyée, la porte à droite est ouverte
             else {
                 // Si il veut se déplacer derrière le mur de droite, entre le haut et le bas de la porte
-                if ( ( GameConfiguration.ROOM_RIGHT_LIMITATION < finaleHitbox.getUpperRight().getX() ) && ( (GameConfiguration.GATE_UP.getY() < endPosition.getY()) && (endPosition.getY() < GameConfiguration.GATE_DOWN.getY() - GameConfiguration.PLAYER_HEIGHT))) {
+                if ( ( GameConfiguration.ROOM_RIGHT_LIMITATION < finaleHitbox.getUpperRight().getX() ) && ( (GameConfiguration.GATE_UPPERLEFT.getY() < endPosition.getY()) && (endPosition.getY() < GameConfiguration.GATE_BOTTOMRIGHT.getY() - GameConfiguration.PLAYER_HEIGHT))) {
                     canBeMoved = true; // On peut le déplacer
                 }
                 else {
