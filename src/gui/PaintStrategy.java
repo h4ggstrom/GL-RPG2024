@@ -26,17 +26,9 @@ public class PaintStrategy {
     public RessourceManager ressourceManager = RessourceManager.getInstance();
       
     // Stratégie d'affichage pour la salle
-    public void paint (Room room, Graphics graphics) {
+    public void paint(Room room, Graphics graphics) {
         // On dessine le sol
         graphics.drawImage(ressourceManager.getImage("./src/ressources/assets/ground.png"), 0, 0, null);
-
-        // Informations sur la salle
-        graphics.setFont(new Font("Dialog", Font.PLAIN, 10)); // Le nom
-        graphics.drawString("Etage : " + Player.getInstance().getCurrentStage(), 30,30);
-        graphics.drawString("Salle : " + Player.getInstance().getCurrentRoom(), 100,30); 
-        graphics.setColor(Color.RED);
-        graphics.drawString("Difficulté : " + room.getDifficulty(), 30, 45);
-        graphics.setColor(Color.BLACK);
         
         // Écran de fin de partie
         if(Player.getInstance().getHealth() <= 0){
@@ -116,5 +108,13 @@ public class PaintStrategy {
         graphics.drawLine(bl.getX(), bl.getY(), ct.getX(), ct.getY());
         graphics.drawLine(ur.getX(), ur.getY(), ct.getX(), ct.getY());
         graphics.drawLine(br.getX(), br.getY(), ct.getX(), ct.getY());
+    }
+
+    public void paintLevelInfo(Graphics graphics) {
+        // Informations sur la salle
+        graphics.setColor(Color.WHITE);
+        graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
+        graphics.drawString("Etage : " + Player.getInstance().getCurrentStage(), 30,30);
+        graphics.drawString("Salle : " + Player.getInstance().getCurrentRoom(), 100,30);
     }
 }

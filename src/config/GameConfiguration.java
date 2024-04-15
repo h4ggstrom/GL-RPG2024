@@ -190,6 +190,9 @@ public class GameConfiguration {
     public static final String TREE_ASSET_NAME = "Arbre";
     public static final String WALL_ASSET_NAME = "Mur";
     public static final String GATE_ASSET_NAME = "Porte";
+    public static final String STRONG_NAME = "Costaud";
+    public static final String SORCERER_NAME = "Sorcier";
+    public static final String FAST_NAME = "Rapide";
 
     // partie effets
     public static final String HEALTHFLASK_EFFECT = "heal";

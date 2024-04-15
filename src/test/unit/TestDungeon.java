@@ -50,7 +50,7 @@ public class TestDungeon {
     public void testAddEntity() {
         int nbBefore = manager.getRoom().getEntities().size();
         Position p = new Position(500, 500);
-        Entity ent = new Enemy(p, null);
+        Entity ent = new Enemy(p);
         manager.getRoom().addEntity(ent);
         int nbAfter = manager.getRoom().getEntities().size();
         assertEquals(nbBefore,nbAfter-1);
@@ -62,7 +62,7 @@ public class TestDungeon {
     @Test
     public void testRmEntity() {
         Position p = new Position(500, 500);
-        Entity ent = new Enemy(p, null);
+        Entity ent = new Enemy(p);
         manager.getRoom().addEntity(ent);
         int nbBefore = manager.getRoom().getEntities().size();
         manager.getRoom().removeEntity(ent);

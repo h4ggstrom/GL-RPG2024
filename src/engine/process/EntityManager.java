@@ -83,7 +83,6 @@ public class EntityManager {
     public void moveCharacter (GameCharacter character, String direction) {
         Position startPosition = character.getHitbox().getCenter();
         Position endPosition;
-        Boolean canBeMoved = true;
         String entityType = character.getEntityType();
         int speed = character.getMoveSpeed();
         if (character instanceof Player) {
@@ -113,36 +112,13 @@ public class EntityManager {
 
         Hitbox finaleHitbox = new Hitbox(endPosition, entityType, character); // On instancie la Hitbox sur l'emplacement final
 
-        // Si la position finale du personnage n'est pas dans les limites de la Room
-        if ( ! checkRoomBounds(finaleHitbox) ) {
-            logger.trace("La position finale du " + entityType + "n'est pas dans les limites de la Room");
-            // Si la Room n'est pas nettoyée
-            if(!this.getRoom().getCleaned()){
-                canBeMoved = false; // Il ne peut pas être déplacé
-            }
-            // Si la Room est nettoyée, la porte à droite est ouverte
-            else {
-                // Si il veut se déplacer derrière le mur de droite, entre le haut et le bas de la porte
-                if ( ( GameConfiguration.ROOM_RIGHT_LIMITATION < finaleHitbox.getUpperRight().getX() ) && ( (GameConfiguration.GATE_UPPERLEFT.getY() < endPosition.getY()) && (endPosition.getY() < GameConfiguration.GATE_BOTTOMRIGHT.getY() - GameConfiguration.PLAYER_HEIGHT))) {
-                    canBeMoved = true; // On peut le déplacer
-                }
-                else {
-                    canBeMoved = false;
-                }
-            }
-        }
-        else {
-            logger.trace("La position du " + entityType + " est dans les limites de la room");
-        }
+        Boolean canBeMoved = true;
 
-        if(canBeMoved) {
-            logger.trace("On vérifie la collision avec les Hitbox des entités de la Room");
-            this.getRoom().removeEntity(character); // on retire l'Entité de la Room pour ne pas vérifier la collision avec sa propre hitbox
-            canBeMoved = verifHitboxes(finaleHitbox);
-            logger.trace("Verification de canBeMoved après la verification des hitboxs : " + canBeMoved);
-            this.getRoom().addEntity(character); // on replace l'entité dans le Room
-        }
-
+        logger.trace("On vérifie la collision avec les Hitbox des entités de la Room");
+        this.getRoom().removeEntity(character); // on retire le personnage de la Room pour ne pas vérifier la collision avec sa propre hitbox
+        canBeMoved = verifHitboxes(finaleHitbox); // on vérifie que la Hitbox finale n'est en collision avec aucune autre
+        logger.trace("Verification de canBeMoved après la verification des hitboxs : " + canBeMoved);
+        this.getRoom().addEntity(character); // on replace l'entité dans le Room
 
         if (canBeMoved) { // Si on a jugé que le personnage peut se déplacer
             logger.trace(entityType + " peut se déplacer.");
@@ -150,8 +126,10 @@ public class EntityManager {
             character.setHitbox(finaleHitbox); // On associe la nouvelle Hitbox
         }
 
-        if (character.getHitbox().getCenter().getX() > GameConfiguration.WINDOW_WIDTH) {
-            this.getRoom().exit();
+        // Si le personnage sort des limites de l'écran
+        if (character.getHitbox().getCenter().getX() > GameConfiguration.WINDOW_WIDTH || character.getHitbox().getCenter().getY() > GameConfiguration.WINDOW_HEIGHT) {
+            // Il sort de la Room
+            this.nextRoom();
         }
     }
 
@@ -224,8 +202,9 @@ public class EntityManager {
                 }
             }
 
+            // Si plus aucun ennemi ne reste
             if(hasBeenCleaned) {
-                this.getRoom().clean();
+                this.getRoom().open();
                 Position healthPosition = new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.HEALTHFLASK_HEIGHT/2);
                 Consumable healthPotion = (Consumable)EntityFactory.createEntity("healthFlask", healthPosition);
                 this.getRoom().addEntity(healthPotion);
@@ -329,18 +308,6 @@ public class EntityManager {
                 moveCharacter(enemy, dy > 0 ? "down" : "up");
             }
         }
-    }
-
-    /**
-     * Vérifie si la Hitbox donnée est dans les limites de la salle.
-     * @param hitbox La Hitbox à vérifier.
-     * @return true si la Hitbox est dans les limites, false sinon.
-     */
-    private boolean checkRoomBounds(Hitbox hitbox) {
-        return (GameConfiguration.ROOM_LEFT_LIMITATION < hitbox.getUpperLeft().getX() &&
-                hitbox.getUpperRight().getX() < GameConfiguration.ROOM_RIGHT_LIMITATION) &&
-                (GameConfiguration.ROOM_UPPER_LIMITATION < hitbox.getUpperRight().getY() &&
-                hitbox.getBottomRight().getY() < GameConfiguration.ROOM_LOWER_LIMITATION);
     }
 
     public void attackforEnemy(){

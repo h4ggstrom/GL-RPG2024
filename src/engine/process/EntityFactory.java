@@ -10,8 +10,6 @@ import engine.entities.items.consumables.*;
 import engine.entities.containers.*;
 import engine.entities.items.equipment.*;
 
-import java.awt.image.BufferedImage;
-
 import config.GameConfiguration;
 
 /**
@@ -22,8 +20,7 @@ public class EntityFactory {
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
             case GameConfiguration.ENEMY_ENTITYTYPE:
-                BufferedImage enemySprite = RessourceManager.getInstance().getImage("./src/ressources/assets/entity/enemy.png");
-                return new Enemy(position, enemySprite);
+                return new Enemy(position);
             case GameConfiguration.SWORD_ENTITYTYPE:
                 return new Sword(position);
             case GameConfiguration.HEALTHFLASK_ENTITYTYPE:

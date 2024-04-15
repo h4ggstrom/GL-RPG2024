@@ -1,7 +1,5 @@
 package engine.entities.characters;
 
-import java.awt.image.BufferedImage;
-
 import config.GameConfiguration;
 import engine.dungeon.Position;
 
@@ -17,16 +15,13 @@ import engine.dungeon.Position;
  * 
  */
 public class Enemy extends GameCharacter {
-    
-    private BufferedImage sprite;
 
     /**
      * Constructeur par défaut. Crée une nouvelle instance d'Enemy en utilisant le constructeur de {@link engine.entities.characters.GameCharacter}
      * 
      * @param position la position de départ de l'ennemi
      */
-    public Enemy(Position position, BufferedImage sprite) {
+    public Enemy(Position position) {
         super(position, GameConfiguration.ENEMY_NAME, GameConfiguration.ENEMY_ENTITYTYPE, GameConfiguration.ENEMY_DEFAULT_MAXHEALTH, GameConfiguration.ENEMY_DEFAULT_MAXHEALTH, GameConfiguration.ENEMY_DEFAULT_ARMOR, GameConfiguration.ENEMY_DEFAULT_ATTACKSPEED, GameConfiguration.ENEMY_DEFAULT_ATTACKRANGE, GameConfiguration.ENEMY_DEFAULT_ATTACKDAMAGE, GameConfiguration.ENEMY_DEFAULT_MOVESPEED, GameConfiguration.ENEMY_DEFAULT_ABILITYCOOLDOWN, GameConfiguration.ENEMY_DEFAULT_STUNCOOLDOWN);
-        this.sprite = sprite;
     }
 }

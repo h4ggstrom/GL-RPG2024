@@ -70,11 +70,11 @@ public class PlayerSetup extends JFrame{
 
             super("Sélectionnez votre classe");
 
-            heavyButton = new JButton("Costaud");
-            fastButton = new JButton("rapide");
-            sorcererButton = new JButton("sorcier");
-            cancelButton = new JButton("annuler");
-            validateButton = new JButton("valider");
+            heavyButton = new JButton(GameConfiguration.STRONG_NAME);
+            fastButton = new JButton(GameConfiguration.FAST_NAME);
+            sorcererButton = new JButton(GameConfiguration.SORCERER_NAME);
+            cancelButton = new JButton("Annuler");
+            validateButton = new JButton("Valider");
 
             chart = createChart();
 

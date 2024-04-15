@@ -23,17 +23,13 @@ import log.Gamelog;
 public class Room {
 
     private static Logger logger = Gamelog.getLogger();
-    
-    // définition des attributs
-    private Boolean cleaned = false; // booléen pour savoir si la salle a été nettoyée de toute entité hostile
-    private Boolean exited = false; // booléen  pour savoir si le joueur a quitté
 
     private int number;
+    private GateEnv gate;
 
 
     // Liste des entités présentes dans la salle
     private ArrayList<Entity> entities = new ArrayList<Entity>();
-    private String fileName = "room";
 
     public Room (int number) {
         this.number = number;
@@ -62,16 +58,20 @@ public class Room {
         lowerGateWall.getHitbox().drawHitbox(GameConfiguration.GATE_BOTTOMLEFT, new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT));
         addEntity(lowerGateWall);
 
-        GateEnv gate = new GateEnv(null);
+        gate = new GateEnv(null);
         gate.getHitbox().drawHitbox(GameConfiguration.GATE_UPPERLEFT, GameConfiguration.GATE_BOTTOMRIGHT);
         addEntity(gate);
     }
 
     public void empty() {
-        this.cleaned = false;
-        this.exited = false;
         entities.clear();
-        fileName = "room";
+    }
+
+    /**
+     * Méthode permettant d'ouvrir la porte de la salle
+     */
+    public void open() {
+        this.removeEntity(gate);
     }
   
     /**
@@ -97,41 +97,13 @@ public class Room {
         logger.trace(entity + " removed");
     }
 
-    /**
-     * Cette méthode permet de déclarer la salle comme etant nettoyée (de toute entité hostile)
-     */
-    public void clean () {
-        this.cleaned = true;
-        logger.info("room has been marked as cleaned");
-        this.fileName = "room_open";
-    }
-
-    public Boolean getCleaned () {
-        return this.cleaned;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public void exit() {
-        this.exited = true;
-    }
-
-    public Boolean getExited() {
-        return exited;
-    }
-
     public int getNumber() {
         return number;
     }
 
     /**
      * Méthode permettant de créer une liste d'entitées destinées à être dessinées dans le GUI, évitant ainsi l'Exception : ConcurrentModificationException
+     * Cette exception survient lorsqu'on parcourt un ArrayList et qu'on la modifie parrallèlement (tuer les ennemis par exemple)
      * @return Une nouvelle liste avec les entitées de la Room, destinée au dessin dans le GUI
      */
     public ArrayList<Entity> getEntitiesToDraw() {

@@ -44,6 +44,8 @@ public class GameDisplay extends JPanel {
         for (Entity entity : entitiesToDraw) {
             paintStrategy.paint(entity, graphics);
         }
+
+        paintStrategy.paintLevelInfo(graphics);
     }
    
 }

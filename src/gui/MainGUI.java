@@ -86,10 +86,6 @@ public class MainGUI extends JFrame implements Runnable {
 			}
 
             compteur++;
-
-            if(manager.getRoom().getExited()) {
-                manager.nextRoom();
-            }
             
             if(compteur%100 == 0){
                manager.moveEnemies();
@@ -97,7 +93,7 @@ public class MainGUI extends JFrame implements Runnable {
 
             if(compteur%1000 == 0){
                 manager.attackforEnemy();
-             }
+            }
 
             if(Player.getInstance().getHealth() <= 0){
                 manager.gameOver();
