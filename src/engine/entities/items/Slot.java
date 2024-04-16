@@ -7,6 +7,7 @@ import engine.entities.items.weapons.Weapon;
 
 public class Slot implements Serializable {
     
+    private static final long serialVersionUID = 1L;
     private Item item;
 
     /**

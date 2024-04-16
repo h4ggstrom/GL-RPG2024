@@ -15,6 +15,7 @@ import java.io.Serializable;
 public class Position implements Serializable {
 
     // définition des attributs.
+    private static final long serialVersionUID = 1L;
     private int x;
     private int y;
 

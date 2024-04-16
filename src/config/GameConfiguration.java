@@ -27,6 +27,8 @@ public class GameConfiguration {
     //FIXME : Paramètres
     //FIXME : Expérience et amélioration de stats
 
+    public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";
+
     // PARTIE DIMENSIONS
     public static final int WINDOW_WIDTH = 1080;
 	public static final int WINDOW_HEIGHT = 720;

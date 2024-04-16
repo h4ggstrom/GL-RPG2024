@@ -6,6 +6,7 @@ import engine.dungeon.Position;
 
 public abstract class Entity implements Serializable {
     
+    private static final long serialVersionUID = 1L;
     private Hitbox hitbox;
     private String entityName;
     private String entityType;

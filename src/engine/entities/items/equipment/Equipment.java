@@ -8,6 +8,7 @@ import engine.entities.items.weapons.Weapon;
 
 public class Equipment implements Serializable{
     
+    private static final long serialVersionUID = 1L;
     private Weapon weapon;
     private Helmet helmet;
     private Gloves gloves;

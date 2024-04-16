@@ -7,6 +7,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import config.GameConfiguration;
+import engine.entities.characters.Player;
 
 public class MainMenuGUI extends JFrame {
 
@@ -80,7 +81,15 @@ public class MainMenuGUI extends JFrame {
 
     class LoadGame implements ActionListener {
 		public void actionPerformed(ActionEvent e){
-            
+            // On récupère l'instance de joueur
+            Player player = Player.getInstance();
+            // On charge le fichier
+            player.loadSave();
+            MainGUI gameMainGUI = new MainGUI(GameConfiguration.GAME_TITLE);
+        
+            Thread gameThread = new Thread(gameMainGUI);
+            gameThread.start();
+            dispose();
 		}
 	}
 

@@ -1,5 +1,8 @@
 package engine.entities.characters;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
@@ -157,6 +160,14 @@ public class Player extends GameCharacter {
 
     public void setPlayerWidth(int playerWidth) {
         this.playerWidth = playerWidth;
-    } 
+    }
+
+    public void loadSave() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./src/save/save.dat"))) {
+            player = (Player)ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

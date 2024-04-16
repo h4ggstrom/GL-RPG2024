@@ -22,6 +22,7 @@ import log.Gamelog;
 public class Hitbox implements Serializable {
 
     // définition des attributs
+    private static final long serialVersionUID = 1L;
     private static Logger logger = Gamelog.getLogger();
     private Position upperLeft;
     private Position upperRight;
