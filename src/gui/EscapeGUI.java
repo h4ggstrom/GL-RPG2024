@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 
+import config.GameConfiguration;
 import engine.entities.characters.Player;
 
 import java.awt.*;
@@ -24,7 +25,7 @@ public class EscapeGUI extends JFrame {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Ajout d'un label pour le titre du jeu
-        JLabel titleLabel = new JLabel("Panique à Cergy-Préfecture");
+        JLabel titleLabel = new JLabel(GameConfiguration.GAME_TITLE);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 

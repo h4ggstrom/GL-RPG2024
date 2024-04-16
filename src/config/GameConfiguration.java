@@ -18,14 +18,13 @@ public class GameConfiguration {
 
     //FIXME : Parfois les arbres apparaissent devant la porte de sortie ...
     //FIXME : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
-    //FIXME : Sauvegardes
     //FIXME : Magasin à chaque milieu d'étage (PNJ ?)
     //FIXME : Tous les types d'ennemis et BOSS à la fin des étages
     //FIXME : Changer d'environnement à chaque étage
     //FIXME : Tous les types d'armes
     //FIXME : Capacités (mana, immobilisation, visuels)
     //FIXME : Paramètres
-    //FIXME : Expérience et amélioration de stats
+    //FIXME : Expérience et amélioration de stats à chaque nouveau niveau
 
     public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";
 

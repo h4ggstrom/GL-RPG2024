@@ -144,7 +144,7 @@ public class PlayerSetup extends JFrame{
                 public void actionPerformed(java.awt.event.ActionEvent e) {
                     logger.info("class selected : " + player.getPlayerClass());
                     logger.info("game is starting");
-                    MainGUI gameMainGUI = new MainGUI("RPG");
+                    MainGUI gameMainGUI = new MainGUI(GameConfiguration.GAME_TITLE);
         
                     Thread gameThread = new Thread(gameMainGUI);
                     gameThread.start();
