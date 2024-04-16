@@ -1,5 +1,7 @@
 package engine.dungeon;
 
+import java.io.Serializable;
+
 /**
  * Génie Logiciel - Projet RPG.
  * 
@@ -10,7 +12,7 @@ package engine.dungeon;
  * @author hayder.ur-rehman@etu.cyu.fr
  * 
  */
-public class Position {
+public class Position implements Serializable {
 
     // définition des attributs.
     private int x;

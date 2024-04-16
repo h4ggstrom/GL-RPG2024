@@ -1,7 +1,5 @@
 package engine.entities.characters;
 
-import java.io.Serializable;
-
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
@@ -20,7 +18,7 @@ import log.Gamelog;
  * @author hayder.ur-rehman@etu.cyu.fr
  * 
  */
-public class Player extends GameCharacter implements Serializable {
+public class Player extends GameCharacter {
 
     // définition des attributs
     private static Player player;

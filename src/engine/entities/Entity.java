@@ -1,8 +1,10 @@
 package engine.entities;
 
+import java.io.Serializable;
+
 import engine.dungeon.Position;
 
-public abstract class Entity {
+public abstract class Entity implements Serializable {
     
     private Hitbox hitbox;
     private String entityName;

@@ -126,21 +126,13 @@ public class MainGUI extends JFrame implements Runnable {
                 case 'e':
                     new InventoryGUI(manager);
                     break;
-                case 'p':
-                    // Faire pause
-                    if(gameSpeed == GameConfiguration.GAME_SPEED) {
-                        gameSpeed = 100000;
-                    }
-                    else {
-                        gameSpeed = GameConfiguration.GAME_SPEED;
-                    }
                 default:
                     break;
             }
 
             // Si la touche échap est pressée
             if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                
+                new EscapeGUI();
             }
         }
 

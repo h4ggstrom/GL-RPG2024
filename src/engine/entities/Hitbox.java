@@ -1,5 +1,7 @@
 package engine.entities;
 
+import java.io.Serializable;
+
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
@@ -17,7 +19,7 @@ import log.Gamelog;
  * @author hayder.ur-rehman@etu.cyu.fr
  * 
  */
-public class Hitbox {
+public class Hitbox implements Serializable {
 
     // définition des attributs
     private static Logger logger = Gamelog.getLogger();

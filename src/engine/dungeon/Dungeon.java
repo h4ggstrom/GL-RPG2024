@@ -1,11 +1,10 @@
 package engine.dungeon;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import config.GameConfiguration;
 
-public class Dungeon implements Serializable {
+public class Dungeon {
     
     private ArrayList<Stage> stages;
 

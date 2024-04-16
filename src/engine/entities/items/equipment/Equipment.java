@@ -1,11 +1,12 @@
 package engine.entities.items.equipment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import engine.entities.items.Item;
 import engine.entities.items.weapons.Weapon;
 
-public class Equipment {
+public class Equipment implements Serializable{
     
     private Weapon weapon;
     private Helmet helmet;

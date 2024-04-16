@@ -1,9 +1,11 @@
 package engine.entities.items;
 
+import java.io.Serializable;
+
 import engine.entities.items.consumables.Consumable;
 import engine.entities.items.weapons.Weapon;
 
-public class Slot {
+public class Slot implements Serializable {
     
     private Item item;
 
