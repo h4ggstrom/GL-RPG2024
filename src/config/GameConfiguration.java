@@ -14,8 +14,18 @@ import engine.dungeon.Position;
  */
 public class GameConfiguration {
 
+    // À faire :
+
     //FIXME : Parfois les arbres apparaissent devant la porte de sortie ...
     //FIXME : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
+    //FIXME : Sauvegardes
+    //FIXME : Magasin à chaque milieu d'étage (PNJ ?)
+    //FIXME : Tous les types d'ennemis et BOSS à la fin des étages
+    //FIXME : Changer d'environnement à chaque étage
+    //FIXME : Tous les types d'armes
+    //FIXME : Capacités (mana, immobilisation, visuels)
+    //FIXME : Paramètres
+    //FIXME : Expérience et amélioration de stats
 
     // PARTIE DIMENSIONS
     public static final int WINDOW_WIDTH = 1080;
