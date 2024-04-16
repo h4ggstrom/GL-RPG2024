@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import engine.entities.Entity;
+import engine.entities.characters.Enemy;
 import engine.entities.environment.GateEnv;
 import log.Gamelog;
 
@@ -83,6 +84,21 @@ public class Room {
      */
     public ArrayList<Entity> getStaticEntities() {
         return new ArrayList<>(entities);
+    }
+
+    /**
+     * Méthode permettant de récupérer les ennemis présents dans la Room
+     */
+    public ArrayList<Enemy> getEnemies() {
+        ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
+        // Pour chaque entité présente dans la salle
+        for (Entity entity : getStaticEntities()) {
+            if (entity instanceof Enemy) {
+                Enemy enemy = (Enemy) entity;
+                enemiesFetched.add(enemy);
+            }
+        }
+        return enemiesFetched;
     }
 
     public String getDifficulty() {

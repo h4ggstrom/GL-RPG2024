@@ -228,10 +228,10 @@ public class InventoryGUI extends ContainerGUI {
 
         healthTextField.setText("Nombre de points de vie actuels : " + player.getHealth());
         armorTextField.setText("Nombre de points d'armure : " + player.getArmor());
-        attackSpeedTextField.setText("Vitesse d'attaque : " + player.getAttackSpeed() + " ms");
-        moveSpeedTextField.setText("Vitesse de déplacement : " + player.getMoveSpeed() + " pixels par ms");
-        abilityCooldownTextField.setText("Délai de récupération des abilités : " + player.getAbilityCooldown() + " ms");
-        stunCooldownTextField.setText("Durée des immobilisations : " + player.getStunCooldown() + " ms");
+        attackSpeedTextField.setText("Délai de récupération d'attaque : " + player.getAttackSpeed() + " ticks");
+        moveSpeedTextField.setText("Vitesse de déplacement : " + player.getMoveSpeed() + " pixels par tick");
+        abilityCooldownTextField.setText("Délai de récupération des abilités : " + player.getAbilityCooldown() + " ticks");
+        stunCooldownTextField.setText("Durée des immobilisations : " + player.getStunCooldown() + " ticks");
 
         playerStatisticsPanel.add(healthTextField);
         playerStatisticsPanel.add(armorTextField);

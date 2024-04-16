@@ -60,8 +60,8 @@ public class GameConfiguration {
     public static final int TREE_WIDTH = 56;
     public static final int TREE_HEIGHT = 51;
 	
-    // vitesse d'exécution du jeu
-	public static final int GAME_SPEED = 1;
+    // vitesse d'exécution du jeu, un tick sera égal à ce nombre de millisecondes
+	public static final int GAME_SPEED = 10;
 
     // statistiques du donjon
     public static final int NUMBER_OF_STAGES = 3;

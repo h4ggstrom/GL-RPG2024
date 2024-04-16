@@ -12,8 +12,6 @@ import engine.entities.environment.GateEnv;
 import engine.entities.environment.TreeEnv;
 import engine.entities.environment.WallEnv;
 import engine.entities.items.consumables.Coin;
-import engine.entities.items.equipment.*;
-import engine.entities.items.weapons.*;
 import engine.dungeon.Dungeon;
 import log.Gamelog;
 
@@ -103,42 +101,18 @@ public class GameBuilder {
     }
     
     private static void initializeEquipmentOfEnemy(Enemy enemy, int currentRoom, int enemyCount) {
-        // On équipe un enemy sur deux d'un Scepter
-        if ( currentRoom > 2 && enemyCount % 2 == 0) {
-            enemy.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
-        } else {
-            enemy.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
-        }
+        switch(enemy.getEntityType()) {
+            case "rat_fistule":
+                // On génère un nombre aléatoire entre 1 et 10 * le numéro de la room
+                int randomNumber = getRandomNumber(1, 10*currentRoom);
 
-        // On génère ensuite un nombre aléatoire entre 1 et 5
-        int randomNumber = getRandomNumber(1, 5);
+                // On ajoute à l'inventaire du rat fistulé des pièces
+                Coin coins = (Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null);
+                coins.setConsumableValue(randomNumber);
+                enemy.getInventory().addItem(coins);
 
-        // L'ennemi aura un des 5 habits en équipement
-        switch(randomNumber) {
-            case 1:
-                enemy.getEquipment().setHelmet((Helmet)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
-                break;
-            case 2:
-                enemy.getEquipment().setGloves((Gloves)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
-                break;
-            case 3:
-                enemy.getEquipment().setChestplate((Chestplate)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
-                break;
-            case 4:
-                enemy.getEquipment().setPants((Pants)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
-                break;
-            case 5:
-                enemy.getEquipment().setBoots((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
                 break;
         }
-        
-        // On génère ensuite un nombre aléatoire entre 1 et 10 * le numéro de la room
-        randomNumber = getRandomNumber(1, 10*currentRoom);
-
-        // On ajoute cette fois-ci à l'inventaire de l'ennemi des pièces
-        Coin coins = (Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null);
-        coins.setConsumableValue(randomNumber);
-        enemy.getInventory().addItem(coins);
     }
 
     /**

@@ -316,20 +316,15 @@ public class EntityManager {
     }
 
     public void attackforEnemy(){
-        ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
-        // Pour chaque entité présente dans la salle
-        for (Entity entity : this.getCurrentRoom().getEntities()) {
-            if (entity instanceof Enemy) {
-                Enemy enemy = (Enemy) entity;
-                enemiesFetched.add(enemy);
-            }
-        }
-        for (Enemy enemy : enemiesFetched) {
+        for (Enemy enemy : getCurrentRoom().getEnemies()) {
             Position enemyPosition = enemy.getHitbox().getCenter();
             Position playerPosition = player.getHitbox().getCenter();
             int distanceEnemyPlayer = calculateDistance(enemyPosition, playerPosition);
-            if(distanceEnemyPlayer <= enemy.getAttackRange()){ 
-                player.hurtCharacter(enemy.getAttackDamage());;
+            if(distanceEnemyPlayer <= enemy.getAttackRange() && enemy.canAttack()){ 
+                // On blesse le joueur
+                player.hurtCharacter(enemy.getAttackDamage());
+                // On indique que l'ennemi à attaqué et ne peut plus attaquer 
+                enemy.setCanAttack(false);
                 // On indique aux conteneurs si ils sont ouverts que des nouvelles valeurs pour les PV sont à afficher
                 refreshContainers();
             }
@@ -447,6 +442,22 @@ public class EntityManager {
         }
         if(inventoryRefreshListener != null) {
             inventoryRefreshListener.refreshContainer();
+        }
+    }
+
+    /**
+     * Cette méthode permet à certaines valeurs de ticks (en millisecondes) de redonner la possibilité aux personnages d'attaquer
+     * @param tick temps du jeu en millisecondes
+     */
+    public void giveBackAttackPossibility(int tick) {
+        if(tick%Player.getInstance().getAttackSpeed() == 0) {
+            Player.getInstance().setCanAttack(true);
+        }
+        
+        for(Enemy enemy : getCurrentRoom().getEnemies()) {
+            if(tick%enemy.getAttackSpeed() == 0) {
+                enemy.setCanAttack(true);
+            }
         }
     }
 

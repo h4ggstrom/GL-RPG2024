@@ -86,23 +86,14 @@ public class MainGUI extends JFrame implements Runnable {
 			}
 
             compteur++;
-            
-            if(compteur%100 == 0){
-               manager.moveEnemies();
-            }
-
-            if(compteur%1000 == 0){
-                manager.attackforEnemy();
-            }
 
             if(Player.getInstance().getHealth() <= 0){
                 manager.gameOver();
             }
 
-            // Chaque tick correspondant à la vitesse d'attaque du joueur, on lui rend la possibilité d'attaquer
-            if(compteur%Player.getInstance().getAttackSpeed() == 0){
-                Player.getInstance().setCanAttack(true);
-            }
+            manager.moveEnemies();
+            manager.giveBackAttackPossibility(compteur);
+            manager.attackforEnemy();
 
             dashboard.repaint();
 		}
