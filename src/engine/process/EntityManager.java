@@ -55,14 +55,6 @@ public class EntityManager {
         return logger;
     }
 
-    public void set (Player player) {
-        this.player = player;
-    }
-
-    public Player getPlayer () {
-        return this.player;
-    }
-
     public Dungeon getDungeon() {
         return this.dungeon;
     }
@@ -257,13 +249,18 @@ public class EntityManager {
     }
 
     /**
-     * Méthode pour changer de Room
+     * Méthode pour passer à la Room suivante
      */
     public void nextRoom() {
-        // On incrémente la room
-        player.moveToNextRoom();
+        // On incrémente le numéro de la room
+        player.setRoomNumber(player.getRoomNumber() + 1);
+        // On récupère cette nouvelle Room
+        Room nextRoom = this.getCurrentRoom();
+        // On place le joueur au milieu de la Room
         player.setPosition(new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_CENTER_Y));
-        // On regènère toutes les entités pour cette room
+        // On ajoute le joueur à la liste d'entités
+        nextRoom.addEntity(player);
+        // On génère les entités de cette room
         GameBuilder.initializeEntities(this);
     }
 

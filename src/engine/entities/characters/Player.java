@@ -71,11 +71,6 @@ public class Player extends GameCharacter {
         this.roomNumber = roomNumber;
     }
 
-    public void moveToNextRoom() {
-        this.roomNumber++;
-    }
-
-
     public void gainExp(int exp) {
         this.experience += exp;
     }

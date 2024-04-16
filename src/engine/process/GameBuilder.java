@@ -57,6 +57,20 @@ public class GameBuilder {
     }
 
     /**
+     * Cette méthode permet d'initialiser le joueur au centre de la salle
+     * 
+     * @param manager le process de gestion des actions, auquel sera ajouté le joueur généré
+     * 
+     * @see engine.process.EntityManager pour les détails du processus de gestion des actions du joueur
+     */
+    private static void initializePlayer (EntityManager manager) {
+        // On récupère l'instance de Player
+        Player player = Player.getInstance();
+        // On ajoute le joueur à la liste d'entités
+        manager.getCurrentRoom().addEntity(player);
+    }
+
+    /**
      * Permet l'initialisation de toutes les entités de la salle actuelle, l'ordre de génération est important
      * @param manager
      */
@@ -71,20 +85,6 @@ public class GameBuilder {
     }
 
     /**
-     * Cette méthode permet d'initialiser le joueur au centre de la salle
-     * 
-     * @param manager le process de gestion des actions, auquel sera ajouté le joueur généré
-     * 
-     * @see engine.process.EntityManager pour les détails du processus de gestion des actions du joueur
-     */
-    private static void initializePlayer (EntityManager manager) {
-        // On récupère l'instance de Player
-        Player player = Player.getInstance();
-        manager.getCurrentRoom().addEntity(player);
-        manager.set(player);
-    }
-
-    /**
      * Cette méthode permet d'initialiser les ennemis à des endroits aléatoires de la salle.
      * 
      * @param manager le process de gestion des actions auquel seront ajoutés les ennemis générés.
@@ -94,7 +94,7 @@ public class GameBuilder {
     public static void initializeEnemies(EntityManager manager) {
         Player player = Player.getInstance();
         int roomNumber = player.getRoomNumber();
-        int enemyCount = manager.getPlayer().getstageNumber() * manager.getPlayer().getRoomNumber(); 
+        int enemyCount = player.getstageNumber() * player.getRoomNumber(); 
         for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", null); // On instancie l'Enemy
             randomPlaceEntity(manager, enemy); // On le place de manière aléatoire
