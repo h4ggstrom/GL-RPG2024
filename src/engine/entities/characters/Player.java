@@ -105,8 +105,9 @@ public class Player extends GameCharacter {
         switch (playerClass) {
             case "heavy":
                 super.setMaxHealth(150);
+                super.setHealth(150);
                 super.setMoveSpeed(8);
-                super.setAttackSpeed(5000);
+                super.setAttackSpeed(500);
                 this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
                 this.mana = 100;
                 this.playerHeight = 40;
@@ -116,8 +117,9 @@ public class Player extends GameCharacter {
 
             case "sorcerer":
                 super.setMaxHealth(100);
+                super.setHealth(100);
                 super.setMoveSpeed(10);
-                super.setAttackSpeed(4000);
+                super.setAttackSpeed(400);
                 this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null)); 
                 this.mana = 200;
                 this.playerHeight = 40;
@@ -126,8 +128,9 @@ public class Player extends GameCharacter {
 
             case "fast":
                 super.setMaxHealth(85);
+                super.setHealth(85);
                 super.setMoveSpeed(15);
-                super.setAttackSpeed(3000);
+                super.setAttackSpeed(300);
                 this.mana = 80;
                 this.playerHeight = 40;
                 this.playerWidth = 20;

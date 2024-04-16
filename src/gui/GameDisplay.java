@@ -46,6 +46,7 @@ public class GameDisplay extends JPanel {
         }
 
         paintStrategy.paintLevelInfo(graphics);
+        paintStrategy.paintPlayerInfo(graphics);
     }
    
 }

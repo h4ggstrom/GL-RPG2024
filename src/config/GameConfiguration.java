@@ -14,6 +14,9 @@ import engine.dungeon.Position;
  */
 public class GameConfiguration {
 
+    //FIXME : Parfois les arbres apparaissent devant la porte de sortie ...
+    //FIXME : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
+
     // PARTIE DIMENSIONS
     public static final int WINDOW_WIDTH = 1080;
 	public static final int WINDOW_HEIGHT = 720;

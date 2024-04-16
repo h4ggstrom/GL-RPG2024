@@ -69,22 +69,13 @@ public class PaintStrategy {
             graphics.drawImage(ressourceManager.getGif(filePath).getImage(), position.getX(), position.getY(), null);
 
             // Cas si l'entité est un personnage
-            if(entity instanceof GameCharacter) {
+            if(entity instanceof Enemy) {
+                graphics.setColor(Color.RED);
                 GameCharacter character = (GameCharacter)entity;
-                int lifebar_xshift = 0;
+                int lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
                 if (character instanceof Enemy) {
                     graphics.setColor(Color.RED);
                     lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
-                }
-                else if (character instanceof Player) {
-                    graphics.setColor(Color.MAGENTA);
-                    lifebar_xshift = GameConfiguration.PLAYER_LIFEBAR_XSHIFT;
-
-                    // Partie portée d'attaque pour le joueur
-                    Position hitbox_center = character.getHitbox().getCenter();
-                    int x_center = hitbox_center.getX();
-                    int y_center = hitbox_center.getY();
-                    graphics.drawOval(x_center - character.getAttackRange(), y_center - character.getAttackRange(), character.getAttackRange() * 2, character.getAttackRange() * 2);
                 }
                 
                 // Nom du personnage
@@ -121,5 +112,33 @@ public class PaintStrategy {
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
         graphics.drawString("Etage : " + Player.getInstance().getstageNumber(), 30,30);
         graphics.drawString("Salle : " + Player.getInstance().getRoomNumber(), 100,30);
+    }
+
+    public void paintPlayerInfo(Graphics graphics) {
+        Player player = Player.getInstance();
+
+        // Barre de vie
+        graphics.setColor(Color.WHITE);
+        graphics.fillRect(30, 680, 5*player.getMaxHealth(), 30);
+        graphics.setColor(Color.RED);
+        graphics.fillRect(32, 684, 5*player.getHealth(), 26);
+        graphics.setColor(Color.BLACK);
+        graphics.drawString("PV : " + player.getHealth() + "/" + player.getMaxHealth(), 30, 695);
+
+        // Peut-il attaquer ?
+        String filePath = "";
+        if(player.canAttack()) {
+            filePath = "./src/ressources/assets/canAttack.png";
+        }
+        else {
+            filePath = "./src/ressources/assets/cannotAttack.png";
+        }
+        graphics.drawImage(ressourceManager.getImage(filePath), 5*player.getMaxHealth() + 50, 670, null);
+
+        // Partie portée d'attaque pour le joueur
+        Position hitbox_center = player.getHitbox().getCenter();
+        int x_center = hitbox_center.getX();
+        int y_center = hitbox_center.getY();
+        graphics.drawOval(x_center - player.getAttackRange(), y_center - player.getAttackRange(), player.getAttackRange() * 2, player.getAttackRange() * 2);
     }
 }

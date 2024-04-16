@@ -69,6 +69,10 @@ public abstract class GameCharacter extends Entity {
         return health;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public void healCharacter(int heal) {
         int finalHealth = this.getHealth() + heal;
         if(finalHealth > this.getMaxHealth()) {

@@ -288,15 +288,7 @@ public class EntityManager {
      * Cette méthode génére les déplacement des ennemis.
      */
     public void moveEnemies() {
-        ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
-        // Pour chaque entité présente dans la salle
-        for (Entity entity : this.getCurrentRoom().getEntities()) {
-            if (entity instanceof Enemy) {
-                Enemy enemy = (Enemy) entity;
-                enemiesFetched.add(enemy);
-            }
-        }
-        for (Enemy enemy : enemiesFetched) {
+        for (Enemy enemy : getCurrentRoom().getEnemies()) {
             Position enemyPosition = enemy.getHitbox().getCenter();
             Position playerPosition = player.getHitbox().getCenter();
     
