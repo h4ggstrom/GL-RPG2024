@@ -2,7 +2,6 @@ package engine.process;
 
 import engine.dungeon.Position;
 import engine.entities.Entity;
-import engine.entities.characters.Enemy;
 import engine.entities.environment.TreeEnv;
 import engine.entities.items.weapons.*;
 import engine.entities.items.consumables.*;
@@ -18,8 +17,6 @@ public class EntityFactory {
 
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
-            case GameConfiguration.ENEMY_ENTITYTYPE:
-                return new Enemy(position);
             case GameConfiguration.SWORD_ENTITYTYPE:
                 return new Sword(position);
             case GameConfiguration.HEALTHFLASK_ENTITYTYPE:

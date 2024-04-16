@@ -43,7 +43,11 @@ public class PaintStrategy {
 
     public void paint(Entity entity, Graphics graphics) {
         Position position = entity.getHitbox().getUpperLeft();
-        String filePath = "./src/ressources/assets/entity/" + entity.getEntityType() + ".png";
+        String extension = ".png";
+        if(entity instanceof GameCharacter) {
+            extension = ".gif";
+        }
+        String filePath = "./src/ressources/assets/entity/" + entity.getEntityType() + extension;
 
         if(entity instanceof WallEnv || entity instanceof GateEnv) {
             Environment environment = (Environment)entity;
@@ -61,7 +65,8 @@ public class PaintStrategy {
         }
 
         else {
-            graphics.drawImage(ressourceManager.getImage(filePath), position.getX(), position.getY(), null);
+            // On peut afficher l'image telle quelle à la position de l'entité
+            graphics.drawImage(ressourceManager.getGif(filePath).getImage(), position.getX(), position.getY(), null);
 
             // Cas si l'entité est un personnage
             if(entity instanceof GameCharacter) {

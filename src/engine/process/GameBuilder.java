@@ -96,7 +96,7 @@ public class GameBuilder {
         int roomNumber = player.getRoomNumber();
         int enemyCount = player.getstageNumber() * player.getRoomNumber(); 
         for (int i = 0; i < enemyCount; i++) {
-            Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", null); // On instancie l'Enemy
+            Enemy enemy = EnemyFactory.createEnemy("rat_fistule", null); // On instancie des rats fistulés
             randomPlaceEntity(manager, enemy); // On le place de manière aléatoire
             initializeEquipmentOfEnemy(enemy, roomNumber, enemyCount); // On l'équipe
         }

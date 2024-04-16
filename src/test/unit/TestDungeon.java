@@ -6,12 +6,12 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
+import engine.process.EnemyFactory;
 import engine.process.EntityManager;
 import engine.process.GameBuilder;
 import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
 import engine.entities.Entity;
-import engine.entities.characters.Enemy;
 
 
 public class TestDungeon {
@@ -50,7 +50,7 @@ public class TestDungeon {
     public void testAddEntity() {
         int nbBefore = manager.getCurrentRoom().getEntities().size();
         Position p = new Position(500, 500);
-        Entity ent = new Enemy(p);
+        Entity ent = EnemyFactory.createEnemy("rat", p);
         manager.getCurrentRoom().addEntity(ent);
         int nbAfter = manager.getCurrentRoom().getEntities().size();
         assertEquals(nbBefore,nbAfter-1);
@@ -62,7 +62,7 @@ public class TestDungeon {
     @Test
     public void testRmEntity() {
         Position p = new Position(500, 500);
-        Entity ent = new Enemy(p);
+        Entity ent = EnemyFactory.createEnemy("rat", p);
         manager.getCurrentRoom().addEntity(ent);
         int nbBefore = manager.getCurrentRoom().getEntities().size();
         manager.getCurrentRoom().removeEntity(ent);

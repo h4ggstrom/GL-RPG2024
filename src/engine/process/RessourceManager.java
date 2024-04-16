@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,9 +17,11 @@ import java.io.IOException;
 public class RessourceManager {
     private static RessourceManager instance = null;
     private Map<String, BufferedImage> images;
+    private Map<String, ImageIcon> gifs;
 
     private RessourceManager() {
         images = new HashMap<>();
+        gifs = new HashMap<>();
     }
 
     public static RessourceManager getInstance() {
@@ -38,4 +41,12 @@ public class RessourceManager {
         }
         return images.get(path);
     }
+
+    public ImageIcon getGif(String path) {
+        if (!gifs.containsKey(path)) {
+            gifs.put(path, new ImageIcon(path));
+        }
+        return gifs.get(path);
+    }
+    // FIXME : le prof il me semble ne voulait pas de ImageIcon mais c'est la seule manière que j'ai trouvé de lire des GIF
 }

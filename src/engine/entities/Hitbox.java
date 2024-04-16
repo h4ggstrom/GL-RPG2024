@@ -51,9 +51,9 @@ public class Hitbox {
         int width = 0;
         int height = 0;
         switch (this.entityType) {
-            case GameConfiguration.ENEMY_ENTITYTYPE :
-                width = GameConfiguration.ENEMY_WIDTH;
-                height = GameConfiguration.ENEMY_HEIGHT;
+            case "rat_fistule" :
+                width = GameConfiguration.RAT_FISTULE_WIDTH;
+                height = GameConfiguration.RAT_FISTULE_HEIGHT;
                 break;
             case GameConfiguration.PLAYER_ENTITYTYPE :
                 width = GameConfiguration.PLAYER_WIDTH;

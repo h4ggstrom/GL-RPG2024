@@ -24,6 +24,9 @@ public class GameConfiguration {
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
 
+    public static final int RAT_FISTULE_WIDTH = 20;
+    public static final int RAT_FISTULE_HEIGHT = 15;
+
     public static final int SWORD_WIDTH = 30;
     public static final int SWORD_HEIGHT = 30;
 
@@ -150,7 +153,7 @@ public class GameConfiguration {
     // partie noms d'entités (utile pour les assets par exemple)
     public static final String INVENTORY_ENTITYTYPE = "inventory";
     public static final String BAG_ENTITYTYPE = "bag";
-    public static final String PLAYER_ENTITYTYPE = "player0";
+    public static final String PLAYER_ENTITYTYPE = "player";
     public static final String ENEMY_ENTITYTYPE = "enemy";
     public static final String SWORD_ENTITYTYPE = "sword";
     public static final String HEALTHFLASK_ENTITYTYPE = "healthFlask";
