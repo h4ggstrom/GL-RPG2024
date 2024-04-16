@@ -80,7 +80,7 @@ public class GameBuilder {
     private static void initializePlayer (EntityManager manager) {
         // On récupère l'instance de Player
         Player player = Player.getInstance();
-        manager.getRoom().addEntity(player);
+        manager.getCurrentRoom().addEntity(player);
         manager.set(player);
     }
 
@@ -93,12 +93,12 @@ public class GameBuilder {
      */
     public static void initializeEnemies(EntityManager manager) {
         Player player = Player.getInstance();
-        int currentRoom = player.getCurrentRoom();
-        int enemyCount = manager.getPlayer().getCurrentStage() * manager.getPlayer().getCurrentRoom(); 
+        int roomNumber = player.getRoomNumber();
+        int enemyCount = manager.getPlayer().getstageNumber() * manager.getPlayer().getRoomNumber(); 
         for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = (Enemy)EntityFactory.createEntity("enemy", null); // On instancie l'Enemy
             randomPlaceEntity(manager, enemy); // On le place de manière aléatoire
-            initializeEquipmentOfEnemy(enemy, currentRoom, enemyCount); // On l'équipe
+            initializeEquipmentOfEnemy(enemy, roomNumber, enemyCount); // On l'équipe
         }
     }
     
@@ -160,7 +160,7 @@ public class GameBuilder {
     }
 
     public static void initializeWalls(EntityManager manager) {
-        Room currentRoom = manager.getRoom();
+        Room currentRoom = manager.getCurrentRoom();
         WallEnv sideWall = new WallEnv(null);
         sideWall.getHitbox().drawHitbox(new Position(0, 0), new Position(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.WINDOW_HEIGHT));
         currentRoom.addEntity(sideWall);
@@ -196,7 +196,7 @@ public class GameBuilder {
             entity.setPosition(randomPosition);
             // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
             if(manager.verifHitboxes(entity.getHitbox())) {
-                manager.getRoom().addEntity(entity); // On ajoute l'entité à la liste d'entités de la Room
+                manager.getCurrentRoom().addEntity(entity); // On ajoute l'entité à la liste d'entités de la Room
                 break; // On sort de la boucle
             }
         }

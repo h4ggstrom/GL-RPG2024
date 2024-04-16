@@ -38,9 +38,9 @@ public class GameDisplay extends JPanel {
     public void paintComponent (Graphics graphics) {
         super.paintComponent(graphics);
 
-        paintStrategy.paint(manager.getRoom(), graphics);
+        paintStrategy.paint(manager.getCurrentRoom(), graphics);
 
-        ArrayList<Entity> entitiesToDraw = manager.getRoom().getEntitiesToDraw();
+        ArrayList<Entity> entitiesToDraw = manager.getCurrentRoom().getEntitiesToDraw();
         for (Entity entity : entitiesToDraw) {
             paintStrategy.paint(entity, graphics);
         }

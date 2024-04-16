@@ -71,8 +71,8 @@ public class EntityManager {
      * Méthode permettant de retourner l'instance de la Room ou le joueur se trouve
      * @return room instance de la Room ou le joueur se trouve
      */
-    public Room getRoom() {
-        return this.dungeon.getStages().get(player.getCurrentStage() - 1).getRooms().get(player.getCurrentRoom() - 1);
+    public Room getCurrentRoom() {
+        return this.dungeon.getStages().get(player.getstageNumber() - 1).getRooms().get(player.getRoomNumber() - 1);
     }
 
     /**
@@ -115,10 +115,10 @@ public class EntityManager {
         Boolean canBeMoved = true;
 
         logger.trace("On vérifie la collision avec les Hitbox des entités de la Room");
-        this.getRoom().removeEntity(character); // on retire le personnage de la Room pour ne pas vérifier la collision avec sa propre hitbox
+        this.getCurrentRoom().removeEntity(character); // on retire le personnage de la Room pour ne pas vérifier la collision avec sa propre hitbox
         canBeMoved = verifHitboxes(finaleHitbox); // on vérifie que la Hitbox finale n'est en collision avec aucune autre
         logger.trace("Verification de canBeMoved après la verification des hitboxs : " + canBeMoved);
-        this.getRoom().addEntity(character); // on replace l'entité dans le Room
+        this.getCurrentRoom().addEntity(character); // on replace l'entité dans le Room
 
         if (canBeMoved) { // Si on a jugé que le personnage peut se déplacer
             logger.trace(entityType + " peut se déplacer.");
@@ -149,7 +149,7 @@ public class EntityManager {
 
         // Si le click visait une Entity, on la récupère
         Entity selectedEntity = null;
-        for(Entity entity : this.getRoom().getEntities()) {
+        for(Entity entity : this.getCurrentRoom().getEntities()) {
             Hitbox selectedHitbox = entity.getHitbox();
             if(selectedHitbox.isContaining(click)) {
                 selectedEntity = entity;
@@ -189,14 +189,14 @@ public class EntityManager {
                 // On le remplit avec tout ce qu'il y a sur l'Enemy
                 bag.fillBagWithGameCharacterItems(selectedEnemy);
                 // On ajoute le sac à la liste d'entités de la Room
-                this.getRoom().addEntity(bag);
+                this.getCurrentRoom().addEntity(bag);
                 // on retire l'Enemy de la liste d'entités de la Room
-                this.getRoom().removeEntity(selectedEnemy);
+                this.getCurrentRoom().removeEntity(selectedEnemy);
             }
 
             // On vérifie finalement si il ne reste plus aucun ennemis
             Boolean hasBeenCleaned = true;
-            for(Entity entity : this.getRoom().getEntities()) {
+            for(Entity entity : this.getCurrentRoom().getEntities()) {
                 if (entity instanceof Enemy) {
                     hasBeenCleaned = false;
                 }
@@ -204,10 +204,10 @@ public class EntityManager {
 
             // Si plus aucun ennemi ne reste
             if(hasBeenCleaned) {
-                this.getRoom().open();
+                this.getCurrentRoom().open();
                 Position healthPosition = new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.HEALTHFLASK_HEIGHT/2);
                 Consumable healthPotion = (Consumable)EntityFactory.createEntity("healthFlask", healthPosition);
-                this.getRoom().addEntity(healthPotion);
+                this.getCurrentRoom().addEntity(healthPotion);
             }
         }
 
@@ -228,7 +228,7 @@ public class EntityManager {
                 // Le joueur ramasse l'Item et l'ajoute à son inventaire
                 logger.trace("item fetched");
                 player.getInventory().addItem(selectedItem); // ajout à l'inventaire
-                this.getRoom().removeEntity(selectedItem); // on retire l'item de la room
+                this.getCurrentRoom().removeEntity(selectedItem); // on retire l'item de la room
             }
         }
 
@@ -240,7 +240,7 @@ public class EntityManager {
             if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
                 // Le joueur ramasse le coin
                 player.addCoins(selectedCoin.getConsumableValue());
-                this.getRoom().removeEntity(selectedCoin); 
+                this.getCurrentRoom().removeEntity(selectedCoin); 
             }
         }
     }
@@ -270,7 +270,7 @@ public class EntityManager {
     public boolean verifHitboxes(Hitbox finaleHitbox) {
         boolean verif = true;
         // On parcourt toutes les Hitbox d'Entity de la Room
-        for (Entity entity : this.getRoom().getEntities()) {
+        for (Entity entity : this.getCurrentRoom().getEntities()) {
             Hitbox hitbox = entity.getHitbox();
             logger.trace("Les deux hitboxs à inspecter : " + hitbox + " et " + finaleHitbox);
             if ( hitbox.isInCollision(finaleHitbox) ) { // Si la Hitbox finale est en collision avec une des Hitbox de la salle
@@ -287,7 +287,7 @@ public class EntityManager {
     public void moveEnemies() {
         ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
         // Pour chaque entité présente dans la salle
-        for (Entity entity : this.getRoom().getEntities()) {
+        for (Entity entity : this.getCurrentRoom().getEntities()) {
             if (entity instanceof Enemy) {
                 Enemy enemy = (Enemy) entity;
                 enemiesFetched.add(enemy);
@@ -315,7 +315,7 @@ public class EntityManager {
     public void attackforEnemy(){
         ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
         // Pour chaque entité présente dans la salle
-        for (Entity entity : this.getRoom().getEntities()) {
+        for (Entity entity : this.getCurrentRoom().getEntities()) {
             if (entity instanceof Enemy) {
                 Enemy enemy = (Enemy) entity;
                 enemiesFetched.add(enemy);
@@ -334,7 +334,7 @@ public class EntityManager {
     }
 
     public void gameOver(){
-        this.getRoom().empty();
+        this.getCurrentRoom().empty();
     }
 
     /**

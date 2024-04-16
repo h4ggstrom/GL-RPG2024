@@ -114,7 +114,7 @@ public class PaintStrategy {
         // Informations sur la salle
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
-        graphics.drawString("Etage : " + Player.getInstance().getCurrentStage(), 30,30);
-        graphics.drawString("Salle : " + Player.getInstance().getCurrentRoom(), 100,30);
+        graphics.drawString("Etage : " + Player.getInstance().getstageNumber(), 30,30);
+        graphics.drawString("Salle : " + Player.getInstance().getRoomNumber(), 100,30);
     }
 }

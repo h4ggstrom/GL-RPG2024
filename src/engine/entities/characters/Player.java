@@ -22,8 +22,8 @@ public class Player extends GameCharacter {
 
     // définition des attributs
     private static Player player;
-    private int currentStage = 1;
-    private int currentRoom = 1;
+    private int stageNumber = 1;
+    private int roomNumber = 1;
     private int experience = 0;
     private int coinCounter = 0;
     private int mana;
@@ -51,28 +51,28 @@ public class Player extends GameCharacter {
         return player;
     }
 
-    public int getCurrentStage() {
-        if (currentRoom > 7) {
-            currentStage++;
-            currentRoom = 1;
+    public int getstageNumber() {
+        if (roomNumber > 7) {
+            stageNumber++;
+            roomNumber = 1;
         }
-        return currentStage;
+        return stageNumber;
     }
 
-    public void setCurrentStage(int currentStage) {
-        this.currentStage = currentStage;
+    public void setstageNumber(int stageNumber) {
+        this.stageNumber = stageNumber;
     }
 
-    public int getCurrentRoom() {
-        return currentRoom;
+    public int getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setCurrentRoom(int currentRoom) {
-        this.currentRoom = currentRoom;
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public void moveToNextRoom() {
-        this.currentRoom++;
+        this.roomNumber++;
     }
 
 
