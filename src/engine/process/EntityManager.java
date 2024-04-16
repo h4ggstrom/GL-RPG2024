@@ -267,10 +267,16 @@ public class EntityManager {
         GameBuilder.initializeEntities(this);
     }
 
+    /**
+     * Cette méthode permet de parcourir toutes les Hitbox de la Room et de vérifier qu'aucune d'entre elles n'est en collision avec la Hitbox fournie
+     * On parcourt les Hitbox mais on ne modifie rien donc on veille à parcourir l'ArrayList statique pour éviter des erreurs de commodification
+     * @param finaleHitbox la hitbox à analyser
+     * @return un booléen nous disant si la hitbox est en collision avec une entité
+     */
     public boolean verifHitboxes(Hitbox finaleHitbox) {
         boolean verif = true;
         // On parcourt toutes les Hitbox d'Entity de la Room
-        for (Entity entity : this.getCurrentRoom().getEntities()) {
+        for (Entity entity : this.getCurrentRoom().getStaticEntities()) {
             Hitbox hitbox = entity.getHitbox();
             logger.trace("Les deux hitboxs à inspecter : " + hitbox + " et " + finaleHitbox);
             if ( hitbox.isInCollision(finaleHitbox) ) { // Si la Hitbox finale est en collision avec une des Hitbox de la salle

@@ -77,11 +77,11 @@ public class Room {
     }
 
     /**
-     * Méthode permettant de créer une liste d'entitées destinées à être dessinées dans le GUI, évitant ainsi l'Exception : ConcurrentModificationException
-     * Cette exception survient lorsqu'on parcourt un ArrayList et qu'on la modifie parrallèlement (tuer les ennemis par exemple)
-     * @return Une nouvelle liste avec les entitées de la Room, destinée au dessin dans le GUI
+     * Méthode permettant de créer une liste d'entitées destinées à être seulement parcourue et non modifiée, évitant ainsi l'Exception : ConcurrentModificationException
+     * Cette exception survient lorsqu'on parcourt un ArrayList et qu'on la modifie parrallèlement (blesser et tuer les ennemis par exemple)
+     * @return Une nouvelle liste avec les entitées de la Room, destinée aux traitements statiques
      */
-    public ArrayList<Entity> getEntitiesToDraw() {
+    public ArrayList<Entity> getStaticEntities() {
         return new ArrayList<>(entities);
     }
 

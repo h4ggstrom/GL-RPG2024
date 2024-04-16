@@ -40,7 +40,7 @@ public class GameDisplay extends JPanel {
 
         paintStrategy.paint(manager.getCurrentRoom(), graphics);
 
-        ArrayList<Entity> entitiesToDraw = manager.getCurrentRoom().getEntitiesToDraw();
+        ArrayList<Entity> entitiesToDraw = manager.getCurrentRoom().getStaticEntities();
         for (Entity entity : entitiesToDraw) {
             paintStrategy.paint(entity, graphics);
         }
