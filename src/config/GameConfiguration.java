@@ -38,8 +38,8 @@ public class GameConfiguration {
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
 
-    public static final int RAT_FISTULE_WIDTH = 20;
-    public static final int RAT_FISTULE_HEIGHT = 15;
+    public static final int RAT_FISTULE_WIDTH = 32;
+    public static final int RAT_FISTULE_HEIGHT = 32;
 
     public static final int SWORD_WIDTH = 30;
     public static final int SWORD_HEIGHT = 30;
