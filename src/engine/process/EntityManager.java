@@ -83,20 +83,35 @@ public class EntityManager {
         else if (character instanceof Enemy) {
             logger.trace("L'entité sélectionnée pour être déplacée est un ennemi.");
         }
+
+        // Pour maintenir une vitesse constante dans toutes les directions
+        int diagonalSpeed = (int) (speed / Math.sqrt(2));
         // Switch case pour calculer la nouvelle position
         switch (direction) {
             case "up":
                 endPosition = new Position(startPosition.getX(), startPosition.getY() - speed);
+            break;
+            case "down":
+                endPosition = new Position(startPosition.getX(), startPosition.getY() + speed);
                 break;
             case "left":
                 endPosition = new Position(startPosition.getX() - speed, startPosition.getY());
                 break;
-            case "down":
-                endPosition = new Position(startPosition.getX(), startPosition.getY() + speed);
-                break;
             case "right":
                 endPosition = new Position(startPosition.getX() + speed, startPosition.getY());
                 break;
+            case "up-right":
+                endPosition = new Position(startPosition.getX() + diagonalSpeed, startPosition.getY() - diagonalSpeed);
+                break;
+            case "up-left":
+                endPosition = new Position(startPosition.getX() - diagonalSpeed, startPosition.getY() - diagonalSpeed);
+                break;
+            case "down-right":
+                endPosition = new Position(startPosition.getX() + diagonalSpeed, startPosition.getY() + diagonalSpeed);
+                break;
+            case "down-left":
+                endPosition = new Position(startPosition.getX() - diagonalSpeed, startPosition.getY() + diagonalSpeed);
+            break;
             default:
                 endPosition = startPosition; // Sinon, on garde la même position
                 break;

@@ -106,24 +106,27 @@ public class MainGUI extends JFrame implements Runnable {
      * Inner-class permettant d'écouter les touches
      */
     private class KeyControls implements KeyListener {
+        private boolean upPressed = false;
+        private boolean downPressed = false;
+        private boolean leftPressed = false;
+        private boolean rightPressed = false;
 
         @Override
         public void keyPressed(KeyEvent event){
-            char keyChar = event.getKeyChar(); // On récupère le caractère associé à la touche enfoncée
-            switch (keyChar) {
-                case 'z':
-                    manager.moveCharacter(Player.getInstance(),"up");
+            switch (event.getKeyCode()) {
+                case KeyEvent.VK_Z:
+                    upPressed = true;
                     break;
-                case 'q':
-                    manager.moveCharacter(Player.getInstance(),"left");
+                case KeyEvent.VK_Q:
+                    leftPressed = true;
                     break;
-                case 's':
-                    manager.moveCharacter(Player.getInstance(),"down");
+                case KeyEvent.VK_S:
+                    downPressed = true;
                     break;
-                case 'd':
-                    manager.moveCharacter(Player.getInstance(),"right");
+                case KeyEvent.VK_D:
+                    rightPressed = true;
                     break;
-                case 'e':
+                case KeyEvent.VK_E:
                     new InventoryGUI(manager);
                     break;
                 default:
@@ -134,17 +137,55 @@ public class MainGUI extends JFrame implements Runnable {
             if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 new EscapeGUI();
             }
-        }
 
-        @Override
-        public void keyTyped(KeyEvent event){
-            
+            updateMovement();
         }
-
+    
         @Override
         public void keyReleased(KeyEvent event){
-            
+            switch (event.getKeyCode()) {
+                case KeyEvent.VK_Z:
+                    upPressed = false;
+                    break;
+                case KeyEvent.VK_Q:
+                    leftPressed = false;
+                    break;
+                case KeyEvent.VK_S:
+                    downPressed = false;
+                    break;
+                case KeyEvent.VK_D:
+                    rightPressed = false;
+                    break;
+                    default:
+                    break;
+            }
+            updateMovement();
         }
+    
+        private void updateMovement() {
+            if (upPressed && rightPressed) {
+                manager.moveCharacter(Player.getInstance(), "up-right");
+            } else if (upPressed && leftPressed) {
+                manager.moveCharacter(Player.getInstance(), "up-left");
+            } else if (downPressed && rightPressed) {
+                manager.moveCharacter(Player.getInstance(), "down-right");
+            } else if (downPressed && leftPressed) {
+                manager.moveCharacter(Player.getInstance(), "down-left");
+            } else if (upPressed) {
+                manager.moveCharacter(Player.getInstance(), "up");
+            } else if (downPressed) {
+                manager.moveCharacter(Player.getInstance(), "down");
+            } else if (leftPressed) {
+                manager.moveCharacter(Player.getInstance(), "left");
+            } else if (rightPressed) {
+                manager.moveCharacter(Player.getInstance(), "right");
+            }
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
+
     }
 
     /*
