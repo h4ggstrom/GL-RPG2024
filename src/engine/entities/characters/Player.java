@@ -44,7 +44,7 @@ public class Player extends GameCharacter {
      * @param position la position du joueur.
      */
     private Player(Position position, String playerClass) {
-        super(position, GameConfiguration.PLAYER_NAME, GameConfiguration.PLAYER_ENTITYTYPE, GameConfiguration.PLAYER_DEFAULT_MAXHEALTH, GameConfiguration.PLAYER_DEFAULT_MAXHEALTH, GameConfiguration.PLAYER_DEFAULT_ARMOR, GameConfiguration.PLAYER_DEFAULT_ATTACKSPEED, GameConfiguration.PLAYER_DEFAULT_ATTACKRANGE, GameConfiguration.PLAYER_DEFAULT_ATTACKDAMAGE, GameConfiguration.PLAYER_DEFAULT_MOVESPEED, GameConfiguration.PLAYER_DEFAULT_ABILITYCOOLDOWN, GameConfiguration.PLAYER_DEFAULT_STUNCOOLDOWN);
+        super(position, GameConfiguration.PLAYER_NAME, GameConfiguration.PLAYER_ENTITYTYPE);
         setPlayerClass(playerClass);
     }
 
@@ -123,10 +123,15 @@ public class Player extends GameCharacter {
         this.playerClass = playerClass;
         switch (playerClass) {
             case "heavy":
-                super.setMaxHealth(150);
-                super.setHealth(150);
-                super.setMoveSpeed(8);
-                super.setAttackSpeed(500);
+                super.addMaxHealth(150);
+                super.healCharacter(150);
+                super.addMoveSpeed(8);
+                super.addAttackSpeed(500);
+                super.addArmor(200);
+                super.addAttackDamage(40);
+                super.addAttackRange(GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE);
+                super.addAbilityCooldown(500);
+                super.addStunCooldown(200);
                 this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
                 this.mana = 100;
                 this.playerHeight = 40;
@@ -135,10 +140,15 @@ public class Player extends GameCharacter {
                 break;
 
             case "sorcerer":
-                super.setMaxHealth(100);
-                super.setHealth(100);
-                super.setMoveSpeed(10);
-                super.setAttackSpeed(400);
+                super.addMaxHealth(100);
+                super.healCharacter(100);
+                super.addMoveSpeed(10);
+                super.addAttackSpeed(400);
+                super.addArmor(0);
+                super.addAttackDamage(5);
+                super.addAttackRange(GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE);
+                super.addAbilityCooldown(100);
+                super.addStunCooldown(1000);
                 this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null)); 
                 this.mana = 200;
                 this.playerHeight = 40;
@@ -146,10 +156,15 @@ public class Player extends GameCharacter {
                 break;
 
             case "fast":
-                super.setMaxHealth(85);
-                super.setHealth(85);
-                super.setMoveSpeed(15);
-                super.setAttackSpeed(300);
+                super.addMaxHealth(85);
+                super.healCharacter(85);
+                super.addMoveSpeed(15);
+                super.addAttackSpeed(300);
+                super.addArmor(0);
+                super.addAttackDamage(5);
+                super.addAttackRange(GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE);
+                super.addAbilityCooldown(100);
+                super.addStunCooldown(1000);
                 this.mana = 80;
                 this.playerHeight = 40;
                 this.playerWidth = 20;

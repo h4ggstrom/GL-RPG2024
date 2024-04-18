@@ -16,6 +16,7 @@ public class GameConfiguration {
 
     // À faire :
 
+    //FIXME : Important ! Doser valeurs (Game Speed avec vitesse des ennemis par exemple... problèmes...)
     //FIXME : Parfois les arbres apparaissent devant la porte de sortie ...
     //FIXME : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
     //FIXME : Magasin à chaque milieu d'étage (PNJ ?)
