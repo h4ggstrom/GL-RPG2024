@@ -209,7 +209,7 @@ public class GameBuilder {
      * @param max le nombre maximum
      * @return le nombre aléatoire généré, formatté en entier
      */
-    private static int getRandomNumber(int min, int max) {
+    public static int getRandomNumber(int min, int max) {
 		return (int) (Math.random() * (max + 1 - min)) + min;
     }
 }

@@ -180,6 +180,10 @@ public class EntityManager {
                 // On l'ajoute à la liste d'Enemy éliminés
                 eliminatedEnemies.add(selectedEnemy);
                 logger.trace("enemy eliminated");
+                // Le joueur gagne de l'EXP
+                player.gainExp(GameBuilder.getRandomNumber(100,200));
+                // On rafraîchit les potentielles fenêtres ouvertes
+                refreshContainers();
             }
 
             // On parcourt les Enemy éliminés pour les retirer du jeu et faire tomber leur sac

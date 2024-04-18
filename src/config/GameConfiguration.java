@@ -169,11 +169,12 @@ public class GameConfiguration {
     public static final int CHARACTER_NAMETAG_YSHIFT = -5;
     public static final int CHARACTER_LIFEBAR_YSHIFT = 5;
 
-    // partie inventaire et sac
+    // partie maximums
     public static final int INVENTORY_MAX = 6;
     public static final int BAG_MAX = 12;
     public static final int CHEST_MAX = 1;
     public static final int GARBAGE_MAX = 1;
+    public static final int PLAYER_EXP_MAX = 1000;
 
     // partie noms d'entités (utile pour les assets par exemple)
     public static final String INVENTORY_ENTITYTYPE = "inventory";

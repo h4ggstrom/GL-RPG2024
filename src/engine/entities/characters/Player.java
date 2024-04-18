@@ -9,6 +9,7 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.entities.items.weapons.Weapon;
 import engine.process.EntityFactory;
+import gui.LevelUpGUI;
 import log.Gamelog;
 
 /**
@@ -28,6 +29,8 @@ public class Player extends GameCharacter {
     private int stageNumber = 1;
     private int roomNumber = 1;
     private int experience = 0;
+    private int level = 1;
+
     private int coinCounter = 0;
     private int mana;
     private String playerClass;
@@ -76,10 +79,23 @@ public class Player extends GameCharacter {
 
     public void gainExp(int exp) {
         this.experience += exp;
+        if(experience >= GameConfiguration.PLAYER_EXP_MAX) {
+            this.experience -= GameConfiguration.PLAYER_EXP_MAX;
+            gainLevel();
+        }
     }
 
     public int getExp() {
         return this.experience;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void gainLevel() {
+        this.level++;
+        new LevelUpGUI();
     }
 
     public void addCoins(int numberOfCoins) {

@@ -249,12 +249,12 @@ public class InventoryGUI extends ContainerGUI {
         JProgressBar expProgressBar = new JProgressBar();
 
         expProgressBar.setMinimum(0);
-        expProgressBar.setMaximum(1000);
+        expProgressBar.setMaximum(GameConfiguration.PLAYER_EXP_MAX);
 
         expProgressBar.setValue(player.getExp());
 
         expProgressBar.setStringPainted(true);
-        expProgressBar.setString("EXP: " + player.getExp() + " / " + expProgressBar.getMaximum());
+        expProgressBar.setString("Level : " + player.getLevel() + " | EXP: " + player.getExp() + " / " + expProgressBar.getMaximum());
 
         playerStatisticsPanel.add(expProgressBar);
     }

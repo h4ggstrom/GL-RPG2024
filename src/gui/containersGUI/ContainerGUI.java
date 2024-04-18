@@ -57,6 +57,9 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
                 Consumable consumable = (Consumable)item;
                 tooltipText = "<html>" + "Nom : " + consumable.getEntityName() + "<br>" + "Effet : " + consumable.getConsumableEffect() + "<br>" + "Valeur : " + consumable.getConsumableValue() + "</html>";
             }
+            else {
+                tooltipText = "<html>" + item.getEntityName() + "</html>";
+            }
             itemPanel.setToolTipText(tooltipText);
         }
         
