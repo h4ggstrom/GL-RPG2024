@@ -29,6 +29,7 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
         itemPanel.setLayout(new BorderLayout());
         itemPanel.setBackground(Color.WHITE);
         itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        itemPanel.setSize(30, 30);
         JLabel nameLabel = new JLabel(slotName, JLabel.CENTER);
         itemPanel.add(nameLabel, BorderLayout.PAGE_START);
         String tooltipText = "Slot vide";

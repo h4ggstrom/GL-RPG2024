@@ -82,6 +82,18 @@ public class Hitbox implements Serializable {
                 width = 0;
                 height = 0;
                 break;
+            case GameConfiguration.CHEST_ENTITYTYPE:
+                width = GameConfiguration.CHEST_WIDTH;
+                height = GameConfiguration.CHEST_HEIGHT;
+                break;
+            case GameConfiguration.KEY_ENTITYTYPE:
+                width = GameConfiguration.KEY_WIDTH;
+                height = GameConfiguration.KEY_HEIGHT;
+                break;
+            case GameConfiguration.GARBAGE_ENTITYTYPE:
+                width = GameConfiguration.GARBAGE_WIDTH;
+                height = GameConfiguration.GARBAGE_HEIGHT;
+                break;
             case "default" :
                 logger.warn(entityType + " is not a recognized type of entity");
                 break;

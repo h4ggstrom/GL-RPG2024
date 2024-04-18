@@ -8,10 +8,14 @@ import engine.dungeon.Room;
 import engine.entities.Entity;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
+import engine.entities.containers.Chest;
+import engine.entities.containers.Garbage;
 import engine.entities.environment.GateEnv;
 import engine.entities.environment.TreeEnv;
 import engine.entities.environment.WallEnv;
+import engine.entities.items.Key;
 import engine.entities.items.consumables.Coin;
+import engine.entities.items.weapons.Scepter;
 import engine.dungeon.Dungeon;
 import log.Gamelog;
 
@@ -122,6 +126,8 @@ public class GameBuilder {
     public static void initializeEnvironment(EntityManager manager) {
         initializeWalls(manager);
         initializeTrees(manager);
+        initializeChest(manager);
+        initializeGarbage(manager);
     }
 
     public static void initializeTrees(EntityManager manager) {
@@ -130,6 +136,26 @@ public class GameBuilder {
         for(int i = 0 ; i < treeNumber ; i++) {
             TreeEnv tree = (TreeEnv)EntityFactory.createEntity(GameConfiguration.TREE_ASSET_ENTITYTYPE, null);
             randomPlaceEntity(manager, tree);
+        }
+    }
+
+    public static void initializeChest(EntityManager manager) {
+        Chest chest = (Chest)EntityFactory.createEntity(GameConfiguration.CHEST_ENTITYTYPE, null);
+        chest.addItem((Scepter)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
+        randomPlaceEntity(manager, chest);
+    }
+
+    public static void initializeGarbage(EntityManager manager) {
+        // On met entre 6 et 16 piles de déchêts par salle
+        int garbageNumber = getRandomNumber(6, 16);
+        for(int i = 0 ; i < garbageNumber ; i++) {
+            Garbage garbage = (Garbage)EntityFactory.createEntity(GameConfiguration.GARBAGE_ENTITYTYPE, null);
+            // On veut qu'il y ai une chance sur 10 qu'une clé se trouve à l'intérieur du tas de détritus
+            int keyOdds = getRandomNumber(1, 10);
+            if(keyOdds == 10) {
+                garbage.addItem((Key)EntityFactory.createEntity(GameConfiguration.KEY_ENTITYTYPE, null));
+            }
+            randomPlaceEntity(manager, garbage);
         }
     }
 

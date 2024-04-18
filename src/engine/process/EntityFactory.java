@@ -4,6 +4,7 @@ import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.environment.TreeEnv;
 import engine.entities.items.weapons.*;
+import engine.entities.items.Key;
 import engine.entities.items.consumables.*;
 import engine.entities.containers.*;
 import engine.entities.items.equipment.*;
@@ -47,6 +48,12 @@ public class EntityFactory {
                 return new Coin(position);
             case GameConfiguration.TREE_ASSET_ENTITYTYPE:
                 return new TreeEnv(position);
+            case GameConfiguration.CHEST_ENTITYTYPE:
+                return new Chest(position);
+            case GameConfiguration.KEY_ENTITYTYPE:
+                return new Key(position);
+            case GameConfiguration.GARBAGE_ENTITYTYPE:
+                return new Garbage(position);
             default:
                 throw new IllegalArgumentException("Entité inconnue : " + entityType);
         }

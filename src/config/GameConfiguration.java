@@ -73,6 +73,15 @@ public class GameConfiguration {
 
     public static final int TREE_WIDTH = 56;
     public static final int TREE_HEIGHT = 51;
+
+    public static final int CHEST_WIDTH = 32;
+    public static final int CHEST_HEIGHT = 32;
+
+    public static final int KEY_WIDTH = 30;
+    public static final int KEY_HEIGHT = 30;
+
+    public static final int GARBAGE_WIDTH = 36;
+    public static final int GARBAGE_HEIGHT = 36;
 	
     // vitesse d'exécution du jeu, un tick sera égal à ce nombre de millisecondes
 	public static final int GAME_SPEED = 10;
@@ -163,6 +172,8 @@ public class GameConfiguration {
     // partie inventaire et sac
     public static final int INVENTORY_MAX = 6;
     public static final int BAG_MAX = 12;
+    public static final int CHEST_MAX = 1;
+    public static final int GARBAGE_MAX = 1;
 
     // partie noms d'entités (utile pour les assets par exemple)
     public static final String INVENTORY_ENTITYTYPE = "inventory";
@@ -185,6 +196,9 @@ public class GameConfiguration {
     public static final String TREE_ASSET_ENTITYTYPE = "tree";
     public static final String WALL_ASSET_ENTITYTYPE = "wall";
     public static final String GATE_ASSET_ENTITYTYPE = "gate";
+    public static final String CHEST_ENTITYTYPE = "chest";
+    public static final String KEY_ENTITYTYPE = "key";
+    public static final String GARBAGE_ENTITYTYPE = "garbage";
 
     // partie noms d'objets
     public static final String INVENTORY_NAME = "Inventaire";
@@ -210,6 +224,9 @@ public class GameConfiguration {
     public static final String STRONG_NAME = "Costaud";
     public static final String SORCERER_NAME = "Sorcier";
     public static final String FAST_NAME = "Rapide";
+    public static final String CHEST_NAME = "Coffre";
+    public static final String KEY_NAME = "Clé de coffre";
+    public static final String GARBAGE_NAME = "Pile de détritus";
 
     // partie effets
     public static final String HEALTHFLASK_EFFECT = "heal";

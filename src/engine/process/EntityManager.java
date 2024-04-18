@@ -6,22 +6,14 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
-import engine.dungeon.Dungeon;
-import engine.dungeon.Position;
-import engine.dungeon.Room;
-import engine.entities.Entity;
-import engine.entities.Hitbox;
-import engine.entities.characters.Enemy;
-import engine.entities.characters.GameCharacter;
-import engine.entities.characters.Player;
-import engine.entities.containers.Bag;
-import engine.entities.items.Item;
-import engine.entities.items.Slot;
-import engine.entities.items.consumables.Coin;
-import engine.entities.items.consumables.Consumable;
+import engine.dungeon.*;
+import engine.entities.*;
+import engine.entities.characters.*;
+import engine.entities.containers.*;
+import engine.entities.items.*;
 import engine.entities.items.weapons.*;
 import engine.entities.items.equipment.*;
-import gui.containersGUI.BagGUI;
+import gui.containersGUI.*;
 import log.Gamelog;
 
 /**
@@ -42,6 +34,7 @@ public class EntityManager {
     private Dungeon dungeon; // la salle dans laquelle évolue le joueur
     public static ContainerRefreshListener bagRefreshListener;
     public static ContainerRefreshListener inventoryRefreshListener;
+    public static ContainerRefreshListener chestRefreshListener;
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de CharacterManager.
@@ -215,10 +208,49 @@ public class EntityManager {
             }
         }
 
-        // Si l'entité sélectionnée est un Sac et qu'on est à portée de l'ouvrir
-        else if(selectedEntity instanceof Bag && distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
-            Bag bag = (Bag)selectedEntity;
-            new BagGUI(this, bag);
+        if(selectedEntity instanceof Container) {
+            Container selectedContainer = (Container)selectedEntity;
+            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
+                // Si l'entité sélectionnée est un Sac et qu'on est à portée de l'ouvrir
+                if(selectedContainer instanceof Bag) {
+                    Bag selectedBag = (Bag)selectedEntity;
+                    new BagGUI(this, selectedBag);
+                }
+
+                else if(selectedContainer instanceof Garbage) {
+                    Garbage selectedGarbage = (Garbage)selectedContainer;
+                    // On retire la pile de détritus de la room
+                    this.getCurrentRoom().removeEntity(selectedGarbage);
+                    Item item = selectedGarbage.getSlots().get(0).getItem();
+                    // Si la pile de détritus contient bien un item
+                    if(item != null) {
+                        item.setPosition(selectedGarbage.getPosition());
+                        this.getCurrentRoom().addEntity(item);
+                    }
+                }
+
+                else if(selectedEntity instanceof Chest) {
+                    Chest selectedChest = (Chest)selectedEntity;
+                    if(!selectedChest.isLocked()) {
+                        new ChestGUI(this, selectedChest);
+                    }
+                    else {
+                        // On vérifie si le joueur à une clé
+                        ArrayList<Slot> slots = player.getInventory().getSlots();
+                        for (Slot slot : slots) {
+                            Item item = slot.getItem();
+                            if(item instanceof Key) {
+                                // On supprime la clé
+                                slot.setItem(null);
+                                // On ouvre le coffre
+                                selectedChest.setLocked(false);
+                                // On rafraîchit les potientiels GUI ouverts
+                                refreshContainers();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         // Si l'entité sélectionnée est un Item
@@ -233,18 +265,6 @@ public class EntityManager {
                 logger.trace("item fetched");
                 player.getInventory().addItem(selectedItem); // ajout à l'inventaire
                 this.getCurrentRoom().removeEntity(selectedItem); // on retire l'item de la room
-            }
-        }
-
-        else if(selectedEntity instanceof Coin){
-
-            Coin selectedCoin = (Coin)selectedEntity;
-
-            logger.trace("coin selected");
-            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
-                // Le joueur ramasse le coin
-                player.addCoins(selectedCoin.getConsumableValue());
-                this.getCurrentRoom().removeEntity(selectedCoin); 
             }
         }
     }
@@ -446,6 +466,9 @@ public class EntityManager {
         }
         if(inventoryRefreshListener != null) {
             inventoryRefreshListener.refreshContainer();
+        }
+        if(chestRefreshListener != null) {
+            chestRefreshListener.refreshContainer();
         }
     }
 

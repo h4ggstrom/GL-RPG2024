@@ -214,6 +214,7 @@ public class InventoryGUI extends ContainerGUI {
         playerStatisticsPanel.setLayout(new GridLayout(7, 1));
         JTextField healthTextField = new JTextField();
         JTextField armorTextField = new JTextField();
+        JTextField attackDamageTextField = new JTextField();
         JTextField attackSpeedTextField = new JTextField();
         JTextField moveSpeedTextField = new JTextField();
         JTextField abilityCooldownTextField = new JTextField();
@@ -221,6 +222,7 @@ public class InventoryGUI extends ContainerGUI {
 
         healthTextField.setEditable(false);
         armorTextField.setEditable(false);
+        attackDamageTextField.setEditable(false);
         attackSpeedTextField.setEditable(false);
         moveSpeedTextField.setEditable(false);
         abilityCooldownTextField.setEditable(false);
@@ -228,6 +230,7 @@ public class InventoryGUI extends ContainerGUI {
 
         healthTextField.setText("Nombre de points de vie actuels : " + player.getHealth());
         armorTextField.setText("Nombre de points d'armure : " + player.getArmor());
+        attackDamageTextField.setText("Dégâts d'attaque : " + player.getAttackDamage());
         attackSpeedTextField.setText("Délai de récupération d'attaque : " + player.getAttackSpeed() + " ticks");
         moveSpeedTextField.setText("Vitesse de déplacement : " + player.getMoveSpeed() + " pixels par tick");
         abilityCooldownTextField.setText("Délai de récupération des abilités : " + player.getAbilityCooldown() + " ticks");
@@ -235,6 +238,7 @@ public class InventoryGUI extends ContainerGUI {
 
         playerStatisticsPanel.add(healthTextField);
         playerStatisticsPanel.add(armorTextField);
+        playerStatisticsPanel.add(attackDamageTextField);
         playerStatisticsPanel.add(attackSpeedTextField);
         playerStatisticsPanel.add(moveSpeedTextField);
         playerStatisticsPanel.add(abilityCooldownTextField);
