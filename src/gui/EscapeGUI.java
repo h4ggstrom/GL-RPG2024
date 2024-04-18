@@ -18,7 +18,7 @@ public class EscapeGUI extends JFrame {
         setTitle("Panique à Cergy-Préfecture");
         setSize(400, 200); // Taille de la fenêtre
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer l'application à la fermeture de la fenêtre
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fermer l'application à la fermeture de la fenêtre
 
         // Création du panneau principal
         JPanel panel = new JPanel();

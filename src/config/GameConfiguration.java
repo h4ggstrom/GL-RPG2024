@@ -20,7 +20,7 @@ public class GameConfiguration {
     //FIXME : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
     //FIXME : Magasin à chaque milieu d'étage (PNJ ?)
     //FIXME : Tous les types d'ennemis et BOSS à la fin des étages
-    //FIXME : Changer d'environnement à chaque étage
+    //FIXME : Environnement égoûts. (Changer d'environnement à chaque étage si on est chauds)
     //FIXME : Tous les types d'armes
     //FIXME : Capacités (mana, immobilisation, visuels)
     //FIXME : Paramètres
