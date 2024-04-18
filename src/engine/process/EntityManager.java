@@ -212,9 +212,6 @@ public class EntityManager {
             // Si plus aucun ennemi ne reste
             if(hasBeenCleaned) {
                 this.getCurrentRoom().open();
-                Position healthPosition = new Position(GameConfiguration.ROOM_CENTER_X, GameConfiguration.ROOM_UPPER_LIMITATION + GameConfiguration.HEALTHFLASK_HEIGHT/2);
-                Consumable healthPotion = (Consumable)EntityFactory.createEntity("healthFlask", healthPosition);
-                this.getCurrentRoom().addEntity(healthPotion);
             }
         }
 
