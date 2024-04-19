@@ -63,7 +63,7 @@ public class MainGUI extends JFrame implements Runnable {
         addMouseListener(mouseControls);
 
         dungeon = GameBuilder.buildDungeon();
-        manager = GameBuilder.buildInitCharacters(dungeon);
+        manager = GameBuilder.buildInitEntities(dungeon);
         dashboard = new GameDisplay(manager);
 
         dashboard.setPreferredSize(preferredSize);

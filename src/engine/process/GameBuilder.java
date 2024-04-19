@@ -15,7 +15,11 @@ import engine.entities.environment.TreeEnv;
 import engine.entities.environment.WallEnv;
 import engine.entities.items.Key;
 import engine.entities.items.consumables.Coin;
+import engine.entities.items.consumables.HealthFlask;
+import engine.entities.items.equipment.Boots;
+import engine.entities.items.equipment.Chestplate;
 import engine.entities.items.weapons.Scepter;
+import engine.entities.npc.Vendor;
 import engine.dungeon.Dungeon;
 import log.Gamelog;
 
@@ -44,7 +48,7 @@ public class GameBuilder {
      * @param room la salle dans laquelle évolue le joueur
      * @return le système de gestion de la partie. Pour plus de détails, voir {@link src.engine.characters.EntityManager}
      */
-    public static EntityManager buildInitCharacters (Dungeon dungeon) {
+    public static EntityManager buildInitEntities (Dungeon dungeon) {
         EntityManager manager = new EntityManager(dungeon);
         logger.trace("New instance of EntityManager");
 
@@ -78,11 +82,22 @@ public class GameBuilder {
      */
     public static void initializeEntities(EntityManager manager) {
 
+        Room currentRoom = manager.getCurrentRoom();
+
         initializeEnvironment(manager);
         logger.trace("Initialized environment");
 
-        initializeEnemies(manager);
-        logger.trace("Initialized ennemies");
+        if(currentRoom.isShop()) {
+            // On initialise le vendeur
+            initializeVendor(manager);
+            // On ouvre directement la porte
+            manager.getCurrentRoom().open();
+            logger.trace("Initialized vendor");
+        }
+        else {
+            initializeEnemies(manager);
+            logger.trace("Initialized ennemies");
+        }
 
     }
 
@@ -143,6 +158,14 @@ public class GameBuilder {
         Chest chest = (Chest)EntityFactory.createEntity(GameConfiguration.CHEST_ENTITYTYPE, null);
         chest.addItem((Scepter)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
         randomPlaceEntity(manager, chest);
+    }
+
+    public static void initializeVendor(EntityManager manager) {
+        Vendor vendor = (Vendor)EntityFactory.createEntity(GameConfiguration.VENDOR_ENTITYTYPE, null);
+        vendor.addSellingItem((Chestplate)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null), 300);
+        vendor.addSellingItem((HealthFlask)EntityFactory.createEntity(GameConfiguration.HEALTHFLASK_ENTITYTYPE, null), 50);
+        vendor.addSellingItem((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null), 250);
+        randomPlaceEntity(manager, vendor);
     }
 
     public static void initializeGarbage(EntityManager manager) {

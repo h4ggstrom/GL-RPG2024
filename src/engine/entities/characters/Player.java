@@ -102,6 +102,10 @@ public class Player extends GameCharacter {
         this.coinCounter += numberOfCoins;
     }
 
+    public void removeCoins(int numberOfCoins) {
+        this.coinCounter -= numberOfCoins;
+    }
+
     public int getCoinCount() {
         return this.coinCounter;
     }

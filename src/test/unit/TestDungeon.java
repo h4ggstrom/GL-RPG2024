@@ -32,7 +32,7 @@ public class TestDungeon {
      */
     @Before
     public void prepareManager() {
-        this.manager = GameBuilder.buildInitCharacters(dungeon);
+        this.manager = GameBuilder.buildInitEntities(dungeon);
     }
 
     /**

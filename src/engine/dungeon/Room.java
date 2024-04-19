@@ -25,7 +25,7 @@ public class Room {
 
     private int number;
     private GateEnv gate;
-
+    private boolean isShop;
 
     // Liste des entités présentes dans la salle
     private ArrayList<Entity> entities = new ArrayList<Entity>();
@@ -110,5 +110,13 @@ public class Room {
             return "difficile";
         }
         return "undefined";
+    }
+
+    public boolean isShop() {
+        return isShop;
+    }
+
+    public void setShop(boolean isShop) {
+        this.isShop = isShop;
     }
 }

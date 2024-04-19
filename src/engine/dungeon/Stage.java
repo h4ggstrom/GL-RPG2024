@@ -12,8 +12,13 @@ public class Stage {
     public Stage(int number) {
         this.number = number;
         this.rooms = new ArrayList<Room>();
-        for(int i = 0 ; i < GameConfiguration.NUMBER_OF_ROOMS ; i++) {
-            this.rooms.add(new Room(i+1));
+        for(int i = 1 ; i <= GameConfiguration.NUMBER_OF_ROOMS ; i++) {
+            Room room = new Room(i);
+            // Toutes les 5 salles on place un magasin
+            if(i%5==0) {
+                room.setShop(true);
+            }
+            this.rooms.add(room);
         }
     }
 

@@ -12,6 +12,7 @@ import engine.entities.characters.*;
 import engine.entities.containers.*;
 import engine.entities.items.*;
 import engine.entities.items.weapons.*;
+import engine.entities.npc.Vendor;
 import engine.entities.items.equipment.*;
 import gui.containersGUI.*;
 import log.Gamelog;
@@ -35,6 +36,7 @@ public class EntityManager {
     public static ContainerRefreshListener bagRefreshListener;
     public static ContainerRefreshListener inventoryRefreshListener;
     public static ContainerRefreshListener chestRefreshListener;
+    public static ContainerRefreshListener vendorRefreshListener;
 
     /**
      * Constructeur par défaut. Génère une nouvelle instance de CharacterManager.
@@ -212,15 +214,17 @@ public class EntityManager {
             }
         }
 
-        if(selectedEntity instanceof Container) {
-            Container selectedContainer = (Container)selectedEntity;
-            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
+        // Sinon, est-ce que le joueur est à distance raisonnable de l'entité ?
+        else if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
+            // Si l'entité sélectionnée est un Container
+            if(selectedEntity instanceof Container) {
+                Container selectedContainer = (Container)selectedEntity;
                 // Si l'entité sélectionnée est un Sac et qu'on est à portée de l'ouvrir
                 if(selectedContainer instanceof Bag) {
                     Bag selectedBag = (Bag)selectedEntity;
                     new BagGUI(this, selectedBag);
                 }
-
+    
                 else if(selectedContainer instanceof Garbage) {
                     Garbage selectedGarbage = (Garbage)selectedContainer;
                     // On retire la pile de détritus de la room
@@ -232,7 +236,7 @@ public class EntityManager {
                         this.getCurrentRoom().addEntity(item);
                     }
                 }
-
+    
                 else if(selectedEntity instanceof Chest) {
                     Chest selectedChest = (Chest)selectedEntity;
                     if(!selectedChest.isLocked()) {
@@ -255,20 +259,24 @@ public class EntityManager {
                     }
                 }
             }
-        }
+            // Si l'entité sélectionnée est un Item
+            else if(selectedEntity instanceof Item) {
 
-        // Si l'entité sélectionnée est un Item
-        else if(selectedEntity instanceof Item) {
+                logger.trace("item selected");
 
-            logger.trace("item selected");
-
-            Item selectedItem = (Item)selectedEntity;
-            // Si la distance entre l'Item est le joueur est assez restreinte et qu'on a de la place dans l'inventaire, on peut intéragir
-            if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE && player.getInventory().getNumberOfItems() < GameConfiguration.INVENTORY_MAX) {
-                // Le joueur ramasse l'Item et l'ajoute à son inventaire
-                logger.trace("item fetched");
-                player.getInventory().addItem(selectedItem); // ajout à l'inventaire
-                this.getCurrentRoom().removeEntity(selectedItem); // on retire l'item de la room
+                Item selectedItem = (Item)selectedEntity;
+                // Si la distance entre l'Item est le joueur est assez restreinte et qu'on a de la place dans l'inventaire, on peut intéragir
+                if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE && player.getInventory().getNumberOfItems() < GameConfiguration.INVENTORY_MAX) {
+                    // Le joueur ramasse l'Item et l'ajoute à son inventaire
+                    logger.trace("item fetched");
+                    player.getInventory().addItem(selectedItem); // ajout à l'inventaire
+                    this.getCurrentRoom().removeEntity(selectedItem); // on retire l'item de la room
+                }
+            }
+            // Si l'entité sélectionnée est un Vendor
+            else if(selectedEntity instanceof Vendor) {
+                Vendor selectedVendor = (Vendor)selectedEntity;
+                new VendorGUI(selectedVendor, this);
             }
         }
     }

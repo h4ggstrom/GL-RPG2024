@@ -6,12 +6,10 @@ import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
-import engine.entities.items.consumables.Coin;
 
 public class Container extends Entity {
 
     private ArrayList<Slot> slots;
-    private ArrayList<Coin> coins; 
     private int numberOfItems;
     private int maxNumberOfItems;
 
@@ -31,14 +29,6 @@ public class Container extends Entity {
 
     public void setSlots(ArrayList<Slot> slots) {
         this.slots = slots;
-    }
-
-    public ArrayList<Coin> getCoins() {
-        return coins;
-    }
-
-    public void setCoins(ArrayList<Coin> coins) {
-        this.coins = coins;
     }
 
     /**

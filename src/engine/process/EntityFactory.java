@@ -4,6 +4,7 @@ import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.environment.TreeEnv;
 import engine.entities.items.weapons.*;
+import engine.entities.npc.Vendor;
 import engine.entities.items.Key;
 import engine.entities.items.consumables.*;
 import engine.entities.containers.*;
@@ -54,6 +55,8 @@ public class EntityFactory {
                 return new Key(position);
             case GameConfiguration.GARBAGE_ENTITYTYPE:
                 return new Garbage(position);
+            case GameConfiguration.VENDOR_ENTITYTYPE:
+                return new Vendor(position);
             default:
                 throw new IllegalArgumentException("Entité inconnue : " + entityType);
         }

@@ -14,18 +14,19 @@ import engine.dungeon.Position;
  */
 public class GameConfiguration {
 
-    // À faire :
+    // À faire : FIXME
 
-    //FIXME : Important ! Doser valeurs (Game Speed avec vitesse des ennemis par exemple... problèmes...)
-    //FIXME : Parfois les arbres apparaissent devant la porte de sortie ...
-    //FIXME : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
-    //FIXME : Magasin à chaque milieu d'étage (PNJ ?)
-    //FIXME : Tous les types d'ennemis et BOSS à la fin des étages
-    //FIXME : Environnement égoûts. (Changer d'environnement à chaque étage si on est chauds)
-    //FIXME : Tous les types d'armes
-    //FIXME : Capacités (mana, immobilisation, visuels)
-    //FIXME : Paramètres
-    //FIXME : Expérience et amélioration de stats à chaque nouveau niveau
+    //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
+    //CORRIGER : Parfois les arbres apparaissent devant la porte de sortie ...
+    //CORRIGER : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
+    
+    //AJOUTER : Magasin à chaque milieu d'étage (PNJ ?)
+    //AJOUTER : Tous les types d'ennemis et BOSS à la fin des étages
+    //AJOUTER : Tous les types d'armes
+    //AJOUTER : Capacités (mana, immobilisation, visuels)
+    //AJOUTER : Paramètres
+
+    //FACULTATIF : Environnement égoûts. (Changer d'environnement à chaque étage si on est chauds)
 
     public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";
 
@@ -35,6 +36,9 @@ public class GameConfiguration {
 
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 40;
+
+    public static final int VENDOR_WIDTH = 20;
+    public static final int VENDOR_HEIGHT = 40;
 
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
@@ -201,6 +205,7 @@ public class GameConfiguration {
     public static final String CHEST_ENTITYTYPE = "chest";
     public static final String KEY_ENTITYTYPE = "key";
     public static final String GARBAGE_ENTITYTYPE = "garbage";
+    public static final String VENDOR_ENTITYTYPE = "vendor";
 
     // partie noms d'objets
     public static final String INVENTORY_NAME = "Inventaire";
@@ -229,6 +234,7 @@ public class GameConfiguration {
     public static final String CHEST_NAME = "Coffre";
     public static final String KEY_NAME = "Clé de coffre";
     public static final String GARBAGE_NAME = "Pile de détritus";
+    public static final String VENDOR_NAME = "Mohamed-Lamine le Marchand";
 
     // partie effets
     public static final String HEALTHFLASK_EFFECT = "heal";
