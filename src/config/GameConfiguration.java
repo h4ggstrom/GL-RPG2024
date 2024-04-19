@@ -19,8 +19,10 @@ public class GameConfiguration {
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
     //CORRIGER : Parfois les arbres apparaissent devant la porte de sortie ...
     //CORRIGER : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
+
+    //AMELIORER : Visuels GUI en général
+    //AMELIORER : Système de vitesse d'attaque (pour l'instant un peu aléatoire, il faudrait un vrai compteur du moment ou on attaque jusqu'au moment ou on peut réattaquer)
     
-    //AJOUTER : Magasin à chaque milieu d'étage (PNJ ?)
     //AJOUTER : Tous les types d'ennemis et BOSS à la fin des étages
     //AJOUTER : Tous les types d'armes
     //AJOUTER : Capacités (mana, immobilisation, visuels)
