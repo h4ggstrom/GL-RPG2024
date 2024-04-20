@@ -43,7 +43,9 @@ public class MainGUI extends JFrame implements Runnable {
 
     private EntityManager manager; // processus de gestion des actions
 
-    private int gameSpeed;
+    private boolean pause;
+
+    private MainGUI instance = this;
 
     private Logger logger = Gamelog.getLogger(); // récupération du logger
 
@@ -80,10 +82,9 @@ public class MainGUI extends JFrame implements Runnable {
 
     public void run () {
         int compteur = 0;
-        gameSpeed = GameConfiguration.GAME_SPEED;
-        while (true) {
+        while (!pause) {
 			try {
-				Thread.sleep(gameSpeed);
+				Thread.sleep(GameConfiguration.GAME_SPEED);
 			} catch (InterruptedException e) {
 				logger.fatal("game crashed");
 			}
@@ -125,6 +126,16 @@ public class MainGUI extends JFrame implements Runnable {
                     break;
                 case KeyEvent.VK_D:
                     rightPressed = true;
+                    break;
+                case KeyEvent.VK_P:
+                    if(!pause) {
+                        pause = true;
+                    }
+                    else {
+                        pause = false;
+                        Thread game = new Thread(instance);
+                        game.start();
+                    }
                     break;
                 case KeyEvent.VK_E:
                     new InventoryGUI(manager);
