@@ -15,6 +15,7 @@ import engine.dungeon.Position;
 public class GameConfiguration {
 
     // À faire : FIXME
+    // IL FAUT FAIRE UN VISITOR A CHAQUE FOIS QU'ON AGIT DIFFEREMENT SELON LE TYPE D'ENTITÉ
 
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
     //CORRIGER : Parfois les arbres apparaissent devant la porte de sortie ...
