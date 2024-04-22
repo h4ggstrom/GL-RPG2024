@@ -16,6 +16,7 @@ public class GameConfiguration {
 
     // À faire : FIXME
     // IL FAUT FAIRE UN VISITOR A CHAQUE FOIS QU'ON AGIT DIFFEREMENT SELON LE TYPE D'ENTITÉ
+    // BIEN DOCUMENTER TOUTES LES CLASSES ET MÉTHODES (optimiser au max la réutilisabilité -> manuels utilisateur avec @see et @link ...)
 
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
     //CORRIGER : Parfois les arbres apparaissent devant la porte de sortie ...
