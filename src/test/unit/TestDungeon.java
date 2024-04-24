@@ -6,18 +6,17 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import engine.process.EnemyFactory;
-import engine.process.EntityManager;
-import engine.process.GameBuilder;
 import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
 import engine.entities.Entity;
+import engine.process.management.EnemyFactory;
+import engine.process.management.EntityManager;
+import engine.process.management.GameBuilder;
 
 
 public class TestDungeon {
     
     private Dungeon dungeon;
-    private EntityManager manager;
 
     /**
      * set le donjon avant d'effectuer les tests dessus.
@@ -25,14 +24,6 @@ public class TestDungeon {
     @Before
     public void prepareDungeon() {
         this.dungeon = GameBuilder.buildDungeon();
-    }
-
-    /**
-     * set le manager avant d'effectuer les tests dessus
-     */
-    @Before
-    public void prepareManager() {
-        this.manager = GameBuilder.buildInitEntities(dungeon);
     }
 
     /**
@@ -48,11 +39,11 @@ public class TestDungeon {
      */
     @Test
     public void testAddEntity() {
-        int nbBefore = manager.getCurrentRoom().getEntities().size();
+        int nbBefore = EntityManager.getCurrentRoom().getEntities().size();
         Position p = new Position(500, 500);
         Entity ent = EnemyFactory.createEnemy("rat", p);
-        manager.getCurrentRoom().addEntity(ent);
-        int nbAfter = manager.getCurrentRoom().getEntities().size();
+        EntityManager.getCurrentRoom().addEntity(ent);
+        int nbAfter = EntityManager.getCurrentRoom().getEntities().size();
         assertEquals(nbBefore,nbAfter-1);
     }
     
@@ -63,10 +54,10 @@ public class TestDungeon {
     public void testRmEntity() {
         Position p = new Position(500, 500);
         Entity ent = EnemyFactory.createEnemy("rat", p);
-        manager.getCurrentRoom().addEntity(ent);
-        int nbBefore = manager.getCurrentRoom().getEntities().size();
-        manager.getCurrentRoom().removeEntity(ent);
-        int nbAfter = manager.getCurrentRoom().getEntities().size();
+        EntityManager.getCurrentRoom().addEntity(ent);
+        int nbBefore = EntityManager.getCurrentRoom().getEntities().size();
+        EntityManager.getCurrentRoom().removeEntity(ent);
+        int nbAfter = EntityManager.getCurrentRoom().getEntities().size();
         assertEquals(nbBefore,nbAfter+1);
     }
 

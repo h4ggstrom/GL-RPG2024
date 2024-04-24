@@ -18,8 +18,7 @@ import engine.entities.items.consumables.Consumable;
 import engine.entities.containers.Inventory;
 import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.*;
-import engine.process.ConsumableManager;
-import engine.process.EntityManager;
+import engine.process.management.ConsumableManager;
 
 public class InventoryGUI extends ContainerGUI {
 
@@ -32,9 +31,8 @@ public class InventoryGUI extends ContainerGUI {
     private JPanel playerStatisticsPanel = new JPanel();
     private JPanel imageAndCoinPanel = new JPanel();
     
-    public InventoryGUI(EntityManager manager) {
-        super(manager);
-        EntityManager.inventoryRefreshListener = this;
+    public InventoryGUI() {
+        super.manager.setInventoryRefreshListener(this);
 
         initOverallView();
 

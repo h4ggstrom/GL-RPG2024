@@ -16,7 +16,7 @@ import engine.entities.characters.Player;
 import engine.entities.environment.Environment;
 import engine.entities.environment.GateEnv;
 import engine.entities.environment.WallEnv;
-import engine.process.RessourceManager;
+import engine.process.management.RessourceManager;
 
 /*
  * Dans cette classe, on implémente une stratégie d'affichage pour chaque élement du jeu.

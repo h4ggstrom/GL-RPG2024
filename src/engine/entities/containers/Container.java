@@ -7,7 +7,7 @@ import engine.entities.Entity;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 
-public class Container extends Entity {
+public abstract class Container extends Entity {
 
     private ArrayList<Slot> slots;
     private int numberOfItems;

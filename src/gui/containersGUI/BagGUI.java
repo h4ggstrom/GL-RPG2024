@@ -15,7 +15,6 @@ import config.GameConfiguration;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.containers.Bag;
-import engine.process.EntityManager;
 
 public class BagGUI extends ContainerGUI {
 
@@ -23,10 +22,9 @@ public class BagGUI extends ContainerGUI {
     private JPanel upperPanel = new JPanel();
     private JPanel lowerPanel = new JPanel();
 
-    public BagGUI(EntityManager manager, Bag bag) {
-        super(manager);
+    public BagGUI(Bag bag) {
         this.bag = bag;
-        EntityManager.bagRefreshListener = this;
+        super.manager.setBagRefreshListener(this);
 
         initOverallView();
 

@@ -1,6 +1,7 @@
 package engine.entities.characters;
 
 import engine.dungeon.Position;
+import engine.process.visitor.EntityVisitor;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -23,4 +24,9 @@ public class Enemy extends GameCharacter {
     public Enemy(Position position, String enemyName, String enemyType) {
         super(position, enemyName, enemyType);
     }
+
+    @Override
+	public <E> E accept(EntityVisitor<E> visitor) {
+		return visitor.visit(this);
+	}
 }

@@ -14,15 +14,15 @@ import engine.entities.items.consumables.Coin;
 import engine.entities.items.consumables.Consumable;
 import engine.entities.items.equipment.Clothe;
 import engine.entities.items.weapons.Weapon;
-import engine.process.ContainerRefreshListener;
-import engine.process.EntityManager;
+import engine.process.management.ContainerRefreshListener;
+import engine.process.management.EntityManager;
 
 public abstract class ContainerGUI extends JFrame implements ContainerRefreshListener {
 
-    public EntityManager manager;
+    public EntityManager manager = EntityManager.getInstance();
 
-    public ContainerGUI (EntityManager manager) {
-        this.manager = manager;
+    public ContainerGUI () {
+
     }
 
     public void initItemSlot(JPanel panel, JPanel itemPanel, Item item, String slotName) {

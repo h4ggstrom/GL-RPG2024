@@ -6,6 +6,7 @@ import engine.entities.characters.GameCharacter;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.items.equipment.*;
+import engine.process.visitor.EntityVisitor;
 
 public class Bag extends Container {
 
@@ -30,5 +31,10 @@ public class Bag extends Container {
             this.addItem(item);
         }
     }
+
+    @Override
+	public <E> E accept(EntityVisitor<E> visitor) {
+		return visitor.visit(this);
+	}
 
 }

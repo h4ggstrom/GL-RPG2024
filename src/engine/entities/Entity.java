@@ -3,6 +3,7 @@ package engine.entities;
 import java.io.Serializable;
 
 import engine.dungeon.Position;
+import engine.process.visitor.EntityVisitor;
 
 public abstract class Entity implements Serializable {
     
@@ -10,6 +11,7 @@ public abstract class Entity implements Serializable {
     private Hitbox hitbox;
     private String entityName;
     private String entityType;
+    public abstract <E> E accept(EntityVisitor<E> visitor);
 
     public Entity (Position position, String entityName, String entityType) {
         this.entityName = entityName;

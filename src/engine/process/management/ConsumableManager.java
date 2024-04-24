@@ -1,4 +1,4 @@
-package engine.process;
+package engine.process.management;
 
 import engine.entities.characters.Player;
 import engine.entities.items.Slot;
@@ -8,6 +8,8 @@ import engine.entities.items.consumables.Consumable;
  * Cette classe permet l'utilisation de tout objet consommable par le joueur
  */
 public class ConsumableManager {
+
+    private static EntityManager manager = EntityManager.getInstance();
 
     public static void consumeInventoryItem(int slotNumber) {
         // On récupère le slot d'inventaire concerné
@@ -28,6 +30,6 @@ public class ConsumableManager {
             default:
                 throw new IllegalArgumentException("Effet du consommable inconnu : " + consumable.getConsumableEffect());
         }
-        EntityManager.refreshContainers();
+        manager.refreshContainers();
     }
 }

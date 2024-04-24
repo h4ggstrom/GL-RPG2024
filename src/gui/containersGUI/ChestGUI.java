@@ -15,17 +15,15 @@ import config.GameConfiguration;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.containers.Chest;
-import engine.process.EntityManager;
 
 public class ChestGUI extends ContainerGUI {
 
     private Chest chest;
     private JPanel panel = new JPanel();
 
-    public ChestGUI(EntityManager manager, Chest chest) {
-        super(manager);
+    public ChestGUI(Chest chest) {
         this.chest = chest;
-        EntityManager.chestRefreshListener = this;
+        super.manager.setChestRefreshListener(this);
 
         initOverallView();
 

@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import org.apache.log4j.Logger;
 
 import engine.entities.Entity;
-import engine.process.EntityManager;
+import engine.process.management.EntityManager;
 import log.Gamelog;
 
 /**
@@ -24,13 +24,12 @@ import log.Gamelog;
 public class GameDisplay extends JPanel {
 
     private static Logger logger = Gamelog.getLogger();
+    private static EntityManager manager = EntityManager.getInstance();
     
     // définition des attributs
-    private EntityManager manager; // le processus de gestion des actions
     private PaintStrategy paintStrategy = new PaintStrategy();
 
-    public GameDisplay (EntityManager manager) {
-        this.manager = manager;
+    public GameDisplay () {
         logger.trace("New instance of GameDisplay");
     }
     

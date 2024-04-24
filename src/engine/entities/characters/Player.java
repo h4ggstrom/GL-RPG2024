@@ -8,7 +8,8 @@ import org.apache.log4j.Logger;
 import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.entities.items.weapons.Weapon;
-import engine.process.EntityFactory;
+import engine.process.management.EntityFactory;
+import engine.process.visitor.EntityVisitor;
 import gui.LevelUpGUI;
 import log.Gamelog;
 
@@ -204,5 +205,10 @@ public class Player extends GameCharacter {
             e.printStackTrace();
         }
     }
+
+    @Override
+	public <E> E accept(EntityVisitor<E> visitor) {
+		return visitor.visit(this);
+	}
 
 }

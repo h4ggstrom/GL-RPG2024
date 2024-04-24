@@ -15,8 +15,8 @@ import config.GameConfiguration;
 import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
 import engine.entities.characters.Player;
-import engine.process.EntityManager;
-import engine.process.GameBuilder;
+import engine.process.management.EntityManager;
+import engine.process.management.GameBuilder;
 import gui.containersGUI.InventoryGUI;
 import log.Gamelog;
 
@@ -41,7 +41,7 @@ public class MainGUI extends JFrame implements Runnable {
 
     private GameDisplay dashboard; // ATH à intégrer dans la fenêtre
 
-    private EntityManager manager; // processus de gestion des actions
+    private EntityManager manager = EntityManager.getInstance(); // processus de gestion des actions
 
     private boolean pause;
 
@@ -65,8 +65,8 @@ public class MainGUI extends JFrame implements Runnable {
         addMouseListener(mouseControls);
 
         dungeon = GameBuilder.buildDungeon();
-        manager = GameBuilder.buildInitEntities(dungeon);
-        dashboard = new GameDisplay(manager);
+        GameBuilder.buildInitEntities(dungeon);
+        dashboard = new GameDisplay();
 
         dashboard.setPreferredSize(preferredSize);
         contentPane.add(dashboard, BorderLayout.CENTER);
@@ -138,7 +138,7 @@ public class MainGUI extends JFrame implements Runnable {
                     }
                     break;
                 case KeyEvent.VK_E:
-                    new InventoryGUI(manager);
+                    new InventoryGUI();
                     break;
                 default:
                     break;

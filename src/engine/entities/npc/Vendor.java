@@ -6,6 +6,7 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.items.Item;
+import engine.process.visitor.EntityVisitor;
 
 public class Vendor extends Entity {
 
@@ -32,5 +33,10 @@ public class Vendor extends Entity {
     public void removeSellingItem(Item item) {
         itemsForSale.remove(item);
     }
+
+    @Override
+	public <E> E accept(EntityVisitor<E> visitor) {
+		return visitor.visit(this);
+	}
 
 }

@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import engine.entities.npc.Vendor;
-import engine.process.EntityManager;
 import engine.entities.characters.Player;
 import engine.entities.items.Item;
 
@@ -15,9 +14,8 @@ public class VendorGUI extends ContainerGUI {
     private JLabel balanceLabel; // Affiche les fonds disponibles du joueur
     private JPanel vendorPanel = new JPanel(new GridLayout(4, 1));
 
-    public VendorGUI(Vendor vendor, EntityManager manager) {
-        super(manager);
-        EntityManager.vendorRefreshListener = this;
+    public VendorGUI(Vendor vendor) {
+        super.manager.setVendorRefreshListener(this);
         this.vendor = vendor;
         setTitle("Magasin de " + vendor.getEntityName());
         setSize(400, 300);

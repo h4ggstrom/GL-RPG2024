@@ -2,6 +2,7 @@ package engine.entities.containers;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
+import engine.process.visitor.EntityVisitor;
 
 public class Chest extends Container {
 
@@ -18,5 +19,10 @@ public class Chest extends Container {
     public void setLocked(boolean isLocked) {
         this.isLocked = isLocked;
     }
+
+    @Override
+	public <E> E accept(EntityVisitor<E> visitor) {
+		return visitor.visit(this);
+	}
 
 }

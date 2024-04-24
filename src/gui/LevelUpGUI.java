@@ -4,13 +4,14 @@ import javax.swing.*;
 
 import config.GameConfiguration;
 import engine.entities.characters.Player;
-import engine.process.EntityManager;
+import engine.process.management.EntityManager;
 
 import java.awt.*;
 
 public class LevelUpGUI extends JFrame {
 
     private Player player = Player.getInstance();
+    private EntityManager manager = EntityManager.getInstance();
     
     public LevelUpGUI() {
         setTitle("Amélioration de personnage");
@@ -37,7 +38,7 @@ public class LevelUpGUI extends JFrame {
         button.addActionListener(e -> {
             action.run();
             // On rafraîchit la fenêtre d'inventaire si elle est ouverte
-            EntityManager.refreshContainers();
+            manager.refreshContainers();
             // On ferme la fenêtre
             dispose();
         });
