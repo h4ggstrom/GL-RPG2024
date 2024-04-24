@@ -40,6 +40,7 @@ public class InteractionVisitor implements EntityVisitor<Void>{
     
     @Override
     public Void visit(Enemy entity) {
+        logger.trace("Enemy clicked");
         // On récupère la distance entre le joueur et l'ennemi
         int distance = manager.calculateDistance(playerPosition, entity.getPosition());
         logger.trace("Distance to selected Enemy = " + distance);
@@ -96,11 +97,13 @@ public class InteractionVisitor implements EntityVisitor<Void>{
 
     @Override
     public Void visit(Player entity) {
+        logger.trace("Player clicked");
         return null;
     }
 
     @Override
     public Void visit(Item entity) {
+        logger.trace("Item clicked");
         int distance = manager.calculateDistance(playerPosition, entity.getPosition());
         logger.trace("Distance to selected item = " + distance);
         if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
@@ -114,6 +117,7 @@ public class InteractionVisitor implements EntityVisitor<Void>{
 
     @Override
     public Void visit(Bag entity) {
+        logger.trace("Bag clicked");
         int distance = manager.calculateDistance(playerPosition, entity.getPosition());
         logger.trace("Distance to selected item = " + distance); 
         if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
@@ -124,6 +128,7 @@ public class InteractionVisitor implements EntityVisitor<Void>{
 
     @Override
     public Void visit(Vendor entity) {
+        logger.trace("Vendor clicked");
         int distance = manager.calculateDistance(playerPosition, entity.getPosition());
         logger.trace("Distance to selected item = " + distance);
         if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
@@ -134,16 +139,19 @@ public class InteractionVisitor implements EntityVisitor<Void>{
 
     @Override
     public Void visit(Environment entity) {
+        logger.trace("Environment clicked");
         return null;
     }
 
     @Override
     public Void visit(Inventory entity) {
+        logger.trace("Inventory clicked");
         return null;
     }
 
     @Override
     public Void visit(Garbage entity) {
+        logger.trace("Garbage clicked");
         int distance = manager.calculateDistance(playerPosition, entity.getPosition());
         logger.trace("Distance to selected item = " + distance);
         if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
@@ -161,6 +169,7 @@ public class InteractionVisitor implements EntityVisitor<Void>{
 
     @Override
     public Void visit(Chest entity) {
+        logger.trace("Chest clicked");
         int distance = manager.calculateDistance(playerPosition, entity.getPosition());
         logger.trace("Distance to selected item = " + distance);
         if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
