@@ -52,12 +52,20 @@ public abstract class GameCharacter extends Entity {
         return maxHealth;
     }
 
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
     public void addMaxHealth(int maxHealth) {
         this.maxHealth += maxHealth;
     }
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public void healCharacter(int heal) {
@@ -76,12 +84,20 @@ public abstract class GameCharacter extends Entity {
         return this.getItemBonus(armor, equipment.getChestplate());
     }
 
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
+
     public void addArmor(int armor) {
         this.armor += armor;
     }
 
     public int getAttackSpeed() {
         return this.getItemBonus(attackSpeed, equipment.getGloves());
+    }
+
+    public void setAttackSpeed(int attackSpeed) {
+        this.attackSpeed = attackSpeed;
     }
 
     public void addAttackSpeed(int attackSpeed) {
@@ -92,12 +108,20 @@ public abstract class GameCharacter extends Entity {
         return attackRange + ((equipment.getWeapon() == null) ? 0 : ((Weapon)equipment.getWeapon()).getAttackRange());
     }
 
+    public void setAttackRange(int attackRange) {
+        this.attackRange = attackRange;
+    }
+
     public void addAttackRange(int attackRange) {
         this.attackRange += attackRange;
     }
 
     public int getAttackDamage() {
         return attackDamage + ((equipment.getWeapon() == null) ? 0 : ((Weapon)equipment.getWeapon()).getAttackDamage());
+    }
+
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage;
     }
 
     /**
@@ -112,6 +136,10 @@ public abstract class GameCharacter extends Entity {
         return this.getItemBonus(moveSpeed, equipment.getBoots());
     }
 
+    public void setMoveSpeed(int moveSpeed) {
+        this.moveSpeed = moveSpeed;
+    }
+
     public void addMoveSpeed(int moveSpeed) {
         this.moveSpeed += moveSpeed;
     }
@@ -120,12 +148,20 @@ public abstract class GameCharacter extends Entity {
         return this.getItemBonus(abilityCooldown, equipment.getHelmet());
     }
 
+    public void setAbilityCooldown(int abilityCooldown) {
+        this.abilityCooldown = abilityCooldown;
+    }
+
     public void addAbilityCooldown(int abilityCooldown) {
         this.abilityCooldown += abilityCooldown;
     }
 
     public int getStunCooldown() {
         return this.getItemBonus(stunCooldown, equipment.getPants());
+    }
+
+    public void setStunCooldown(int stunCooldown) {
+        this.stunCooldown = stunCooldown;
     }
 
     public void addStunCooldown(int stunCooldown) {

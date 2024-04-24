@@ -17,6 +17,7 @@ import engine.process.management.GameBuilder;
 public class TestDungeon {
     
     private Dungeon dungeon;
+    private EntityManager manager = EntityManager.getInstance();
 
     /**
      * set le donjon avant d'effectuer les tests dessus.
@@ -39,11 +40,11 @@ public class TestDungeon {
      */
     @Test
     public void testAddEntity() {
-        int nbBefore = EntityManager.getCurrentRoom().getEntities().size();
+        int nbBefore = manager.getCurrentRoom().getEntities().size();
         Position p = new Position(500, 500);
         Entity ent = EnemyFactory.createEnemy("rat", p);
-        EntityManager.getCurrentRoom().addEntity(ent);
-        int nbAfter = EntityManager.getCurrentRoom().getEntities().size();
+        manager.getCurrentRoom().addEntity(ent);
+        int nbAfter = manager.getCurrentRoom().getEntities().size();
         assertEquals(nbBefore,nbAfter-1);
     }
     
@@ -54,10 +55,10 @@ public class TestDungeon {
     public void testRmEntity() {
         Position p = new Position(500, 500);
         Entity ent = EnemyFactory.createEnemy("rat", p);
-        EntityManager.getCurrentRoom().addEntity(ent);
-        int nbBefore = EntityManager.getCurrentRoom().getEntities().size();
-        EntityManager.getCurrentRoom().removeEntity(ent);
-        int nbAfter = EntityManager.getCurrentRoom().getEntities().size();
+        manager.getCurrentRoom().addEntity(ent);
+        int nbBefore = manager.getCurrentRoom().getEntities().size();
+        manager.getCurrentRoom().removeEntity(ent);
+        int nbAfter = manager.getCurrentRoom().getEntities().size();
         assertEquals(nbBefore,nbAfter+1);
     }
 
