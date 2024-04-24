@@ -81,7 +81,6 @@ public class MainGUI extends JFrame implements Runnable {
     }
 
     public void run () {
-        int compteur = 0;
         while (!pause) {
 			try {
 				Thread.sleep(GameConfiguration.GAME_SPEED);
@@ -89,14 +88,12 @@ public class MainGUI extends JFrame implements Runnable {
 				logger.fatal("game crashed");
 			}
 
-            compteur++;
-
             if(Player.getInstance().getHealth() <= 0){
                 manager.gameOver();
             }
 
             manager.moveEnemies();
-            manager.giveBackAttackPossibility(compteur);
+            manager.incrementAttackPossibility();
             manager.attackforEnemy();
 
             dashboard.repaint();

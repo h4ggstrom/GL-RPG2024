@@ -29,8 +29,7 @@ public abstract class GameCharacter extends Entity {
     private int moveSpeed = 0;
     private int abilityCooldown = 0;
     private int stunCooldown = 0;
-
-    private boolean canAttack = true;
+    private int attackPossibility = 0;
 
     private Inventory inventory;
     private Equipment equipment;
@@ -195,11 +194,21 @@ public abstract class GameCharacter extends Entity {
         this.equipment = equipment;
     }
 
-    public boolean canAttack() {
-        return canAttack;
+    public int getAttackPossibility() {
+        return attackPossibility;
     }
 
-    public void setCanAttack(boolean canAttack) {
-        this.canAttack = canAttack;
+    public void setAttackPossibility(int attackPossibility) {
+        this.attackPossibility = attackPossibility;
+    }
+
+    public void incrementAttackPossibility() {
+        if(attackPossibility < attackSpeed) {
+            attackPossibility++;
+        }
+    }
+
+    public boolean canAttack() {
+        return attackPossibility == attackSpeed;
     }
 }

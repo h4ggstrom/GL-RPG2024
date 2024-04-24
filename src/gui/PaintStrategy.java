@@ -116,29 +116,39 @@ public class PaintStrategy {
 
     public void paintPlayerInfo(Graphics graphics) {
         Player player = Player.getInstance();
-
+    
         // Barre de vie
         graphics.setColor(Color.WHITE);
-        graphics.fillRect(30, 680, 5*player.getMaxHealth(), 30);
+        graphics.fillRect(30, 680, 5 * player.getMaxHealth(), 30);
         graphics.setColor(Color.RED);
-        graphics.fillRect(32, 684, 5*player.getHealth(), 26);
+        graphics.fillRect(32, 684, 5 * player.getHealth(), 26);
         graphics.setColor(Color.BLACK);
         graphics.drawString("PV : " + player.getHealth() + "/" + player.getMaxHealth(), 30, 695);
-
-        // Peut-il attaquer ?
-        String filePath = "";
-        if(player.canAttack()) {
-            filePath = "./src/ressources/assets/canAttack.png";
-        }
-        else {
-            filePath = "./src/ressources/assets/cannotAttack.png";
-        }
-        graphics.drawImage(ressourceManager.getImage(filePath), 5*player.getMaxHealth() + 50, 670, null);
-
+    
+        // Icone d'état d'attaque (peut attaquer ou non)
+        String attackIconPath = player.canAttack() ? "./src/ressources/assets/canAttack.png" : "./src/ressources/assets/cannotAttack.png";
+        BufferedImage attackIcon = ressourceManager.getImage(attackIconPath);
+        int attackIconX = 5 * player.getMaxHealth() + 50;
+        graphics.drawImage(attackIcon, attackIconX, 670, null);
+    
+        // Calculer la hauteur de la barre de chargement d'attaque basée sur le pourcentage d'attaque disponible
+        double attackPercentage = ((double) player.getAttackPossibility() / player.getAttackSpeed()) * 100;
+        int attackBarHeight = (int) (30 * (attackPercentage / 100));
+    
+        // Barre de chargement d'attaque
+        int attackBarX = attackIconX + attackIcon.getWidth() + 10;
+        graphics.setColor(Color.GRAY); // Couleur du fond de la barre de chargement
+        graphics.fillRect(attackBarX, 680, 20, 30);
+        graphics.setColor(Color.GREEN); // Couleur de la barre de progression
+        graphics.fillRect(attackBarX, 680 + (30 - attackBarHeight), 20, attackBarHeight);
+        graphics.setColor(Color.BLACK); // Bordure de la barre de chargement
+        graphics.drawRect(attackBarX, 680, 20, 30);
+    
         // Partie portée d'attaque pour le joueur
         Position hitbox_center = player.getHitbox().getCenter();
         int x_center = hitbox_center.getX();
         int y_center = hitbox_center.getY();
         graphics.drawOval(x_center - player.getAttackRange(), y_center - player.getAttackRange(), player.getAttackRange() * 2, player.getAttackRange() * 2);
     }
+    
 }

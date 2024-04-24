@@ -54,7 +54,7 @@ public class InteractionVisitor implements EntityVisitor<Void>{
             entity.hurtCharacter(player.getAttackDamage());;
             logger.trace("Enemy now has "+ entity.getHealth()+ " HP");
             // On indique que le joueur ne peut plus attaquer
-            player.setCanAttack(false);
+            player.setAttackPossibility(0);;
         }
 
         // Si la vie de l'Enemy atteint 0 (ou moins)

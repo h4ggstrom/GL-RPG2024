@@ -242,7 +242,7 @@ public class EntityManager {
                 // On blesse le joueur
                 player.hurtCharacter(enemy.getAttackDamage());
                 // On indique que l'ennemi à attaqué et ne peut plus attaquer 
-                enemy.setCanAttack(false);
+                enemy.setAttackPossibility(0);
                 // On indique aux conteneurs si ils sont ouverts que des nouvelles valeurs pour les PV sont à afficher
                 refreshContainers();
             }
@@ -354,6 +354,13 @@ public class EntityManager {
         }
     }
 
+    public void incrementAttackPossibility() {
+        player.incrementAttackPossibility();
+        for(Enemy enemy : getCurrentRoom().getEnemies()) {
+            enemy.incrementAttackPossibility();
+        }
+    }
+
     public void setBagRefreshListener(ContainerRefreshListener bagRefreshListener) {
         this.bagRefreshListener = bagRefreshListener;
     }
@@ -384,21 +391,4 @@ public class EntityManager {
             vendorRefreshListener.refreshContainer();
         }
     }
-
-    /**
-     * Cette méthode permet à certaines valeurs de ticks (en millisecondes) de redonner la possibilité aux personnages d'attaquer
-     * @param tick temps du jeu en millisecondes
-     */
-    public void giveBackAttackPossibility(int tick) {
-        if(tick%Player.getInstance().getAttackSpeed() == 0) {
-            Player.getInstance().setCanAttack(true);
-        }
-        
-        for(Enemy enemy : getCurrentRoom().getEnemies()) {
-            if(tick%enemy.getAttackSpeed() == 0) {
-                enemy.setCanAttack(true);
-            }
-        }
-    }
-
 }
