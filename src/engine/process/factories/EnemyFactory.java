@@ -1,4 +1,4 @@
-package engine.process.management;
+package engine.process.factories;
 
 import engine.dungeon.Position;
 import engine.entities.characters.Enemy;

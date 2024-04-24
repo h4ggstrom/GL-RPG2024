@@ -1,8 +1,7 @@
-package engine.process.management;
+package engine.process.factories;
 
 import engine.dungeon.Position;
 import engine.entities.Entity;
-import engine.entities.environment.TreeEnv;
 import engine.entities.items.weapons.*;
 import engine.entities.npc.Vendor;
 import engine.entities.items.Key;
@@ -47,8 +46,6 @@ public class EntityFactory {
                 return new Bow(position);
             case GameConfiguration.COIN_ENTITYTYPE:
                 return new Coin(position);
-            case GameConfiguration.TREE_ASSET_ENTITYTYPE:
-                return new TreeEnv(position);
             case GameConfiguration.CHEST_ENTITYTYPE:
                 return new Chest(position);
             case GameConfiguration.KEY_ENTITYTYPE:

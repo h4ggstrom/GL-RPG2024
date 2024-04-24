@@ -19,7 +19,7 @@ import engine.entities.items.Item;
 import engine.entities.items.Key;
 import engine.entities.items.Slot;
 import engine.entities.npc.Vendor;
-import engine.process.management.EntityFactory;
+import engine.process.factories.EntityFactory;
 import engine.process.management.EntityManager;
 import engine.process.management.GameBuilder;
 import gui.containersGUI.BagGUI;

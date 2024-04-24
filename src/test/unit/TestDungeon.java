@@ -9,7 +9,7 @@ import org.junit.Test;
 import engine.dungeon.Dungeon;
 import engine.dungeon.Position;
 import engine.entities.Entity;
-import engine.process.management.EnemyFactory;
+import engine.process.factories.EnemyFactory;
 import engine.process.management.EntityManager;
 import engine.process.management.GameBuilder;
 

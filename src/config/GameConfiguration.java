@@ -15,7 +15,6 @@ import engine.dungeon.Position;
 public class GameConfiguration {
 
     // À faire : FIXME
-    // IL FAUT FAIRE UN VISITOR A CHAQUE FOIS QU'ON AGIT DIFFEREMENT SELON LE TYPE D'ENTITÉ
     // BIEN DOCUMENTER TOUTES LES CLASSES ET MÉTHODES (optimiser au max la réutilisabilité -> manuels utilisateur avec @see et @link ...)
 
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
@@ -23,14 +22,13 @@ public class GameConfiguration {
     //CORRIGER : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
 
     //AMELIORER : Visuels GUI en général
-    //AMELIORER : Système de vitesse d'attaque (pour l'instant un peu aléatoire, il faudrait un vrai compteur du moment ou on attaque jusqu'au moment ou on peut réattaquer)
     
     //AJOUTER : Tous les types d'ennemis et BOSS à la fin des étages
     //AJOUTER : Tous les types d'armes
     //AJOUTER : Capacités (mana, immobilisation, visuels)
     //AJOUTER : Paramètres
-
-    //FACULTATIF : Environnement égoûts. (Changer d'environnement à chaque étage si on est chauds)
+    //AJOUTER : Implémenter l'armure, stun et cooldown, ability et cooldown
+    //AJOUTER : Changement d'environnement, égoûts. (Changer d'environnement à chaque étage si on est chauds)
 
     public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";
 

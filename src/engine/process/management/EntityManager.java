@@ -64,7 +64,7 @@ public class EntityManager {
      * @return room instance de la Room ou le joueur se trouve
      */
     public Room getCurrentRoom() {
-        return dungeon.getStages().get(player.getstageNumber() - 1).getRooms().get(player.getRoomNumber() - 1);
+        return dungeon.getStages().get(player.getStageNumber() - 1).getRooms().get(player.getRoomNumber() - 1);
     }
 
     /**
@@ -179,7 +179,7 @@ public class EntityManager {
      */
     public void nextRoom() {
         // On incrémente le numéro de la room
-        player.setRoomNumber(player.getRoomNumber() + 1);
+        player.incrementRoom();
         // On récupère cette nouvelle Room
         Room nextRoom = getCurrentRoom();
         // On place le joueur au milieu de la Room

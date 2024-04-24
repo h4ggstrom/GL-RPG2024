@@ -4,7 +4,7 @@ import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.process.visitor.EntityVisitor;
 
-public abstract class Environment extends Entity {
+public class Environment extends Entity {
 
     public Environment(Position position, String environmentName, String environmentType) {
         super(position, environmentName, environmentType);

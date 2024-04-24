@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.entities.items.weapons.Weapon;
-import engine.process.management.EntityFactory;
+import engine.process.factories.EntityFactory;
 import engine.process.visitor.EntityVisitor;
 import gui.LevelUpGUI;
 import log.Gamelog;
@@ -58,16 +58,20 @@ public class Player extends GameCharacter {
         return player;
     }
 
-    public int getstageNumber() {
-        if (roomNumber > 7) {
-            stageNumber++;
-            roomNumber = 1;
-        }
+    public int getStageNumber() {
         return stageNumber;
     }
 
-    public void setstageNumber(int stageNumber) {
+    public void setStageNumber(int stageNumber) {
         this.stageNumber = stageNumber;
+    }
+
+    public void incrementStage() {
+        this.stageNumber++;
+        if(stageNumber > 3) {
+            // WIN
+            System.out.println("C'est gagné");
+        }
     }
 
     public int getRoomNumber() {
@@ -76,6 +80,14 @@ public class Player extends GameCharacter {
 
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
+    }
+
+    public void incrementRoom() {
+        this.roomNumber++;
+        if(roomNumber > 7) {
+            this.roomNumber = 1;
+            incrementStage();
+        }
     }
 
     public void gainExp(int exp) {
@@ -163,7 +175,7 @@ public class Player extends GameCharacter {
             case "fast":
                 super.setMaxHealth(85);
                 super.setHealth(85);
-                super.setMoveSpeed(15);
+                super.setMoveSpeed(1500);
                 super.setAttackSpeed(300);
                 super.setArmor(0);
                 super.setAttackDamage(5);

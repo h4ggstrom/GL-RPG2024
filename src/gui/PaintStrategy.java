@@ -14,8 +14,6 @@ import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
 import engine.entities.environment.Environment;
-import engine.entities.environment.GateEnv;
-import engine.entities.environment.WallEnv;
 import engine.process.management.RessourceManager;
 
 /*
@@ -24,11 +22,24 @@ import engine.process.management.RessourceManager;
 public class PaintStrategy {
 
     public RessourceManager ressourceManager = RessourceManager.getInstance();
+    public String folderPath = "./src/ressources/assets/";
+    public String currentFolder = "stage1/";
       
     // Stratégie d'affichage pour la salle
     public void paint(Room room, Graphics graphics) {
+
+        if(Player.getInstance().getStageNumber() == 1) {
+            currentFolder = "stage1/";
+        }
+        else if(Player.getInstance().getStageNumber() == 2) {
+            currentFolder = "stage2/";
+        }
+        else if(Player.getInstance().getStageNumber() == 3) {
+            currentFolder = "stage3/";
+        }
+
         // On dessine le sol
-        graphics.drawImage(ressourceManager.getImage("./src/ressources/assets/ground.png"), 0, 0, null);
+        graphics.drawImage(ressourceManager.getImage(folderPath + currentFolder + "ground.png"), 0, 0, null);
         
         // Écran de fin de partie
         if(Player.getInstance().getHealth() <= 0){
@@ -49,13 +60,14 @@ public class PaintStrategy {
         }
         String filePath = "./src/ressources/assets/entity/" + entity.getEntityType() + extension;
 
-        if(entity instanceof WallEnv || entity instanceof GateEnv) {
+        if(entity.getEntityType().equals(GameConfiguration.WALL_ASSET_ENTITYTYPE) || entity.getEntityType().equals(GameConfiguration.GATE_ASSET_ENTITYTYPE)){
             Environment environment = (Environment)entity;
+            filePath = folderPath + currentFolder + entity.getEntityType() + ".png";
             Position upperLeft = environment.getHitbox().getUpperLeft();
             int width = environment.getHitbox().getWidth();
             int height = environment.getHitbox().getHeight();
 
-            // Charger l'image de texture de pierre
+            // Charger l'image de texture
             BufferedImage stoneImage = ressourceManager.getImage(filePath);
             // Redimensionner l'image pour qu'elle corresponde à la hitbox du mur
             BufferedImage scaledImage = stoneImage.getSubimage(0, 0, width, height);
@@ -110,7 +122,7 @@ public class PaintStrategy {
         // Informations sur la salle
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
-        graphics.drawString("Etage : " + Player.getInstance().getstageNumber(), 30,30);
+        graphics.drawString("Etage : " + Player.getInstance().getStageNumber(), 30,30);
         graphics.drawString("Salle : " + Player.getInstance().getRoomNumber(), 100,30);
     }
 

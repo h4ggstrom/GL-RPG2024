@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 
 import engine.entities.Entity;
 import engine.entities.characters.Enemy;
-import engine.entities.environment.GateEnv;
+import engine.entities.environment.Environment;
 import log.Gamelog;
 
 /**
@@ -24,7 +24,7 @@ public class Room {
     private static Logger logger = Gamelog.getLogger();
 
     private int number;
-    private GateEnv gate;
+    private Environment gate;
     private boolean isShop;
 
     // Liste des entités présentes dans la salle
@@ -73,7 +73,7 @@ public class Room {
         return number;
     }
 
-    public void setGate(GateEnv gate) {
+    public void setGate(Environment gate) {
         this.gate = gate;
     }
 

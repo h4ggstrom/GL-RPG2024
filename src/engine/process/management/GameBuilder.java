@@ -10,9 +10,7 @@ import engine.entities.characters.Enemy;
 import engine.entities.characters.Player;
 import engine.entities.containers.Chest;
 import engine.entities.containers.Garbage;
-import engine.entities.environment.GateEnv;
-import engine.entities.environment.TreeEnv;
-import engine.entities.environment.WallEnv;
+import engine.entities.environment.Environment;
 import engine.entities.items.Key;
 import engine.entities.items.consumables.Coin;
 import engine.entities.items.consumables.HealthFlask;
@@ -20,6 +18,9 @@ import engine.entities.items.equipment.Boots;
 import engine.entities.items.equipment.Chestplate;
 import engine.entities.items.weapons.Scepter;
 import engine.entities.npc.Vendor;
+import engine.process.factories.EnemyFactory;
+import engine.process.factories.EntityFactory;
+import engine.process.factories.EnvironmentFactory;
 import engine.dungeon.Dungeon;
 import log.Gamelog;
 
@@ -109,7 +110,7 @@ public class GameBuilder {
     public static void initializeEnemies() {
         Player player = Player.getInstance();
         int roomNumber = player.getRoomNumber();
-        int enemyCount = player.getstageNumber() * player.getRoomNumber(); 
+        int enemyCount = player.getStageNumber() * player.getRoomNumber(); 
         for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = EnemyFactory.createEnemy("rat_fistule", null); // On instancie des rats fistulés
             randomPlaceEntity(enemy); // On le place de manière aléatoire
@@ -147,7 +148,7 @@ public class GameBuilder {
         // on veut entre 7 et 11 arbres
         int treeNumber = getRandomNumber(7, 11);
         for(int i = 0 ; i < treeNumber ; i++) {
-            TreeEnv tree = (TreeEnv)EntityFactory.createEntity(GameConfiguration.TREE_ASSET_ENTITYTYPE, null);
+            Environment tree = EnvironmentFactory.createEnvironment(GameConfiguration.TREE_ASSET_ENTITYTYPE, null);
             randomPlaceEntity(tree);
         }
     }
@@ -182,27 +183,27 @@ public class GameBuilder {
 
     public static void initializeWalls() {
         Room currentRoom = manager.getCurrentRoom();
-        WallEnv sideWall = new WallEnv(null);
+        Environment sideWall = EnvironmentFactory.createEnvironment(GameConfiguration.WALL_ASSET_ENTITYTYPE, null);
         sideWall.getHitbox().drawHitbox(new Position(0, 0), new Position(GameConfiguration.ROOM_LEFT_LIMITATION, GameConfiguration.WINDOW_HEIGHT));
         currentRoom.addEntity(sideWall);
 
-        WallEnv upperWall = new WallEnv(null);
+        Environment upperWall = EnvironmentFactory.createEnvironment(GameConfiguration.WALL_ASSET_ENTITYTYPE, null);
         upperWall.getHitbox().drawHitbox(new Position(0, 0), new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.ROOM_UPPER_LIMITATION));
         currentRoom.addEntity(upperWall);
 
-        WallEnv lowerWall = new WallEnv(null);
+        Environment lowerWall = EnvironmentFactory.createEnvironment(GameConfiguration.WALL_ASSET_ENTITYTYPE, null);
         lowerWall.getHitbox().drawHitbox(new Position(0, GameConfiguration.ROOM_LOWER_LIMITATION), new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT));
         currentRoom.addEntity(lowerWall);
 
-        WallEnv upperGateWall = new WallEnv(null);
+        Environment upperGateWall = EnvironmentFactory.createEnvironment(GameConfiguration.WALL_ASSET_ENTITYTYPE, null);
         upperGateWall.getHitbox().drawHitbox(new Position(GameConfiguration.ROOM_RIGHT_LIMITATION, 0), GameConfiguration.GATE_UPPERRIGHT);
         currentRoom.addEntity(upperGateWall);
 
-        WallEnv lowerGateWall = new WallEnv(null);
+        Environment lowerGateWall = EnvironmentFactory.createEnvironment(GameConfiguration.WALL_ASSET_ENTITYTYPE, null);
         lowerGateWall.getHitbox().drawHitbox(GameConfiguration.GATE_BOTTOMLEFT, new Position(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT));
         currentRoom.addEntity(lowerGateWall);
 
-        GateEnv gate = new GateEnv(null);
+        Environment gate = EnvironmentFactory.createEnvironment(GameConfiguration.GATE_ASSET_ENTITYTYPE, null);
         gate.getHitbox().drawHitbox(GameConfiguration.GATE_UPPERLEFT, GameConfiguration.GATE_BOTTOMRIGHT);
         currentRoom.setGate(gate);
         currentRoom.addEntity(gate);
