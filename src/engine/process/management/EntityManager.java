@@ -1,8 +1,6 @@
 package engine.process.management;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -279,39 +277,49 @@ public class EntityManager {
     public void equipInventoryItem(int slotNumber) {
         Slot slot = player.getInventory().getSlots().get(slotNumber);
         Item item = slot.getItem();
+        boolean itemEquiped = false;
         if(item instanceof Weapon) {
             if(player.getEquipment().getWeapon() == null) {
                 player.getEquipment().setWeapon((Weapon)item);
+                itemEquiped = true;
             }
         }
         else if(item instanceof Helmet) {
             if(player.getEquipment().getHelmet() == null) {
                 player.getEquipment().setHelmet((Helmet)item);
+                itemEquiped = true;
             }
         }
         else if(item instanceof Gloves) {
             if(player.getEquipment().getGloves() == null) {
                 player.getEquipment().setGloves((Gloves)item);
+                itemEquiped = true;
             }
         }
         else if(item instanceof Chestplate) {
             if(player.getEquipment().getChestplate() == null) {
                 player.getEquipment().setChestplate((Chestplate)item);
+                itemEquiped = true;
             }
         }
         else if(item instanceof Pants) {
             if(player.getEquipment().getPants() == null) {
                 player.getEquipment().setPants((Pants)item);
+                itemEquiped = true;
             }
         }
         else if(item instanceof Boots) {
             if(player.getEquipment().getBoots() == null) {
                 player.getEquipment().setBoots((Boots)item);
+                itemEquiped = true;
             }
         }
-        // On supprime l'item de l'inventaire
-        player.getInventory().removeItem(slotNumber);
-        refreshContainers();
+
+        if(itemEquiped) {
+            // On supprime l'item de l'inventaire
+            player.getInventory().removeItem(slotNumber);
+            refreshContainers();
+        }
     }
 
     public void desequipInventoryItem(String entityType) {

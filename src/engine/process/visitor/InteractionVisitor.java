@@ -191,17 +191,25 @@ public class InteractionVisitor implements EntityVisitor<Void>{
             }
             else {
                 // On vérifie si le joueur à une clé
-                ArrayList<Slot> slots = player.getInventory().getSlots();
+                Inventory inventory = player.getInventory();
+                ArrayList<Slot> slots = inventory.getSlots();
+                int slotNumber = 0;
                 for (Slot slot : slots) {
                     Item item = slot.getItem();
                     if(item instanceof Key) {
-                        // On supprime la clé
-                        slot.setItem(null);
-                        // On ouvre le coffre
-                        entity.setLocked(false);
-                        // On rafraîchit les potientiels GUI ouverts
-                        manager.refreshContainers();
+                        // On sort de la boucle
+                        break;
                     }
+                    slotNumber++;
+                }
+                // Si on s'est arrêté avant la fin de la liste, c'est que le joueur a une clé
+                if(slotNumber < slots.size()) {
+                    // On retire la clé de l'inventaire
+                    inventory.removeItem(slotNumber);
+                    // On ouvre le coffre
+                    entity.setLocked(false);
+                    // On rafraîchit les potientiels GUI ouverts
+                    manager.refreshContainers();
                 }
             }
         }
