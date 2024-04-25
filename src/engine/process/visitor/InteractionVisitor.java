@@ -121,10 +121,23 @@ public class InteractionVisitor implements EntityVisitor<Void>{
         int distance = manager.calculateDistance(playerPosition, entity.getPosition());
         logger.trace("Distance to selected item = " + distance); 
         if(distance <= GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE) {
-            new BagGUI(entity);
+            boolean isEmpty = true;
+            for (Slot bagSlot : entity.getSlots()) {
+                if (bagSlot.getItem() != null) {
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if (isEmpty) {
+                manager.getCurrentRoom().removeEntity(entity);
+                logger.trace("empty bag removed"); 
+            } else {
+                new BagGUI(entity);
+            }
         }
         return null;
     }
+
 
     @Override
     public Void visit(Vendor entity) {
