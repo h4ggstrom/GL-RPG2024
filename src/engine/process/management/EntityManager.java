@@ -1,6 +1,8 @@
 package engine.process.management;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -237,15 +239,18 @@ public class EntityManager {
             logger.trace("La différence de x entre l'ennemi et le joueur est " + dx);
             int dy = playerPosition.getY() - enemyPosition.getY();
     
-            if(dx != 0) {
+            int distanceEnemyPlayer = calculateDistance(enemyPosition, playerPosition);
+            if(dx != 0 && distanceEnemyPlayer >= enemy.getAttackRange() && distanceEnemyPlayer <= GameConfiguration.MAXIMAL_DISTANCE) {
                 moveCharacter(enemy, dx > 0 ? "right" : "left");
             }
 
-            if(dy != 0) {
+            if(dy != 0 && distanceEnemyPlayer >= enemy.getAttackRange() && distanceEnemyPlayer <= GameConfiguration.MAXIMAL_DISTANCE) {
                 moveCharacter(enemy, dy > 0 ? "down" : "up");
             }
+
         }
     }
+
 
     public void attackforEnemy(){
         for (Enemy enemy : getCurrentRoom().getEnemies()) {

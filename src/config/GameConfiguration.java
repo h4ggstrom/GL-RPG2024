@@ -45,8 +45,8 @@ public class GameConfiguration {
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
 
-    public static final int RAT_FISTULE_WIDTH = 32;
-    public static final int RAT_FISTULE_HEIGHT = 32;
+    public static final int RAT_FISTULE_WIDTH = 24;
+    public static final int RAT_FISTULE_HEIGHT = 21;
 
     public static final int SWORD_WIDTH = 30;
     public static final int SWORD_HEIGHT = 30;
@@ -89,6 +89,9 @@ public class GameConfiguration {
 
     public static final int GARBAGE_WIDTH = 36;
     public static final int GARBAGE_HEIGHT = 36;
+
+    // distance maximale entre le player l'enemy, en dessous duquel l'enemy se déplacera vers le player
+    public static final int MAXIMAL_DISTANCE = 200;
 	
     // vitesse d'exécution du jeu, un tick sera égal à ce nombre de millisecondes
 	public static final int GAME_SPEED = 10;
