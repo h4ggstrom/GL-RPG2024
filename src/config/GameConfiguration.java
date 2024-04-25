@@ -19,7 +19,7 @@ public class GameConfiguration {
 
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
     //CORRIGER : Parfois les arbres apparaissent devant la porte de sortie ...
-    //CORRIGER : Les ennemis peuvent bloquer le personnage, les sacs peuvent bloquer le personnage à l'intérieur de leur hitbox
+    //CORRIGER : Les ennemies peuvent être repoussés dans les entités et par la suite être coincés
 
     //AMELIORER : Visuels GUI en général
     

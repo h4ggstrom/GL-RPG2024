@@ -1,5 +1,8 @@
 package engine.process.management;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
@@ -131,6 +134,16 @@ public class EntityManager {
             logger.trace(entityType + " peut se déplacer.");
             logger.trace(character + "moved " + direction);
             character.setHitbox(finaleHitbox); // On associe la nouvelle Hitbox
+        } else{
+            if (character instanceof Player) {
+                for (Entity entity : getCurrentRoom().getEntities()) {
+                    if (entity instanceof Enemy && entity.getHitbox().isInCollision(finaleHitbox)) {
+                        Position enemyPosition = entity.getHitbox().getCenter();
+                        Position pushPosition = new Position(enemyPosition.getX() + (endPosition.getX() - startPosition.getX()), enemyPosition.getY() + (endPosition.getY() - startPosition.getY()));
+                        entity.setHitbox(new Hitbox(pushPosition, entity.getEntityType(), entity));
+                    }
+                }
+            }
         }
 
         // Si le personnage sort des limites de l'écran
@@ -214,7 +227,8 @@ public class EntityManager {
      * Cette méthode génére les déplacement des ennemis.
      */
     public void moveEnemies() {
-        for (Enemy enemy : getCurrentRoom().getEnemies()) {
+        List<Enemy> enemies = new ArrayList<>(getCurrentRoom().getEnemies());
+        for (Enemy enemy : enemies) {
             Position enemyPosition = enemy.getHitbox().getCenter();
             Position playerPosition = player.getHitbox().getCenter();
     
