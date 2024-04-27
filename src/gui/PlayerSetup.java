@@ -60,7 +60,9 @@ public class PlayerSetup extends JFrame{
         private ImageIcon fastIcon = new ImageIcon("src/ressources/assets/entity/rapide.png");
 
         private JLabel playerDisplay = new JLabel(initIcon);
+        private JLabel specialAbilityLabel = new JLabel();
 
+        private JPanel playerAndSpecialAbilityPanel = new JPanel(new GridLayout(2, 1));
         private JPanel ClassButtonsPanel;
         private JPanel ControlButtonsPanel;
         private JPanel finalButtonPanel;
@@ -95,7 +97,10 @@ public class PlayerSetup extends JFrame{
 
             /* on crée un panel pour l'affichage des stats et de l'avatar */
             this.statsPanel = new JPanel(new GridLayout(1, 2));
-            this.statsPanel.add(playerDisplay);
+            specialAbilityLabel.setHorizontalAlignment(JLabel.CENTER);
+            playerAndSpecialAbilityPanel.add(playerDisplay);
+            playerAndSpecialAbilityPanel.add(specialAbilityLabel);
+            this.statsPanel.add(playerAndSpecialAbilityPanel);
             this.statsPanel.add(chart);
 
             /* on ajoute le tout au main panel */
@@ -174,12 +179,15 @@ public class PlayerSetup extends JFrame{
             switch(className) {
                 case "heavy":
                     playerDisplay.setIcon(heavyIcon);
+                    specialAbilityLabel.setText("Compétence spéciale (R) : Invincible pendant 5 secondes");
                     break;
                 case "fast":
                     playerDisplay.setIcon(fastIcon);
+                    specialAbilityLabel.setText("Compétence spéciale (R) : Peut se téléporter pendant 5 secondes");
                     break;
                 case "sorcerer":
                     playerDisplay.setIcon(sorcererIcon);
+                    specialAbilityLabel.setText("Compétence spéciale (R) : Immobilise les ennemis");
                     break;
             }
         }
