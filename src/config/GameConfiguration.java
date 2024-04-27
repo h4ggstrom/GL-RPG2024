@@ -25,7 +25,8 @@ public class GameConfiguration {
     
     //AJOUTER : Tous les types d'ennemis et BOSS à la fin des étages
     //AJOUTER : Tous les types d'armes
-    //AJOUTER : Capacités (mana, immobilisation, visuels)
+    //AJOUTER : Capacités (mana, immobilisation, visuels) idée : magicien peut stun, guerrier peut repousser, fast peut invisibilité
+    //--> Cooldown de compétences fonctionnel et visuel & réduire durée stun ptite souris (d'ailleurs durée variable par ennemis)
     //AJOUTER : Paramètres
     //AJOUTER : Implémenter l'armure, stun et cooldown, ability et cooldown
     //AJOUTER : Changement d'environnement, égoûts. (Changer d'environnement à chaque étage si on est chauds)
@@ -80,6 +81,12 @@ public class GameConfiguration {
 
     public static final int TREE_WIDTH = 56;
     public static final int TREE_HEIGHT = 51;
+
+    public static final int PIPE_WIDTH = 40;
+    public static final int PIPE_HEIGHT = 51;
+
+    public static final int TABLE_WIDTH = 46;
+    public static final int TABLE_HEIGHT = 30;
 
     public static final int CHEST_WIDTH = 32;
     public static final int CHEST_HEIGHT = 32;
@@ -158,16 +165,6 @@ public class GameConfiguration {
     public static final Position GATE_BOTTOMLEFT = new Position(1026, 448); // Le pixel bas gauche de la porte de sortie
     public static final Position GATE_BOTTOMRIGHT = new Position(1080, 448); // Le pixel bas gauche de la porte de sortie
 
-    // statistiques par défaut des ennemis
-    public static final int ENEMIES_INIT_NUMBER = 2;
-    public static final int ENEMY_DEFAULT_MAXHEALTH = 30;
-    public static final int ENEMY_DEFAULT_ARMOR = 10;
-    public static final int ENEMY_DEFAULT_ATTACKSPEED = 5;
-    public static final int ENEMY_DEFAULT_ATTACKRANGE = 50;
-    public static final int ENEMY_DEFAULT_ATTACKDAMAGE = 3;
-    public static final int ENEMY_DEFAULT_MOVESPEED = 5;
-    public static final int ENEMY_DEFAULT_ABILITYCOOLDOWN = 1000;
-    public static final int ENEMY_DEFAULT_STUNCOOLDOWN = 4000;
     public static final int ENEMY_LIFEBAR_XSHIFT = -5;
     public static final int ENEMY_NOSPAWNAREA = 100;
 
@@ -211,6 +208,8 @@ public class GameConfiguration {
     public static final String KEY_ENTITYTYPE = "key";
     public static final String GARBAGE_ENTITYTYPE = "garbage";
     public static final String VENDOR_ENTITYTYPE = "vendor";
+    public static final String PIPE_ASSET_ENTITYTYPE = "pipe";
+    public static final String TABLE_ASSET_ENTITYTYPE = "table";
 
     // partie noms d'objets
     public static final String INVENTORY_NAME = "Inventaire";
@@ -240,6 +239,8 @@ public class GameConfiguration {
     public static final String KEY_NAME = "Clé de coffre";
     public static final String GARBAGE_NAME = "Pile de détritus";
     public static final String VENDOR_NAME = "Mohamed-Lamine le Marchand";
+    public static final String PIPE_ASSET_NAME = "Tuyau";
+    public static final String TABLE_ASSET_NAME = "Table";
 
     // partie effets
     public static final String HEALTHFLASK_EFFECT = "heal";

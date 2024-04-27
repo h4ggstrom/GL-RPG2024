@@ -21,14 +21,14 @@ public class LevelUpGUI extends JFrame {
         setLayout(new GridLayout(0, 1)); // Grille avec une colonne et plusieurs lignes
         
         // Ajout des boutons pour chaque amélioration
-        addUpgradeOption("Améliorer PV max", () -> player.addMaxHealth(10));
-        addUpgradeOption("Améliorer armure", () -> player.addArmor(1));
-        addUpgradeOption("Améliorer vitesse d'attaque", () -> player.addAttackSpeed(-10));
+        addUpgradeOption("Améliorer PV max", () -> player.addMaxHealth(20));
+        addUpgradeOption("Améliorer armure", () -> player.addArmor(7));
+        addUpgradeOption("Améliorer vitesse d'attaque", () -> player.addAttackSpeed(-40));
         addUpgradeOption("Améliorer portée d'attaque", () -> player.addAttackRange(10));
-        addUpgradeOption("Améliorer vitesse de déplacement", () -> player.addMoveSpeed(2));
+        addUpgradeOption("Améliorer vitesse de déplacement", () -> player.addMoveSpeed(3));
         addUpgradeOption("Améliorer dégâts d'attaque", () -> player.addAttackDamage(5));
-        addUpgradeOption("Réduire délai de récupération d'abilité", () -> player.addAbilityCooldown(-10));
-        addUpgradeOption("Réduire temps d'immobilisation", () -> player.addStunCooldown(-10));
+        addUpgradeOption("Réduire délai de récupération d'abilité", () -> player.addAbilityCooldown(-40));
+        addUpgradeOption("Réduire temps d'immobilisation", () -> player.addStunCooldown(-40));
 
         setVisible(true); // Rendre la fenêtre visible
     }

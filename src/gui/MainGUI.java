@@ -93,7 +93,7 @@ public class MainGUI extends JFrame implements Runnable {
             }
 
             manager.moveEnemies();
-            manager.incrementAttackPossibility();
+            manager.incrementPossibilities();
             manager.attackforEnemy();
 
             dashboard.repaint();
@@ -136,6 +136,9 @@ public class MainGUI extends JFrame implements Runnable {
                     break;
                 case KeyEvent.VK_E:
                     new InventoryGUI();
+                    break;
+                case KeyEvent.VK_R:
+                    manager.playerUseAbility();
                     break;
                 default:
                     break;

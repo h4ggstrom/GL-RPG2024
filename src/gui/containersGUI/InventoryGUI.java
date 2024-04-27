@@ -226,8 +226,8 @@ public class InventoryGUI extends ContainerGUI {
         abilityCooldownTextField.setEditable(false);
         stunCooldownTextField.setEditable(false);
 
-        healthTextField.setText("Nombre de points de vie actuels : " + player.getHealth());
-        armorTextField.setText("Nombre de points d'armure : " + player.getArmor());
+        healthTextField.setText("Points de vie actuels : " + player.getHealth() + "pv");
+        armorTextField.setText("Armure : " + player.getArmor() + "%");
         attackDamageTextField.setText("Dégâts d'attaque : " + player.getAttackDamage());
         attackSpeedTextField.setText("Délai de récupération d'attaque : " + player.getAttackSpeed() + " ticks");
         moveSpeedTextField.setText("Vitesse de déplacement : " + player.getMoveSpeed() + " pixels par tick");

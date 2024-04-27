@@ -14,6 +14,10 @@ public class EnvironmentFactory {
                 return new Environment(position, GameConfiguration.WALL_ASSET_NAME, GameConfiguration.WALL_ASSET_ENTITYTYPE);
             case GameConfiguration.GATE_ASSET_ENTITYTYPE :
                 return new Environment(position, GameConfiguration.GATE_ASSET_NAME, GameConfiguration.GATE_ASSET_ENTITYTYPE);
+            case GameConfiguration.PIPE_ASSET_ENTITYTYPE :
+                return new Environment(position, GameConfiguration.PIPE_ASSET_NAME, GameConfiguration.PIPE_ASSET_ENTITYTYPE);
+            case GameConfiguration.TABLE_ASSET_ENTITYTYPE :
+                return new Environment(position, GameConfiguration.TABLE_ASSET_NAME, GameConfiguration.TABLE_ASSET_ENTITYTYPE);
             default:
                 throw new IllegalArgumentException("Entité inconnue : " + entityType);
         }

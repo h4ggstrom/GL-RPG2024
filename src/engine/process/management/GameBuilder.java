@@ -139,17 +139,28 @@ public class GameBuilder {
      */
     public static void initializeEnvironment() {
         initializeWalls();
-        initializeTrees();
+        initializeObstacles();
         initializeChest();
         initializeGarbage();
     }
 
-    public static void initializeTrees() {
+    public static void initializeObstacles() {
         // on veut entre 7 et 11 arbres
-        int treeNumber = getRandomNumber(7, 11);
-        for(int i = 0 ; i < treeNumber ; i++) {
-            Environment tree = EnvironmentFactory.createEnvironment(GameConfiguration.TREE_ASSET_ENTITYTYPE, null);
-            randomPlaceEntity(tree);
+        int obstacleNumber = getRandomNumber(7, 11);
+        int stageNumber = Player.getInstance().getStageNumber();
+        String entityType = "";
+        if(stageNumber == 1) {
+            entityType = GameConfiguration.PIPE_ASSET_ENTITYTYPE;
+        }
+        else if(stageNumber == 2) {
+            entityType = GameConfiguration.TREE_ASSET_ENTITYTYPE;
+        }
+        else if(stageNumber == 3) {
+            entityType = GameConfiguration.TABLE_ASSET_ENTITYTYPE;
+        }
+        for(int i = 0 ; i < obstacleNumber ; i++) {
+            Environment environment = EnvironmentFactory.createEnvironment(entityType, null);
+            randomPlaceEntity(environment);
         }
     }
 

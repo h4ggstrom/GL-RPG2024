@@ -13,15 +13,15 @@ public class EnemyFactory {
         switch (enemyType) {
             case "rat_fistule":
                 Enemy ratFistuled = new Enemy(position, "Rat fistulé", "rat_fistule");
-                ratFistuled.addMaxHealth(15);
-                ratFistuled.healCharacter(15);
-                ratFistuled.addArmor(1);
-                ratFistuled.addAttackDamage(2);
-                ratFistuled.addAttackRange(30);
-                ratFistuled.addAttackSpeed(100);
-                ratFistuled.addMoveSpeed(1);
-                ratFistuled.addAbilityCooldown(100);
-                ratFistuled.addStunCooldown(1000);
+                ratFistuled.setMaxHealth(15);
+                ratFistuled.setHealth(15);
+                ratFistuled.setArmor(1);
+                ratFistuled.setAttackDamage(2);
+                ratFistuled.setAttackRange(30);
+                ratFistuled.setAttackSpeed(100);
+                ratFistuled.setMoveSpeed(1);
+                ratFistuled.setAbilityCooldown(100);
+                ratFistuled.setStunCooldown(1000);
                 return ratFistuled;
             default:
                 throw new IllegalArgumentException("Type d'ennemi inconnu : " + enemyType);

@@ -130,6 +130,10 @@ public class EntityManager {
         logger.trace("Verification de canBeMoved après la verification des hitboxs : " + canBeMoved);
         getCurrentRoom().addEntity(character); // on replace l'entité dans le Room
 
+        // on vérifie que le personnage n'est pas entravé par une compétence
+        canBeMoved = character.canMove();
+        logger.trace("Verification de canBeMoved après la verification des entraves : " + canBeMoved);
+
         if (canBeMoved) { // Si on a jugé que le personnage peut se déplacer
             logger.trace(entityType + " peut se déplacer.");
             logger.trace(character + "moved " + direction);
@@ -381,10 +385,34 @@ public class EntityManager {
         }
     }
 
-    public void incrementAttackPossibility() {
-        player.incrementAttackPossibility();
+    /**
+     * Permet au joueur d'utiliser une compétence spéciale
+     */
+    public void playerUseAbility() {
+        if(player.canAbility()) {
+            switch(player.getPlayerClass()) {
+                case "fast":
+                    // L'abilité du fast est de se rendre invisible pendant 5 secondes
+                    break;
+                case "strong":
+                    // L'abilité du strong est de devenir invincible pendant 5 secondes
+                    break;
+                case "sorcerer":
+                    // L'abilité du sorcerer est d'immobiliser les ennemis
+                    for(Enemy enemy : getCurrentRoom().getEnemies()) {
+                        // Pour chaque ennemi de la Room on lui vide sa barre de déplacement
+                        enemy.setMovePossibility(0);
+                    }
+                    break;
+            }
+            player.setAbilityPossibility(0);
+        }
+    }
+
+    public void incrementPossibilities() {
+        player.incrementPossibilities();
         for(Enemy enemy : getCurrentRoom().getEnemies()) {
-            enemy.incrementAttackPossibility();
+            enemy.incrementPossibilities();
         }
     }
 

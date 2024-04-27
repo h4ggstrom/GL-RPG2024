@@ -67,8 +67,10 @@ public class Player extends GameCharacter {
     }
 
     public void incrementStage() {
-        this.stageNumber++;
-        if(stageNumber > 3) {
+        if(stageNumber < 3) {
+            this.stageNumber++;
+        }
+        else {
             // WIN
             System.out.println("C'est gagné");
         }
@@ -144,10 +146,10 @@ public class Player extends GameCharacter {
                 super.setHealth(150);
                 super.setMoveSpeed(8);
                 super.setAttackSpeed(500);
-                super.setArmor(200);
+                super.setArmor(30);
                 super.setAttackDamage(40);
                 super.setAttackRange(GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE);
-                super.setAbilityCooldown(500);
+                super.setAbilityCooldown(1400);
                 super.setStunCooldown(200);
                 this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
                 this.mana = 100;
@@ -164,7 +166,7 @@ public class Player extends GameCharacter {
                 super.setArmor(0);
                 super.setAttackDamage(5);
                 super.setAttackRange(GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE);
-                super.setAbilityCooldown(100);
+                super.setAbilityCooldown(1000);
                 super.setStunCooldown(1000);
                 this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null)); 
                 this.mana = 200;
@@ -175,12 +177,12 @@ public class Player extends GameCharacter {
             case "fast":
                 super.setMaxHealth(85);
                 super.setHealth(85);
-                super.setMoveSpeed(14);
+                super.setMoveSpeed(1400);
                 super.setAttackSpeed(300);
                 super.setArmor(0);
                 super.setAttackDamage(5);
                 super.setAttackRange(GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE);
-                super.setAbilityCooldown(100);
+                super.setAbilityCooldown(700);
                 super.setStunCooldown(1000);
                 this.mana = 80;
                 this.playerHeight = 40;

@@ -30,6 +30,8 @@ public abstract class GameCharacter extends Entity {
     private int abilityCooldown = 0;
     private int stunCooldown = 0;
     private int attackPossibility = 0;
+    private int movePossibility = 0;
+    private int abilityPossibility = 0;
 
     private Inventory inventory;
     private Equipment equipment;
@@ -88,7 +90,12 @@ public abstract class GameCharacter extends Entity {
     }
 
     public void addArmor(int armor) {
-        this.armor += armor;
+        // Valeur maximale d'armure 85%
+        if(this.armor + armor < 85) {
+            this.armor += armor;
+        } else {
+            this.armor = 85;
+        }
     }
 
     public int getAttackSpeed() {
@@ -161,6 +168,7 @@ public abstract class GameCharacter extends Entity {
 
     public void setStunCooldown(int stunCooldown) {
         this.stunCooldown = stunCooldown;
+        this.movePossibility = stunCooldown;
     }
 
     public void addStunCooldown(int stunCooldown) {
@@ -202,13 +210,55 @@ public abstract class GameCharacter extends Entity {
         this.attackPossibility = attackPossibility;
     }
 
+    public int getMovePossibility() {
+        return movePossibility;
+    }
+
+    public void setMovePossibility(int movePossibility) {
+        this.movePossibility = movePossibility;
+    }
+
+    public int getAbilityPossibility() {
+        return abilityPossibility;
+    }
+
+    public void setAbilityPossibility(int abilityPossibility) {
+        this.abilityPossibility = abilityPossibility;
+    }
+
+    public void incrementPossibilities() {
+        incrementAttackPossibility();
+        incrementMovePossibility();
+        incrementAbilityPossibility();
+    }
+
     public void incrementAttackPossibility() {
         if(attackPossibility < attackSpeed) {
             attackPossibility++;
         }
     }
 
+    public void incrementMovePossibility() {
+        if(movePossibility < stunCooldown) {
+            movePossibility++;
+        }
+    }
+
+    public void incrementAbilityPossibility() {
+        if(abilityPossibility < abilityCooldown) {
+            abilityPossibility++;
+        }
+    }
+
+    public boolean canMove() {
+        return movePossibility == stunCooldown;
+    }
+
     public boolean canAttack() {
         return attackPossibility == attackSpeed;
+    }
+
+    public boolean canAbility() {
+        return abilityPossibility == abilityCooldown;
     }
 }

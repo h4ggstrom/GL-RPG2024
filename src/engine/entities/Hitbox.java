@@ -78,6 +78,14 @@ public class Hitbox implements Serializable {
                 width = GameConfiguration.TREE_WIDTH;
                 height = GameConfiguration.TREE_HEIGHT;
                 break;
+            case GameConfiguration.PIPE_ASSET_ENTITYTYPE:
+                width = GameConfiguration.PIPE_WIDTH;
+                height = GameConfiguration.PIPE_HEIGHT;
+                break;
+            case GameConfiguration.TABLE_ASSET_ENTITYTYPE:
+                width = GameConfiguration.TABLE_WIDTH;
+                height = GameConfiguration.TABLE_HEIGHT;
+                break;
             case GameConfiguration.WALL_ASSET_ENTITYTYPE:
                 width = 0;
                 height = 0;
