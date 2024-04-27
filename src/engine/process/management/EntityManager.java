@@ -131,8 +131,10 @@ public class EntityManager {
         getCurrentRoom().addEntity(character); // on replace l'entité dans le Room
 
         // on vérifie que le personnage n'est pas entravé par une compétence
-        canBeMoved = character.canMove();
-        logger.trace("Verification de canBeMoved après la verification des entraves : " + canBeMoved);
+        if(canBeMoved) {
+            canBeMoved = character.canMove();
+            logger.trace("Verification de canBeMoved après la verification des entraves : " + canBeMoved);
+        }
 
         if (canBeMoved) { // Si on a jugé que le personnage peut se déplacer
             logger.trace(entityType + " peut se déplacer.");
@@ -177,6 +179,17 @@ public class EntityManager {
 
         if(selectedEntity != null) {
             selectedEntity.accept(interactionVisitor);
+        }
+        // Si le clic ne visait rien
+        else {
+            // Si le joueur est un fast, il peut se téléporter
+            if(player.getPlayerClass().equals("fast")) {
+                // Mais seulement si son abilité à été déclenchée il y a moins de 5 secondes
+                if(player.getAbilityPossibility() < 500) {
+                    // Si c'est le cas on le téléporte
+                    player.setPosition(click);
+                }
+            }
         }
     }
 
@@ -392,7 +405,7 @@ public class EntityManager {
         if(player.canAbility()) {
             switch(player.getPlayerClass()) {
                 case "fast":
-                    // L'abilité du fast est de se rendre invisible pendant 5 secondes
+                    // L'abilité du fast est de pouvoir se téléporter à l'aide du clic de la souris, géré dans la méthode interact
                     break;
                 case "heavy":
                     // L'abilité du heavy est de devenir invincible pendant 5 secondes, géré directement dans la méthode hurtCharacter de Player
@@ -405,7 +418,7 @@ public class EntityManager {
                     }
                     break;
             }
-            player.setAbilityPossibility(0);
+            player.useAbility();
         }
     }
 

@@ -226,6 +226,10 @@ public abstract class GameCharacter extends Entity {
         this.abilityPossibility = abilityPossibility;
     }
 
+    public void useAbility() {
+        abilityPossibility = 0;
+    }
+
     public void incrementPossibilities() {
         incrementAttackPossibility();
         incrementMovePossibility();
