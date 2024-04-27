@@ -220,6 +220,24 @@ public class Player extends GameCharacter {
         }
     }
 
+    /**
+     * Méthode permettant de blesser le joueur en particuler, pratique pour les vérifications avec l'ability du heavy
+     */
+    @Override
+    public void hurtCharacter(int damage) {
+        // Si le joueur est un heavy
+        if(playerClass.equals("heavy")) {
+            // On vérifie que l'ability du heavy ne s'est pas activée il y a moins de 5 secondes
+            if(getAbilityPossibility() < 500) {
+                // Si ce n'est pas le cas on peut blesser le joueur
+                super.hurtCharacter(damage);
+            }
+        }
+        else {
+            super.hurtCharacter(damage);
+        }
+    }
+
     @Override
 	public <E> E accept(EntityVisitor<E> visitor) {
 		return visitor.visit(this);

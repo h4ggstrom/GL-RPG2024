@@ -394,8 +394,8 @@ public class EntityManager {
                 case "fast":
                     // L'abilité du fast est de se rendre invisible pendant 5 secondes
                     break;
-                case "strong":
-                    // L'abilité du strong est de devenir invincible pendant 5 secondes
+                case "heavy":
+                    // L'abilité du heavy est de devenir invincible pendant 5 secondes, géré directement dans la méthode hurtCharacter de Player
                     break;
                 case "sorcerer":
                     // L'abilité du sorcerer est d'immobiliser les ennemis
