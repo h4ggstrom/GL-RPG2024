@@ -58,6 +58,38 @@ public class Hitbox implements Serializable {
                 width = GameConfiguration.RAT_FISTULE_WIDTH;
                 height = GameConfiguration.RAT_FISTULE_HEIGHT;
                 break;
+            case "rocky_blateboa" :
+                width = GameConfiguration.ROCKY_BLATEBOA_WIDTH;
+                height = GameConfiguration.ROCKY_BLATEBOA_HEIGHT;
+                break;
+            case "abomination_des_egouts" :
+                width = GameConfiguration.ABOMINATION_DES_EGOUTS_WIDTH;
+                height = GameConfiguration.ABOMINATION_DES_EGOUTS_HEIGHT;
+                break;
+            case "crackhead" :
+                width = GameConfiguration.CRACKHEAD_WIDTH;
+                height = GameConfiguration.CRACKHEAD_HEIGHT;
+                break;
+            case "chevre" :
+                width = GameConfiguration.CHEVRE_WIDTH;
+                height = GameConfiguration.CHEVRE_HEIGHT;
+                break;
+            case "gobelin_malefique" :
+                width = GameConfiguration.GOBLIN_WIDTH;
+                height = GameConfiguration.GOBLIN_HEIGHT;
+                break;
+            case "professor":
+                width = GameConfiguration.PROFESSOR_WIDTH;
+                height = GameConfiguration.PROFESSOR_HEIGHT;
+                break;
+            case "secretaire":
+                width = GameConfiguration.SECRETAIRE_WIDTH;
+                height = GameConfiguration.SECRETAIRE_HEIGHT;
+                break;
+            case "derdoudiable":
+                width = GameConfiguration.DERDOUDIABLE_WIDTH;
+                height = GameConfiguration.DERDOUDIABLE_HEIGHT;
+                break;
             case GameConfiguration.PLAYER_ENTITYTYPE :
                 width = GameConfiguration.PLAYER_WIDTH;
                 height = GameConfiguration.PLAYER_HEIGHT;

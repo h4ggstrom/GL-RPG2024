@@ -18,6 +18,10 @@ public class Stage {
             if(i%5==0) {
                 room.setShop(true);
             }
+            // La room du boss à chaque fin d'étage
+            if(i==GameConfiguration.NUMBER_OF_ROOMS) {
+                room.setBoss(true);
+            }
             this.rooms.add(room);
         }
     }

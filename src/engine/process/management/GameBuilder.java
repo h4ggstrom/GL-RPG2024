@@ -93,6 +93,9 @@ public class GameBuilder {
             manager.getCurrentRoom().open();
             logger.trace("Initialized vendor");
         }
+        else if(currentRoom.isBoss()) {
+            initializeBoss();
+        }
         else {
             initializeEnemies();
             logger.trace("Initialized ennemies");
@@ -109,12 +112,59 @@ public class GameBuilder {
      */
     public static void initializeEnemies() {
         Player player = Player.getInstance();
+        int stageNumber = player.getStageNumber();
         int roomNumber = player.getRoomNumber();
         int enemyCount = player.getStageNumber() * player.getRoomNumber(); 
         for (int i = 0; i < enemyCount; i++) {
-            Enemy enemy = EnemyFactory.createEnemy("rat_fistule", null); // On instancie des rats fistulés
+            int randomNumber = getRandomNumber(1, 2);
+            String enemyType = "";
+            if(stageNumber == 1) {
+                if(randomNumber == 1) {
+                    enemyType = "rat_fistule";
+                }
+                else {
+                    enemyType = "rocky_blateboa";
+                }
+            }
+            else if(stageNumber == 2) {
+                if(randomNumber == 1) {
+                    enemyType = "crackhead";
+                }
+                else {
+                    enemyType = "chevre";
+                }
+            }
+            else if(stageNumber == 3) {
+                if(randomNumber == 1) {
+                    enemyType = "secretaire";
+                }
+                else {
+                    enemyType = "professor";
+                }
+            }
+            Enemy enemy = EnemyFactory.createEnemy(enemyType, null); // On instancie des rats fistulés
             randomPlaceEntity(enemy); // On le place de manière aléatoire
             initializeEquipmentOfEnemy(enemy, roomNumber, enemyCount); // On l'équipe
+        }
+    }
+
+    /**
+     * Cette méthode permet d'initialiser le boss de la salle
+     */
+    public static void initializeBoss() {
+        Player player = Player.getInstance();
+        int stageNumber = player.getStageNumber();
+        if(stageNumber == 1) {
+            Enemy boss = EnemyFactory.createEnemy("abomination_des_egouts", null);
+            randomPlaceEntity(boss);
+        }
+        else if(stageNumber == 2) {
+            Enemy boss = EnemyFactory.createEnemy("gobelin_malefique", null);
+            randomPlaceEntity(boss);
+        }
+        else if(stageNumber == 3) {
+            Enemy boss = EnemyFactory.createEnemy("derdoudiable", null);
+            randomPlaceEntity(boss);
         }
     }
     
@@ -138,10 +188,14 @@ public class GameBuilder {
      * @param manager
      */
     public static void initializeEnvironment() {
+        Room currentRoom = manager.getCurrentRoom();
+
         initializeWalls();
-        initializeObstacles();
-        initializeChest();
-        initializeGarbage();
+        if(!currentRoom.isBoss()) {
+            initializeObstacles();
+            initializeChest();
+            initializeGarbage();
+        }
     }
 
     public static void initializeObstacles() {

@@ -22,14 +22,11 @@ public class GameConfiguration {
     //CORRIGER : Les ennemies peuvent être repoussés dans les entités et par la suite être coincés
 
     //AMELIORER : Visuels GUI en général
+    //AMELIORER : Mana à la place de Cooldown pour l'ability, donc avec potion et tout?
     
     //AJOUTER : Tous les types d'ennemis et BOSS à la fin des étages
     //AJOUTER : Tous les types d'armes
-    //AJOUTER : Capacités (mana, immobilisation, visuels) idée : magicien peut stun, guerrier peut repousser, fast peut invisibilité
-    //--> Cooldown de compétences fonctionnel et visuel & réduire durée stun ptite souris (d'ailleurs durée variable par ennemis)
     //AJOUTER : Paramètres
-    //AJOUTER : Implémenter l'armure, stun et cooldown, ability et cooldown
-    //AJOUTER : Changement d'environnement, égoûts. (Changer d'environnement à chaque étage si on est chauds)
 
     public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";
 
@@ -48,6 +45,30 @@ public class GameConfiguration {
 
     public static final int RAT_FISTULE_WIDTH = 24;
     public static final int RAT_FISTULE_HEIGHT = 21;
+
+    public static final int ROCKY_BLATEBOA_WIDTH = 30;
+    public static final int ROCKY_BLATEBOA_HEIGHT = 30;
+
+    public static final int ABOMINATION_DES_EGOUTS_WIDTH = 120;
+    public static final int ABOMINATION_DES_EGOUTS_HEIGHT = 120;
+
+    public static final int CRACKHEAD_WIDTH = 40;
+    public static final int CRACKHEAD_HEIGHT = 40;
+
+    public static final int CHEVRE_WIDTH = 40;
+    public static final int CHEVRE_HEIGHT = 40;
+
+    public static final int GOBLIN_WIDTH = 120;
+    public static final int GOBLIN_HEIGHT = 120;
+
+    public static final int PROFESSOR_WIDTH = 50;
+    public static final int PROFESSOR_HEIGHT = 50;
+
+    public static final int SECRETAIRE_WIDTH = 50;
+    public static final int SECRETAIRE_HEIGHT = 50;
+
+    public static final int DERDOUDIABLE_WIDTH = 200;
+    public static final int DERDOUDIABLE_HEIGHT = 200;
 
     public static final int SWORD_WIDTH = 30;
     public static final int SWORD_HEIGHT = 30;
@@ -210,6 +231,10 @@ public class GameConfiguration {
     public static final String VENDOR_ENTITYTYPE = "vendor";
     public static final String PIPE_ASSET_ENTITYTYPE = "pipe";
     public static final String TABLE_ASSET_ENTITYTYPE = "table";
+    public static final String STRONG_ENTITYTYPE = "strong";
+    public static final String SORCERER_ENTITYTYPE = "sorcerer";
+    public static final String FAST_ENTITYTYPE = "fast";
+    public static final String ROCKY_BLATEBOA_ENTITYTYPE = "rockyBlateboa";
 
     // partie noms d'objets
     public static final String INVENTORY_NAME = "Inventaire";

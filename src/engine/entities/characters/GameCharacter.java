@@ -1,11 +1,14 @@
 package engine.entities.characters;
 
+import org.apache.log4j.Logger;
+
 import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.items.Item;
 import engine.entities.containers.Inventory;
 import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.Weapon;
+import log.Gamelog;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -18,6 +21,8 @@ import engine.entities.items.weapons.Weapon;
  * 
  */
 public abstract class GameCharacter extends Entity {
+
+    private Logger logger = Gamelog.getLogger();
 
     // définition des attributs
     private int maxHealth = 0;
@@ -78,7 +83,11 @@ public abstract class GameCharacter extends Entity {
     }
 
     public void hurtCharacter(int damage) {
-        this.health = this.getHealth() - damage;
+        logger.info(this.getEntityName() + " has been hurt by " + damage + " damage.");
+        logger.info("Armor at : " + armor + "%");
+        logger.info("Damage reduce by " + (double)(damage * this.getArmor() / 100));
+        this.health = this.getHealth() - (int)(damage - (double)(damage * this.getArmor() / 100));
+        logger.info("Health at : " + health);
     }
 
     public int getArmor() {

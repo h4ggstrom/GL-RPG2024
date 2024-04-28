@@ -177,7 +177,7 @@ public class Player extends GameCharacter {
             case "fast":
                 super.setMaxHealth(85);
                 super.setHealth(85);
-                super.setMoveSpeed(14);
+                super.setMoveSpeed(1400);
                 super.setAttackSpeed(300);
                 super.setArmor(0);
                 super.setAttackDamage(5);
@@ -227,9 +227,9 @@ public class Player extends GameCharacter {
     public void hurtCharacter(int damage) {
         // Si le joueur est un heavy
         if(playerClass.equals("heavy")) {
-            // On vérifie que l'ability du heavy ne s'est pas activée il y a moins de 5 secondes
-            if(getAbilityPossibility() < 500) {
-                // Si ce n'est pas le cas on peut blesser le joueur
+            // On vérifie que l'ability du heavy s'est activée il y a plus de 5 secondes
+            if(getAbilityPossibility() > 500) {
+                // Si c'est le cas on peut blesser le joueur
                 super.hurtCharacter(damage);
             }
         }

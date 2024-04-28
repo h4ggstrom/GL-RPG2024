@@ -26,6 +26,7 @@ public class Room {
     private int number;
     private Environment gate;
     private boolean isShop;
+    private boolean isBoss;
 
     // Liste des entités présentes dans la salle
     private ArrayList<Entity> entities = new ArrayList<Entity>();
@@ -118,5 +119,13 @@ public class Room {
 
     public void setShop(boolean isShop) {
         this.isShop = isShop;
+    }
+
+    public boolean isBoss() {
+        return isBoss;
+    }
+
+    public void setBoss(boolean isBoss) {
+        this.isBoss = isBoss;
     }
 }
