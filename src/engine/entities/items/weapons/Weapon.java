@@ -3,7 +3,7 @@ package engine.entities.items.weapons;
 import engine.dungeon.Position;
 import engine.entities.items.Item;
 
-public abstract class Weapon extends Item {
+public class Weapon extends Item {
     
     int attackDamage;
     int attackRange;

@@ -7,8 +7,6 @@ import org.apache.log4j.Logger;
 
 import config.GameConfiguration;
 import engine.dungeon.Position;
-import engine.entities.items.weapons.Weapon;
-import engine.process.factories.EntityFactory;
 import engine.process.visitor.EntityVisitor;
 import gui.LevelUpGUI;
 import log.Gamelog;
@@ -33,7 +31,6 @@ public class Player extends GameCharacter {
     private int level = 1;
 
     private int coinCounter = 0;
-    private int mana;
     private String playerClass;
     private int playerHeight;
     private int playerWidth;
@@ -125,15 +122,6 @@ public class Player extends GameCharacter {
         return this.coinCounter;
     }
 
-    public int getMana() {
-        return this.mana;
-    }
-
-    public void setMana(int mana) {
-        this.mana = mana;
-        return;
-    }
-
     public String getPlayerClass() {
         return this.playerClass;
     }
@@ -147,12 +135,10 @@ public class Player extends GameCharacter {
                 super.setMoveSpeed(8);
                 super.setAttackSpeed(500);
                 super.setArmor(30);
-                super.setAttackDamage(40);
+                super.setAttackDamage(15);
                 super.setAttackRange(GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE);
                 super.setAbilityCooldown(1400);
                 super.setStunCooldown(200);
-                this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SWORD_ENTITYTYPE, null));
-                this.mana = 100;
                 this.playerHeight = 40;
                 this.playerWidth = 20;
                 // FIXME : corriger les dimensions pour le HEAVY qd on aura un spray convenable
@@ -164,12 +150,10 @@ public class Player extends GameCharacter {
                 super.setMoveSpeed(10);
                 super.setAttackSpeed(400);
                 super.setArmor(0);
-                super.setAttackDamage(5);
+                super.setAttackDamage(10);
                 super.setAttackRange(GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE);
                 super.setAbilityCooldown(1000);
                 super.setStunCooldown(1000);
-                this.getEquipment().setWeapon((Weapon)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null)); 
-                this.mana = 200;
                 this.playerHeight = 40;
                 this.playerWidth = 20;
                 break;
@@ -177,14 +161,13 @@ public class Player extends GameCharacter {
             case "fast":
                 super.setMaxHealth(85);
                 super.setHealth(85);
-                super.setMoveSpeed(1400);
+                super.setMoveSpeed(14);
                 super.setAttackSpeed(300);
                 super.setArmor(0);
                 super.setAttackDamage(5);
                 super.setAttackRange(GameConfiguration.PLAYER_ENTITY_INTERACTION_RANGE);
                 super.setAbilityCooldown(700);
                 super.setStunCooldown(1000);
-                this.mana = 80;
                 this.playerHeight = 40;
                 this.playerWidth = 20;
                 // FIXME : corriger les dimensions pour le FAST qd on aura un spray convenable
@@ -228,7 +211,7 @@ public class Player extends GameCharacter {
         // Si le joueur est un heavy
         if(playerClass.equals("heavy")) {
             // On vérifie que l'ability du heavy s'est activée il y a plus de 5 secondes
-            if(getAbilityPossibility() > 500) {
+            if(getMana() > 500) {
                 // Si c'est le cas on peut blesser le joueur
                 super.hurtCharacter(damage);
             }

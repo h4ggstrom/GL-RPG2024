@@ -12,15 +12,10 @@ import engine.entities.containers.Chest;
 import engine.entities.containers.Garbage;
 import engine.entities.environment.Environment;
 import engine.entities.items.Key;
-import engine.entities.items.consumables.Coin;
-import engine.entities.items.consumables.HealthFlask;
-import engine.entities.items.equipment.Boots;
-import engine.entities.items.equipment.Chestplate;
-import engine.entities.items.weapons.Scepter;
+import engine.entities.items.consumables.*;
+import engine.entities.items.equipment.*;
 import engine.entities.npc.Vendor;
-import engine.process.factories.EnemyFactory;
-import engine.process.factories.EntityFactory;
-import engine.process.factories.EnvironmentFactory;
+import engine.process.factories.*;
 import engine.dungeon.Dungeon;
 import log.Gamelog;
 
@@ -113,7 +108,6 @@ public class GameBuilder {
     public static void initializeEnemies() {
         Player player = Player.getInstance();
         int stageNumber = player.getStageNumber();
-        int roomNumber = player.getRoomNumber();
         int enemyCount = player.getStageNumber() * player.getRoomNumber(); 
         for (int i = 0; i < enemyCount; i++) {
             int randomNumber = getRandomNumber(1, 2);
@@ -144,7 +138,7 @@ public class GameBuilder {
             }
             Enemy enemy = EnemyFactory.createEnemy(enemyType, null); // On instancie des rats fistulés
             randomPlaceEntity(enemy); // On le place de manière aléatoire
-            initializeEquipmentOfEnemy(enemy, roomNumber, enemyCount); // On l'équipe
+            initializeEquipmentOfEnemy(enemy); // On l'équipe
         }
     }
 
@@ -156,30 +150,73 @@ public class GameBuilder {
         int stageNumber = player.getStageNumber();
         if(stageNumber == 1) {
             Enemy boss = EnemyFactory.createEnemy("abomination_des_egouts", null);
+            boss.getInventory().addItem(WeaponFactory.createWeapon("epee_legendaire_des_egouts", null));
             randomPlaceEntity(boss);
         }
         else if(stageNumber == 2) {
-            Enemy boss = EnemyFactory.createEnemy("gobelin_malefique", null);
+            Enemy boss = EnemyFactory.createEnemy("arc_mystique_de_gobelin", null);
+            boss.getInventory().addItem(WeaponFactory.createWeapon("epee_legendaire_des_egouts", null));
             randomPlaceEntity(boss);
         }
         else if(stageNumber == 3) {
-            Enemy boss = EnemyFactory.createEnemy("derdoudiable", null);
+            Enemy boss = EnemyFactory.createEnemy("tampon_legendaire_de_derdoudiable", null);
+            boss.getInventory().addItem(WeaponFactory.createWeapon("epee_legendaire_des_egouts", null));
             randomPlaceEntity(boss);
         }
     }
     
-    private static void initializeEquipmentOfEnemy(Enemy enemy, int currentRoom, int enemyCount) {
-        switch(enemy.getEntityType()) {
-            case "rat_fistule":
-                // On génère un nombre aléatoire entre 1 et 10 * le numéro de la room
-                int randomNumber = getRandomNumber(1, 10*currentRoom);
+    private static void initializeEquipmentOfEnemy(Enemy enemy) {
+        // On génère un nombre aléatoire de pièces
+        int randomNumber = getRandomNumber(1, 25);
 
-                // On ajoute à l'inventaire du rat fistulé des pièces
-                Coin coins = (Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null);
-                coins.setConsumableValue(randomNumber);
-                enemy.getInventory().addItem(coins);
+        // On ajoute à l'inventaire de l'ennemi les pièces
+        Coin coins = (Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null);
+        coins.setConsumableValue(randomNumber);
+        enemy.getInventory().addItem(coins);
 
-                break;
+        // On donne ou pas à l'ennemi son arme favorite
+        if(randomNumber < 12) {
+            if(enemy.getEntityType().equals("rat_fistule")) {
+                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("epee_de_rat", null));
+            }
+            else if(enemy.getEntityType().equals("rocky_blateboa")) {
+                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("epee_de_chevalier", null));
+            }
+            else if(enemy.getEntityType().equals("crackhead")) {
+                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("dagues_de_crackhead", null));
+            }
+            else if(enemy.getEntityType().equals("chevre")) {
+                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("arc_de_chevre", null));
+            }
+            else if(enemy.getEntityType().equals("secretaire")) {
+                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("dagues_de_secretaire", null));
+            }
+            else if(enemy.getEntityType().equals("professor")) {
+                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("sceptre_de_professeur", null));
+            }
+        }
+
+        // Peu de chances pour que l'ennemi ait un bout d'armure
+        if(randomNumber == 1) {
+            enemy.getEquipment().setHelmet((Helmet)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
+        }
+        else if(randomNumber == 2) {
+            enemy.getEquipment().setChestplate((Chestplate)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
+        }
+        else if(randomNumber == 3) {
+            enemy.getEquipment().setBoots((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
+        }
+        else if(randomNumber == 4) {
+            enemy.getEquipment().setGloves((Gloves)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
+        }
+        else if(randomNumber == 5) {
+            enemy.getEquipment().setPants((Pants)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
+        }
+
+        // On génère un grand nombre aléatoire
+        randomNumber = getRandomNumber(1, 100);
+        if(randomNumber%8 == 0) {
+
         }
     }
 
@@ -218,9 +255,21 @@ public class GameBuilder {
         }
     }
 
+    /**
+     * Cette méthode permet d'initialiser un coffre à un endroit aléatoire de la salle.
+     * Ce coffre contiendra soit une potion de vie, soit un magôt d'une grande valeur.
+     */
     public static void initializeChest() {
         Chest chest = (Chest)EntityFactory.createEntity(GameConfiguration.CHEST_ENTITYTYPE, null);
-        chest.addItem((Scepter)EntityFactory.createEntity(GameConfiguration.SCEPTER_ENTITYTYPE, null));
+        int randomNumber = getRandomNumber(1, 2);
+        if(randomNumber == 1) {
+            chest.addItem((HealthFlask)EntityFactory.createEntity(GameConfiguration.HEALTHFLASK_ENTITYTYPE, null));
+        }
+        else {
+            Coin coin = (Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null);
+            coin.setConsumableValue(getRandomNumber(100, 300));
+            chest.addItem(coin);
+        }
         randomPlaceEntity(chest);
     }
 

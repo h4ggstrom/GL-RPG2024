@@ -13,34 +13,34 @@ public class EnemyFactory {
         switch (enemyType) {
             case "rat_fistule":
                 Enemy ratFistuled = new Enemy(position, "Rat fistulé", "rat_fistule");
-                ratFistuled.setMaxHealth(15);
-                ratFistuled.setHealth(15);
+                ratFistuled.setMaxHealth(10);
+                ratFistuled.setHealth(10);
                 ratFistuled.setArmor(1);
-                ratFistuled.setAttackDamage(2);
-                ratFistuled.setAttackRange(40);
+                ratFistuled.setAttackDamage(5);
+                ratFistuled.setAttackRange(45);
                 ratFistuled.setAttackSpeed(100);
                 ratFistuled.setMoveSpeed(1);
                 ratFistuled.setStunCooldown(500);
                 return ratFistuled;
             case "rocky_blateboa":
                 Enemy rockyBlateboa = new Enemy(position, "Rocky Blateboa", "rocky_blateboa");
-                rockyBlateboa.setMaxHealth(50);
-                rockyBlateboa.setHealth(50);
-                rockyBlateboa.setArmor(5);
-                rockyBlateboa.setAttackDamage(5);
-                rockyBlateboa.setAttackRange(40);
-                rockyBlateboa.setAttackSpeed(200);
+                rockyBlateboa.setMaxHealth(30);
+                rockyBlateboa.setHealth(30);
+                rockyBlateboa.setArmor(10);
+                rockyBlateboa.setAttackDamage(12);
+                rockyBlateboa.setAttackRange(55);
+                rockyBlateboa.setAttackSpeed(250);
                 rockyBlateboa.setMoveSpeed(2);
                 rockyBlateboa.setStunCooldown(700);
                 return rockyBlateboa;
             case "abomination_des_egouts":
                 Enemy abominationDesEgouts = new Enemy(position, "Abomination des égouts", "abomination_des_egouts");
-                abominationDesEgouts.setMaxHealth(100);
-                abominationDesEgouts.setHealth(100);
-                abominationDesEgouts.setArmor(10);
-                abominationDesEgouts.setAttackDamage(10);
-                abominationDesEgouts.setAttackRange(40);
-                abominationDesEgouts.setAttackSpeed(300);
+                abominationDesEgouts.setMaxHealth(200);
+                abominationDesEgouts.setHealth(200);
+                abominationDesEgouts.setArmor(30);
+                abominationDesEgouts.setAttackDamage(20);
+                abominationDesEgouts.setAttackRange(130);
+                abominationDesEgouts.setAttackSpeed(700);
                 abominationDesEgouts.setMoveSpeed(3);
                 abominationDesEgouts.setStunCooldown(1000);
                 return abominationDesEgouts;

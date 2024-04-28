@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import org.apache.log4j.Logger;
 
 import engine.entities.Entity;
+import engine.entities.characters.Player;
 import engine.process.management.EntityManager;
 import log.Gamelog;
 
@@ -38,6 +39,8 @@ public class GameDisplay extends JPanel {
         super.paintComponent(graphics);
 
         paintStrategy.paint(manager.getCurrentRoom(), graphics);
+
+        paintStrategy.paint(Player.getInstance(), graphics);
 
         ArrayList<Entity> entitiesToDraw = manager.getCurrentRoom().getStaticEntities();
         for (Entity entity : entitiesToDraw) {

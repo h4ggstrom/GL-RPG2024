@@ -36,7 +36,7 @@ public abstract class GameCharacter extends Entity {
     private int stunCooldown = 0;
     private int attackPossibility = 0;
     private int movePossibility = 0;
-    private int abilityPossibility = 0;
+    private int mana = 0;
 
     private Inventory inventory;
     private Equipment equipment;
@@ -227,22 +227,22 @@ public abstract class GameCharacter extends Entity {
         this.movePossibility = movePossibility;
     }
 
-    public int getAbilityPossibility() {
-        return abilityPossibility;
+    public int getMana() {
+        return mana;
     }
 
-    public void setAbilityPossibility(int abilityPossibility) {
-        this.abilityPossibility = abilityPossibility;
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 
     public void useAbility() {
-        abilityPossibility = 0;
+        mana = 0;
     }
 
     public void incrementPossibilities() {
         incrementAttackPossibility();
         incrementMovePossibility();
-        incrementAbilityPossibility();
+        incrementMana();
     }
 
     public void incrementAttackPossibility() {
@@ -257,9 +257,9 @@ public abstract class GameCharacter extends Entity {
         }
     }
 
-    public void incrementAbilityPossibility() {
-        if(abilityPossibility < abilityCooldown) {
-            abilityPossibility++;
+    public void incrementMana() {
+        if(mana < abilityCooldown) {
+            mana++;
         }
     }
 
@@ -272,6 +272,6 @@ public abstract class GameCharacter extends Entity {
     }
 
     public boolean canAbility() {
-        return abilityPossibility >= abilityCooldown;
+        return mana >= abilityCooldown;
     }
 }

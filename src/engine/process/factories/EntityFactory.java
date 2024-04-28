@@ -2,7 +2,6 @@ package engine.process.factories;
 
 import engine.dungeon.Position;
 import engine.entities.Entity;
-import engine.entities.items.weapons.*;
 import engine.entities.npc.Vendor;
 import engine.entities.items.Key;
 import engine.entities.items.consumables.*;
@@ -18,8 +17,6 @@ public class EntityFactory {
 
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
-            case GameConfiguration.SWORD_ENTITYTYPE:
-                return new Sword(position);
             case GameConfiguration.HEALTHFLASK_ENTITYTYPE:
                 return new HealthFlask(position);
             case GameConfiguration.HELMET_ENTITYTYPE:
@@ -34,16 +31,6 @@ public class EntityFactory {
                 return new Boots(position);
             case GameConfiguration.BAG_ENTITYTYPE:
                 return new Bag(position);
-            case GameConfiguration.DAGGER_ENTITYTYPE:
-                return new Dagger(position);
-            case GameConfiguration.WHIP_ENTITYTYPE:
-                return new Whip(position);
-            case GameConfiguration.SCEPTER_ENTITYTYPE:
-                return new Scepter(position);
-            case GameConfiguration.GRIMOIRE_ENTITYTYPE:
-                return new Grimoire(position);
-            case GameConfiguration.BOW_ENTITYTYPE:
-                return new Bow(position);
             case GameConfiguration.COIN_ENTITYTYPE:
                 return new Coin(position);
             case GameConfiguration.CHEST_ENTITYTYPE:

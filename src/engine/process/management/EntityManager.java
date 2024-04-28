@@ -185,7 +185,7 @@ public class EntityManager {
             // Si le joueur est un fast, il peut se téléporter
             if(player.getPlayerClass().equals("fast")) {
                 // Mais seulement si son abilité à été déclenchée il y a moins de 5 secondes
-                if(player.getAbilityPossibility() < 500) {
+                if(player.getMana() < 500) {
                     // Si c'est le cas on le téléporte
                     player.setPosition(click);
                 }

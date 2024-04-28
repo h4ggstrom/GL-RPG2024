@@ -102,17 +102,6 @@ public class Room {
         return enemiesFetched;
     }
 
-    public String getDifficulty() {
-        if (this.number >= 1 && this.number <= 2) {
-            return "facile";
-        } else if (this.number >= 3 && this.number <= 5) {
-            return "moyenne";
-        } else if (this.number >= 6 && this.number <= 7) {
-            return "difficile";
-        }
-        return "undefined";
-    }
-
     public boolean isShop() {
         return isShop;
     }

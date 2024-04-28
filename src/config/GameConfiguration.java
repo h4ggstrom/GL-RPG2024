@@ -21,6 +21,7 @@ public class GameConfiguration {
     //CORRIGER : Parfois les arbres apparaissent devant la porte de sortie ...
     //CORRIGER : Boss peut spawn dans le mur...
     //CORRIGER : Pousser ennemis dans les murs
+    //CORRIGER : ConcurrentModificationException car on bouge le joueur en parralèlle (le joueur est dans les entités, faut l'enlever ...)
 
     //AMELIORER : Visuels GUI en général
     //AMELIORER : Mana à la place de Cooldown pour l'ability, donc avec potion et tout?
@@ -141,37 +142,6 @@ public class GameConfiguration {
     public static final int PLAYER_DEFAULT_STUNCOOLDOWN = 4000;
     public static final int PLAYER_LIFEBAR_XSHIFT = -15;
     public static final int PLAYER_ENTITY_INTERACTION_RANGE = 50;
-    
-    // PARTIE ARMES
-
-    // Épée
-    public static final int SWORD_DAMAGE = 15;
-    public static final int SWORD_RANGE = 50;
-
-    // Fouet
-    public static final int WHIP_DAMAGE = 3;
-    public static final int WHIP_RANGE = 100;
-    public static final int WHIP_AREA_DAMAGE = 1;
-
-    // Sceptre
-    public static final int SCEPTER_BURN_DAMAGE = 1;
-    public static final int SCEPTER_DAMAGE = 80;
-    public static final int SCEPTER_RANGE = 250;
-
-    // Grimoire
-    public static final int GRIMOIRE_ROOT_DURATION = 3;
-    public static final int GRIMOIRE_DAMAGE = 2;
-    public static final int GRIMOIRE_RANGE = 250;
-
-    // Dague
-    public static final int DAGGER_DAMAGE = 3;
-    public static final int DAGGER_RANGE = 50;
-    public static final int DAGGER_BLEED_DAMAGE = 1;
-
-    // Arc
-    public static final int BOW_DAMAGE = 5;
-    public static final int BOW_RANGE = 300;
-    public static final int BOW_DAMAGE_OVER_RANGE = 5;
 
     // dimensions et limites de la salle
     public static final int ROOM_UPPER_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en Y

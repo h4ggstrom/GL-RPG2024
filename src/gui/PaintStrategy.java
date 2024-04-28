@@ -162,8 +162,8 @@ public class PaintStrategy {
 
         // Barre de chargement d'abilité
         int abilityBarX = abilityIconX + abilityIcon.getWidth() + 10;
-        double abilityPercentage = ((double) player.getAbilityPossibility() / player.getAbilityCooldown()) * 100;
-        int abilityBarHeight = (int) (30 * (abilityPercentage / 100));
+        double manaPercentage = ((double) player.getMana() / player.getAbilityCooldown()) * 100;
+        int abilityBarHeight = (int) (30 * (manaPercentage / 100));
         graphics.setColor(Color.GRAY); // Couleur du fond de la barre de chargement
         graphics.fillRect(abilityBarX, 680, 20, 30);
         graphics.setColor(Color.BLUE); // Couleur de la barre de progression
