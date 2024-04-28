@@ -19,13 +19,15 @@ public class GameConfiguration {
 
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
     //CORRIGER : Parfois les arbres apparaissent devant la porte de sortie ...
-    //CORRIGER : Les ennemies peuvent être repoussés dans les entités et par la suite être coincés
+    //CORRIGER : Boss peut spawn dans le mur...
+    //CORRIGER : Pousser ennemis dans les murs
 
     //AMELIORER : Visuels GUI en général
     //AMELIORER : Mana à la place de Cooldown pour l'ability, donc avec potion et tout?
     
     //AJOUTER : Tous les types d'ennemis et BOSS à la fin des étages
     //AJOUTER : Tous les types d'armes
+    //AJOUTER : FIN DE JEU
     //AJOUTER : Paramètres
 
     public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";

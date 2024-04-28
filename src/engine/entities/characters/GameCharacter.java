@@ -264,14 +264,14 @@ public abstract class GameCharacter extends Entity {
     }
 
     public boolean canMove() {
-        return movePossibility == stunCooldown;
+        return movePossibility >= stunCooldown;
     }
 
     public boolean canAttack() {
-        return attackPossibility == attackSpeed;
+        return attackPossibility >= attackSpeed;
     }
 
     public boolean canAbility() {
-        return abilityPossibility == abilityCooldown;
+        return abilityPossibility >= abilityCooldown;
     }
 }
