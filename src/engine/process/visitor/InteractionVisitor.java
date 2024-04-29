@@ -43,6 +43,8 @@ public class InteractionVisitor implements EntityVisitor<Void>{
         logger.trace("Enemy clicked");
         // On récupère la distance entre le joueur et l'ennemi
         int distance = manager.calculateDistance(playerPosition, entity.getPosition());
+        // On réduit cette distance pour que le joueur puisse attaquer l'ennemi sur toute la surface de la Hitbox et pas seulement lorsque son milieu est à sa portée
+        distance = distance - entity.getHitbox().getWidth()/2;
         logger.trace("Distance to selected Enemy = " + distance);
 
         List<Enemy> eliminatedEnemies = new ArrayList<Enemy>();
@@ -54,7 +56,7 @@ public class InteractionVisitor implements EntityVisitor<Void>{
             entity.hurtCharacter(player.getAttackDamage());;
             logger.trace("Enemy now has "+ entity.getHealth()+ " HP");
             // On indique que le joueur ne peut plus attaquer
-            player.setAttackPossibility(0);;
+            player.setAttackPossibility(0);
         }
 
         // Si la vie de l'Enemy atteint 0 (ou moins)

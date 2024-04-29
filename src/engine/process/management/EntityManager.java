@@ -182,7 +182,7 @@ public class EntityManager {
     }
 
     /**
-     * Cette méthode permet de calculer la distance entre deux objets en utilisant le théorème de Pytaghore.
+     * Cette méthode permet de calculer la distance entre deux objets en utilisant le théorème de Pythagore.
      *
      * @param p1 la position du premier objet
      * @param p2 la position du deuxieme objet

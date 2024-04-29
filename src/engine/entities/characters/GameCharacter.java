@@ -151,7 +151,7 @@ public abstract class GameCharacter extends Entity {
     }
 
     public int getAbilityCooldown() {
-        return this.getItemBonus(abilityCooldown, equipment.getHelmet());
+        return (this.getItemBonus(abilityCooldown, equipment.getHelmet()) < 500 ? 501 : this.getItemBonus(abilityCooldown, equipment.getHelmet()));
     }
 
     public void setAbilityCooldown(int abilityCooldown) {
