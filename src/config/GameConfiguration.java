@@ -34,8 +34,8 @@ public class GameConfiguration {
     public static final int PLAYER_WIDTH = 40;
     public static final int PLAYER_HEIGHT = 40;
 
-    public static final int VENDOR_WIDTH = 20;
-    public static final int VENDOR_HEIGHT = 40;
+    public static final int VENDOR_WIDTH = 30;
+    public static final int VENDOR_HEIGHT = 60;
 
     public static final int ENEMY_WIDTH = 20;
     public static final int ENEMY_HEIGHT = 40;
