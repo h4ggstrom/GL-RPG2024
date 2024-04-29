@@ -49,13 +49,13 @@ public class VendorGUI extends ContainerGUI {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (player.getCoinCount() >= price && !player.getInventory().isFull()) {
-                        JOptionPane.showMessageDialog(VendorGUI.this, "Vous avez acheté " + item.getEntityType() + " pour " + price + " pièces.", "Achat réussi", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(VendorGUI.this, "Vous avez acheté " + item.getEntityName() + " pour " + price + " pièces.", "Achat réussi", JOptionPane.INFORMATION_MESSAGE);
                         player.removeCoins(price);
                         vendor.removeSellingItem(item);
                         player.getInventory().addItem(item);
                         refreshContainer();
                     } else {
-                        JOptionPane.showMessageDialog(VendorGUI.this, "Fonds insuffisants pour acheter " + item.getEntityType() + ".", "Achat échoué", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(VendorGUI.this, "Fonds insuffisants pour acheter " + item.getEntityName() + ".", "Achat échoué", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });
