@@ -21,6 +21,7 @@ public class EnemyFactory {
                 ratFistuled.setAttackSpeed(100);
                 ratFistuled.setMoveSpeed(1);
                 ratFistuled.setStunCooldown(500);
+                ratFistuled.setSightDistance(100);
                 return ratFistuled;
             case "rocky_blateboa":
                 Enemy rockyBlateboa = new Enemy(position, "Rocky Blateboa", "rocky_blateboa");
@@ -32,6 +33,7 @@ public class EnemyFactory {
                 rockyBlateboa.setAttackSpeed(250);
                 rockyBlateboa.setMoveSpeed(2);
                 rockyBlateboa.setStunCooldown(700);
+                rockyBlateboa.setSightDistance(200);
                 return rockyBlateboa;
             case "abomination_des_egouts":
                 Enemy abominationDesEgouts = new Enemy(position, "Abomination des égouts", "abomination_des_egouts");
@@ -39,10 +41,11 @@ public class EnemyFactory {
                 abominationDesEgouts.setHealth(200);
                 abominationDesEgouts.setArmor(30);
                 abominationDesEgouts.setAttackDamage(20);
-                abominationDesEgouts.setAttackRange(130);
+                abominationDesEgouts.setAttackRange(220);
                 abominationDesEgouts.setAttackSpeed(700);
                 abominationDesEgouts.setMoveSpeed(3);
                 abominationDesEgouts.setStunCooldown(1000);
+                abominationDesEgouts.setSightDistance(500);
                 return abominationDesEgouts;
             case "crackhead":
                 Enemy crackhead = new Enemy(position, "Crackhead", "crackhead");
@@ -50,10 +53,11 @@ public class EnemyFactory {
                 crackhead.setHealth(30);
                 crackhead.setArmor(2);
                 crackhead.setAttackDamage(3);
-                crackhead.setAttackRange(40);
+                crackhead.setAttackRange(250);
                 crackhead.setAttackSpeed(150);
                 crackhead.setMoveSpeed(1);
                 crackhead.setStunCooldown(600);
+                crackhead.setSightDistance(250);
                 return crackhead;
             case "chevre":
                 Enemy chevre = new Enemy(position, "Chèvre", "chevre");
@@ -65,6 +69,7 @@ public class EnemyFactory {
                 chevre.setAttackSpeed(100);
                 chevre.setMoveSpeed(1);
                 chevre.setStunCooldown(500);
+                chevre.setSightDistance(250);
                 return chevre;
             case "gobelin_malefique":
                 Enemy gobelinMalefique = new Enemy(position, "Gobelin maléfique", "gobelin_malefique");
@@ -76,6 +81,7 @@ public class EnemyFactory {
                 gobelinMalefique.setAttackSpeed(150);
                 gobelinMalefique.setMoveSpeed(1);
                 gobelinMalefique.setStunCooldown(600);
+                gobelinMalefique.setSightDistance(600);
                 return gobelinMalefique;
             case "professor":
                 Enemy professor = new Enemy(position, "Professor", "professor");
@@ -87,6 +93,7 @@ public class EnemyFactory {
                 professor.setAttackSpeed(200);
                 professor.setMoveSpeed(2);
                 professor.setStunCooldown(700);
+                professor.setSightDistance(200);
                 return professor;
             case "secretaire":
                 Enemy secretaire = new Enemy(position, "Secrétaire", "secretaire");
@@ -98,6 +105,7 @@ public class EnemyFactory {
                 secretaire.setAttackSpeed(150);
                 secretaire.setMoveSpeed(1);
                 secretaire.setStunCooldown(600);
+                secretaire.setSightDistance(200);
                 return secretaire;
             case "derdoudiable":
                 Enemy derdoudiable = new Enemy(position, "Derdoudiable", "derdoudiable");
@@ -105,10 +113,11 @@ public class EnemyFactory {
                 derdoudiable.setHealth(80);
                 derdoudiable.setArmor(6);
                 derdoudiable.setAttackDamage(8);
-                derdoudiable.setAttackRange(40);
+                derdoudiable.setAttackRange(400);
                 derdoudiable.setAttackSpeed(250);
                 derdoudiable.setMoveSpeed(2);
                 derdoudiable.setStunCooldown(800);
+                derdoudiable.setSightDistance(700);
                 return derdoudiable;
             default:
                 throw new IllegalArgumentException("Type d'ennemi inconnu : " + enemyType);

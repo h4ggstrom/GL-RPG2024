@@ -13,6 +13,8 @@ import engine.entities.items.Item;
 import engine.entities.items.consumables.Coin;
 import engine.entities.items.consumables.Consumable;
 import engine.entities.items.equipment.Clothe;
+import engine.entities.items.equipment.Gloves;
+import engine.entities.items.equipment.Helmet;
 import engine.entities.items.weapons.Weapon;
 import engine.process.management.ContainerRefreshListener;
 import engine.process.management.EntityManager;
@@ -48,6 +50,9 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
             else if(item instanceof Clothe) {
                 Clothe clothe = (Clothe)item;
                 tooltipText = "<html>" + "Nom : " + clothe.getEntityName() + "<br>" + "Effet : " + clothe.getEffect() + "<br>" + "Valeur : " + clothe.getValue() + "</html>";
+                if(clothe instanceof Gloves || clothe instanceof Helmet) {
+                    tooltipText = "<html>" + "Nom : " + clothe.getEntityName() + "<br>" + "Effet : " + clothe.getEffect() + "<br>" + "Valeur : " + clothe.getValue()/100 + "</html>";
+                }
             }
             else if(item instanceof Coin) {
                 Coin coin = (Coin)item;

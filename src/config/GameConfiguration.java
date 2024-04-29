@@ -18,6 +18,8 @@ public class GameConfiguration {
     // BIEN DOCUMENTER TOUTES LES CLASSES ET MÉTHODES (optimiser au max la réutilisabilité -> manuels utilisateur avec @see et @link ...)
 
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
+    // attaque damage de base : 5
+    //CORRIGER : les ennemis se déplacent uniquement jusqu'à leur portée d'attaque
 
     //ENLEVER : Bouton paramètres, remplacer par bouton quitter
 
@@ -237,16 +239,16 @@ public class GameConfiguration {
     public static final String TABLE_ASSET_NAME = "Table";
 
     // partie effets
-    public static final String HEALTHFLASK_EFFECT = "heal";
-    public static final String HELMET_EFFECT = "abilityCooldown";
-    public static final String GLOVES_EFFECT = "attackSpeed";
-    public static final String CHESTPLATE_EFFECT = "armor";
-    public static final String PANTS_EFFECT = "stunCooldown";
-    public static final String BOOTS_EFFECT = "moveSpeed";
+    public static final String HEALTHFLASK_EFFECT = "Régénération";
+    public static final String HELMET_EFFECT = "Réduction du délai de capacité";
+    public static final String GLOVES_EFFECT = "Vitesse d'attaque";
+    public static final String CHESTPLATE_EFFECT = "Armure";
+    public static final String PANTS_EFFECT = "Réduction du délai d'immobilisation";
+    public static final String BOOTS_EFFECT = "Vitesse de déplacement";
 
     // partie bonus
     public static final int HEALTHFLASK_BONUS = 10;
-    public static final int HELMET_BONUS = 3;
+    public static final int HELMET_BONUS = -300; // En dixième de secondes
     public static final int GLOVES_BONUS = -200; // En dixième de secondes
     public static final int CHESTPLATE_BONUS = 10;
     public static final int PANTS_BONUS = 2;

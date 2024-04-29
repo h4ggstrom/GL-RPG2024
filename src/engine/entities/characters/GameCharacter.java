@@ -237,32 +237,32 @@ public abstract class GameCharacter extends Entity {
     }
 
     public void incrementAttackPossibility() {
-        if(attackPossibility < attackSpeed) {
+        if(attackPossibility < getAttackSpeed()) {
             attackPossibility++;
         }
     }
 
     public void incrementMovePossibility() {
-        if(movePossibility < stunCooldown) {
+        if(movePossibility < getStunCooldown()) {
             movePossibility++;
         }
     }
 
     public void incrementMana() {
-        if(mana < abilityCooldown) {
+        if(mana < getAbilityCooldown()) {
             mana++;
         }
     }
 
     public boolean canMove() {
-        return movePossibility >= stunCooldown;
+        return movePossibility >= getStunCooldown();
     }
 
     public boolean canAttack() {
-        return attackPossibility >= attackSpeed;
+        return attackPossibility >= getAttackSpeed();
     }
 
     public boolean canAbility() {
-        return mana >= abilityCooldown;
+        return mana >= getAbilityCooldown();
     }
 }

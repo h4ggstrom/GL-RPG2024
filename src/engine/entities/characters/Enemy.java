@@ -16,6 +16,12 @@ import engine.process.visitor.EntityVisitor;
  */
 public class Enemy extends GameCharacter {
 
+    /*
+     * sightDistance : distance à laquelle l'ennemi peut voir le joueur
+     * @see engine.process.manager.EntityManager#moveEnemies()
+     */
+    private int sightDistance = 0;
+
     /**
      * Constructeur par défaut. Crée une nouvelle instance d'Enemy en utilisant le constructeur de {@link engine.entities.characters.GameCharacter}
      * 
@@ -24,6 +30,15 @@ public class Enemy extends GameCharacter {
     public Enemy(Position position, String enemyName, String enemyType) {
         super(position, enemyName, enemyType);
     }
+
+    public int getSightDistance() {
+        return sightDistance;
+    }
+
+    public void setSightDistance(int sightDistance) {
+        this.sightDistance = sightDistance;
+    }
+
 
     @Override
 	public <E> E accept(EntityVisitor<E> visitor) {

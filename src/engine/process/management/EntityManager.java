@@ -249,11 +249,11 @@ public class EntityManager {
             int dy = playerPosition.getY() - enemyPosition.getY();
     
             int distanceEnemyPlayer = calculateDistance(enemyPosition, playerPosition);
-            if(dx != 0 && distanceEnemyPlayer >= enemy.getAttackRange() && distanceEnemyPlayer <= GameConfiguration.MAXIMAL_DISTANCE) {
+            if(dx != 0 && distanceEnemyPlayer >= enemy.getAttackRange() && distanceEnemyPlayer <= enemy.getSightDistance()) {
                 moveCharacter(enemy, dx > 0 ? "right" : "left");
             }
 
-            if(dy != 0 && distanceEnemyPlayer >= enemy.getAttackRange() && distanceEnemyPlayer <= GameConfiguration.MAXIMAL_DISTANCE) {
+            if(dy != 0 && distanceEnemyPlayer >= enemy.getAttackRange() && distanceEnemyPlayer <= enemy.getSightDistance()) {
                 moveCharacter(enemy, dy > 0 ? "down" : "up");
             }
 

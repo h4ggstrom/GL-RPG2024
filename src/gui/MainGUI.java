@@ -137,6 +137,8 @@ public class MainGUI extends JFrame implements Runnable {
                 case KeyEvent.VK_R:
                     manager.playerUseAbility();
                     break;
+                case KeyEvent.VK_K:
+                    System.out.println(Player.getInstance().getAbilityCooldown());
                 default:
                     break;
             }
