@@ -25,7 +25,9 @@ public class PaintStrategy {
     public String folderPath = "./src/ressources/assets/";
     public String currentFolder = "stage1/";
       
-    // Stratégie d'affichage pour la salle
+    /*
+     * Stratégie d'affichage pour la salle actuelle
+     */
     public void paint(Room room, Graphics graphics) {
 
         if(Player.getInstance().getStageNumber() == 1) {
@@ -65,6 +67,9 @@ public class PaintStrategy {
         }
     }
 
+    /*
+     * Stratégie d'affichage pour une entité
+     */
     public void paint(Entity entity, Graphics graphics) {
         Position position = entity.getHitbox().getUpperLeft();
         String extension = ".png";
@@ -120,6 +125,9 @@ public class PaintStrategy {
         }
     }
 
+    /*
+     * Stratégie d'affichage pour les informations d'étage et de salle
+     */
     public void paintLevelInfo(Graphics graphics) {
         // Informations sur la salle
         graphics.setColor(Color.WHITE);
@@ -128,6 +136,9 @@ public class PaintStrategy {
         graphics.drawString("Salle : " + Player.getInstance().getRoomNumber(), 100,30);
     }
 
+    /*
+     * Stratégie d'affichage pour les informations du joueur (barre de vie, barre de chargement d'attaque et d'abilité)
+     */
     public void paintPlayerInfo(Graphics graphics) {
         Player player = Player.getInstance();
     

@@ -14,6 +14,12 @@ import config.GameConfiguration;
 import engine.entities.characters.Player;
 import engine.process.management.RessourceManager;
 
+/**
+ * Génie Logiciel - Projet RPG.
+ *
+ * Cette classe gère l'affichage du menu principal du jeu.
+ *
+ */
 public class MainMenuGUI extends JFrame {
 
     private ImagePanel imagePanel;
@@ -22,11 +28,17 @@ public class MainMenuGUI extends JFrame {
     private JButton btnQuitter = new JButton("Quitter");
     private JPanel buttonPanel = new JPanel();
 
+    /**
+     * Constructeur par défaut. Crée une nouvelle instance de MainMenuGUI, qui permet au joueur de choisir de commencer une nouvelle partie, de charger une partie existante ou de quitter le jeu.
+     */
     public MainMenuGUI() {
         initLayout();
         initActions();
     }
 
+    /**
+     * Initialise le layout de la fenêtre.
+     */
 	private void initLayout() {
 
 
@@ -79,6 +91,9 @@ public class MainMenuGUI extends JFrame {
 		setVisible(true);
 	}
 
+    /**
+     * Initialise les actions des boutons.
+     */
     private void initActions() {
 		btnNewGame.addActionListener(new NewGame());
 
@@ -87,6 +102,9 @@ public class MainMenuGUI extends JFrame {
         btnQuitter.addActionListener(new Quitter());
 	}
 
+    /**
+     * Classe interne qui gère l'action de commencer une nouvelle partie.
+     */
     class NewGame implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			new PlayerSetup();
@@ -94,6 +112,9 @@ public class MainMenuGUI extends JFrame {
 		}
 	}
 
+    /**
+     * Classe interne qui gère l'action de charger une partie existante.
+     */
     class LoadGame implements ActionListener {
 		public void actionPerformed(ActionEvent e){
             // On récupère l'instance de joueur
@@ -108,12 +129,18 @@ public class MainMenuGUI extends JFrame {
 		}
 	}
 
+    /**
+     * Classe interne qui gère l'action de quitter le jeu.
+     */
     class Quitter implements ActionListener {
 		public void actionPerformed(ActionEvent e){
             System.exit(0);
 		}
 	}
 
+    /**
+     * Classe interne qui gère l'affichage d'une image en arrière-plan.
+     */
     class ImagePanel extends JPanel {
         private BufferedImage backgroundImage;
 

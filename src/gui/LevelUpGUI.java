@@ -8,11 +8,17 @@ import engine.process.management.EntityManager;
 
 import java.awt.*;
 
+/**
+ * Fenêtre permettant au joueur d'améliorer son personnage.
+ */
 public class LevelUpGUI extends JFrame {
 
     private Player player = Player.getInstance();
     private EntityManager manager = EntityManager.getInstance();
     
+    /**
+     * Constructeur par défaut. Crée une nouvelle instance de LevelUpGUI, qui permet au joueur d'améliorer son personnage.
+     */
     public LevelUpGUI() {
         setTitle("Amélioration de personnage");
         setSize(400, 300); // Taille de la fenêtre
@@ -33,6 +39,11 @@ public class LevelUpGUI extends JFrame {
         setVisible(true); // Rendre la fenêtre visible
     }
 
+    /**
+     * Ajoute un bouton pour améliorer une caractéristique du joueur.
+     * @param upgradeName Nom de l'amélioration
+     * @param action Action à effectuer lors de l'amélioration
+     */
     private void addUpgradeOption(String upgradeName, Runnable action) {
         JButton button = new JButton(upgradeName);
         button.addActionListener(e -> {

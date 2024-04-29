@@ -46,11 +46,19 @@ public class MainGUI extends JFrame implements Runnable {
 
     private Logger logger = Gamelog.getLogger(); // récupération du logger
 
+    /**
+     * Constructeur par défaut. Crée une nouvelle instance de MainGUI
+     * 
+     * @param title le titre de la fenêtre
+     */
     public MainGUI (String title){
         super(title);
         init();
     }
-
+    
+    /**
+     * Méthode d'initialisation de la fenêtre
+     */
     public void init() {
 
         Container contentPane = getContentPane();
@@ -77,6 +85,9 @@ public class MainGUI extends JFrame implements Runnable {
 
     }
 
+    /**
+     * Méthode implémentant la boucle de jeu
+     */
     public void run () {
         while (!pause) {
 			try {
@@ -177,7 +188,10 @@ public class MainGUI extends JFrame implements Runnable {
             }
             updateMovement();
         }
-    
+        
+        /**
+         * Méthode permettant de mettre à jour le mouvement du joueur
+         */
         private void updateMovement() {
             if (upPressed && rightPressed) {
                 manager.moveCharacter(Player.getInstance(), "up-right");

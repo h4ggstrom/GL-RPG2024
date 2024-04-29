@@ -34,10 +34,16 @@ public class PlayerSetup extends JFrame{
 
     private Player player = Player.getInstance();
 
+    /**
+     * Constructeur par défaut. Crée une nouvelle instance de PlayerSetup, qui permet au joueur de choisir sa classe.
+     */
     public PlayerSetup() {
         new ClassSelection();
     }
 
+    /**
+     * Classe interne qui gère l'affichage de la sélection de classe du joueur
+     */
     private class ClassSelection extends JFrame {
 
         /* definition des variables, ici ce sera majoritairement des éléments d'affichage */
@@ -68,6 +74,9 @@ public class PlayerSetup extends JFrame{
         private JPanel finalButtonPanel;
         private JPanel statsPanel;
         
+        /**
+         * Constructeur par défaut. Crée une nouvelle instance de ClassSelection, qui permet au joueur de choisir sa classe.
+         */
         public ClassSelection() {
 
             super("Sélectionnez votre classe");
@@ -158,6 +167,10 @@ public class PlayerSetup extends JFrame{
             });
         }
 
+        /**
+         * Crée un graphique à barres pour afficher les stats du joueur
+         * @return ChartPanel
+         */
         private ChartPanel createChart() {
             this.dataset.setValue(this.values[0],"series","Points de vie (x10)");
             this.dataset.setValue(this.values[1],"series","Vitesse de déplacement");
@@ -170,6 +183,10 @@ public class PlayerSetup extends JFrame{
             return new ChartPanel(chartPanel);
         }
 
+        /**
+         * Met à jour les valeurs des stats du joueur en fonction de la classe choisie
+         * @param className
+         */
         private void updateClass(String className) {
             player.setPlayerClass(className);
             values[0] = player.getMaxHealth()/10;

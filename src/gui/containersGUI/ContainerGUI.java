@@ -19,6 +19,11 @@ import engine.entities.items.weapons.Weapon;
 import engine.process.management.ContainerRefreshListener;
 import engine.process.management.EntityManager;
 
+/**
+ * Classe abstraite permettant de créer une interface graphique pour un conteneur.
+ * 
+ * @see JFrame
+ */
 public abstract class ContainerGUI extends JFrame implements ContainerRefreshListener {
 
     public EntityManager manager = EntityManager.getInstance();
@@ -27,6 +32,14 @@ public abstract class ContainerGUI extends JFrame implements ContainerRefreshLis
 
     }
 
+    /**
+     * Méthode permettant d'initialiser un slot d'item dans un conteneur.
+     * 
+     * @param panel le panel contenant le slot
+     * @param itemPanel le panel de l'item
+     * @param item l'item à afficher
+     * @param slotName le nom du slot
+     */
     public void initItemSlot(JPanel panel, JPanel itemPanel, Item item, String slotName) {
         itemPanel.setLayout(new BorderLayout());
         itemPanel.setBackground(Color.WHITE);

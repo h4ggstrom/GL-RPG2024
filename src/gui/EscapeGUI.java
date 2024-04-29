@@ -12,7 +12,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+/**
+ * Génie Logiciel - Projet RPG.
+ *
+ * Cette classe gère l'affichage du menu de pause du jeu.
+ *
+ */
 public class EscapeGUI extends JFrame {
+    /**
+     * Constructeur par défaut. Crée une nouvelle instance de EscapeGUI, qui permet au joueur de sauvegarder sa partie ou de quitter le jeu.
+     */
     public EscapeGUI() {
         // Configuration initiale de la fenêtre
         setTitle("Panique à Cergy-Préfecture");

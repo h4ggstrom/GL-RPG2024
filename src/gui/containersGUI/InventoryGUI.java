@@ -20,6 +20,11 @@ import engine.entities.items.equipment.*;
 import engine.entities.items.weapons.*;
 import engine.process.management.ConsumableManager;
 
+/**
+ * Classe permettant de créer une interface graphique pour l'inventaire du joueur.
+ * 
+ * @see ContainerGUI
+ */
 public class InventoryGUI extends ContainerGUI {
 
     private Player player = Player.getInstance();
@@ -31,6 +36,9 @@ public class InventoryGUI extends ContainerGUI {
     private JPanel playerStatisticsPanel = new JPanel();
     private JPanel imageAndCoinPanel = new JPanel();
     
+    /**
+     * Constructeur de la classe InventoryGUI.
+     */
     public InventoryGUI() {
         super.manager.setInventoryRefreshListener(this);
 
@@ -71,6 +79,9 @@ public class InventoryGUI extends ContainerGUI {
         initInventorySlotsPanels();
     }
 
+    /**
+     * Méthode permettant d'initialiser les panels des slots de l'inventaire.
+     */
     public void initInventorySlotsPanels() {
         // On récupère la liste des slots du sac
         ArrayList<Slot> slots = inventory.getSlots();
@@ -122,6 +133,9 @@ public class InventoryGUI extends ContainerGUI {
         }
     }
 
+    /**
+     * Méthode permettant d'initialiser le panel contenant l'image du joueur, son compteur de pièces et ses items équipés
+     */
     public void initPlayerViewPanel() {
         playerViewPanel.setLayout(new GridLayout(1, 2));
 
@@ -132,6 +146,9 @@ public class InventoryGUI extends ContainerGUI {
         initImageAndCoinsPanel();
     }
     
+    /*
+     * Méthode permettant d'initialiser le panel des items équipés
+     */
     public void initEquipedItemsPanel() {
         // Une ligne pour le JLabel puis des lignes pour les items équipés
         equipedItemsPanel.setLayout(new GridLayout(7, 1));
@@ -164,6 +181,9 @@ public class InventoryGUI extends ContainerGUI {
         initEquipmentSlotListener(bootsPanel, "boots");
     }
 
+    /*
+     * Méthode permettant d'initialiser le panel de l'image et du compteur de pièces
+     */
     public void initImageAndCoinsPanel() {
         imageAndCoinPanel.setLayout(new BorderLayout());
 
@@ -190,6 +210,9 @@ public class InventoryGUI extends ContainerGUI {
         imageAndCoinPanel.add(coinCounterLabel, BorderLayout.SOUTH);
     }
 
+    /*
+     * Méthode initialisant un écouteur de clic pour les slots d'équipement
+     */
     public void initEquipmentSlotListener(JPanel panel, String entityType) {
         panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -207,6 +230,9 @@ public class InventoryGUI extends ContainerGUI {
         });
     }
 
+    /**
+     * Méthode permettant d'initialiser le panel des statistiques du joueur
+     */
     public void initPlayerStatisticsPanel() {
         // Une colonne et une ligne par statistique, la dernière utilisée pour l'affichage de l'EXP
         playerStatisticsPanel.setLayout(new GridLayout(7, 1));

@@ -16,11 +16,21 @@ import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.containers.Chest;
 
+/**
+ * Classe permettant de créer une interface graphique pour un coffre.
+ * 
+ * @see ContainerGUI
+ */
 public class ChestGUI extends ContainerGUI {
 
     private Chest chest;
     private JPanel panel = new JPanel();
 
+    /**
+     * Constructeur de la classe ChestGUI.
+     * 
+     * @param chest le coffre
+     */
     public ChestGUI(Chest chest) {
         this.chest = chest;
         super.manager.setChestRefreshListener(this);
@@ -33,6 +43,9 @@ public class ChestGUI extends ContainerGUI {
 		setVisible(true);
     }
 
+    /**
+     * Méthode permettant d'initialiser l'interface graphique du coffre.
+     */
     public void initOverallView() {
         // On veut 1 ligne et 1 colonne
         this.getContentPane().setLayout(new GridLayout(1, 1));
@@ -40,6 +53,9 @@ public class ChestGUI extends ContainerGUI {
         initChestSlot();
     }
 
+    /**
+     * Méthode permettant d'initialiser les slots du coffre.
+     */
     public void initChestSlot() {
         // On récupère la liste des slots du sac
         ArrayList<Slot> slots = chest.getSlots();
@@ -70,6 +86,9 @@ public class ChestGUI extends ContainerGUI {
         }
     }
 
+    /**
+     * Méthode permettant de rafraîchir l'interface graphique du coffre.
+     */
     public void refreshContainer() {
         panel.removeAll();
         initOverallView();

@@ -8,12 +8,22 @@ import engine.entities.npc.Vendor;
 import engine.entities.characters.Player;
 import engine.entities.items.Item;
 
+/**
+ * Classe permettant de créer une interface graphique pour un vendeur.
+ * 
+ * @see ContainerGUI
+ */
 public class VendorGUI extends ContainerGUI {
     private Vendor vendor;
     private Player player = Player.getInstance();
     private JLabel balanceLabel; // Affiche les fonds disponibles du joueur
     private JPanel vendorPanel = new JPanel(new GridLayout(4, 1));
 
+    /**
+     * Constructeur de la classe VendorGUI.
+     * 
+     * @param vendor le vendeur
+     */
     public VendorGUI(Vendor vendor) {
         super.manager.setVendorRefreshListener(this);
         this.vendor = vendor;
@@ -30,6 +40,9 @@ public class VendorGUI extends ContainerGUI {
         setVisible(true);
     }
 
+    /**
+     * Méthode permettant d'initialiser l'interface graphique du vendeur.
+     */
     public void init() {
         // Afficher les fonds du joueur
         balanceLabel = new JLabel("Fonds disponibles : " + player.getCoinCount() + " pièces");

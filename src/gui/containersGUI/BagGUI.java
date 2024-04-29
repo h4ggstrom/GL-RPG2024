@@ -16,12 +16,22 @@ import engine.entities.items.Item;
 import engine.entities.items.Slot;
 import engine.entities.containers.Bag;
 
+/**
+ * Classe permettant de créer une interface graphique pour un sac.
+ * 
+ * @see ContainerGUI
+ */
 public class BagGUI extends ContainerGUI {
 
     private Bag bag;
     private JPanel upperPanel = new JPanel();
     private JPanel lowerPanel = new JPanel();
 
+    /**
+     * Constructeur de la classe BagGUI.
+     * 
+     * @param bag le sac
+     */
     public BagGUI(Bag bag) {
         this.bag = bag;
         super.manager.setBagRefreshListener(this);
@@ -34,6 +44,9 @@ public class BagGUI extends ContainerGUI {
 		setVisible(true);
     }
 
+    /**
+     * Méthode permettant d'initialiser l'interface graphique du sac.
+     */
     public void initOverallView() {
         // On veut 2 lignes, on mettra 6 slots sur chaque ligne
         this.getContentPane().setLayout(new GridLayout(2, 1));
@@ -46,6 +59,9 @@ public class BagGUI extends ContainerGUI {
         add(lowerPanel);
     }
 
+    /**
+     * Méthode permettant d'initialiser les slots du sac.
+     */
     public void initBagSlotsPanels() {
         // On récupère la liste des slots du sac
         ArrayList<Slot> slots = bag.getSlots();
@@ -84,6 +100,9 @@ public class BagGUI extends ContainerGUI {
         }
     }
 
+    /**
+     * Méthode permettant de rafraîchir l'interface graphique du sac.
+     */
     public void refreshContainer() {
         upperPanel.removeAll();
         lowerPanel.removeAll();

@@ -29,10 +29,18 @@ public class GameDisplay extends JPanel {
     // définition des attributs
     private PaintStrategy paintStrategy = new PaintStrategy();
 
+    /**
+     * Constructeur par défaut. Crée une nouvelle instance de GameDisplay
+     */
     public GameDisplay () {
         logger.trace("New instance of GameDisplay");
     }
     
+    /**
+     * Méthode permettant de redessiner la fenêtre de jeu
+     * 
+     * @param graphics le contexte graphique
+     */
     @Override
     public void paintComponent (Graphics graphics) {
         super.paintComponent(graphics);
