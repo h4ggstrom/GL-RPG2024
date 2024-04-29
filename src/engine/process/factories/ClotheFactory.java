@@ -8,11 +8,11 @@ public class ClotheFactory {
     public static Clothe createClothe(String clotheType, Position position) {
         switch(clotheType) {
             case "chapeau_de_rat":
-                return new Helmet(-1000, "Chapeau de rat", "chapeau_de_rat", position);
+                return new Helmet(-200, "Chapeau de rat", "chapeau_de_rat", position);
             case "casque_de_chevalier":
-                return new Helmet(-2000, "Casque de chevalier", "casque_de_chevalier", position);
+                return new Helmet(-400, "Casque de chevalier", "casque_de_chevalier", position);
             case "casque_des_terres_arides":
-                return new Helmet(-3000, "Casque des terres arides", "casque_des_terres_arides", position);
+                return new Helmet(-600, "Casque des terres arides", "casque_des_terres_arides", position);
             case "gants_d_aventurier":
                 return new Gloves(-1000, "Gants d'aventurier", "gants_d_aventurier", position);
             case "pantalon_de_troubadour":

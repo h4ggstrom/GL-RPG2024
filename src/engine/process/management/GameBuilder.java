@@ -207,7 +207,7 @@ public class GameBuilder {
                     enemy.getEquipment().setHelmet((Helmet)ClotheFactory.createClothe("chapeau_de_rat", null));
                     break;
                 case "rocky_blateboa":
-                    enemy.getEquipment().setBoots((Boots)ClotheFactory.createClothe("bottes_remplies_de_blatte", null));
+                    enemy.getEquipment().setBoots((Boots)ClotheFactory.createClothe("bottes_remplies_de_blattes", null));
                     break;
                 case "crackhead":
                     enemy.getEquipment().setPants((Pants)ClotheFactory.createClothe("pantalon_de_troubadour", null));

@@ -18,18 +18,12 @@ public class GameConfiguration {
     // BIEN DOCUMENTER TOUTES LES CLASSES ET MÉTHODES (optimiser au max la réutilisabilité -> manuels utilisateur avec @see et @link ...)
 
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
-    // attaque damage de base : 5
-    //CORRIGER : les ennemis se déplacent uniquement jusqu'à leur portée d'attaque
-
-    //ENLEVER : Bouton paramètres, remplacer par bouton quitter
 
     //AMELIORER : Visuels GUI en général ---> ECRAN D'ACCUEIL
-    //AMELIORER : Mana à la place de Cooldown pour l'ability, donc avec potion et tout?
     
     //AJOUTER : son ?? (musique ambiance, bruitages, ...)
     //AJOUTER : animation attaque ??
     //AJOUTER : FIN DE JEU
-    //AJOUTER : Paramètres
 
     public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";
 
@@ -37,7 +31,7 @@ public class GameConfiguration {
     public static final int WINDOW_WIDTH = 1080;
 	public static final int WINDOW_HEIGHT = 720;
 
-    public static final int PLAYER_WIDTH = 20;
+    public static final int PLAYER_WIDTH = 40;
     public static final int PLAYER_HEIGHT = 40;
 
     public static final int VENDOR_WIDTH = 20;
@@ -120,9 +114,6 @@ public class GameConfiguration {
 
     public static final int GARBAGE_WIDTH = 36;
     public static final int GARBAGE_HEIGHT = 36;
-
-    // distance maximale entre le player l'enemy, en dessous duquel l'enemy se déplacera vers le player
-    public static final int MAXIMAL_DISTANCE = 200;
 	
     // vitesse d'exécution du jeu, un tick sera égal à ce nombre de millisecondes
 	public static final int GAME_SPEED = 10;
@@ -180,7 +171,6 @@ public class GameConfiguration {
     public static final String INVENTORY_ENTITYTYPE = "inventory";
     public static final String BAG_ENTITYTYPE = "bag";
     public static final String PLAYER_ENTITYTYPE = "player";
-    public static final String ENEMY_ENTITYTYPE = "enemy";
     public static final String COIN_ENTITYTYPE = "coin";
     public static final String TREE_ASSET_ENTITYTYPE = "tree";
     public static final String WALL_ASSET_ENTITYTYPE = "wall";
@@ -191,16 +181,11 @@ public class GameConfiguration {
     public static final String VENDOR_ENTITYTYPE = "vendor";
     public static final String PIPE_ASSET_ENTITYTYPE = "pipe";
     public static final String TABLE_ASSET_ENTITYTYPE = "table";
-    public static final String STRONG_ENTITYTYPE = "strong";
-    public static final String SORCERER_ENTITYTYPE = "sorcerer";
-    public static final String FAST_ENTITYTYPE = "fast";
-    public static final String ROCKY_BLATEBOA_ENTITYTYPE = "rockyBlateboa";
 
     // partie noms d'objets
     public static final String INVENTORY_NAME = "Inventaire";
     public static final String BAG_NAME = "Sac";
     public static final String PLAYER_NAME = "Joueur";
-    public static final String ENEMY_NAME = "Ennemi";
     public static final String COIN_NAME = "Pièce";
     public static final String TREE_ASSET_NAME = "Arbre";
     public static final String WALL_ASSET_NAME = "Mur";
@@ -214,22 +199,6 @@ public class GameConfiguration {
     public static final String VENDOR_NAME = "Mohamed-Lamine le Marchand";
     public static final String PIPE_ASSET_NAME = "Tuyau";
     public static final String TABLE_ASSET_NAME = "Table";
-
-    // partie effets
-    public static final String HEALTHFLASK_EFFECT = "Régénération";
-    public static final String HELMET_EFFECT = "Réduction du délai de capacité";
-    public static final String GLOVES_EFFECT = "Vitesse d'attaque";
-    public static final String CHESTPLATE_EFFECT = "Armure";
-    public static final String PANTS_EFFECT = "Réduction du délai d'immobilisation";
-    public static final String BOOTS_EFFECT = "Vitesse de déplacement";
-
-    // partie bonus
-    public static final int HEALTHFLASK_BONUS = 10;
-    public static final int HELMET_BONUS = -300; // En dixième de secondes
-    public static final int GLOVES_BONUS = -200; // En dixième de secondes
-    public static final int CHESTPLATE_BONUS = 10;
-    public static final int PANTS_BONUS = 2;
-    public static final int BOOTS_BONUS = 5;
 
     // écran gameover
     public static final int GAME_OVER_TITLEFONTSIZE = 20;
