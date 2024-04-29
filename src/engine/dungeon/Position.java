@@ -2,6 +2,8 @@ package engine.dungeon;
 
 import java.io.Serializable;
 
+import config.GameConfiguration;
+
 /**
  * Génie Logiciel - Projet RPG.
  * 
@@ -36,6 +38,10 @@ public class Position implements Serializable {
 
     public int getY() {
         return this.y;
+    }
+
+    public boolean notNearGate() {
+        return this.x < (GameConfiguration.GATE_UPPERLEFT.getX() - 100);
     }
 
     @Override

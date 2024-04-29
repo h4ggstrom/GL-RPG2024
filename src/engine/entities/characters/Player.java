@@ -156,7 +156,7 @@ public class Player extends GameCharacter {
             case "fast":
                 super.setMaxHealth(85);
                 super.setHealth(85);
-                super.setMoveSpeed(14);
+                super.setMoveSpeed(1400);
                 super.setAttackSpeed(300);
                 super.setArmor(0);
                 super.setAttackDamage(5);

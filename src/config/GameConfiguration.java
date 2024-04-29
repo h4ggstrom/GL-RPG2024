@@ -18,11 +18,6 @@ public class GameConfiguration {
     // BIEN DOCUMENTER TOUTES LES CLASSES ET MÉTHODES (optimiser au max la réutilisabilité -> manuels utilisateur avec @see et @link ...)
 
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
-    //CORRIGER : Parfois les arbres apparaissent devant la porte de sortie ...
-    //CORRIGER : Boss peut spawn dans le mur...
-    //CORRIGER : Pousser ennemis dans les murs
-    //CORRIGER : ConcurrentModificationException car on bouge le joueur en parralèlle (le joueur est dans les entités, faut l'enlever ...)
-    // AUSSI PARCE QUE ON MODIFIE LES ENTITES HORS DE RUN IL FAUT FAIRE UN TRUC POUR ÇA style ModificationManager jsp
 
     //ENLEVER : Bouton paramètres, remplacer par bouton quitter
 
@@ -252,7 +247,7 @@ public class GameConfiguration {
     // partie bonus
     public static final int HEALTHFLASK_BONUS = 10;
     public static final int HELMET_BONUS = 3;
-    public static final int GLOVES_BONUS = -2000; // En millisecondes
+    public static final int GLOVES_BONUS = -200; // En dixième de secondes
     public static final int CHESTPLATE_BONUS = 10;
     public static final int PANTS_BONUS = 2;
     public static final int BOOTS_BONUS = 5;
