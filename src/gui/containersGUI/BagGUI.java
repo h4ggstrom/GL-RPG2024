@@ -64,7 +64,7 @@ public class BagGUI extends ContainerGUI {
             else {
                 currentPanel = lowerPanel;
             }
-            initItemSlot(currentPanel, itemPanel, item, (item == null) ? "" : item.getEntityType());
+            initItemSlot(currentPanel, itemPanel, item, (item == null) ? "" : item.getEntityName());
 
             itemPanel.addMouseListener(new MouseAdapter() {
                 @Override

@@ -23,11 +23,11 @@ public class GameConfiguration {
     //CORRIGER : Pousser ennemis dans les murs
     //CORRIGER : ConcurrentModificationException car on bouge le joueur en parralèlle (le joueur est dans les entités, faut l'enlever ...)
 
-    //AMELIORER : Visuels GUI en général
+    //ENLEVER : Bouton paramètres, remplacer par bouton quitter
+
+    //AMELIORER : Visuels GUI en général ---> ECRAN D'ACCUEIL
     //AMELIORER : Mana à la place de Cooldown pour l'ability, donc avec potion et tout?
     
-    //AJOUTER : Tous les types d'ennemis et BOSS à la fin des étages
-    //AJOUTER : Tous les types d'armes
     //AJOUTER : FIN DE JEU
     //AJOUTER : Paramètres
 

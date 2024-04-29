@@ -50,7 +50,7 @@ public class ChestGUI extends ContainerGUI {
             Item item = slots.get(i).getItem();
             // On créé le Panel qui recevra l'Item
             JPanel itemPanel = new JPanel();
-            initItemSlot(panel, itemPanel, item, (item == null) ? "" : item.getEntityType());
+            initItemSlot(panel, itemPanel, item, (item == null) ? "" : item.getEntityName());
 
             itemPanel.addMouseListener(new MouseAdapter() {
                 @Override
