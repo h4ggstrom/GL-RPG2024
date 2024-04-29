@@ -125,10 +125,8 @@ public class EntityManager {
         Boolean canBeMoved = true;
 
         logger.trace("On vérifie la collision avec les Hitbox des entités de la Room");
-        getCurrentRoom().removeEntity(character); // on retire le personnage de la Room pour ne pas vérifier la collision avec sa propre hitbox
-        canBeMoved = verifHitboxes(finaleHitbox); // on vérifie que la Hitbox finale n'est en collision avec aucune autre
+        canBeMoved = verifHitboxes(character, finaleHitbox); // on vérifie que la Hitbox finale n'est en collision avec aucune autre
         logger.trace("Verification de canBeMoved après la verification des hitboxs : " + canBeMoved);
-        getCurrentRoom().addEntity(character); // on replace l'entité dans le Room
 
         // on vérifie que le personnage n'est pas entravé par une compétence
         if(canBeMoved) {
@@ -140,16 +138,6 @@ public class EntityManager {
             logger.trace(entityType + " peut se déplacer.");
             logger.trace(character + "moved " + direction);
             character.setHitbox(finaleHitbox); // On associe la nouvelle Hitbox
-        } else{
-            if (character instanceof Player) {
-                for (Entity entity : getCurrentRoom().getEntities()) {
-                    if (entity instanceof Enemy && entity.getHitbox().isInCollision(finaleHitbox)) {
-                        Position enemyPosition = entity.getHitbox().getCenter();
-                        Position pushPosition = new Position(enemyPosition.getX() + (endPosition.getX() - startPosition.getX()), enemyPosition.getY() + (endPosition.getY() - startPosition.getY()));
-                        entity.setHitbox(new Hitbox(pushPosition, entity.getEntityType(), entity));
-                    }
-                }
-            }
         }
 
         // Si le personnage sort des limites de l'écran
@@ -226,15 +214,21 @@ public class EntityManager {
      * @param finaleHitbox la hitbox à analyser
      * @return un booléen nous disant si la hitbox est en collision avec une entité
      */
-    public boolean verifHitboxes(Hitbox finaleHitbox) {
+    public boolean verifHitboxes(Entity entityToVerif, Hitbox finaleHitbox) {
         boolean verif = true;
         // On parcourt toutes les Hitbox d'Entity de la Room
         for (Entity entity : getCurrentRoom().getEntities()) {
-            Hitbox hitbox = entity.getHitbox();
-            logger.trace("Les deux hitboxs à inspecter : " + hitbox + " et " + finaleHitbox);
-            if ( hitbox.isInCollision(finaleHitbox) ) { // Si la Hitbox finale est en collision avec une des Hitbox de la salle
-                logger.trace("finaleHitbox.isInCollision(hitbox) = " + finaleHitbox.isInCollision(hitbox));
-                verif = false; // Il ne peut pas être déplacé
+            // On s'assure que l'entité en cours d'inspection n'est pas le personnage lui-même
+            if(entity != entityToVerif) {
+                // On peut commencer les vérifications de Hitbox
+                Hitbox hitbox = entity.getHitbox();
+                logger.trace("Les deux hitboxs à inspecter : " + hitbox + " et " + finaleHitbox);
+                // Si la Hitbox finale est en collision avec une des Hitbox de la salle
+                if ( hitbox.isInCollision(finaleHitbox) ) {
+                    logger.trace("finaleHitbox.isInCollision(hitbox) = " + finaleHitbox.isInCollision(hitbox));
+                    // Il ne peut pas être déplacé
+                    verif = false;
+                }
             }
         }
         return verif;

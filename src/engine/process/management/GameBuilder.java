@@ -331,7 +331,7 @@ public class GameBuilder {
             Position randomPosition = new Position(randomX, randomY);
             entity.setPosition(randomPosition);
             // Si la hitbox de l'ennemi n'est en collision avec aucune autre dans la Room
-            if(manager.verifHitboxes(entity.getHitbox())) {
+            if(manager.verifHitboxes(entity, entity.getHitbox())) {
                 manager.getCurrentRoom().addEntity(entity); // On ajoute l'entité à la liste d'entités de la Room
                 break; // On sort de la boucle
             }

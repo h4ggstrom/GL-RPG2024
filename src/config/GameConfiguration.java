@@ -22,12 +22,14 @@ public class GameConfiguration {
     //CORRIGER : Boss peut spawn dans le mur...
     //CORRIGER : Pousser ennemis dans les murs
     //CORRIGER : ConcurrentModificationException car on bouge le joueur en parralèlle (le joueur est dans les entités, faut l'enlever ...)
+    // AUSSI PARCE QUE ON MODIFIE LES ENTITES HORS DE RUN IL FAUT FAIRE UN TRUC POUR ÇA style ModificationManager jsp
 
     //ENLEVER : Bouton paramètres, remplacer par bouton quitter
 
     //AMELIORER : Visuels GUI en général ---> ECRAN D'ACCUEIL
     //AMELIORER : Mana à la place de Cooldown pour l'ability, donc avec potion et tout?
     
+    //AJOUTER : son ?? (musique ambiance, bruitages, ...)
     //AJOUTER : FIN DE JEU
     //AJOUTER : Paramètres
 

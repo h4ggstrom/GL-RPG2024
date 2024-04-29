@@ -79,21 +79,12 @@ public class Room {
     }
 
     /**
-     * Méthode permettant de créer une liste d'entitées destinées à être seulement parcourue et non modifiée, évitant ainsi l'Exception : ConcurrentModificationException
-     * Cette exception survient lorsqu'on parcourt un ArrayList et qu'on la modifie parrallèlement (blesser et tuer les ennemis par exemple)
-     * @return Une nouvelle liste avec les entitées de la Room, destinée aux traitements statiques
-     */
-    public ArrayList<Entity> getStaticEntities() {
-        return new ArrayList<>(entities);
-    }
-
-    /**
      * Méthode permettant de récupérer les ennemis présents dans la Room
      */
     public ArrayList<Enemy> getEnemies() {
         ArrayList<Enemy> enemiesFetched = new ArrayList<Enemy>();
         // Pour chaque entité présente dans la salle
-        for (Entity entity : getStaticEntities()) {
+        for (Entity entity : getEntities()) {
             if (entity instanceof Enemy) {
                 Enemy enemy = (Enemy) entity;
                 enemiesFetched.add(enemy);
