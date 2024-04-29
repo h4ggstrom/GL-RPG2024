@@ -4,8 +4,20 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.entities.environment.Environment;
 
+/**
+ * Classe permettant de créer des entités de type Environment.
+ * 
+ * @see Environment
+ */
 public class EnvironmentFactory {
     
+    /**
+     * Crée une entité de type Environment.
+     * 
+     * @param entityType le type de l'entité
+     * @param position la position de l'entité
+     * @return l'entité créée
+     */
     public static Environment createEnvironment(String entityType, Position position) {
         switch (entityType) {
             case GameConfiguration.TREE_ASSET_ENTITYTYPE :

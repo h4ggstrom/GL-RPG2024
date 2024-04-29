@@ -4,11 +4,26 @@ import java.util.ArrayList;
 
 import config.GameConfiguration;
 
+/**
+ * Génie Logiciel - Projet RPG.
+ * 
+ * Cette classe est un étage du donjon
+ * 
+ * @author Thibault TERRIÉ
+ */
 public class Stage {
     
     private ArrayList<Room> rooms;
     private int number;
 
+    /**
+     * Constructeur de la classe Stage.
+     * Il s'occupe de générer toutes les salles de l'étage.
+     * 
+     * @see Room
+     * 
+     * @param number le numéro de l'étage
+     */
     public Stage(int number) {
         this.number = number;
         this.rooms = new ArrayList<Room>();

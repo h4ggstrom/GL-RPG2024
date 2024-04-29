@@ -251,6 +251,9 @@ public abstract class GameCharacter extends Entity {
         mana = 0;
     }
 
+    /**
+     * Permet d'augmenter les compteurs des possibilités d'attaque, de déplacement et de capacité
+     */
     public void incrementPossibilities() {
         incrementAttackPossibility();
         incrementMovePossibility();

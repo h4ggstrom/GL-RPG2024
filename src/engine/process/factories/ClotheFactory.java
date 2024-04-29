@@ -3,8 +3,24 @@ package engine.process.factories;
 import engine.dungeon.Position;
 import engine.entities.items.equipment.*;
 
+/**
+ * Classe permettant de créer des vêtements.
+ * 
+ * @see Clothe
+ * 
+ * @author thibault.terrie@etu.cyu.fr
+ * @author robin.de-angelis@etu.cyu.fr
+ * @author hayder.ur-rehman@etu.cyu.fr
+ */
 public class ClotheFactory {
     
+    /**
+     * Crée un vêtement.
+     * 
+     * @param clotheType le type de vêtement
+     * @param position la position du vêtement
+     * @return le vêtement créé
+     */
     public static Clothe createClothe(String clotheType, Position position) {
         switch(clotheType) {
             case "chapeau_de_rat":

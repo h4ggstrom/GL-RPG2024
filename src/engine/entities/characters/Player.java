@@ -117,6 +117,11 @@ public class Player extends GameCharacter {
         return this.playerClass;
     }
 
+    /**
+     * Méthode permettant de changer la classe du joueur. Cette méthode permet de changer les statistiques du joueur en fonction de la classe choisie.
+     * 
+     * @param playerClass la classe du joueur.
+     */
     public void setPlayerClass(String playerClass) {
         this.playerClass = playerClass;
         switch (playerClass) {
@@ -185,6 +190,9 @@ public class Player extends GameCharacter {
         this.playerWidth = playerWidth;
     }
 
+    /**
+     * Méthode permettant de sauvegarder les données du joueur dans un fichier save.dat
+     */
     public void loadSave() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./src/save/save.dat"))) {
             player = (Player)ois.readObject();

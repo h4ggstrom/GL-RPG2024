@@ -8,8 +8,18 @@ import engine.entities.items.Slot;
 import engine.entities.items.equipment.*;
 import engine.process.visitor.EntityVisitor;
 
+/**
+ * Classe permettant de créer des entités de type Bag.
+ * 
+ * @see Container
+ */
 public class Bag extends Container {
 
+    /**
+     * Constructeur de la classe Bag.
+     * 
+     * @param position
+     */
     public Bag (Position position) {
         super(position, GameConfiguration.BAG_NAME, GameConfiguration.BAG_ENTITYTYPE, GameConfiguration.BAG_MAX);
     }

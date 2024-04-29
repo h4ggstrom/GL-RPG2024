@@ -11,6 +11,11 @@ public class ConsumableManager {
 
     private static EntityManager manager = EntityManager.getInstance();
 
+    /**
+     * Méthode permettant de consommer un objet de l'inventaire
+     * 
+     * @param slotNumber le numéro du slot de l'objet à consommer
+     */
     public static void consumeInventoryItem(int slotNumber) {
         // On récupère le slot d'inventaire concerné
         Slot slot = Player.getInstance().getInventory().getSlots().get(slotNumber);

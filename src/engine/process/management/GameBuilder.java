@@ -22,7 +22,7 @@ import log.Gamelog;
 /**
  * Génie Logiciel - Projet RPG.
  * 
- * Cette classe gère la génération du jeu (salle et entités)
+ * Cette classe gère la génération du jeu, c'est-à-dire la génération des salles, des entités, des obstacles, des ennemis, des coffres, des vendeurs, etc.
  * 
  * @author thibault.terrie@etu.cyu.fr
  * @author robin.de-angelis@etu.cyu.fr
@@ -40,10 +40,11 @@ public class GameBuilder {
     }
 
     /**
-     * Génère la salle et les ennemis à l'apparition de la salle en utilisant le constructeur de la classe {@link src.engine.characters.manager}
+     * Cette méthode permet de générer les entités de la salle actuelle
      * 
-     * @param room la salle dans laquelle évolue le joueur
-     * @return le système de gestion de la partie. Pour plus de détails, voir {@link src.engine.characters.manager}
+     * @param dungeon le donjon dans lequel se trouve la salle
+     * 
+     * @see engine.dungeon.Dungeon pour les détails du donjon
      */
     public static void buildInitEntities (Dungeon dungeon) {
         manager.setDungeon(dungeon);
@@ -57,9 +58,7 @@ public class GameBuilder {
     }
 
     /**
-     * Cette méthode permet d'initialiser le joueur au centre de la salle
-     * 
-     * @param manager le process de gestion des actions, auquel sera ajouté le joueur généré
+     * Cette méthode permet d'initialiser le joueur au centre de la salle actuelle
      * 
      * @see engine.process.management.EntityManager pour les détails du processus de gestion des actions du joueur
      */
@@ -71,8 +70,9 @@ public class GameBuilder {
     }
 
     /**
-     * Permet l'initialisation de toutes les entités de la salle actuelle, l'ordre de génération est important
-     * @param manager
+     * Cette méthode permet d'initialiser les entités de la salle actuelle
+     * 
+     * @see engine.process.management.EntityManager pour les détails du processus de gestion des actions des entités
      */
     public static void initializeEntities() {
 
@@ -100,8 +100,7 @@ public class GameBuilder {
 
     /**
      * Cette méthode permet d'initialiser les ennemis à des endroits aléatoires de la salle.
-     * 
-     * @param manager le process de gestion des actions auquel seront ajoutés les ennemis générés.
+     * Le type d'ennemi est différent à mesure que le joueur avance dans les salles.
      * 
      * @see engine.process.management.manager pour les détails du processus de gestion des ennemis
      */
@@ -143,7 +142,9 @@ public class GameBuilder {
     }
 
     /**
-     * Cette méthode permet d'initialiser le boss de la salle
+     * Cette méthode permet d'initialiser le boss de la salle actuelle
+     * 
+     * @see engine.process.management.manager pour les détails du processus de gestion des ennemis
      */
     public static void initializeBoss() {
         Player player = Player.getInstance();
@@ -165,6 +166,11 @@ public class GameBuilder {
         }
     }
     
+    /**
+     * Cette méthode permet d'initialiser l'équipement de l'ennemi
+     * 
+     * @param enemy l'ennemi à équiper
+     */
     private static void initializeEquipmentOfEnemy(Enemy enemy) {
         // On génère un nombre aléatoire de pièces
         int randomNumber = getRandomNumber(1, 25);
@@ -229,7 +235,6 @@ public class GameBuilder {
 
     /**
      * On initialise l'environnement dans un ordre particulier : les murs avant le reste pour que tout soit contenu à l'intérieur des murs
-     * @param manager
      */
     public static void initializeEnvironment() {
         Room currentRoom = manager.getCurrentRoom();
@@ -242,6 +247,10 @@ public class GameBuilder {
         }
     }
 
+    /**
+     * Cette méthode permet d'initialiser les obstacles à des endroits aléatoires de la salle.
+     * Le type d'obstacle est différent à mesure que le joueur avance dans les salles.
+     */
     public static void initializeObstacles() {
         // on veut entre 7 et 11 arbres
         int obstacleNumber = getRandomNumber(7, 11);
@@ -286,6 +295,10 @@ public class GameBuilder {
         randomPlaceEntity(chest);
     }
 
+    /**
+     * Cette méthode permet d'initialiser un vendeur à un endroit aléatoire de la salle.
+     * Ce vendeur vendra des objets différents à chaque étage.
+     */
     public static void initializeVendor() {
         Vendor vendor = (Vendor)EntityFactory.createEntity(GameConfiguration.VENDOR_ENTITYTYPE, null);
         switch(Player.getInstance().getStageNumber()) {
@@ -307,6 +320,10 @@ public class GameBuilder {
         randomPlaceEntity(vendor);
     }
 
+    /**
+     * Cette méthode permet d'initialiser les tas de déchêts à des endroits aléatoires de la salle.
+     * Chaque tas de déchêts a une chance de contenir une clé.
+     */
     public static void initializeGarbage() {
         // On met entre 6 et 16 piles de déchêts par salle
         int garbageNumber = getRandomNumber(6, 16);
@@ -321,6 +338,9 @@ public class GameBuilder {
         }
     }
 
+    /**
+     * Cette méthode permet d'initialiser les murs de la salle actuelle
+     */
     public static void initializeWalls() {
         Room currentRoom = manager.getCurrentRoom();
         Environment sideWall = EnvironmentFactory.createEnvironment(GameConfiguration.WALL_ASSET_ENTITYTYPE, null);
@@ -349,6 +369,11 @@ public class GameBuilder {
         currentRoom.addEntity(gate);
     }
 
+    /**
+     * Cette méthode permet de placer une entité de manière aléatoire dans la salle actuelle
+     * 
+     * @param entity l'entité à placer
+     */
     public static void randomPlaceEntity(Entity entity) {
         boolean cannotBePlaced = true;
         while(cannotBePlaced) {

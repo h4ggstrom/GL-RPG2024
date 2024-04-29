@@ -27,6 +27,12 @@ import gui.containersGUI.ChestGUI;
 import gui.containersGUI.VendorGUI;
 import log.Gamelog;
 
+/**
+ * Classe permettant de gérer les interactions entre le joueur et les entités.
+ * 
+ * @see EntityVisitor
+ * @see engine.entities.Entity
+ */
 public class InteractionVisitor implements EntityVisitor<Void>{
 
     private static Logger logger = Gamelog.getLogger();
@@ -38,6 +44,13 @@ public class InteractionVisitor implements EntityVisitor<Void>{
         playerPosition = player.getPosition();
     }
     
+    /**
+     * Méthode permettant la visite d'un ennemi.
+     * Appellée lors du clic du joueur sur l'ennemi.
+     * Elle s'occupe de gérer l'attaque du joueur vers l'ennemi.
+     * 
+     * @param entity l'enemi avec lequel le joueur interagit
+     */
     @Override
     public Void visit(Enemy entity) {
         logger.trace("Enemy clicked");
@@ -97,12 +110,13 @@ public class InteractionVisitor implements EntityVisitor<Void>{
         return null;
     }
 
-    @Override
-    public Void visit(Player entity) {
-        logger.trace("Player clicked");
-        return null;
-    }
-
+    /**
+     * Méthode permettant la visite d'un Item.
+     * Appellée lors du clic du joueur sur l'Item.
+     * Elle s'occupe de gérer le ramassage de l'Item par le joueur.
+     * 
+     * @param entity l'Item avec lequel le joueur interagit
+     */
     @Override
     public Void visit(Item entity) {
         logger.trace("Item clicked");
@@ -117,6 +131,13 @@ public class InteractionVisitor implements EntityVisitor<Void>{
         return null;
     }
 
+    /**
+     * Méthode permettant la visite d'un Bag.
+     * Appellée lors du clic du joueur sur le Bag.
+     * Elle s'occupe de gérer l'ouverture du Bag par le joueur.
+     * 
+     * @param entity le Bag avec lequel le joueur interagit
+     */
     @Override
     public Void visit(Bag entity) {
         logger.trace("Bag clicked");
@@ -140,7 +161,13 @@ public class InteractionVisitor implements EntityVisitor<Void>{
         return null;
     }
 
-
+    /**
+     * Méthode permettant la visite d'un Vendor.
+     * Appellée lors du clic du joueur sur le Vendor.
+     * Elle s'occupe de gérer l'ouverture de la fenêtre de vente par le joueur.
+     * 
+     * @param entity le Vendor avec lequel le joueur interagit
+     */
     @Override
     public Void visit(Vendor entity) {
         logger.trace("Vendor clicked");
@@ -152,18 +179,13 @@ public class InteractionVisitor implements EntityVisitor<Void>{
         return null;
     }
 
-    @Override
-    public Void visit(Environment entity) {
-        logger.trace("Environment clicked");
-        return null;
-    }
-
-    @Override
-    public Void visit(Inventory entity) {
-        logger.trace("Inventory clicked");
-        return null;
-    }
-
+    /**
+     * Méthode permettant la visite d'un Garbage.
+     * Appellée lors du clic du joueur sur le Garbage.
+     * Elle s'occupe de gérer le ramassage de l'Item contenu dans le Garbage par le joueur.
+     * 
+     * @param entity le Garbage avec lequel le joueur interagit
+     */
     @Override
     public Void visit(Garbage entity) {
         logger.trace("Garbage clicked");
@@ -182,6 +204,13 @@ public class InteractionVisitor implements EntityVisitor<Void>{
         return null;
     }
 
+    /**
+     * Méthode permettant la visite d'un Chest.
+     * Appellée lors du clic du joueur sur le Chest.
+     * Elle s'occupe de gérer l'ouverture du Chest par le joueur.
+     * 
+     * @param entity le Chest avec lequel le joueur interagit
+     */
     @Override
     public Void visit(Chest entity) {
         logger.trace("Chest clicked");
@@ -215,6 +244,21 @@ public class InteractionVisitor implements EntityVisitor<Void>{
                 }
             }
         }
+        return null;
+    }
+
+    @Override
+    public Void visit(Player entity) {
+        return null;
+    }
+
+    @Override
+    public Void visit(Inventory inventory) {
+        return null;
+    }
+
+    @Override
+    public Void visit(Environment entity) {
         return null;
     }
 

@@ -18,7 +18,7 @@ import log.Gamelog;
 /**
  * Génie Logiciel - Projet RPG.
  *
- * Cette classe contient tout les processus liés aux interactions entre les entités.
+ * Cette classe contient tout les traitements liés aux interactions entre les entités.
  *
  * @author thibault.terrie@etu.cyu.fr
  * @author robin.de-angelis@etu.cyu.fr
@@ -27,11 +27,13 @@ import log.Gamelog;
  */
 public class EntityManager {
 
-    // définition des attributs
     private static Logger logger = Gamelog.getLogger();
     private static EntityManager instance;
-    private Player player = Player.getInstance(); // le joueur
-    private Dungeon dungeon; // la salle dans laquelle évolue le joueur
+    private Player player = Player.getInstance();
+    private Dungeon dungeon;
+    /*
+     * Les listeners pour les conteneurs permettent un rafraîchissement dynamique des valeurs affichées dans les conteneurs
+     */
     private ContainerRefreshListener bagRefreshListener;
     private ContainerRefreshListener inventoryRefreshListener;
     private ContainerRefreshListener chestRefreshListener;
@@ -252,7 +254,9 @@ public class EntityManager {
         }
     }
 
-
+    /**
+     * Cette méthode permet de gérer les attaques des ennemis
+     */
     public void attackforEnemy(){
         for (Enemy enemy : getCurrentRoom().getEnemies()) {
             Position enemyPosition = enemy.getHitbox().getCenter();
@@ -270,6 +274,9 @@ public class EntityManager {
         }  
     }
 
+    /**
+     * Cette méthode permet de gérer les attaques du joueur
+     */
     public void gameOver(){
         getCurrentRoom().empty();
         Player.getInstance().setPosition(new Position(-9999, -9999));
@@ -327,6 +334,10 @@ public class EntityManager {
         }
     }
 
+    /**
+     * Méthode permettant de déséquiper un item de l'équipement du joueur et de le placer dans l'inventaire
+     * @param entityType le type de l'item à déséquiper
+     */
     public void desequipInventoryItem(String entityType) {
         if(!player.getInventory().isFull()) {
             switch(entityType) {
@@ -410,6 +421,11 @@ public class EntityManager {
         }
     }
 
+    /*
+     * Méthode permettant d'augmenter les compteurs de possibilités de chaque GameCharacter de la Room
+     * 
+     * @see engine.entities.characters.GameCharacter#incrementPossibilities()
+     */
     public void incrementPossibilities() {
         player.incrementPossibilities();
         for(Enemy enemy : getCurrentRoom().getEnemies()) {
@@ -417,22 +433,37 @@ public class EntityManager {
         }
     }
 
+    /*
+     * Méthode permettant de rafraîchir les conteneurs
+     */
     public void setBagRefreshListener(ContainerRefreshListener bagRefreshListener) {
         this.bagRefreshListener = bagRefreshListener;
     }
 
+    /*
+     * Méthode permettant de rafraîchir les conteneurs
+     */
     public void setInventoryRefreshListener(ContainerRefreshListener inventoryRefreshListener) {
         this.inventoryRefreshListener = inventoryRefreshListener;
     }
 
+    /*
+     * Méthode permettant de rafraîchir les conteneurs
+     */
     public void setChestRefreshListener(ContainerRefreshListener chestRefreshListener) {
         this.chestRefreshListener = chestRefreshListener;
     }
 
+    /*
+     * Méthode permettant de rafraîchir les conteneurs
+     */
     public void setVendorRefreshListener(ContainerRefreshListener vendorRefreshListener) {
         this.vendorRefreshListener = vendorRefreshListener;
     }
 
+    /*
+     * Méthode permettant de rafraîchir les conteneurs
+     */
     public void refreshContainers() {
         if(bagRefreshListener != null) {
             bagRefreshListener.refreshContainer();

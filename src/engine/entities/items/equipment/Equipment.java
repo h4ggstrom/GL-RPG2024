@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import engine.entities.items.Item;
 import engine.entities.items.weapons.Weapon;
 
+/**
+ * Classe permettant de créer des entités de type Equipment.
+ * Un équipement contient de la place pour une Weapon, un Helmet, un Gloves, un Chestplate, un Pants et un Boots.
+ * 
+ * @see Item
+ */
 public class Equipment implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -68,6 +74,10 @@ public class Equipment implements Serializable {
         this.boots = boots;
     }
 
+    /**
+     * Permet de récupérer la liste des équipements
+     * @return ArrayList<Item>
+     */
     public ArrayList<Item> getEquipmentList () {
         ArrayList<Item> equipmentList = new ArrayList<Item>();
         equipmentList.add(weapon);

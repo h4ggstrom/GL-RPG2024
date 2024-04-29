@@ -12,7 +12,13 @@ import log.Gamelog;
 /**
  * Génie Logiciel - Projet RPG.
  * 
- * Cette classe contient toutes les données relatives à une salle. Cela comprend la liste des entités présentes à la génération de la salle
+ * Cette classe contient toutes les données relatives à une salle. Cela comprend la liste des entités présentes dans la salle, la porte de la salle, et si la salle est un magasin ou un boss.
+ * 
+ * @param number le numéro de la salle
+ * @param gate la porte de la salle
+ * @param isShop si la salle est un magasin
+ * @param isBoss si la salle est un boss
+ * @param entities la liste des entités présentes dans la salle
  * 
  * @author thibault.terrie@etu.cyu.fr
  * @author robin.de-angelis@etu.cyu.fr

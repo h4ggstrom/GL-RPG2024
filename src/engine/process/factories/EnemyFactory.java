@@ -9,6 +9,13 @@ import engine.entities.characters.Enemy;
  */
 public class EnemyFactory {
 
+    /**
+     * Crée un ennemi de type Enemy.
+     * 
+     * @param enemyType le type de l'ennemi
+     * @param position la position de l'ennemi
+     * @return l'ennemi créé
+     */
     public static Enemy createEnemy(String enemyType, Position position) {
         switch (enemyType) {
             case "rat_fistule":

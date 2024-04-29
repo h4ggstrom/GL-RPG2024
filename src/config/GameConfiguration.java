@@ -14,16 +14,9 @@ import engine.dungeon.Position;
  */
 public class GameConfiguration {
 
-    // À faire : FIXME
-    // BIEN DOCUMENTER TOUTES LES CLASSES ET MÉTHODES (optimiser au max la réutilisabilité -> manuels utilisateur avec @see et @link ...)
-
-    //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
-    
-    //AJOUTER : son ?? (musique ambiance, bruitages, ...)
-
     public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";
 
-    // PARTIE DIMENSIONS
+    // PARTIE DIMENSIONS D'ENTITÉS
     public static final int WINDOW_WIDTH = 1080;
 	public static final int WINDOW_HEIGHT = 720;
 
@@ -118,15 +111,7 @@ public class GameConfiguration {
     public static final int NUMBER_OF_STAGES = 3;
     public static final int NUMBER_OF_ROOMS = 7;
 
-    // statistiques par défaut du joueur
-    public static final int PLAYER_DEFAULT_MAXHEALTH = 50;
-    public static final int PLAYER_DEFAULT_ARMOR = 20;
-    public static final int PLAYER_DEFAULT_ATTACKSPEED = 4000; // En millisecondes
-    public static final int PLAYER_DEFAULT_ATTACKRANGE = 50;
-    public static final int PLAYER_DEFAULT_ATTACKDAMAGE = 5;
-    public static final int PLAYER_DEFAULT_MOVESPEED = 10;
-    public static final int PLAYER_DEFAULT_ABILITYCOOLDOWN = 1000;
-    public static final int PLAYER_DEFAULT_STUNCOOLDOWN = 4000;
+    // valeurs par défaut relatives au joueur
     public static final int PLAYER_LIFEBAR_XSHIFT = -15;
     public static final int PLAYER_ENTITY_INTERACTION_RANGE = 60;
 

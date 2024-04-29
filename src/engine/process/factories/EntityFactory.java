@@ -13,7 +13,14 @@ import config.GameConfiguration;
  * Cette classe permet la création d'entités de tout type concret.
  */
 public class EntityFactory {
-
+    
+    /**
+     * Crée une entité de type Entity.
+     * 
+     * @param entityType le type de l'entité
+     * @param position la position de l'entité
+     * @return l'entité créée
+     */
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
             case "potion_de_sante":

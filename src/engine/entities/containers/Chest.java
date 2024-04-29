@@ -4,10 +4,20 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.process.visitor.EntityVisitor;
 
+/**
+ * Classe permettant de créer des entités de type Chest.
+ * 
+ * @see Container
+ */
 public class Chest extends Container {
 
     private boolean isLocked = true;
 
+    /**
+     * Constructeur de la classe Chest.
+     * 
+     * @param position
+     */
     public Chest (Position position) {
         super(position, GameConfiguration.CHEST_NAME, GameConfiguration.CHEST_ENTITYTYPE, GameConfiguration.CHEST_MAX);
     }

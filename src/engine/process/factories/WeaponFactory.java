@@ -3,8 +3,18 @@ package engine.process.factories;
 import engine.dungeon.Position;
 import engine.entities.items.weapons.Weapon;
 
+/**
+ * Classe permettant de créer des armes.
+ */
 public class WeaponFactory {
     
+    /**
+     * Crée une arme en fonction de son type.
+     * 
+     * @param weaponType le type de l'arme
+     * @param position la position de l'arme
+     * @return l'arme créée
+     */
     public static Weapon createWeapon(String weaponType, Position position) {
         switch(weaponType) {
             case "epee_de_rat":

@@ -12,7 +12,7 @@ import log.Gamelog;
 /**
  * Génie Logiciel - Projet RPG.
  * 
- * Cette classe gère toutes les boîtes de collision des personnages.
+ * Cette classe est une boite de collision pour une entité.
  * 
  * @author thibault.terrie@etu.cyu.fr
  * @author robin.de-angelis@etu.cyu.fr
@@ -35,7 +35,7 @@ public class Hitbox implements Serializable {
     private String entityType;
 
     /**
-     * Constructeur par défaut. Génère une nouvelle instance de hitbox contenant ses dimensions (dépendant du type de personnage).
+     * Constructeur par défaut. Génère une nouvelle instance de hitbox contenant ses dimensions.
      * 
      * @param upperLeft la position en haut à gauche du personnage. La hitbox est calculée à partir de ce point
      * @param entityType le type de l'entité
@@ -50,6 +50,9 @@ public class Hitbox implements Serializable {
         }
     }
 
+    /**
+     * Méthode permettant à partir du centre de l'entité et du type de l'entité de calculer les positions des coins de la hitbox
+     */
     public void calculateCorners() {
         int width = 0;
         int height = 0;
@@ -142,11 +145,20 @@ public class Hitbox implements Serializable {
         logger.trace("New hitbox generated : " + this.toString());
     }
 
+    /**
+     * Méthode permettant de recalculer les proportions de la hitbox
+     */
     public void calculateProportions() {
         this.width = upperRight.getX() - upperLeft.getX();
         this.height = bottomLeft.getY() - upperLeft.getY();
     }
 
+    /**
+     * Méthode permettant de déplacer la hitbox
+     * 
+     * @param x le déplacement en x
+     * @param y le déplacement en y
+     */
     public void setPosition(Position center) {
         this.center = center;
         this.calculateCorners();

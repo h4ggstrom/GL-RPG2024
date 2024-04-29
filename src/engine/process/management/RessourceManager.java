@@ -16,6 +16,7 @@ import java.io.IOException;
  */
 public class RessourceManager {
     private static RessourceManager instance = null;
+    // On utilise deux Map pour stocker les images et les gifs
     private Map<String, BufferedImage> images;
     private Map<String, ImageIcon> gifs;
 
@@ -24,6 +25,11 @@ public class RessourceManager {
         gifs = new HashMap<>();
     }
 
+    /**
+     * Méthode permettant de récupérer l'instance du RessourceManager
+     * 
+     * @return l'instance du RessourceManager
+     */
     public static RessourceManager getInstance() {
         if (instance == null) {
             instance = new RessourceManager();
@@ -31,6 +37,12 @@ public class RessourceManager {
         return instance;
     }
 
+    /**
+     * Méthode permettant de récupérer une image à partir de son chemin
+     * 
+     * @param path le chemin de l'image
+     * @return l'image
+     */
     public BufferedImage getImage(String path) {
         if (!images.containsKey(path)) {
             try {
@@ -41,7 +53,13 @@ public class RessourceManager {
         }
         return images.get(path);
     }
-
+    
+    /**
+     * Méthode permettant de récupérer un gif à partir de son chemin
+     * 
+     * @param path le chemin du gif
+     * @return le gif
+     */
     public ImageIcon getGif(String path) {
         if (!gifs.containsKey(path)) {
             gifs.put(path, new ImageIcon(path));

@@ -7,12 +7,25 @@ import engine.entities.Entity;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
 
+/**
+ * Classe permettant de créer des entités de type Container.
+ * 
+ * @see Entity
+ */
 public abstract class Container extends Entity {
 
     private ArrayList<Slot> slots;
     private int numberOfItems;
     private int maxNumberOfItems;
 
+    /**
+     * Constructeur de la classe Container.
+     * 
+     * @param position
+     * @param containerName
+     * @param containerType
+     * @param numberOfSlots
+     */
     public Container (Position position, String containerName, String containerType, int numberOfSlots) {
         super(position, containerName, containerType);
         this.slots = new ArrayList<Slot>();

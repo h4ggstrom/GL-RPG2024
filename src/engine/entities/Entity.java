@@ -5,6 +5,10 @@ import java.io.Serializable;
 import engine.dungeon.Position;
 import engine.process.visitor.EntityVisitor;
 
+/**
+ * Classe abstraite représentant une entité du jeu.
+ * 
+ */
 public abstract class Entity implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -13,6 +17,13 @@ public abstract class Entity implements Serializable {
     private String entityType;
     public abstract <E> E accept(EntityVisitor<E> visitor);
 
+    /**
+     * Constructeur par défaut. Génère une nouvelle instance d'entité.
+     * 
+     * @param position la position de l'entité
+     * @param entityName le nom de l'entité
+     * @param entityType le type de l'entité
+     */
     public Entity (Position position, String entityName, String entityType) {
         this.entityName = entityName;
         this.entityType = entityType;

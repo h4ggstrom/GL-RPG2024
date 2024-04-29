@@ -8,10 +8,20 @@ import engine.entities.Entity;
 import engine.entities.items.Item;
 import engine.process.visitor.EntityVisitor;
 
+/**
+ * Classe représentant un vendeur.
+ * 
+ * @param itemsForSale la liste des items en vente
+ */
 public class Vendor extends Entity {
 
     private HashMap<Item, Integer> itemsForSale = new HashMap<Item, Integer>();
 
+    /**
+     * Constructeur par défaut. Génère une nouvelle instance de vendeur.
+     * 
+     * @param position la position du vendeur
+     */
     public Vendor(Position position) {
         super(position, GameConfiguration.VENDOR_NAME, GameConfiguration.VENDOR_ENTITYTYPE);
     }

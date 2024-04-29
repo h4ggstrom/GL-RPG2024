@@ -15,6 +15,11 @@ import engine.dungeon.Position;
  */
 public class Coin extends Consumable {
 
+    /**
+     * Constructeur de la classe Coin.
+     * 
+     * @param position la position de la pièce
+     */
     public Coin(Position position) {
         super("money", 0, GameConfiguration.COIN_NAME, GameConfiguration.COIN_ENTITYTYPE, position);
     }
