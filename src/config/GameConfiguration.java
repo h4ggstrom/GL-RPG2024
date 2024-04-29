@@ -18,11 +18,9 @@ public class GameConfiguration {
     // BIEN DOCUMENTER TOUTES LES CLASSES ET MÉTHODES (optimiser au max la réutilisabilité -> manuels utilisateur avec @see et @link ...)
 
     //CORRIGER : Important ! Doser valeurs (Game Speed, vitesse de déplacement, vitesse d'attaque, dégats...)
-
-    //AMELIORER : Visuels GUI en général ---> ECRAN D'ACCUEIL
     
     //AJOUTER : son ?? (musique ambiance, bruitages, ...)
-    //AJOUTER : animation attaque ??
+
     //AJOUTER : FIN DE JEU
 
     public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";

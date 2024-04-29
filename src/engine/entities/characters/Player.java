@@ -205,7 +205,7 @@ public class Player extends GameCharacter {
         // Si le joueur est un heavy
         if(playerClass.equals("heavy")) {
             // On vérifie que l'ability du heavy s'est activée il y a plus de 5 secondes
-            if(getMana() > 500) {
+            if(getMana() >= 500) {
                 // Si c'est le cas on peut blesser le joueur
                 super.hurtCharacter(damage);
             }

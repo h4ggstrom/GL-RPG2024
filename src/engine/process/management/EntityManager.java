@@ -273,6 +273,7 @@ public class EntityManager {
                 enemy.setAttackPossibility(0);
                 // On indique aux conteneurs si ils sont ouverts que des nouvelles valeurs pour les PV sont à afficher
                 refreshContainers();
+                logger.info(enemy + " attaque le joueur pour " + enemy.getAttackDamage() + " points de dégâts");
             }
         }  
     }

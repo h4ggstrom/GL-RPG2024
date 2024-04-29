@@ -237,6 +237,9 @@ public abstract class GameCharacter extends Entity {
 
     public void addMana(int mana) {
         this.mana += mana;
+        if(mana < 500) {
+            this.mana = 500;
+        }
     }
 
     public void useAbility() {
