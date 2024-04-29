@@ -3,13 +3,10 @@ package engine.entities.characters;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
-import org.apache.log4j.Logger;
-
 import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.process.visitor.EntityVisitor;
 import gui.LevelUpGUI;
-import log.Gamelog;
 
 /**
  * Génie Logiciel - Projet RPG.
@@ -23,7 +20,6 @@ import log.Gamelog;
  */
 public class Player extends GameCharacter {
 
-    // définition des attributs
     private static Player player;
     private int stageNumber = 1;
     private int roomNumber = 1;
@@ -34,7 +30,6 @@ public class Player extends GameCharacter {
     private String playerClass;
     private int playerHeight;
     private int playerWidth;
-    private static Logger logger = Gamelog.getLogger();
   
     /**
      * Constructeur par défaut. Génère une nouvelle instance de player en utilisant le constructeur de la classe abstraite {@link engine.entities.characters.GameCharacter}
@@ -174,8 +169,7 @@ public class Player extends GameCharacter {
                 break;
 
             default:
-                logger.error("specified class doesn't exist : " + playerClass);
-                break;
+                throw new IllegalArgumentException("specified class doesn't exist : " + playerClass);
         }
     }
 

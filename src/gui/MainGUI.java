@@ -32,9 +32,6 @@ import log.Gamelog;
  */
 public class MainGUI extends JFrame implements Runnable {
 
-    // définition des attributs    
-    private static final long serialVersionUID = 1L; // définit un numéro de version pour la serialisation
-
     private final static Dimension preferredSize = new Dimension(GameConfiguration.WINDOW_WIDTH, GameConfiguration.WINDOW_HEIGHT); // définit la taille de la fenêtre
 
     private Dungeon dungeon; // le donjon dans lequel le joueur évolue

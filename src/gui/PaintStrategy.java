@@ -80,22 +80,26 @@ public class PaintStrategy {
             // On peut afficher l'image telle quelle à la position de l'entité
             graphics.drawImage(ressourceManager.getGif(filePath).getImage(), position.getX(), position.getY(), null);
 
-            // Cas si l'entité est un personnage
+            // Cas si l'entité est un ennemi
             if(entity instanceof Enemy) {
-                graphics.setColor(Color.RED);
-                GameCharacter character = (GameCharacter)entity;
-                int lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
-                if (character instanceof Enemy) {
-                    graphics.setColor(Color.RED);
-                    lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
-                }
-                
-                // Nom du personnage
-                graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
-                graphics.drawString(character.getEntityName(), position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
+                Enemy enemy = (Enemy)entity;
 
-                // Barre de vie du personnage
-                graphics.fillRect(position.getX() + lifebar_xshift, entity.getHitbox().getBottomLeft().getY() + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, character.getHealth(), 2);
+                // Partie portée d'attaque pour le joueur FIXME à supprimer
+                Position hitbox_center = enemy.getHitbox().getCenter();
+                int x_center = hitbox_center.getX();
+                int y_center = hitbox_center.getY();
+                graphics.drawOval(x_center - enemy.getAttackRange(), y_center - enemy.getAttackRange(), enemy.getAttackRange() * 2, enemy.getAttackRange() * 2);
+
+                graphics.setColor(Color.RED);
+                int lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
+                graphics.setColor(Color.RED);
+                
+                // Nom de l'ennemi
+                graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
+                graphics.drawString(enemy.getEntityName(), position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
+
+                // Barre de vie de l'ennemi
+                graphics.fillRect(position.getX() + lifebar_xshift, entity.getHitbox().getBottomLeft().getY() + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, enemy.getHealth(), 2);
             }
         }
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import engine.entities.items.Item;
 import engine.entities.items.weapons.Weapon;
 
-public class Equipment implements Serializable{
+public class Equipment implements Serializable {
     
     private static final long serialVersionUID = 1L;
     private Weapon weapon;

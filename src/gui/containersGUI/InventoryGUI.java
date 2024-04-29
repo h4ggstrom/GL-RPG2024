@@ -214,6 +214,7 @@ public class InventoryGUI extends ContainerGUI {
         JTextField armorTextField = new JTextField();
         JTextField attackDamageTextField = new JTextField();
         JTextField attackSpeedTextField = new JTextField();
+        JTextField attackRangeTextField = new JTextField();
         JTextField moveSpeedTextField = new JTextField();
         JTextField abilityCooldownTextField = new JTextField();
         JTextField stunCooldownTextField = new JTextField();
@@ -222,22 +223,25 @@ public class InventoryGUI extends ContainerGUI {
         armorTextField.setEditable(false);
         attackDamageTextField.setEditable(false);
         attackSpeedTextField.setEditable(false);
+        attackRangeTextField.setEditable(false);
         moveSpeedTextField.setEditable(false);
         abilityCooldownTextField.setEditable(false);
         stunCooldownTextField.setEditable(false);
 
-        healthTextField.setText("Points de vie actuels : " + player.getHealth() + "pv");
+        healthTextField.setText("Points de vie actuels : " + player.getHealth() + " pv");
         armorTextField.setText("Armure : " + player.getArmor() + "%");
         attackDamageTextField.setText("Dégâts d'attaque : " + player.getAttackDamage());
-        attackSpeedTextField.setText("Délai de récupération d'attaque : " + player.getAttackSpeed() + " ticks");
+        attackSpeedTextField.setText("Délai de récupération d'attaque : " + player.getAttackSpeed()/100 + " s");
+        attackRangeTextField.setText("Portée d'attaque : " + player.getAttackRange());
         moveSpeedTextField.setText("Vitesse de déplacement : " + player.getMoveSpeed() + " pixels par tick");
-        abilityCooldownTextField.setText("Délai de récupération des abilités : " + player.getAbilityCooldown() + " ticks");
-        stunCooldownTextField.setText("Durée des immobilisations : " + player.getStunCooldown() + " ticks");
+        abilityCooldownTextField.setText("Délai de récupération des abilités : " + player.getAbilityCooldown()/100 + " s");
+        stunCooldownTextField.setText("Durée des immobilisations : " + player.getStunCooldown()/100 + " s");
 
         playerStatisticsPanel.add(healthTextField);
         playerStatisticsPanel.add(armorTextField);
         playerStatisticsPanel.add(attackDamageTextField);
         playerStatisticsPanel.add(attackSpeedTextField);
+        playerStatisticsPanel.add(attackRangeTextField);
         playerStatisticsPanel.add(moveSpeedTextField);
         playerStatisticsPanel.add(abilityCooldownTextField);
         playerStatisticsPanel.add(stunCooldownTextField);

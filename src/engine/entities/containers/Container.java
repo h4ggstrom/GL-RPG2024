@@ -2,17 +2,13 @@ package engine.entities.containers;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
-
 import engine.dungeon.Position;
 import engine.entities.Entity;
 import engine.entities.items.Item;
 import engine.entities.items.Slot;
-import log.Gamelog;
 
 public abstract class Container extends Entity {
 
-    private Logger logger = Gamelog.getLogger();
     private ArrayList<Slot> slots;
     private int numberOfItems;
     private int maxNumberOfItems;
@@ -50,7 +46,6 @@ public abstract class Container extends Entity {
                     slot.setItem(item);
                     // On incrémente notre nombre d'items
                     this.numberOfItems++;
-                    logger.info("Added item " + item.getEntityName() + " to " + this.getEntityName() + " container size now at " + numberOfItems);
                     // On sort de la boucle
                     break;
                 }
@@ -65,7 +60,6 @@ public abstract class Container extends Entity {
     public void removeItem(int slotNumber) {
         slots.get(slotNumber).setItem(null);;
         numberOfItems--;
-        logger.info("Removed item from slot " + slotNumber + " in " + this.getEntityName() + " container size now at " + numberOfItems);
     }
 
     public int getNumberOfItems() {
