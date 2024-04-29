@@ -85,7 +85,7 @@ public class MainGUI extends JFrame implements Runnable {
 				logger.fatal("game crashed");
 			}
 
-            if(Player.getInstance().getHealth() <= 0){
+            if(Player.getInstance().getHealth() <= 0 || Player.getInstance().getStageNumber() > 3){
                 manager.gameOver();
             }
 

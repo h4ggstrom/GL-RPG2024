@@ -27,9 +27,10 @@ public class WeaponFactory {
                 return new Weapon(20,200,"Sceptre des terres arides","sceptre_des_terres_arides",position);
             case "sceptre_de_professeur":
                 return new Weapon(25,200,"Sceptre de professeur","sceptre_de_professeur",position);
-
             case "tampon_legendaire_de_derdoudiable":
                 return new Weapon(30,0,"Tampon légendaire de Derdoudiable","tampon_legendaire_de_derdoudiable",position);
+            case "ak_47":
+                return new Weapon(47,500,"AK-47","ak_47",position);
             default:
                 throw new IllegalArgumentException("Type d'arme inconnu : " + weaponType);
         }

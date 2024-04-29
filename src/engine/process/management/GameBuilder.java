@@ -190,7 +190,7 @@ public class GameBuilder {
                     enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("arc_de_chevre", null));
                     break;
                 case "secretaire":
-                    enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("dagues_de_secretaires", null));
+                    enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("dagues_de_secretaire", null));
                     break;
                 case "professor":
                     enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("sceptre_de_professeur", null));
@@ -302,6 +302,7 @@ public class GameBuilder {
             case 3:
                 vendor.addSellingItem(ClotheFactory.createClothe("nike_de_clignancourt", null), 425);
                 vendor.addSellingItem((Flask)EntityFactory.createEntity("potion_de_sante", null), 100);
+                vendor.addSellingItem(WeaponFactory.createWeapon("ak_47", null), 999);
         }
         randomPlaceEntity(vendor);
     }
