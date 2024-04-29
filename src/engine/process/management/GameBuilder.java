@@ -176,47 +176,54 @@ public class GameBuilder {
 
         // On donne ou pas à l'ennemi son arme favorite
         if(randomNumber < 12) {
-            if(enemy.getEntityType().equals("rat_fistule")) {
-                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("epee_de_rat", null));
-            }
-            else if(enemy.getEntityType().equals("rocky_blateboa")) {
-                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("epee_de_chevalier", null));
-            }
-            else if(enemy.getEntityType().equals("crackhead")) {
-                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("dagues_de_crackhead", null));
-            }
-            else if(enemy.getEntityType().equals("chevre")) {
-                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("arc_de_chevre", null));
-            }
-            else if(enemy.getEntityType().equals("secretaire")) {
-                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("dagues_de_secretaire", null));
-            }
-            else if(enemy.getEntityType().equals("professor")) {
-                enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("sceptre_de_professeur", null));
+            switch(enemy.getEntityType()) {
+                case "rat_fistule":
+                    enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("epee_de_rat", null));
+                    break;
+                case "rocky_blateboa":
+                    enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("epee_de_chevalier", null));
+                    break;
+                case "crackhead":
+                    enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("dagues_de_crackhead", null));
+                    break;
+                case "chevre":
+                    enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("arc_de_chevre", null));
+                    break;
+                case "secretaire":
+                    enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("dagues_de_secretaires", null));
+                    break;
+                case "professor":
+                    enemy.getEquipment().setWeapon(WeaponFactory.createWeapon("sceptre_de_professeur", null));
+                    break;
+                default:
+                    break;
             }
         }
 
-        // Peu de chances pour que l'ennemi ait un bout d'armure
-        if(randomNumber == 1) {
-            enemy.getEquipment().setHelmet((Helmet)EntityFactory.createEntity(GameConfiguration.HELMET_ENTITYTYPE, null));
-        }
-        else if(randomNumber == 2) {
-            enemy.getEquipment().setChestplate((Chestplate)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null));
-        }
-        else if(randomNumber == 3) {
-            enemy.getEquipment().setBoots((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null));
-        }
-        else if(randomNumber == 4) {
-            enemy.getEquipment().setGloves((Gloves)EntityFactory.createEntity(GameConfiguration.GLOVES_ENTITYTYPE, null));
-        }
-        else if(randomNumber == 5) {
-            enemy.getEquipment().setPants((Pants)EntityFactory.createEntity(GameConfiguration.PANTS_ENTITYTYPE, null));
-        }
-
-        // On génère un grand nombre aléatoire
-        randomNumber = getRandomNumber(1, 100);
-        if(randomNumber%8 == 0) {
-
+        randomNumber = getRandomNumber(1, 3);
+        if(randomNumber == 2) {
+            switch(enemy.getEntityType()) {
+                case "rat_fistule":
+                    enemy.getEquipment().setHelmet((Helmet)ClotheFactory.createClothe("chapeau_de_rat", null));
+                    break;
+                case "rocky_blateboa":
+                    enemy.getEquipment().setBoots((Boots)ClotheFactory.createClothe("bottes_remplies_de_blatte", null));
+                    break;
+                case "crackhead":
+                    enemy.getEquipment().setPants((Pants)ClotheFactory.createClothe("pantalon_de_troubadour", null));
+                    break;
+                case "chevre":
+                    enemy.getEquipment().setHelmet((Helmet)ClotheFactory.createClothe("casque_de_chevalier", null));
+                    break;
+                case "secretaire":
+                    enemy.getEquipment().setGloves((Gloves)ClotheFactory.createClothe("gants_d_aventurier", null));
+                    break;
+                case "professor":
+                    enemy.getEquipment().setChestplate((Chestplate)ClotheFactory.createClothe("plastron_de_chevalier", null));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -261,13 +268,19 @@ public class GameBuilder {
      */
     public static void initializeChest() {
         Chest chest = (Chest)EntityFactory.createEntity(GameConfiguration.CHEST_ENTITYTYPE, null);
-        int randomNumber = getRandomNumber(1, 2);
+        int randomNumber = getRandomNumber(1, 4);
         if(randomNumber == 1) {
-            chest.addItem((HealthFlask)EntityFactory.createEntity(GameConfiguration.HEALTHFLASK_ENTITYTYPE, null));
+            logger.info("Potion de santé added to chest");
+            chest.addItem((Flask)EntityFactory.createEntity("potion_de_sante", null));
+        }
+        else if(randomNumber == 2) {
+            logger.info("Potion de mana added to chest");
+            chest.addItem((Flask)EntityFactory.createEntity("potion_de_mana", null));
         }
         else {
+            logger.info("Coin added to chest");
             Coin coin = (Coin)EntityFactory.createEntity(GameConfiguration.COIN_ENTITYTYPE, null);
-            coin.setConsumableValue(getRandomNumber(100, 300));
+            coin.setConsumableValue(getRandomNumber(70, 180));
             chest.addItem(coin);
         }
         randomPlaceEntity(chest);
@@ -275,9 +288,21 @@ public class GameBuilder {
 
     public static void initializeVendor() {
         Vendor vendor = (Vendor)EntityFactory.createEntity(GameConfiguration.VENDOR_ENTITYTYPE, null);
-        vendor.addSellingItem((Chestplate)EntityFactory.createEntity(GameConfiguration.CHESTPLATE_ENTITYTYPE, null), 300);
-        vendor.addSellingItem((HealthFlask)EntityFactory.createEntity(GameConfiguration.HEALTHFLASK_ENTITYTYPE, null), 50);
-        vendor.addSellingItem((Boots)EntityFactory.createEntity(GameConfiguration.BOOTS_ENTITYTYPE, null), 250);
+        switch(Player.getInstance().getStageNumber()) {
+            case 1:
+                vendor.addSellingItem(ClotheFactory.createClothe("casque_des_terres_arides", null), 300);
+                vendor.addSellingItem((Flask)EntityFactory.createEntity("potion_de_sante", null), 50);
+                vendor.addSellingItem(WeaponFactory.createWeapon("arc_des_terres_arides", null), 500);
+                break;
+            case 2:
+                vendor.addSellingItem(ClotheFactory.createClothe("plastron_des_terres_arides", null), 375);
+                vendor.addSellingItem((Flask)EntityFactory.createEntity("potion_de_mana", null), 80);
+                vendor.addSellingItem(WeaponFactory.createWeapon("sceptre_des_terres_arides", null), 650);
+                break;
+            case 3:
+                vendor.addSellingItem(ClotheFactory.createClothe("nike_de_clignancourt", null), 425);
+                vendor.addSellingItem((Flask)EntityFactory.createEntity("potion_de_sante", null), 100);
+        }
         randomPlaceEntity(vendor);
     }
 

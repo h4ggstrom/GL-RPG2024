@@ -6,7 +6,6 @@ import engine.entities.npc.Vendor;
 import engine.entities.items.Key;
 import engine.entities.items.consumables.*;
 import engine.entities.containers.*;
-import engine.entities.items.equipment.*;
 
 import config.GameConfiguration;
 
@@ -17,18 +16,10 @@ public class EntityFactory {
 
     public static Entity createEntity(String entityType, Position position) {
         switch (entityType) {
-            case GameConfiguration.HEALTHFLASK_ENTITYTYPE:
-                return new HealthFlask(position);
-            case GameConfiguration.HELMET_ENTITYTYPE:
-                return new Helmet(position);
-            case GameConfiguration.GLOVES_ENTITYTYPE:
-                return new Gloves(position);
-            case GameConfiguration.CHESTPLATE_ENTITYTYPE:
-                return new Chestplate(position);
-            case GameConfiguration.PANTS_ENTITYTYPE:
-                return new Pants(position);
-            case GameConfiguration.BOOTS_ENTITYTYPE:
-                return new Boots(position);
+            case "potion_de_sante":
+                return new Flask("Régénération", 50, "Potion de santé", "potion_de_sante", position);
+            case "potion_de_mana":
+                return new Flask("Mana", 5000, "Potion de mana", "potion_de_mana", position);
             case GameConfiguration.BAG_ENTITYTYPE:
                 return new Bag(position);
             case GameConfiguration.COIN_ENTITYTYPE:

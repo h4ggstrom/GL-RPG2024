@@ -203,6 +203,9 @@ public abstract class GameCharacter extends Entity {
     }
 
     public int getAttackPossibility() {
+        if(attackPossibility > getAttackSpeed()) {
+            attackPossibility = getAttackSpeed();
+        }
         return attackPossibility;
     }
 
@@ -211,6 +214,9 @@ public abstract class GameCharacter extends Entity {
     }
 
     public int getMovePossibility() {
+        if(movePossibility > getStunCooldown()) {
+            movePossibility = getStunCooldown();
+        }
         return movePossibility;
     }
 
@@ -219,11 +225,18 @@ public abstract class GameCharacter extends Entity {
     }
 
     public int getMana() {
+        if(mana > getAbilityCooldown()) {
+            mana = getAbilityCooldown();
+        }
         return mana;
     }
 
     public void setMana(int mana) {
         this.mana = mana;
+    }
+
+    public void addMana(int mana) {
+        this.mana += mana;
     }
 
     public void useAbility() {

@@ -279,6 +279,7 @@ public class EntityManager {
 
     public void gameOver(){
         getCurrentRoom().empty();
+        Player.getInstance().setPosition(new Position(-9999, -9999));
     }
 
     /**

@@ -27,6 +27,7 @@ public class GameConfiguration {
     //AMELIORER : Mana à la place de Cooldown pour l'ability, donc avec potion et tout?
     
     //AJOUTER : son ?? (musique ambiance, bruitages, ...)
+    //AJOUTER : animation attaque ??
     //AJOUTER : FIN DE JEU
     //AJOUTER : Paramètres
 
@@ -75,8 +76,8 @@ public class GameConfiguration {
     public static final int SWORD_WIDTH = 30;
     public static final int SWORD_HEIGHT = 30;
 
-    public static final int HEALTHFLASK_WIDTH = 12;
-    public static final int HEALTHFLASK_HEIGHT = 32;
+    public static final int FLASK_WIDTH = 12;
+    public static final int FLASK_HEIGHT = 32;
     
     public static final int HELMET_WIDTH = 30;
     public static final int HELMET_HEIGHT = 30;
@@ -180,18 +181,6 @@ public class GameConfiguration {
     public static final String BAG_ENTITYTYPE = "bag";
     public static final String PLAYER_ENTITYTYPE = "player";
     public static final String ENEMY_ENTITYTYPE = "enemy";
-    public static final String SWORD_ENTITYTYPE = "sword";
-    public static final String HEALTHFLASK_ENTITYTYPE = "healthFlask";
-    public static final String HELMET_ENTITYTYPE = "helmet";
-    public static final String GLOVES_ENTITYTYPE = "gloves";
-    public static final String CHESTPLATE_ENTITYTYPE = "chestplate";
-    public static final String PANTS_ENTITYTYPE = "pants";
-    public static final String BOOTS_ENTITYTYPE = "boots";
-    public static final String DAGGER_ENTITYTYPE = "dagger";
-    public static final String WHIP_ENTITYTYPE = "whip";
-    public static final String SCEPTER_ENTITYTYPE = "scepter";
-    public static final String GRIMOIRE_ENTITYTYPE = "grimoire";
-    public static final String BOW_ENTITYTYPE = "bow";
     public static final String COIN_ENTITYTYPE = "coin";
     public static final String TREE_ASSET_ENTITYTYPE = "tree";
     public static final String WALL_ASSET_ENTITYTYPE = "wall";
@@ -212,18 +201,6 @@ public class GameConfiguration {
     public static final String BAG_NAME = "Sac";
     public static final String PLAYER_NAME = "Joueur";
     public static final String ENEMY_NAME = "Ennemi";
-    public static final String SWORD_NAME = "Épée de rat";
-    public static final String HEALTHFLASK_NAME = "Potion de santé";
-    public static final String HELMET_NAME = "Casque de rat";
-    public static final String GLOVES_NAME = "Gants de rat";
-    public static final String CHESTPLATE_NAME = "Plastron de rat";
-    public static final String PANTS_NAME = "Pantalon de rat";
-    public static final String BOOTS_NAME = "Bottes de rat";
-    public static final String DAGGER_NAME = "Dague de rat";
-    public static final String WHIP_NAME = "Fouet de rat";
-    public static final String SCEPTER_NAME = "Sceptre de rat";
-    public static final String GRIMOIRE_NAME = "Grimoire de rat";
-    public static final String BOW_NAME = "Arc de rat";
     public static final String COIN_NAME = "Pièce";
     public static final String TREE_ASSET_NAME = "Arbre";
     public static final String WALL_ASSET_NAME = "Mur";

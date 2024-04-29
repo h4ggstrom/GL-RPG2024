@@ -94,14 +94,6 @@ public class Hitbox implements Serializable {
                 width = GameConfiguration.PLAYER_WIDTH;
                 height = GameConfiguration.PLAYER_HEIGHT;
                 break;
-            case GameConfiguration.SWORD_ENTITYTYPE :
-                width = GameConfiguration.SWORD_WIDTH;
-                height = GameConfiguration.SWORD_HEIGHT;
-                break;
-            case GameConfiguration.HEALTHFLASK_ENTITYTYPE : 
-                width = GameConfiguration.HEALTHFLASK_WIDTH;
-                height = GameConfiguration.HEALTHFLASK_HEIGHT;
-                break;
             case GameConfiguration.BAG_ENTITYTYPE :
                 width = GameConfiguration.BAG_WIDTH;
                 height = GameConfiguration.BAG_HEIGHT;

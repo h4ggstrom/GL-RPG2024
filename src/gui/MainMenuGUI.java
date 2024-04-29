@@ -13,7 +13,7 @@ public class MainMenuGUI extends JFrame {
 
     private JButton btnNewGame = new JButton("Nouvelle partie");
     private JButton btnLoadGame = new JButton("Charger une partie existante");
-    private JButton btnSettings = new JButton("Accéder aux paramètres");
+    private JButton btnQuitter = new JButton("Quitter");
     private JPanel buttonPanel = new JPanel();
 
     public MainMenuGUI() {
@@ -29,23 +29,23 @@ public class MainMenuGUI extends JFrame {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
         Dimension buttonSize = new Dimension(
-            Math.max(btnNewGame.getPreferredSize().width, Math.max(btnLoadGame.getPreferredSize().width, btnSettings.getPreferredSize().width)),
-            Math.max(btnNewGame.getPreferredSize().height, Math.max(btnLoadGame.getPreferredSize().height, btnSettings.getPreferredSize().height))
+            Math.max(btnNewGame.getPreferredSize().width, Math.max(btnLoadGame.getPreferredSize().width, btnQuitter.getPreferredSize().width)),
+            Math.max(btnNewGame.getPreferredSize().height, Math.max(btnLoadGame.getPreferredSize().height, btnQuitter.getPreferredSize().height))
         );
 
         btnNewGame.setMaximumSize(buttonSize);
         btnLoadGame.setMaximumSize(buttonSize);
-        btnSettings.setMaximumSize(buttonSize);
+        btnQuitter.setMaximumSize(buttonSize);
 
         buttonPanel.add(btnNewGame);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         buttonPanel.add(btnLoadGame);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        buttonPanel.add(btnSettings);
+        buttonPanel.add(btnQuitter);
 
         btnNewGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnLoadGame.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnSettings.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnQuitter.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
@@ -69,7 +69,7 @@ public class MainMenuGUI extends JFrame {
 
         btnLoadGame.addActionListener(new LoadGame());
 
-        btnSettings.addActionListener(new Settings());
+        btnQuitter.addActionListener(new Quitter());
 	}
 
     class NewGame implements ActionListener {
@@ -93,8 +93,9 @@ public class MainMenuGUI extends JFrame {
 		}
 	}
 
-    class Settings implements ActionListener {
+    class Quitter implements ActionListener {
 		public void actionPerformed(ActionEvent e){
+            System.exit(0);
 		}
 	}
 }

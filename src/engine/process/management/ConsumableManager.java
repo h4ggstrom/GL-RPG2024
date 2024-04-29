@@ -21,8 +21,11 @@ public class ConsumableManager {
         slot.setItem(null);
         // On vérifie son effet et on fait en fonction
         switch (consumable.getConsumableEffect()) {
-            case "heal":
+            case "Régénération":
                 Player.getInstance().healCharacter(consumable.getConsumableValue());
+                break;
+            case "Mana":
+                Player.getInstance().addMana(consumable.getConsumableValue());
                 break;
             case "money":
                 Player.getInstance().addCoins(consumable.getConsumableValue());

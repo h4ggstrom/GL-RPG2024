@@ -73,8 +73,8 @@ public class EnemyFactory {
                 return chevre;
             case "gobelin_malefique":
                 Enemy gobelinMalefique = new Enemy(position, "Gobelin maléfique", "gobelin_malefique");
-                gobelinMalefique.setMaxHealth(40);
-                gobelinMalefique.setHealth(40);
+                gobelinMalefique.setMaxHealth(300);
+                gobelinMalefique.setHealth(300);
                 gobelinMalefique.setArmor(3);
                 gobelinMalefique.setAttackDamage(4);
                 gobelinMalefique.setAttackRange(40);
@@ -109,9 +109,9 @@ public class EnemyFactory {
                 return secretaire;
             case "derdoudiable":
                 Enemy derdoudiable = new Enemy(position, "Derdoudiable", "derdoudiable");
-                derdoudiable.setMaxHealth(80);
-                derdoudiable.setHealth(80);
-                derdoudiable.setArmor(6);
+                derdoudiable.setMaxHealth(500);
+                derdoudiable.setHealth(500);
+                derdoudiable.setArmor(50);
                 derdoudiable.setAttackDamage(8);
                 derdoudiable.setAttackRange(400);
                 derdoudiable.setAttackSpeed(250);
