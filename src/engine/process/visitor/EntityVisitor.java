@@ -1,9 +1,11 @@
 package engine.process.visitor;
 
 import engine.entities.characters.Enemy;
+import engine.entities.characters.Player;
 import engine.entities.containers.Bag;
 import engine.entities.containers.Chest;
 import engine.entities.containers.Garbage;
+import engine.entities.containers.Inventory;
 import engine.entities.environment.Environment;
 import engine.entities.items.Item;
 import engine.entities.npc.Vendor;

@@ -24,19 +24,19 @@ public class WeaponFactory {
             case "epee_legendaire_des_egouts":
                 return new Weapon(20,50,"Épée légendaire des égouts","epee_legendaire_des_egouts",position);
             case "arc_de_chevre":
-                return new Weapon(10,100,"Arc de chèvre","arc_de_chevre",position);
+                return new Weapon(10,60,"Arc de chèvre","arc_de_chevre",position);
             case "arc_des_terres_arides":
-                return new Weapon(15,100,"Arc des terres arides","arc_des_terres_arides",position);
+                return new Weapon(15,65,"Arc des terres arides","arc_des_terres_arides",position);
             case "dagues_de_crackhead":
                 return new Weapon(15,0,"Dagues de crackhead","dagues_de_crackhead",position);
             case "arc_mystique_de_gobelin":
-                return new Weapon(25,100,"Arc mystique de gobelin","arc_mystique_de_gobelin",position);
+                return new Weapon(25,70,"Arc mystique de gobelin","arc_mystique_de_gobelin",position);
             case "dagues_de_secretaire":
                 return new Weapon(20,0,"Dagues de secrétaire","dagues_de_secretaire",position);
             case "sceptre_des_terres_arides":
-                return new Weapon(20,200,"Sceptre des terres arides","sceptre_des_terres_arides",position);
+                return new Weapon(20,80,"Sceptre des terres arides","sceptre_des_terres_arides",position);
             case "sceptre_de_professeur":
-                return new Weapon(25,200,"Sceptre de professeur","sceptre_de_professeur",position);
+                return new Weapon(25,85,"Sceptre de professeur","sceptre_de_professeur",position);
             case "tampon_legendaire_de_derdoudiable":
                 return new Weapon(30,0,"Tampon légendaire de Derdoudiable","tampon_legendaire_de_derdoudiable",position);
             case "ak_47":

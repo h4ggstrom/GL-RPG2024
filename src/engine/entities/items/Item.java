@@ -19,12 +19,7 @@ public abstract class Item extends Entity {
     public Item(Position position, String nom, String entityType) {
         super(position, nom, entityType);
     }
-
-    /**
-     * Méthode permettant de récupérer le nom de l'entité.
-     * 
-     * @return le nom de l'entité
-     */
+    
     @Override
 	public <E> E accept(EntityVisitor<E> visitor) {
 		return visitor.visit(this);

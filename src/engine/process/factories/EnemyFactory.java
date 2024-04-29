@@ -56,11 +56,11 @@ public class EnemyFactory {
                 return abominationDesEgouts;
             case "crackhead":
                 Enemy crackhead = new Enemy(position, "Crackhead", "crackhead");
-                crackhead.setMaxHealth(30);
-                crackhead.setHealth(30);
+                crackhead.setMaxHealth(100);
+                crackhead.setHealth(100);
                 crackhead.setArmor(2);
                 crackhead.setAttackDamage(3);
-                crackhead.setAttackRange(250);
+                crackhead.setAttackRange(55);
                 crackhead.setAttackSpeed(150);
                 crackhead.setMoveSpeed(2);
                 crackhead.setStunCooldown(600);
@@ -68,15 +68,15 @@ public class EnemyFactory {
                 return crackhead;
             case "chevre":
                 Enemy chevre = new Enemy(position, "Chèvre", "chevre");
-                chevre.setMaxHealth(20);
-                chevre.setHealth(20);
+                chevre.setMaxHealth(80);
+                chevre.setHealth(80);
                 chevre.setArmor(1);
                 chevre.setAttackDamage(2);
-                chevre.setAttackRange(40);
+                chevre.setAttackRange(45);
                 chevre.setAttackSpeed(100);
                 chevre.setMoveSpeed(3);
                 chevre.setStunCooldown(500);
-                chevre.setSightDistance(250);
+                chevre.setSightDistance(55);
                 return chevre;
             case "gobelin_malefique":
                 Enemy gobelinMalefique = new Enemy(position, "Gobelin maléfique", "gobelin_malefique");
