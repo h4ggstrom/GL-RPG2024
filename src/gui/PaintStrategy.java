@@ -14,6 +14,7 @@ import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
 import engine.entities.environment.Environment;
+import engine.process.management.EntityManager;
 import engine.process.management.RessourceManager;
 
 /*
@@ -49,6 +50,19 @@ public class PaintStrategy {
             graphics.setFont(new Font("Serif", Font.BOLD, GameConfiguration.GAME_OVER_TITLEFONTSIZE));
             graphics.setColor(Color.RED);
             graphics.drawString("GAME OVER", 470 , 360);
+        }
+
+        // Si le joueur est à la dernière salle
+        if(Player.getInstance().getStageNumber() == 3 && Player.getInstance().getRoomNumber() == 7){
+            // et qu'il a tué le dernier boss
+            if(EntityManager.getInstance().getCurrentRoom().getEnemies().size() == 0){
+                Position gameoverPosition = GameConfiguration.GAME_OVER_POSITION;
+                graphics.setColor(Color.BLACK);
+                graphics.fillRect(gameoverPosition.getX(), gameoverPosition.getY(), GameConfiguration.GAME_OVER_WIDTH, GameConfiguration.GAME_OVER_HEIGHT);
+                graphics.setFont(new Font("Serif", Font.BOLD, GameConfiguration.GAME_OVER_TITLEFONTSIZE));
+                graphics.setColor(Color.YELLOW);
+                graphics.drawString("WIN !", 470 , 360);
+            }
         }
     }
 

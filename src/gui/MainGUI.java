@@ -85,8 +85,16 @@ public class MainGUI extends JFrame implements Runnable {
 				logger.fatal("game crashed");
 			}
 
-            if(Player.getInstance().getHealth() <= 0 || Player.getInstance().getStageNumber() > 3){
+            if(Player.getInstance().getHealth() <= 0){
                 manager.gameOver();
+            }
+
+            // Si le joueur se trouve dans la dernière salle
+            if(Player.getInstance().getStageNumber() == 3 && Player.getInstance().getRoomNumber() == 7){
+                // et que la salle est vidée du boss
+                if(manager.getCurrentRoom().getEnemies().size() == 0){
+                    manager.gameOver();
+                }
             }
 
             manager.moveEnemies();
@@ -137,8 +145,6 @@ public class MainGUI extends JFrame implements Runnable {
                 case KeyEvent.VK_R:
                     manager.playerUseAbility();
                     break;
-                case KeyEvent.VK_K:
-                    System.out.println(Player.getInstance().getAbilityCooldown());
                 default:
                     break;
             }

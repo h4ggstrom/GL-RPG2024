@@ -62,10 +62,6 @@ public class Player extends GameCharacter {
         if(stageNumber < 3) {
             this.stageNumber++;
         }
-        else {
-            // WIN
-            System.out.println("C'est gagné");
-        }
     }
 
     public int getRoomNumber() {
