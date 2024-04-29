@@ -9,7 +9,6 @@ import config.GameConfiguration;
 import engine.dungeon.Position;
 import engine.dungeon.Room;
 import engine.entities.Entity;
-import engine.entities.Hitbox;
 import engine.entities.characters.Enemy;
 import engine.entities.characters.GameCharacter;
 import engine.entities.characters.Player;
@@ -93,47 +92,32 @@ public class PaintStrategy {
         else {
             // On peut afficher l'image telle quelle à la position de l'entité
             graphics.drawImage(ressourceManager.getGif(filePath).getImage(), position.getX(), position.getY(), null);
-
-            // Cas si l'entité est un ennemi
-            if(entity instanceof Enemy) {
-                Enemy enemy = (Enemy)entity;
-
-                // Partie portée d'attaque pour le joueur FIXME à supprimer
-                Position hitbox_center = enemy.getHitbox().getCenter();
+            if(entity instanceof GameCharacter) {
+                GameCharacter character = (GameCharacter)entity;
+                // Partie portée d'attaque pour le joueur
+                graphics.setColor(Color.GREEN);
+                Position hitbox_center = character.getHitbox().getCenter();
                 int x_center = hitbox_center.getX();
                 int y_center = hitbox_center.getY();
-                graphics.drawOval(x_center - enemy.getAttackRange(), y_center - enemy.getAttackRange(), enemy.getAttackRange() * 2, enemy.getAttackRange() * 2);
+                graphics.drawOval(x_center - character.getAttackRange(), y_center - character.getAttackRange(), character.getAttackRange() * 2, character.getAttackRange() * 2);
+            
+                // Cas si l'entité est un ennemi
+                if(entity instanceof Enemy) {
+                    Enemy enemy = (Enemy)entity;
 
-                graphics.setColor(Color.RED);
-                int lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
-                graphics.setColor(Color.RED);
-                
-                // Nom de l'ennemi
-                graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
-                graphics.drawString(enemy.getEntityName(), position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
+                    // On affiche sa barre de vie
+                    int lifebar_xshift = GameConfiguration.ENEMY_LIFEBAR_XSHIFT;
+                    graphics.setColor(Color.RED);
 
-                // Barre de vie de l'ennemi
-                graphics.fillRect(position.getX() + lifebar_xshift, entity.getHitbox().getBottomLeft().getY() + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, enemy.getHealth(), 2);
+                    // Barre de vie de l'ennemi
+                    graphics.fillRect(position.getX() + lifebar_xshift, entity.getHitbox().getBottomLeft().getY() + GameConfiguration.CHARACTER_LIFEBAR_YSHIFT, enemy.getHealth(), 2);
+                    
+                    // Nom de l'ennemi
+                    graphics.setFont(new Font("Dialog", Font.PLAIN, 10));
+                    graphics.drawString(enemy.getEntityName(), position.getX() + GameConfiguration.CHARACTER_NAMETAG_XSHIFT, position.getY() + GameConfiguration.CHARACTER_NAMETAG_YSHIFT);
+                }
             }
         }
-
-        // Partie Hitbox (à des fins de débuggage)
-        Hitbox hitbox = entity.getHitbox();
-        Position ul = hitbox.getUpperLeft();
-        Position ur = hitbox.getUpperRight();
-        Position ct = hitbox.getCenter();
-        Position bl = hitbox.getBottomLeft();
-        Position br = hitbox.getBottomRight();
-        graphics.setColor(Color.BLACK);
-        graphics.drawLine(ul.getX(), ul.getY(), ur.getX(), ur.getY());
-        graphics.drawLine(ul.getX(), ul.getY(), bl.getX(), bl.getY());
-        graphics.drawLine(bl.getX(), bl.getY(), br.getX(), br.getY());
-        graphics.drawLine(ur.getX(), ur.getY(), br.getX(), br.getY());
-
-        graphics.drawLine(ul.getX(), ul.getY(), ct.getX(), ct.getY());
-        graphics.drawLine(bl.getX(), bl.getY(), ct.getX(), ct.getY());
-        graphics.drawLine(ur.getX(), ur.getY(), ct.getX(), ct.getY());
-        graphics.drawLine(br.getX(), br.getY(), ct.getX(), ct.getY());
     }
 
     public void paintLevelInfo(Graphics graphics) {
@@ -188,12 +172,6 @@ public class PaintStrategy {
         graphics.fillRect(abilityBarX, 680 + (30 - abilityBarHeight), 20, abilityBarHeight);
         graphics.setColor(Color.BLACK); // Bordure de la barre de chargement
         graphics.drawRect(abilityBarX, 680, 20, 30);
-    
-        // Partie portée d'attaque pour le joueur
-        Position hitbox_center = player.getHitbox().getCenter();
-        int x_center = hitbox_center.getX();
-        int y_center = hitbox_center.getY();
-        graphics.drawOval(x_center - player.getAttackRange(), y_center - player.getAttackRange(), player.getAttackRange() * 2, player.getAttackRange() * 2);
     }
     
 }

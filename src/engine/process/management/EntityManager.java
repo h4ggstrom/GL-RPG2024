@@ -18,7 +18,7 @@ import log.Gamelog;
 /**
  * Génie Logiciel - Projet RPG.
  *
- * Cette classe contient toutes les processus liés aux déplacements et autres actions du joueur dans l'environnement de jeu.
+ * Cette classe contient tout les processus liés aux interactions entre les entités.
  *
  * @author thibault.terrie@etu.cyu.fr
  * @author robin.de-angelis@etu.cyu.fr
@@ -36,14 +36,6 @@ public class EntityManager {
     private ContainerRefreshListener inventoryRefreshListener;
     private ContainerRefreshListener chestRefreshListener;
     private ContainerRefreshListener vendorRefreshListener;
-
-    /**
-     * Constructeur par défaut. Génère une nouvelle instance de CharacterManager.
-     * @param room la salle dans laquelle évoluera le joueur
-     */
-    private EntityManager () {
-        
-    }
 
     public static EntityManager getInstance() {
         // Si l'instance n'a pas encore été créée, on la crée

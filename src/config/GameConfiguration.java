@@ -21,8 +21,6 @@ public class GameConfiguration {
     
     //AJOUTER : son ?? (musique ambiance, bruitages, ...)
 
-    //AJOUTER : FIN DE JEU
-
     public static final String GAME_TITLE = "Le Donjon de Cergy-Préfecture";
 
     // PARTIE DIMENSIONS
@@ -130,7 +128,7 @@ public class GameConfiguration {
     public static final int PLAYER_DEFAULT_ABILITYCOOLDOWN = 1000;
     public static final int PLAYER_DEFAULT_STUNCOOLDOWN = 4000;
     public static final int PLAYER_LIFEBAR_XSHIFT = -15;
-    public static final int PLAYER_ENTITY_INTERACTION_RANGE = 50;
+    public static final int PLAYER_ENTITY_INTERACTION_RANGE = 60;
 
     // dimensions et limites de la salle
     public static final int ROOM_UPPER_LIMITATION = 52; // Le mur bloque le joueur avant cette valeur en Y

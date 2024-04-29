@@ -48,5 +48,4 @@ public class RessourceManager {
         }
         return gifs.get(path);
     }
-    // FIXME : le prof il me semble ne voulait pas de ImageIcon mais c'est la seule manière que j'ai trouvé de lire des GIF
 }

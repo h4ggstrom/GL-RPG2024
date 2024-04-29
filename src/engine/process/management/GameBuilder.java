@@ -290,9 +290,9 @@ public class GameBuilder {
         Vendor vendor = (Vendor)EntityFactory.createEntity(GameConfiguration.VENDOR_ENTITYTYPE, null);
         switch(Player.getInstance().getStageNumber()) {
             case 1:
-                vendor.addSellingItem(ClotheFactory.createClothe("casque_des_terres_arides", null), 300);
+                vendor.addSellingItem(ClotheFactory.createClothe("casque_des_terres_arides", null), 200);
                 vendor.addSellingItem((Flask)EntityFactory.createEntity("potion_de_sante", null), 50);
-                vendor.addSellingItem(WeaponFactory.createWeapon("arc_des_terres_arides", null), 500);
+                vendor.addSellingItem(WeaponFactory.createWeapon("arc_des_terres_arides", null), 300);
                 break;
             case 2:
                 vendor.addSellingItem(ClotheFactory.createClothe("plastron_des_terres_arides", null), 375);

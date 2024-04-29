@@ -158,8 +158,16 @@ public abstract class GameCharacter extends Entity {
         this.abilityCooldown = abilityCooldown;
     }
 
+    /**
+     * Permet de supprimer du cooldown à la capacité du personnage (ne peut pas aller en dessous de 5s de cooldown)
+     * @param abilityCooldown
+     */
     public void addAbilityCooldown(int abilityCooldown) {
-        this.abilityCooldown += abilityCooldown;
+        if(this.abilityCooldown + abilityCooldown < 500) {
+            this.abilityCooldown = 501;
+        } else {
+            this.abilityCooldown += abilityCooldown;
+        }
     }
 
     public int getStunCooldown() {
@@ -237,9 +245,6 @@ public abstract class GameCharacter extends Entity {
 
     public void addMana(int mana) {
         this.mana += mana;
-        if(mana < 500) {
-            this.mana = 500;
-        }
     }
 
     public void useAbility() {

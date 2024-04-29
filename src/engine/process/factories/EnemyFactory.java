@@ -41,9 +41,9 @@ public class EnemyFactory {
                 abominationDesEgouts.setHealth(200);
                 abominationDesEgouts.setArmor(30);
                 abominationDesEgouts.setAttackDamage(20);
-                abominationDesEgouts.setAttackRange(220);
+                abominationDesEgouts.setAttackRange(120);
                 abominationDesEgouts.setAttackSpeed(700);
-                abominationDesEgouts.setMoveSpeed(3);
+                abominationDesEgouts.setMoveSpeed(1);
                 abominationDesEgouts.setStunCooldown(1000);
                 abominationDesEgouts.setSightDistance(500);
                 return abominationDesEgouts;
@@ -55,9 +55,9 @@ public class EnemyFactory {
                 crackhead.setAttackDamage(3);
                 crackhead.setAttackRange(250);
                 crackhead.setAttackSpeed(150);
-                crackhead.setMoveSpeed(1);
+                crackhead.setMoveSpeed(2);
                 crackhead.setStunCooldown(600);
-                crackhead.setSightDistance(250);
+                crackhead.setSightDistance(300);
                 return crackhead;
             case "chevre":
                 Enemy chevre = new Enemy(position, "Chèvre", "chevre");
@@ -67,7 +67,7 @@ public class EnemyFactory {
                 chevre.setAttackDamage(2);
                 chevre.setAttackRange(40);
                 chevre.setAttackSpeed(100);
-                chevre.setMoveSpeed(1);
+                chevre.setMoveSpeed(3);
                 chevre.setStunCooldown(500);
                 chevre.setSightDistance(250);
                 return chevre;
@@ -91,7 +91,7 @@ public class EnemyFactory {
                 professor.setAttackDamage(6);
                 professor.setAttackRange(40);
                 professor.setAttackSpeed(200);
-                professor.setMoveSpeed(2);
+                professor.setMoveSpeed(3);
                 professor.setStunCooldown(700);
                 professor.setSightDistance(200);
                 return professor;
@@ -103,7 +103,7 @@ public class EnemyFactory {
                 secretaire.setAttackDamage(3);
                 secretaire.setAttackRange(40);
                 secretaire.setAttackSpeed(150);
-                secretaire.setMoveSpeed(1);
+                secretaire.setMoveSpeed(4);
                 secretaire.setStunCooldown(600);
                 secretaire.setSightDistance(200);
                 return secretaire;
@@ -115,7 +115,7 @@ public class EnemyFactory {
                 derdoudiable.setAttackDamage(8);
                 derdoudiable.setAttackRange(400);
                 derdoudiable.setAttackSpeed(250);
-                derdoudiable.setMoveSpeed(2);
+                derdoudiable.setMoveSpeed(1);
                 derdoudiable.setStunCooldown(800);
                 derdoudiable.setSightDistance(700);
                 return derdoudiable;
