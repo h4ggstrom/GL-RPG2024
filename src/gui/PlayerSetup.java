@@ -49,7 +49,7 @@ public class PlayerSetup extends JFrame{
 
         private ChartPanel chart;
         
-        private int[] values = {0, 0, 0, 0}; // valeurs par défaut, elles seront modifiées lors de la séléction d'un élément
+        private int[] values = {0, 0, 0, 0, 0, 0, 0}; // valeurs par défaut, elles seront modifiées lors de la séléction d'un élément
         private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         private static Logger logger = Gamelog.getLogger();
@@ -159,20 +159,26 @@ public class PlayerSetup extends JFrame{
         }
 
         private ChartPanel createChart() {
-            this.dataset.setValue(this.values[0],"series","Points de vie");
+            this.dataset.setValue(this.values[0],"series","Points de vie (x10)");
             this.dataset.setValue(this.values[1],"series","Vitesse de déplacement");
             this.dataset.setValue(this.values[2],"series","Vitesse d'attaque");
-            this.dataset.addValue(this.values[3],"series","Mana");
+            this.dataset.addValue(this.values[3],"series","Dégâts d'attaque");
+            this.dataset.addValue(this.values[4],"series","Mana maximum");
+            this.dataset.addValue(this.values[5],"series","Armure");
+            this.dataset.addValue(this.values[6],"series","Armure");
             JFreeChart chartPanel = ChartFactory.createBarChart("Aptitudes","","",dataset,PlotOrientation.HORIZONTAL,false,false,false);
             return new ChartPanel(chartPanel);
         }
 
         private void updateClass(String className) {
             player.setPlayerClass(className);
-            values[0] = player.getHealth();
+            values[0] = player.getMaxHealth()/10;
             values[1] = player.getMoveSpeed();
-            values[2] = player.getAttackSpeed()/10;
-            values[3] = player.getMana();
+            values[2] = player.getAttackSpeed()/100; // pour l'avoir en terme de secondes
+            values[3] = player.getAttackDamage();
+            values[4] = player.getAbilityCooldown()/100; // pour l'avoir en terme de secondes
+            values[5] = player.getArmor();
+            values[6] = player.getStunCooldown()/100; // pour l'avoir en terme de secondes
             chart = createChart();
             validateButton.setEnabled(true);
     
